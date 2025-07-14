@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>SNS on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/sns/</link>
+    <description>Recent content in SNS on Hazriq&#39;s Dev Chaos</description>
+    <generator>Hugo -- 0.147.7</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Jul 2025 06:17:54 +0800</lastBuildDate>
+    <atom:link href="https://hazriqpedia.github.io/tags/sns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS: SQS vs SNS</title>
+      <link>https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/</guid>
+      <description>&lt;p&gt;At my new company, we rely heavily on AWS SQS (Simple Queue Service) and SNS (Simple Notification Service) to handle the large volume of records we need to ingest daily.&lt;/p&gt;
+&lt;p&gt;Think of a situation where the system experiences a temporary bottleneck or needs to go offline for maintenance or upgrades. In such cases, SQS acts as a buffer—safely storing incoming records in a queue so they’re not lost. Even during traffic spikes, the messages are queued and processed at our own pace. For example, our AWS Lambda function polls the queue and retrieves messages when it&amp;rsquo;s ready, allowing the system to remain responsive and scalable even under pressure.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

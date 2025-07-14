@@ -6,8 +6,29 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.147.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Jun 2025 10:01:29 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 15 Jul 2025 06:17:54 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS</title>
+      <link>https://hazriqpedia.github.io/tags/aws/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SNS</title>
+      <link>https://hazriqpedia.github.io/tags/sns/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/sns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SQS</title>
+      <link>https://hazriqpedia.github.io/tags/sqs/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/sqs/</guid>
+      <description></description>
+    </item>
     <item>
       <title>API</title>
       <link>https://hazriqpedia.github.io/tags/api/</link>
