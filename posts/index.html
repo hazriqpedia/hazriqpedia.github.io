@@ -149,6 +149,86 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: DynamoDB Basics
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore <strong>AWS DynamoDB</strong>.</p>
+<h3 id="database-types">Database Types</h3>
+<p>There are two main types of databases:</p>
+<ul>
+<li><strong>Relational Databases</strong> (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.</li>
+<li><strong>NoSQL Databases</strong>: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.</li>
+</ul>
+<blockquote>
+<p>If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.</p></blockquote>
+<h3 id="key-features-of-dynamodb">Key Features of DynamoDB</h3>
+<ul>
+<li><strong>Fully Managed</strong>: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling.</li>
+<li><strong>Performance at Scale</strong>: It automatically scales up and down to adjust for capacity and maintain performance.</li>
+<li><strong>Flexible Data Model</strong>: Supports key-value and document data structures, allowing for a variety of use cases.</li>
+<li><strong>Built-in Security</strong>: Offers encryption at rest and in transit, along with fine-grained access control.</li>
+</ul>
+<p>So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.</p>
+<h4 id="key-concepts">Key Concepts</h4>
+<ul>
+<li><strong>Tables</strong>: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item.</li>
+<li><strong>Items</strong>: Individual records in a table, similar to rows in a relational database.</li>
+<li><strong>Attributes</strong>: The data fields in an item, similar to columns in a relational database.</li>
+<li><strong>Primary Key</strong>: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key).</li>
+<li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
+</ul>
+<p>A simple item in a DynamoDB table might look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
+<ul>
+<li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
+<li><strong>Performance</strong>: Provides low-latency data access, making it suitable for real-time applications.</li>
+<li><strong>Flexibility</strong>: Supports various data models, allowing developers to choose the best fit for their application.</li>
+<li><strong>Cost-Effective</strong>: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads.</li>
+<li><strong>Integration with AWS Services</strong>: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging.</li>
+<li><strong>TTL (Time to Live)</strong>: Automatically deletes expired items, helping manage storage costs and data lifecycle.</li>
+</ul>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<ul>
+<li><strong>Provisioned Throughput</strong>: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle.</li>
+<li><strong>On-Demand Capacity</strong>: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads.</li>
+<li><strong>Caching</strong>: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads.</li>
+<li><strong>Batch Operations</strong>: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database.</li>
+</ul>
+<h4 id="without-dax">Without DAX</h4>
+<ul>
+<li>Reads and writes are directly from the DynamoDB table.</li>
+<li>Each read or write operation incurs a latency based on the network and DynamoDB&rsquo;s processing time.</li>
+</ul>
+<h4 id="with-dax">With DAX</h4>
+<ul>
+<li>DAX acts as an in-memory cache, reducing the latency for read operations.</li>
+<li>DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests.</li>
+<li>This significantly speeds up read operations, especially for frequently accessed data.</li>
+</ul>
+<h3 id="when-not-to-use-dynamodb">When not to Use DynamoDB</h3>
+<p>While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:</p>
+<ul>
+<li><strong>Complex Queries</strong>: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable.</li>
+<li><strong>Transactional Support</strong>: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions.</li>
+<li><strong>Large Binary Objects</strong>: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata.</li>
+<li><strong>High Write Throughput</strong>: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra.</li>
+</ul>
+<p>DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you&rsquo;re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.</p>
+<p>Of course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: DynamoDB Basics" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">AWS: SQS vs SNS
     </h2>
   </header>

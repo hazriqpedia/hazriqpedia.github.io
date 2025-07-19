@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>AWS: DynamoDB Basics | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="AWS, DynamoDB, NoSQL">
+<meta name="description" content="Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore AWS DynamoDB.
+Database Types
+There are two main types of databases:
+
+Relational Databases (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.
+NoSQL Databases: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.
+
+
+If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hazriqpedia.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">
+  <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:title" content="AWS: DynamoDB Basics">
+  <meta property="og:description" content="Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application’s performance, scalability, and maintainability. In this post, we’ll explore AWS DynamoDB.
+Database Types There are two main types of databases:
+Relational Databases (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle. NoSQL Databases: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB. If you’re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-20T05:42:27+08:00">
+    <meta property="article:modified_time" content="2025-07-20T05:42:27+08:00">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="DynamoDB">
+    <meta property="article:tag" content="NoSQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AWS: DynamoDB Basics">
+<meta name="twitter:description" content="Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore AWS DynamoDB.
+Database Types
+There are two main types of databases:
+
+Relational Databases (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.
+NoSQL Databases: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.
+
+
+If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "AWS: DynamoDB Basics",
+      "item": "https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AWS: DynamoDB Basics",
+  "name": "AWS: DynamoDB Basics",
+  "description": "Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application\u0026rsquo;s performance, scalability, and maintainability. In this post, we\u0026rsquo;ll explore AWS DynamoDB.\nDatabase Types There are two main types of databases:\nRelational Databases (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle. NoSQL Databases: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB. If you\u0026rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.\n",
+  "keywords": [
+    "AWS", "DynamoDB", "NoSQL"
+  ],
+  "articleBody": "Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application’s performance, scalability, and maintainability. In this post, we’ll explore AWS DynamoDB.\nDatabase Types There are two main types of databases:\nRelational Databases (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle. NoSQL Databases: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB. If you’re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.\nKey Features of DynamoDB Fully Managed: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling. Performance at Scale: It automatically scales up and down to adjust for capacity and maintain performance. Flexible Data Model: Supports key-value and document data structures, allowing for a variety of use cases. Built-in Security: Offers encryption at rest and in transit, along with fine-grained access control. So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.\nKey Concepts Tables: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item. Items: Individual records in a table, similar to rows in a relational database. Attributes: The data fields in an item, similar to columns in a relational database. Primary Key: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key). Indexes: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI). A simple item in a DynamoDB table might look like this:\n{ \"UserId\": \"12345\", # Unique identifier for the user. Primary key. \"Name\": \"Hazriq\", \"Email\": \"hazriq@example.com\" } Benefits of Using DynamoDB Scalability: Automatically scales to handle large amounts of data and high request rates without manual intervention. Performance: Provides low-latency data access, making it suitable for real-time applications. Flexibility: Supports various data models, allowing developers to choose the best fit for their application. Cost-Effective: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads. Integration with AWS Services: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging. TTL (Time to Live): Automatically deletes expired items, helping manage storage costs and data lifecycle. Performance Considerations Provisioned Throughput: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle. On-Demand Capacity: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads. Caching: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads. Batch Operations: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database. Without DAX Reads and writes are directly from the DynamoDB table. Each read or write operation incurs a latency based on the network and DynamoDB’s processing time. With DAX DAX acts as an in-memory cache, reducing the latency for read operations. DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests. This significantly speeds up read operations, especially for frequently accessed data. When not to Use DynamoDB While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:\nComplex Queries: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable. Transactional Support: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions. Large Binary Objects: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata. High Write Throughput: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra. DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you’re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.\nOf course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.\n",
+  "wordCount" : "824",
+  "inLanguage": "en",
+  "datePublished": "2025-07-20T05:42:27+08:00",
+  "dateModified": "2025-07-20T05:42:27+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hazriqpedia.github.io/" accesskey="h" title="Hazriq&#39;s Dev Chaos (Alt + H)">Hazriq&#39;s Dev Chaos</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hazriqpedia.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      AWS: DynamoDB Basics
+    </h1>
+    <div class="post-meta"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore <strong>AWS DynamoDB</strong>.</p>
+<h3 id="database-types">Database Types<a hidden class="anchor" aria-hidden="true" href="#database-types">#</a></h3>
+<p>There are two main types of databases:</p>
+<ul>
+<li><strong>Relational Databases</strong> (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.</li>
+<li><strong>NoSQL Databases</strong>: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.</li>
+</ul>
+<blockquote>
+<p>If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.</p></blockquote>
+<h3 id="key-features-of-dynamodb">Key Features of DynamoDB<a hidden class="anchor" aria-hidden="true" href="#key-features-of-dynamodb">#</a></h3>
+<ul>
+<li><strong>Fully Managed</strong>: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling.</li>
+<li><strong>Performance at Scale</strong>: It automatically scales up and down to adjust for capacity and maintain performance.</li>
+<li><strong>Flexible Data Model</strong>: Supports key-value and document data structures, allowing for a variety of use cases.</li>
+<li><strong>Built-in Security</strong>: Offers encryption at rest and in transit, along with fine-grained access control.</li>
+</ul>
+<p>So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.</p>
+<h4 id="key-concepts">Key Concepts<a hidden class="anchor" aria-hidden="true" href="#key-concepts">#</a></h4>
+<ul>
+<li><strong>Tables</strong>: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item.</li>
+<li><strong>Items</strong>: Individual records in a table, similar to rows in a relational database.</li>
+<li><strong>Attributes</strong>: The data fields in an item, similar to columns in a relational database.</li>
+<li><strong>Primary Key</strong>: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key).</li>
+<li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
+</ul>
+<p>A simple item in a DynamoDB table might look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB<a hidden class="anchor" aria-hidden="true" href="#benefits-of-using-dynamodb">#</a></h3>
+<ul>
+<li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
+<li><strong>Performance</strong>: Provides low-latency data access, making it suitable for real-time applications.</li>
+<li><strong>Flexibility</strong>: Supports various data models, allowing developers to choose the best fit for their application.</li>
+<li><strong>Cost-Effective</strong>: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads.</li>
+<li><strong>Integration with AWS Services</strong>: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging.</li>
+<li><strong>TTL (Time to Live)</strong>: Automatically deletes expired items, helping manage storage costs and data lifecycle.</li>
+</ul>
+<h3 id="performance-considerations">Performance Considerations<a hidden class="anchor" aria-hidden="true" href="#performance-considerations">#</a></h3>
+<ul>
+<li><strong>Provisioned Throughput</strong>: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle.</li>
+<li><strong>On-Demand Capacity</strong>: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads.</li>
+<li><strong>Caching</strong>: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads.</li>
+<li><strong>Batch Operations</strong>: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database.</li>
+</ul>
+<h4 id="without-dax">Without DAX<a hidden class="anchor" aria-hidden="true" href="#without-dax">#</a></h4>
+<ul>
+<li>Reads and writes are directly from the DynamoDB table.</li>
+<li>Each read or write operation incurs a latency based on the network and DynamoDB&rsquo;s processing time.</li>
+</ul>
+<h4 id="with-dax">With DAX<a hidden class="anchor" aria-hidden="true" href="#with-dax">#</a></h4>
+<ul>
+<li>DAX acts as an in-memory cache, reducing the latency for read operations.</li>
+<li>DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests.</li>
+<li>This significantly speeds up read operations, especially for frequently accessed data.</li>
+</ul>
+<h3 id="when-not-to-use-dynamodb">When not to Use DynamoDB<a hidden class="anchor" aria-hidden="true" href="#when-not-to-use-dynamodb">#</a></h3>
+<p>While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:</p>
+<ul>
+<li><strong>Complex Queries</strong>: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable.</li>
+<li><strong>Transactional Support</strong>: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions.</li>
+<li><strong>Large Binary Objects</strong>: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata.</li>
+<li><strong>High Write Throughput</strong>: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra.</li>
+</ul>
+<p>DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you&rsquo;re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.</p>
+<p>Of course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/aws/">AWS</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/dynamodb/">DynamoDB</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/nosql/">NoSQL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/">
+    <span class="title">Next »</span>
+    <br>
+    <span>AWS: SQS vs SNS</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://hazriqpedia.github.io/">Hazriq&#39;s Dev Chaos</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

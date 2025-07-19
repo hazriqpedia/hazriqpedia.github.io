@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>AWS | Hazriq&#39;s Dev Chaos</title>
+<title>DynamoDB | Hazriq&#39;s Dev Chaos</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/aws/">
+<link rel="canonical" href="https://hazriqpedia.github.io/tags/dynamodb/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/aws/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/aws/">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/dynamodb/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/dynamodb/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/aws/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/dynamodb/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="AWS">
+  <meta property="og:title" content="DynamoDB">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AWS">
+<meta name="twitter:title" content="DynamoDB">
 <meta name="twitter:description" content="">
 
 </head>
@@ -128,7 +128,7 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    AWS
+    DynamoDB
   </h1>
 </header>
 
@@ -210,79 +210,6 @@
   </div>
   <footer class="entry-footer"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min</footer>
   <a class="entry-link" aria-label="post link to AWS: DynamoDB Basics" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: SQS vs SNS
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>At my new company, we rely heavily on AWS SQS (Simple Queue Service) and SNS (Simple Notification Service) to handle the large volume of records we need to ingest daily.</p>
-<p>Think of a situation where the system experiences a temporary bottleneck or needs to go offline for maintenance or upgrades. In such cases, SQS acts as a buffer—safely storing incoming records in a queue so they’re not lost. Even during traffic spikes, the messages are queued and processed at our own pace. For example, our AWS Lambda function polls the queue and retrieves messages when it&rsquo;s ready, allowing the system to remain responsive and scalable even under pressure.</p>
-<h3 id="core-components-of-sqs-and-sns">Core Components of SQS and SNS</h3>
-<p>To better understand how SQS and SNS work, it helps to break down their main components.</p>
-<h4 id="-sqs-main-components">📨 SQS Main Components:</h4>
-<ul>
-<li><em>Queue</em>: The main container where messages are stored temporarily until processed.</li>
-<li><em>Producer</em>: The system or service that sends messages to the queue.</li>
-<li><em>Consumer</em>: The service (e.g. Lambda, EC2) that polls the queue and processes the message.</li>
-<li><em>Visibility Timeout</em>: A short period where the message becomes invisible to other consumers once picked up—helps avoid duplicate processing.</li>
-<li><em>DLQ (Dead-Letter Queue)</em>: A separate queue that stores messages that couldn&rsquo;t be successfully processed after several retry attempts. Useful for debugging failed messages.</li>
-</ul>
-<h4 id="-sns-main-components">📣 SNS Main Components:</h4>
-<ul>
-<li><em>Topic</em>: The central component that receives messages from publishers.</li>
-<li><em>Publisher</em>: The producer that sends a message to a topic.</li>
-<li><em>Subscriber</em>: Services or endpoints (like Lambda, SQS queue, HTTPS endpoint, email) that receive messages pushed from the topic.</li>
-<li><em>Subscription Filter Policy</em>: You can apply rules to decide which subscribers should receive which messages (useful for message routing).</li>
-</ul>
-<h3 id="sqs-vs-sns--whats-the-difference">SQS vs SNS – What&rsquo;s the Difference?</h3>
-<p>While both SQS and SNS are messaging services provided by AWS, they serve very different purposes:</p>
-<table>
-  <thead>
-      <tr>
-          <th style="text-align: center">Feature</th>
-          <th style="text-align: center">SQS (Simple Queue Service)</th>
-          <th style="text-align: center">SNS (Simple Notification Service)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">Message Pattern</td>
-          <td style="text-align: center">Point-to-point (Queue-based)</td>
-          <td style="text-align: center">Publish/Subscribe (Fan-out)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Delivery Target</td>
-          <td style="text-align: center">Message goes to one consumer</td>
-          <td style="text-align: center">Message goes to multiple subscribers</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Storage</td>
-          <td style="text-align: center">Messages are stored temporarily in a queue</td>
-          <td style="text-align: center">Messages are pushed immediately, not stored by default</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Use Case</td>
-          <td style="text-align: center">Decouple producer and consumer; reliable message handling</td>
-          <td style="text-align: center">Broadcast messages to multiple endpoints/services</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Consumer Behaviour</td>
-          <td style="text-align: center">Consumers poll the queue</td>
-          <td style="text-align: center">Subscribers receive push notifications</td>
-      </tr>
-  </tbody>
-</table>
-<ul>
-<li>Use <em>SQS</em> when you want to decouple your producer and consumer, especially if the consumer might be temporarily unavailable.</li>
-<li>Use <em>SNS</em> when you want to broadcast messages to multiple services (e.g., notify a Lambda, an email service, and an HTTP endpoint at the same time).</li>
-</ul>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-07-15 06:17:54 +0800 +08'>July 15, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: SQS vs SNS" href="https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/"></a>
 </article>
     </main>
     
