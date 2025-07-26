@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>AWS | Hazriq&#39;s Dev Chaos</title>
+<title>Lambda | Hazriq&#39;s Dev Chaos</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/aws/">
+<link rel="canonical" href="https://hazriqpedia.github.io/tags/lambda/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/aws/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/aws/">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/lambda/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/lambda/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/aws/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/lambda/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="AWS">
+  <meta property="og:title" content="Lambda">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AWS">
+<meta name="twitter:title" content="Lambda">
 <meta name="twitter:description" content="">
 
 </head>
@@ -128,7 +128,7 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    AWS
+    Lambda
   </h1>
 </header>
 
@@ -218,159 +218,6 @@
   </div>
   <footer class="entry-footer"><span title='2025-07-27 06:56:44 +0800 +08'>July 27, 2025</span>&nbsp;·&nbsp;5 min</footer>
   <a class="entry-link" aria-label="post link to AWS: Lambda Basics" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: DynamoDB Basics
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore <strong>AWS DynamoDB</strong>.</p>
-<h3 id="database-types">Database Types</h3>
-<p>There are two main types of databases:</p>
-<ul>
-<li><strong>Relational Databases</strong> (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.</li>
-<li><strong>NoSQL Databases</strong>: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.</li>
-</ul>
-<blockquote>
-<p>If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.</p></blockquote>
-<h3 id="key-features-of-dynamodb">Key Features of DynamoDB</h3>
-<ul>
-<li><strong>Fully Managed</strong>: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling.</li>
-<li><strong>Performance at Scale</strong>: It automatically scales up and down to adjust for capacity and maintain performance.</li>
-<li><strong>Flexible Data Model</strong>: Supports key-value and document data structures, allowing for a variety of use cases.</li>
-<li><strong>Built-in Security</strong>: Offers encryption at rest and in transit, along with fine-grained access control.</li>
-</ul>
-<p>So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.</p>
-<h4 id="key-concepts">Key Concepts</h4>
-<ul>
-<li><strong>Tables</strong>: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item.</li>
-<li><strong>Items</strong>: Individual records in a table, similar to rows in a relational database.</li>
-<li><strong>Attributes</strong>: The data fields in an item, similar to columns in a relational database.</li>
-<li><strong>Primary Key</strong>: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key).</li>
-<li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
-</ul>
-<p>A simple item in a DynamoDB table might look like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
-<ul>
-<li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
-<li><strong>Performance</strong>: Provides low-latency data access, making it suitable for real-time applications.</li>
-<li><strong>Flexibility</strong>: Supports various data models, allowing developers to choose the best fit for their application.</li>
-<li><strong>Cost-Effective</strong>: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads.</li>
-<li><strong>Integration with AWS Services</strong>: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging.</li>
-<li><strong>TTL (Time to Live)</strong>: Automatically deletes expired items, helping manage storage costs and data lifecycle.</li>
-</ul>
-<h3 id="performance-considerations">Performance Considerations</h3>
-<ul>
-<li><strong>Provisioned Throughput</strong>: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle.</li>
-<li><strong>On-Demand Capacity</strong>: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads.</li>
-<li><strong>Caching</strong>: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads.</li>
-<li><strong>Batch Operations</strong>: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database.</li>
-</ul>
-<h4 id="without-dax">Without DAX</h4>
-<ul>
-<li>Reads and writes are directly from the DynamoDB table.</li>
-<li>Each read or write operation incurs a latency based on the network and DynamoDB&rsquo;s processing time.</li>
-</ul>
-<h4 id="with-dax">With DAX</h4>
-<ul>
-<li>DAX acts as an in-memory cache, reducing the latency for read operations.</li>
-<li>DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests.</li>
-<li>This significantly speeds up read operations, especially for frequently accessed data.</li>
-</ul>
-<h3 id="when-not-to-use-dynamodb">When not to Use DynamoDB</h3>
-<p>While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:</p>
-<ul>
-<li><strong>Complex Queries</strong>: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable.</li>
-<li><strong>Transactional Support</strong>: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions.</li>
-<li><strong>Large Binary Objects</strong>: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata.</li>
-<li><strong>High Write Throughput</strong>: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra.</li>
-</ul>
-<p>DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you&rsquo;re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.</p>
-<p>Of course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: DynamoDB Basics" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: SQS vs SNS
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>At my new company, we rely heavily on AWS SQS (Simple Queue Service) and SNS (Simple Notification Service) to handle the large volume of records we need to ingest daily.</p>
-<p>Think of a situation where the system experiences a temporary bottleneck or needs to go offline for maintenance or upgrades. In such cases, SQS acts as a buffer—safely storing incoming records in a queue so they’re not lost. Even during traffic spikes, the messages are queued and processed at our own pace. For example, our AWS Lambda function polls the queue and retrieves messages when it&rsquo;s ready, allowing the system to remain responsive and scalable even under pressure.</p>
-<h3 id="core-components-of-sqs-and-sns">Core Components of SQS and SNS</h3>
-<p>To better understand how SQS and SNS work, it helps to break down their main components.</p>
-<h4 id="-sqs-main-components">📨 SQS Main Components:</h4>
-<ul>
-<li><em>Queue</em>: The main container where messages are stored temporarily until processed.</li>
-<li><em>Producer</em>: The system or service that sends messages to the queue.</li>
-<li><em>Consumer</em>: The service (e.g. Lambda, EC2) that polls the queue and processes the message.</li>
-<li><em>Visibility Timeout</em>: A short period where the message becomes invisible to other consumers once picked up—helps avoid duplicate processing.</li>
-<li><em>DLQ (Dead-Letter Queue)</em>: A separate queue that stores messages that couldn&rsquo;t be successfully processed after several retry attempts. Useful for debugging failed messages.</li>
-</ul>
-<h4 id="-sns-main-components">📣 SNS Main Components:</h4>
-<ul>
-<li><em>Topic</em>: The central component that receives messages from publishers.</li>
-<li><em>Publisher</em>: The producer that sends a message to a topic.</li>
-<li><em>Subscriber</em>: Services or endpoints (like Lambda, SQS queue, HTTPS endpoint, email) that receive messages pushed from the topic.</li>
-<li><em>Subscription Filter Policy</em>: You can apply rules to decide which subscribers should receive which messages (useful for message routing).</li>
-</ul>
-<h3 id="sqs-vs-sns--whats-the-difference">SQS vs SNS – What&rsquo;s the Difference?</h3>
-<p>While both SQS and SNS are messaging services provided by AWS, they serve very different purposes:</p>
-<table>
-  <thead>
-      <tr>
-          <th style="text-align: center">Feature</th>
-          <th style="text-align: center">SQS (Simple Queue Service)</th>
-          <th style="text-align: center">SNS (Simple Notification Service)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">Message Pattern</td>
-          <td style="text-align: center">Point-to-point (Queue-based)</td>
-          <td style="text-align: center">Publish/Subscribe (Fan-out)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Delivery Target</td>
-          <td style="text-align: center">Message goes to one consumer</td>
-          <td style="text-align: center">Message goes to multiple subscribers</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Storage</td>
-          <td style="text-align: center">Messages are stored temporarily in a queue</td>
-          <td style="text-align: center">Messages are pushed immediately, not stored by default</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Use Case</td>
-          <td style="text-align: center">Decouple producer and consumer; reliable message handling</td>
-          <td style="text-align: center">Broadcast messages to multiple endpoints/services</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Consumer Behaviour</td>
-          <td style="text-align: center">Consumers poll the queue</td>
-          <td style="text-align: center">Subscribers receive push notifications</td>
-      </tr>
-  </tbody>
-</table>
-<ul>
-<li>Use <em>SQS</em> when you want to decouple your producer and consumer, especially if the consumer might be temporarily unavailable.</li>
-<li>Use <em>SNS</em> when you want to broadcast messages to multiple services (e.g., notify a Lambda, an email service, and an HTTP endpoint at the same time).</li>
-</ul>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-07-15 06:17:54 +0800 +08'>July 15, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: SQS vs SNS" href="https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/"></a>
 </article>
     </main>
     
