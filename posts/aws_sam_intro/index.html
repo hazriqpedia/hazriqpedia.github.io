@@ -5,11 +5,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Serverless | Hazriq&#39;s Dev Chaos</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+<title>AWS: SAM Introduction | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="AWS, SAM, serverless, infrastructure-as-code, IaC">
+<meta name="description" content="Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.
+What is AWS SAM?
+AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.
+It’s designed to simplify your infrastructure-as-code, especially when working with:
+
+AWS Lambda
+API Gateway
+DynamoDB
+EventBridge, SQS, Step Functions, and more
+
+At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/serverless/">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/aws_sam_intro/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +28,7 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/serverless/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/serverless/">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/aws_sam_intro/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,18 +65,90 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/serverless/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/aws_sam_intro/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Serverless">
+  <meta property="og:title" content="AWS: SAM Introduction">
+  <meta property="og:description" content="Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.
+What is AWS SAM? AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.
+It’s designed to simplify your infrastructure-as-code, especially when working with:
+AWS Lambda API Gateway DynamoDB EventBridge, SQS, Step Functions, and more At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.">
   <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-03T07:34:21+08:00">
+    <meta property="article:modified_time" content="2025-08-03T07:34:21+08:00">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="SAM">
+    <meta property="article:tag" content="Serverless">
+    <meta property="article:tag" content="Infrastructure-as-Code">
+    <meta property="article:tag" content="IaC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Serverless">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="AWS: SAM Introduction">
+<meta name="twitter:description" content="Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.
+What is AWS SAM?
+AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.
+It’s designed to simplify your infrastructure-as-code, especially when working with:
 
+AWS Lambda
+API Gateway
+DynamoDB
+EventBridge, SQS, Step Functions, and more
+
+At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "AWS: SAM Introduction",
+      "item": "https://hazriqpedia.github.io/posts/aws_sam_intro/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AWS: SAM Introduction",
+  "name": "AWS: SAM Introduction",
+  "description": "Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.\nWhat is AWS SAM? AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.\nIt’s designed to simplify your infrastructure-as-code, especially when working with:\nAWS Lambda API Gateway DynamoDB EventBridge, SQS, Step Functions, and more At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.\n",
+  "keywords": [
+    "AWS", "SAM", "serverless", "infrastructure-as-code", "IaC"
+  ],
+  "articleBody": "Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.\nWhat is AWS SAM? AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.\nIt’s designed to simplify your infrastructure-as-code, especially when working with:\nAWS Lambda API Gateway DynamoDB EventBridge, SQS, Step Functions, and more At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.\nWhy Use AWS SAM? You should consider SAM when:\nYou’re building serverless applications using AWS services like Lambda and API Gateway. You want to define infrastructure as code but find raw CloudFormation too verbose. You want to test Lambda functions locally using Docker. You prefer guided deployment over manually zipping and uploading code. SAM is ideal for:\nQuick prototyping of serverless apps Developer teams who want simplicity without giving up AWS-native IaC Learning how serverless works with real AWS infrastructure SAM vs. CloudFormation: what’s the difference? SAM is built on top of CloudFormation, so it inherits all the benefits of CloudFormation while providing a simpler syntax for serverless applications. Here are some key differences:\nFeature AWS CloudFormation AWS SAM Purpose Define any AWS infrastructure Focused on serverless apps Syntax YAML/JSON (verbose) Simplified YAML with shorthand Testing ❌ No built-in local testing ✅ Local testing with Docker Deployment CLI aws cloudformation deploy sam deploy –guided Abstraction Layer Base layer Built on top of CloudFormation In short: SAM is CloudFormation — just way easier for serverless.\nYou still get all the benefits of CloudFormation (rollback, drift detection, etc.), but with less effort and boilerplate.\nSAM Main Components template.yaml Your SAM template is the blueprint of your application — it declares all the AWS resources your app needs.\nResources: HelloWorldFunction: Type: AWS::Serverless::Function Properties: CodeUri: hello_world/ Handler: app.lambda_handler Runtime: python3.12 Events: HelloWorld: Type: Api Properties: Path: /hello Method: get samconfig.toml: Configuration for Reusability \u0026 Environments When you run sam deploy --guided, SAM generates a samconfig.toml file. This file stores deployment settings like your S3 bucket, stack name, region, and parameter overrides — so you don’t need to type them every time.\nBut beyond that, you can define multiple environments using named configurations. Example:\nversion = 0.1 [staging.deploy.parameters] stack_name = \"my-sam-app-staging\" region = \"ap-southeast-1\" s3_bucket = \"my-sam-artifacts-staging\" capabilities = \"CAPABILITY_IAM\" parameter_overrides = \"Environment=staging\" [prod.deploy.parameters] stack_name = \"my-sam-app-prod\" region = \"ap-southeast-1\" s3_bucket = \"my-sam-artifacts-prod\" capabilities = \"CAPABILITY_IAM\" parameter_overrides = \"Environment=prod\" Now you can deploy using:\nsam deploy --config-env staging sam deploy --config-env prod This allows:\nCleaner separation between dev/staging/prod Safer deployment practices Per-env overrides for Lambda environment variables, tags, etc. SAM CLI A command-line tool that simplifies development and deployment:\nsam init – scaffold a new project sam build – package your code sam deploy – push it to AWS sam local invoke – test individual functions locally sam local start-api – emulate full API locally If you’re starting your journey into serverless with AWS, SAM is one of the best tools to learn and use. It removes the friction of writing raw CloudFormation, supports local development, and lets you ship your ideas quickly.\nIt’s not just beginner-friendly — it’s also powerful enough to be used in production systems, especially when paired with other AWS services like DynamoDB, Step Functions, and EventBridge.\n",
+  "wordCount" : "555",
+  "inLanguage": "en",
+  "datePublished": "2025-08-03T07:34:21+08:00",
+  "dateModified": "2025-08-03T07:34:21+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/aws_sam_intro/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -125,21 +206,20 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Serverless
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: SAM Introduction
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.</p>
-<h3 id="what-is-aws-sam">What is AWS SAM?</h3>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      AWS: SAM Introduction
+    </h1>
+    <div class="post-meta"><span title='2025-08-03 07:34:21 +0800 +08'>August 3, 2025</span>&nbsp;·&nbsp;3 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.</p>
+<h3 id="what-is-aws-sam">What is AWS SAM?<a hidden class="anchor" aria-hidden="true" href="#what-is-aws-sam">#</a></h3>
 <p>AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.</p>
 <p>It’s designed to simplify your infrastructure-as-code, especially when working with:</p>
 <ul>
@@ -149,7 +229,7 @@
 <li>EventBridge, SQS, Step Functions, and more</li>
 </ul>
 <p>At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.</p>
-<h3 id="why-use-aws-sam">Why Use AWS SAM?</h3>
+<h3 id="why-use-aws-sam">Why Use AWS SAM?<a hidden class="anchor" aria-hidden="true" href="#why-use-aws-sam">#</a></h3>
 <p>You should consider SAM when:</p>
 <ul>
 <li>You’re building serverless applications using AWS services like Lambda and API Gateway.</li>
@@ -163,7 +243,7 @@
 <li>Developer teams who want simplicity without giving up AWS-native IaC</li>
 <li>Learning how serverless works with real AWS infrastructure</li>
 </ul>
-<h3 id="sam-vs-cloudformation-whats-the-difference">SAM vs. CloudFormation: what&rsquo;s the difference?</h3>
+<h3 id="sam-vs-cloudformation-whats-the-difference">SAM vs. CloudFormation: what&rsquo;s the difference?<a hidden class="anchor" aria-hidden="true" href="#sam-vs-cloudformation-whats-the-difference">#</a></h3>
 <p>SAM is built on top of CloudFormation, so it inherits all the benefits of CloudFormation while providing a simpler syntax for serverless applications. Here are some key differences:</p>
 <table>
   <thead>
@@ -203,7 +283,7 @@
 </table>
 <p>In short: SAM is CloudFormation — just way easier for serverless.</p>
 <p>You still get all the benefits of CloudFormation (rollback, drift detection, etc.), but with less effort and boilerplate.</p>
-<h3 id="sam-main-components">SAM Main Components</h3>
+<h3 id="sam-main-components">SAM Main Components<a hidden class="anchor" aria-hidden="true" href="#sam-main-components">#</a></h3>
 <ol>
 <li>template.yaml</li>
 </ol>
@@ -263,97 +343,26 @@
 <p>If you’re starting your journey into serverless with AWS, SAM is one of the best tools to learn and use. It removes the friction of writing raw CloudFormation, supports local development, and lets you ship your ideas quickly.</p>
 <p>It’s not just beginner-friendly — it’s also powerful enough to be used in production systems, especially when paired with other AWS services like DynamoDB, Step Functions, and EventBridge.</p>
 
-  </div>
-  <footer class="entry-footer"><span title='2025-08-03 07:34:21 +0800 +08'>August 3, 2025</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: SAM Introduction" href="https://hazriqpedia.github.io/posts/aws_sam_intro/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: Lambda Basics
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.</p>
-<p>In this post, I will cover the basics:</p>
-<ul>
-<li>What is Lambda?</li>
-<li>What are the core components?</li>
-<li>Why use it?</li>
-<li>A real use case: processing SQS messages in TypeScript</li>
-<li>Common limitations</li>
-</ul>
-<h3 id="what-is-aws-lambda">What is AWS Lambda?</h3>
-<p>AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.</p>
-<p>You don’t manage servers. You just focus on the code, and Lambda takes care of:</p>
-<ul>
-<li>Running it</li>
-<li>Scaling it automatically</li>
-<li>Charging you only when it runs</li>
-</ul>
-<h3 id="key-components-of-aws-lambda">Key Components of AWS Lambda</h3>
-<ol>
-<li><strong>Handlers</strong>: The entry point for your Lambda function. It&rsquo;s the method that AWS Lambda calls to start execution.</li>
-<li><strong>Events</strong>: Lambda functions are triggered by events, which can come from various AWS services like S3, DynamoDB, API Gateway, or even custom events.</li>
-<li><strong>Context</strong>: Provides runtime information to your Lambda function, such as the function name, version, and remaining execution time.</li>
-<li><strong>IAM Roles</strong>: AWS Identity and Access Management (IAM) roles define the permissions for your Lambda function, allowing it to access other AWS services securely.</li>
-<li><strong>Environment Variables</strong>: Key-value pairs that you can use to pass configuration settings to your Lambda function at runtime.</li>
-<li><strong>Timeouts and Memory</strong>: You can configure the maximum execution time and memory allocated to your Lambda function, which affects performance and cost.</li>
-<li><strong>CloudWatch Logs</strong>: Automatically logs the output of your Lambda function, which you can use for debugging and monitoring.</li>
-</ol>
-<h3 id="why-use-aws-lambda">Why Use AWS Lambda?</h3>
-<ul>
-<li><strong>Cost-Effective</strong>: You only pay for the compute time you consume. There are no charges when your code is not running.</li>
-<li><strong>Scalability</strong>: Automatically scales your application by running code in response to each event, so you don’t have to worry about scaling your infrastructure.</li>
-<li><strong>Flexibility</strong>: Supports multiple programming languages (Node.js, Python, Java, Go, C#, Ruby, and custom runtimes) and can be used for a wide range of applications, from simple scripts to complex microservices.</li>
-<li><strong>Event-Driven</strong>: Easily integrates with other AWS services, allowing you to build event-driven architectures that respond to changes in your data or system state.</li>
-<li><strong>Zero Administration</strong>: No need to manage servers or runtime environments. AWS handles all the infrastructure management tasks, including patching, scaling, and availability.</li>
-</ul>
-<h3 id="real-use-case-typescript-lambda-to-process-sqs--dynamodb">Real Use Case: TypeScript Lambda to Process SQS → DynamoDB</h3>
-<p>In my current role, we use AWS Lambda to process messages from SQS queues. Here’s a simple example of how you can set up a Lambda function in TypeScript to process messages from an SQS queue and store them in DynamoDB.</p>
-<p>Lets say we receive messages in SQS that contain user data, and we want to store this data in DynamoDB.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SQSHandler</span><span class="p">,</span> <span class="nx">SQSEvent</span><span class="p">,</span> <span class="nx">Context</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-lambda&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DynamoDB</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-sdk&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">dynamoDb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DynamoDB</span><span class="p">.</span><span class="nx">DocumentClient</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">handler</span>: <span class="kt">SQSHandler</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">event</span>: <span class="kt">SQSEvent</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">context</span>: <span class="kt">Context</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">record</span> <span class="k">of</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">TableName</span><span class="o">:</span> <span class="s2">&#34;Users&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">Item</span>: <span class="kt">userData</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="nx">dynamoDb</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">promise</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><p>In this example:</p>
-<ul>
-<li>We import necessary types from <code>aws-lambda</code> and the <code>DynamoDB</code> client from <code>aws-sdk</code>.</li>
-<li>The <code>handler</code> function processes each message in the SQS event.</li>
-<li>We parse the message body and store it in a DynamoDB table named <code>Users</code>.</li>
-</ul>
-<p>This function will be uploaded to AWS Lambda, and you can configure it to trigger whenever new messages arrive in the SQS queue.</p>
-<h3 id="common-limitations-of-aws-lambda">Common Limitations of AWS Lambda</h3>
-<ul>
-<li><strong>Execution Time</strong>: Lambda functions have a maximum execution time of 15 minutes. If your task takes longer, you may need to break it into smaller functions or use other services.</li>
-<li><strong>Cold Starts</strong>: When a Lambda function is invoked after being idle, it may take longer to start due to the initialization time (cold start). This can affect performance, especially for latency-sensitive applications.</li>
-<li><strong>Limited Resources</strong>: Each Lambda function has a maximum memory limit (up to 1024 MB) and a maximum package size (50 MB for direct upload, 250 MB when using layers). This can be a constraint for resource-intensive applications.</li>
-<li><strong>Limited Runtime Environment</strong>: While Lambda supports multiple programming languages, you may encounter limitations with certain libraries or dependencies that require a specific runtime environment.</li>
-<li><strong>State Management</strong>: Lambda functions are stateless, meaning they do not retain any state between invocations. If you need to maintain state, you will have to use external storage solutions like DynamoDB or S3.</li>
-<li><strong>Concurrency Limits</strong>: There are limits on the number of concurrent executions for Lambda functions. If your application experiences a sudden spike in traffic, you may hit these limits, leading to throttling of requests.</li>
-<li><strong>Vendor Lock-In</strong>: Using AWS Lambda ties you to the AWS ecosystem, which can make it challenging to migrate to other cloud providers or on-premises in the future.</li>
-</ul>
-<h3 id="wrap-up">Wrap-Up</h3>
-<p>AWS Lambda is a powerful tool for building serverless applications that can scale automatically and respond to events without the need for server management. By understanding its core components and limitations, you can effectively leverage Lambda to build efficient, cost-effective applications that meet your business needs.</p>
-<p>Whether you’re processing SQS messages, building APIs with API Gateway, or integrating with other AWS services, Lambda provides a flexible and scalable solution that can adapt to your application’s requirements.</p>
 
   </div>
-  <footer class="entry-footer"><span title='2025-07-27 06:56:44 +0800 +08'>July 27, 2025</span>&nbsp;·&nbsp;5 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: Lambda Basics" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/aws/">AWS</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/sam/">SAM</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/serverless/">Serverless</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/infrastructure-as-code/">Infrastructure-as-Code</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/iac/">IaC</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/">
+    <span class="title">Next »</span>
+    <br>
+    <span>AWS: Lambda Basics</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
     </main>
     
@@ -425,6 +434,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

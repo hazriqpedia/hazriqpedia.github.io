@@ -174,6 +174,142 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: SAM Introduction
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.</p>
+<h3 id="what-is-aws-sam">What is AWS SAM?</h3>
+<p>AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.</p>
+<p>It’s designed to simplify your infrastructure-as-code, especially when working with:</p>
+<ul>
+<li>AWS Lambda</li>
+<li>API Gateway</li>
+<li>DynamoDB</li>
+<li>EventBridge, SQS, Step Functions, and more</li>
+</ul>
+<p>At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.</p>
+<h3 id="why-use-aws-sam">Why Use AWS SAM?</h3>
+<p>You should consider SAM when:</p>
+<ul>
+<li>You’re building serverless applications using AWS services like Lambda and API Gateway.</li>
+<li>You want to define infrastructure as code but find raw CloudFormation too verbose.</li>
+<li>You want to test Lambda functions locally using Docker.</li>
+<li>You prefer guided deployment over manually zipping and uploading code.</li>
+</ul>
+<p>SAM is ideal for:</p>
+<ul>
+<li>Quick prototyping of serverless apps</li>
+<li>Developer teams who want simplicity without giving up AWS-native IaC</li>
+<li>Learning how serverless works with real AWS infrastructure</li>
+</ul>
+<h3 id="sam-vs-cloudformation-whats-the-difference">SAM vs. CloudFormation: what&rsquo;s the difference?</h3>
+<p>SAM is built on top of CloudFormation, so it inherits all the benefits of CloudFormation while providing a simpler syntax for serverless applications. Here are some key differences:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Feature</th>
+          <th style="text-align: center">AWS CloudFormation</th>
+          <th style="text-align: center">AWS SAM</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Purpose</td>
+          <td style="text-align: center">Define any AWS infrastructure</td>
+          <td style="text-align: center">Focused on serverless apps</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Syntax</td>
+          <td style="text-align: center">YAML/JSON (verbose)</td>
+          <td style="text-align: center">Simplified YAML with shorthand</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Testing</td>
+          <td style="text-align: center">❌ No built-in local testing</td>
+          <td style="text-align: center">✅ Local testing with Docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Deployment CLI</td>
+          <td style="text-align: center">aws cloudformation deploy</td>
+          <td style="text-align: center">sam deploy &ndash;guided</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Abstraction Layer</td>
+          <td style="text-align: center">Base layer</td>
+          <td style="text-align: center">Built on top of CloudFormation</td>
+      </tr>
+  </tbody>
+</table>
+<p>In short: SAM is CloudFormation — just way easier for serverless.</p>
+<p>You still get all the benefits of CloudFormation (rollback, drift detection, etc.), but with less effort and boilerplate.</p>
+<h3 id="sam-main-components">SAM Main Components</h3>
+<ol>
+<li>template.yaml</li>
+</ol>
+<p>Your SAM template is the blueprint of your application — it declares all the AWS resources your app needs.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HelloWorldFunction</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Serverless::Function</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CodeUri</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Handler</span><span class="p">:</span><span class="w"> </span><span class="l">app.lambda_handler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Events</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">HelloWorld</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">Api</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l">/hello</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Method</span><span class="p">:</span><span class="w"> </span><span class="l">get</span><span class="w">
+</span></span></span></code></pre></div><ol start="2">
+<li><strong>samconfig.toml</strong>: Configuration for Reusability &amp; Environments</li>
+</ol>
+<p>When you run <code>sam deploy --guided</code>, SAM generates a <code>samconfig.toml</code> file. This file stores deployment settings like your S3 bucket, stack name, region, and parameter overrides — so you don’t need to type them every time.</p>
+<p>But beyond that, you can define multiple environments using named configurations. Example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">staging</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-staging&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-staging&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=staging&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">prod</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-prod&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-prod&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=prod&#34;</span>
+</span></span></code></pre></div><p>Now you can deploy using:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sam deploy --config-env staging
+</span></span><span class="line"><span class="cl">sam deploy --config-env prod
+</span></span></code></pre></div><p>This allows:</p>
+<ul>
+<li>Cleaner separation between dev/staging/prod</li>
+<li>Safer deployment practices</li>
+<li>Per-env overrides for Lambda environment variables, tags, etc.</li>
+</ul>
+<ol start="3">
+<li>SAM CLI</li>
+</ol>
+<p>A command-line tool that simplifies development and deployment:</p>
+<ul>
+<li><code>sam init</code> – scaffold a new project</li>
+<li><code>sam build</code> – package your code</li>
+<li><code>sam deploy</code> – push it to AWS</li>
+<li><code>sam local invoke</code> – test individual functions locally</li>
+<li><code>sam local start-api</code> – emulate full API locally</li>
+</ul>
+<p>If you’re starting your journey into serverless with AWS, SAM is one of the best tools to learn and use. It removes the friction of writing raw CloudFormation, supports local development, and lets you ship your ideas quickly.</p>
+<p>It’s not just beginner-friendly — it’s also powerful enough to be used in production systems, especially when paired with other AWS services like DynamoDB, Step Functions, and EventBridge.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-08-03 07:34:21 +0800 +08'>August 3, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: SAM Introduction" href="https://hazriqpedia.github.io/posts/aws_sam_intro/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">AWS: Lambda Basics
     </h2>
   </header>
