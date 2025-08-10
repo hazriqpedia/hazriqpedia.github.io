@@ -149,6 +149,122 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; DAX Cost Factors
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>We discussed about DynamoDB in <a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">previous post</a>, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).</p>
+<h3 id="recap">Recap</h3>
+<ul>
+<li>
+<p><strong>Amazon DynamoDB (DDB)</strong> is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.</p>
+</li>
+<li>
+<p><strong>Amazon DynamoDB Accelerator (DAX)</strong> is an in-memory caching service for DynamoDB.
+Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.</p>
+</li>
+</ul>
+<p>Together, DDB and DAX can significantly improve application performance — but they also come with different cost models you’ll want to understand before adopting.</p>
+<h4 id="when-to-use-dax">When to Use DAX?</h4>
+<p>DAX is particularly useful when:</p>
+<ul>
+<li>Your workload has high read traffic with repeated queries for the same items.</li>
+<li>You want microsecond read latency for real-time user experience.</li>
+<li>You aim to offload read traffic from DynamoDB to reduce provisioned read capacity usage.</li>
+</ul>
+<p><strong>Example</strong>: A database for AI model training, where the same training data is accessed repeatedly.</p>
+<h4 id="skip-dax-when">Skip DAX when:</h4>
+<ul>
+<li>Your workload is write-heavy with low read repetition.</li>
+<li>Your queries are strongly consistent (DAX only supports eventually consistent reads).</li>
+<li>Your access patterns are highly dynamic and unpredictable — the cache hit rate might be low.</li>
+</ul>
+<h3 id="understanding-dynamodb-costs">Understanding DynamoDB Costs</h3>
+<p>DynamoDB costs come from three main areas:</p>
+<ul>
+<li><strong>Reading Data</strong>
+<ul>
+<li>Imagine a reading allowance — every time you check a page from a book, it uses part of your allowance.</li>
+<li>You can either pay per read (On-Demand) or buy a monthly “reading subscription” (Provisioned) if you know your usual usage.</li>
+</ul>
+</li>
+<li><strong>Writing Data</strong>
+<ul>
+<li>Adding or updating books also uses an allowance — think of it as your “writing subscription” or “per-write” payment.</li>
+</ul>
+</li>
+<li><strong>Storing Data</strong>
+<ul>
+<li>This is your bookshelf space.</li>
+<li>Regular storage (Standard) is always ready but costs more.</li>
+<li>Cheaper storage (Standard-IA) is for books you rarely read, but you’ll pay a small fee each time you take one.</li>
+</ul>
+</li>
+</ul>
+<p>Extras You Might Pay For:</p>
+<ul>
+<li>Backups — like taking daily photos of your bookshelf.</li>
+<li>Copies in other regions — like having the same library in multiple cities.</li>
+</ul>
+<h3 id="understanding-dax-costs">Understanding DAX Costs</h3>
+<ol start="5">
+<li>DAX Costs
+DAX pricing is per node-hour, depending on node type:</li>
+</ol>
+<ul>
+<li>Smallest node (dax.t3.small) is the cheapest, suitable for dev/test.</li>
+<li>Larger nodes (dax.r5.large, etc.) cost more but handle higher throughput.</li>
+<li>DAX clusters require at least 3 nodes for fault tolerance in production.</li>
+</ul>
+<p>Note: DAX charges are separate from DynamoDB — even if your reads come from the cache.</p>
+<h3 id="cost-comparison">Cost Comparison</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Component</th>
+          <th style="text-align: center">Without DAX (Provisioned)</th>
+          <th style="text-align: center">With DAX (Provisioned)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Read Capacity Cost</td>
+          <td style="text-align: center">High (due to all reads hitting DDB)</td>
+          <td style="text-align: center">Lower (fewer RCUs needed)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Write Capacity Cost</td>
+          <td style="text-align: center">Same</td>
+          <td style="text-align: center">Same</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Storage Cost</td>
+          <td style="text-align: center">Same</td>
+          <td style="text-align: center">Same</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">DAX Cost</td>
+          <td style="text-align: center">$0</td>
+          <td style="text-align: center">Node-hour charges</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>If your cache hit rate is low, DAX might increase costs without much benefit.</p></blockquote>
+<h3 id="final-thoughts">Final Thoughts</h3>
+<ul>
+<li>Use DAX if you have heavy, repeated reads and need lightning-fast results.</li>
+<li>Use Standard-IA storage for rarely accessed data — but don’t forget the retrieval cost.</li>
+<li>Always measure first: monitor read/write usage and cache hit rates before committing.</li>
+</ul>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-08-10 11:11:51 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: DynamoDB & DAX Cost Factors" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">AWS: SAM Introduction
     </h2>
   </header>

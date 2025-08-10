@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>DaX on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/dax/</link>
+    <description>Recent content in DaX on Hazriq&#39;s Dev Chaos</description>
+    <generator>Hugo -- 0.147.7</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Aug 2025 11:11:51 +0800</lastBuildDate>
+    <atom:link href="https://hazriqpedia.github.io/tags/dax/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS: DynamoDB &amp; DAX Cost Factors</title>
+      <link>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</link>
+      <pubDate>Sun, 10 Aug 2025 11:11:51 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</guid>
+      <description>&lt;p&gt;We discussed about DynamoDB in &lt;a href=&#34;https://hazriqpedia.github.io/posts/aws_dynamodb_intro/&#34;&gt;previous post&lt;/a&gt;, but let&amp;rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).&lt;/p&gt;
+&lt;h3 id=&#34;recap&#34;&gt;Recap&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amazon DynamoDB (DDB)&lt;/strong&gt; is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amazon DynamoDB Accelerator (DAX)&lt;/strong&gt; is an in-memory caching service for DynamoDB.
+Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -5,11 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>DynamoDB | Hazriq&#39;s Dev Chaos</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+<title>AWS: DynamoDB &amp; DAX Cost Factors | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="AWS, DynamoDB, NoSQL, DaX, costs">
+<meta name="description" content="We discussed about DynamoDB in previous post, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).
+Recap
+
+
+Amazon DynamoDB (DDB) is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.
+
+
+Amazon DynamoDB Accelerator (DAX) is an in-memory caching service for DynamoDB.
+Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/dynamodb/">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +26,7 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/dynamodb/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/dynamodb/">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,18 +63,87 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/dynamodb/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="DynamoDB">
+  <meta property="og:title" content="AWS: DynamoDB & DAX Cost Factors">
+  <meta property="og:description" content="We discussed about DynamoDB in previous post, but let’s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).
+Recap Amazon DynamoDB (DDB) is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.
+Amazon DynamoDB Accelerator (DAX) is an in-memory caching service for DynamoDB. Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.">
   <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-10T11:11:51+08:00">
+    <meta property="article:modified_time" content="2025-08-10T11:11:51+08:00">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="DynamoDB">
+    <meta property="article:tag" content="NoSQL">
+    <meta property="article:tag" content="DaX">
+    <meta property="article:tag" content="Costs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DynamoDB">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="AWS: DynamoDB &amp; DAX Cost Factors">
+<meta name="twitter:description" content="We discussed about DynamoDB in previous post, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).
+Recap
 
+
+Amazon DynamoDB (DDB) is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.
+
+
+Amazon DynamoDB Accelerator (DAX) is an in-memory caching service for DynamoDB.
+Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "AWS: DynamoDB \u0026 DAX Cost Factors",
+      "item": "https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AWS: DynamoDB \u0026 DAX Cost Factors",
+  "name": "AWS: DynamoDB \u0026 DAX Cost Factors",
+  "description": "We discussed about DynamoDB in previous post, but let\u0026rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).\nRecap Amazon DynamoDB (DDB) is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.\nAmazon DynamoDB Accelerator (DAX) is an in-memory caching service for DynamoDB. Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.\n",
+  "keywords": [
+    "AWS", "DynamoDB", "NoSQL", "DaX", "costs"
+  ],
+  "articleBody": "We discussed about DynamoDB in previous post, but let’s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).\nRecap Amazon DynamoDB (DDB) is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.\nAmazon DynamoDB Accelerator (DAX) is an in-memory caching service for DynamoDB. Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.\nTogether, DDB and DAX can significantly improve application performance — but they also come with different cost models you’ll want to understand before adopting.\nWhen to Use DAX? DAX is particularly useful when:\nYour workload has high read traffic with repeated queries for the same items. You want microsecond read latency for real-time user experience. You aim to offload read traffic from DynamoDB to reduce provisioned read capacity usage. Example: A database for AI model training, where the same training data is accessed repeatedly.\nSkip DAX when: Your workload is write-heavy with low read repetition. Your queries are strongly consistent (DAX only supports eventually consistent reads). Your access patterns are highly dynamic and unpredictable — the cache hit rate might be low. Understanding DynamoDB Costs DynamoDB costs come from three main areas:\nReading Data Imagine a reading allowance — every time you check a page from a book, it uses part of your allowance. You can either pay per read (On-Demand) or buy a monthly “reading subscription” (Provisioned) if you know your usual usage. Writing Data Adding or updating books also uses an allowance — think of it as your “writing subscription” or “per-write” payment. Storing Data This is your bookshelf space. Regular storage (Standard) is always ready but costs more. Cheaper storage (Standard-IA) is for books you rarely read, but you’ll pay a small fee each time you take one. Extras You Might Pay For:\nBackups — like taking daily photos of your bookshelf. Copies in other regions — like having the same library in multiple cities. Understanding DAX Costs DAX Costs DAX pricing is per node-hour, depending on node type: Smallest node (dax.t3.small) is the cheapest, suitable for dev/test. Larger nodes (dax.r5.large, etc.) cost more but handle higher throughput. DAX clusters require at least 3 nodes for fault tolerance in production. Note: DAX charges are separate from DynamoDB — even if your reads come from the cache.\nCost Comparison Component Without DAX (Provisioned) With DAX (Provisioned) Read Capacity Cost High (due to all reads hitting DDB) Lower (fewer RCUs needed) Write Capacity Cost Same Same Storage Cost Same Same DAX Cost $0 Node-hour charges If your cache hit rate is low, DAX might increase costs without much benefit.\nFinal Thoughts Use DAX if you have heavy, repeated reads and need lightning-fast results. Use Standard-IA storage for rarely accessed data — but don’t forget the retrieval cost. Always measure first: monitor read/write usage and cache hit rates before committing. ",
+  "wordCount" : "488",
+  "inLanguage": "en",
+  "datePublished": "2025-08-10T11:11:51+08:00",
+  "dateModified": "2025-08-10T11:11:51+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -125,21 +201,20 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    DynamoDB
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; DAX Cost Factors
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>We discussed about DynamoDB in <a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">previous post</a>, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).</p>
-<h3 id="recap">Recap</h3>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      AWS: DynamoDB &amp; DAX Cost Factors
+    </h1>
+    <div class="post-meta"><span title='2025-08-10 11:11:51 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>We discussed about DynamoDB in <a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">previous post</a>, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).</p>
+<h3 id="recap">Recap<a hidden class="anchor" aria-hidden="true" href="#recap">#</a></h3>
 <ul>
 <li>
 <p><strong>Amazon DynamoDB (DDB)</strong> is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.</p>
@@ -150,7 +225,7 @@ Think of it as a turbocharger — it reduces read latency from milliseconds to m
 </li>
 </ul>
 <p>Together, DDB and DAX can significantly improve application performance — but they also come with different cost models you’ll want to understand before adopting.</p>
-<h4 id="when-to-use-dax">When to Use DAX?</h4>
+<h4 id="when-to-use-dax">When to Use DAX?<a hidden class="anchor" aria-hidden="true" href="#when-to-use-dax">#</a></h4>
 <p>DAX is particularly useful when:</p>
 <ul>
 <li>Your workload has high read traffic with repeated queries for the same items.</li>
@@ -158,13 +233,13 @@ Think of it as a turbocharger — it reduces read latency from milliseconds to m
 <li>You aim to offload read traffic from DynamoDB to reduce provisioned read capacity usage.</li>
 </ul>
 <p><strong>Example</strong>: A database for AI model training, where the same training data is accessed repeatedly.</p>
-<h4 id="skip-dax-when">Skip DAX when:</h4>
+<h4 id="skip-dax-when">Skip DAX when:<a hidden class="anchor" aria-hidden="true" href="#skip-dax-when">#</a></h4>
 <ul>
 <li>Your workload is write-heavy with low read repetition.</li>
 <li>Your queries are strongly consistent (DAX only supports eventually consistent reads).</li>
 <li>Your access patterns are highly dynamic and unpredictable — the cache hit rate might be low.</li>
 </ul>
-<h3 id="understanding-dynamodb-costs">Understanding DynamoDB Costs</h3>
+<h3 id="understanding-dynamodb-costs">Understanding DynamoDB Costs<a hidden class="anchor" aria-hidden="true" href="#understanding-dynamodb-costs">#</a></h3>
 <p>DynamoDB costs come from three main areas:</p>
 <ul>
 <li><strong>Reading Data</strong>
@@ -191,7 +266,7 @@ Think of it as a turbocharger — it reduces read latency from milliseconds to m
 <li>Backups — like taking daily photos of your bookshelf.</li>
 <li>Copies in other regions — like having the same library in multiple cities.</li>
 </ul>
-<h3 id="understanding-dax-costs">Understanding DAX Costs</h3>
+<h3 id="understanding-dax-costs">Understanding DAX Costs<a hidden class="anchor" aria-hidden="true" href="#understanding-dax-costs">#</a></h3>
 <ol start="5">
 <li>DAX Costs
 DAX pricing is per node-hour, depending on node type:</li>
@@ -202,7 +277,7 @@ DAX pricing is per node-hour, depending on node type:</li>
 <li>DAX clusters require at least 3 nodes for fault tolerance in production.</li>
 </ul>
 <p>Note: DAX charges are separate from DynamoDB — even if your reads come from the cache.</p>
-<h3 id="cost-comparison">Cost Comparison</h3>
+<h3 id="cost-comparison">Cost Comparison<a hidden class="anchor" aria-hidden="true" href="#cost-comparison">#</a></h3>
 <table>
   <thead>
       <tr>
@@ -236,96 +311,33 @@ DAX pricing is per node-hour, depending on node type:</li>
 </table>
 <blockquote>
 <p>If your cache hit rate is low, DAX might increase costs without much benefit.</p></blockquote>
-<h3 id="final-thoughts">Final Thoughts</h3>
+<h3 id="final-thoughts">Final Thoughts<a hidden class="anchor" aria-hidden="true" href="#final-thoughts">#</a></h3>
 <ul>
 <li>Use DAX if you have heavy, repeated reads and need lightning-fast results.</li>
 <li>Use Standard-IA storage for rarely accessed data — but don’t forget the retrieval cost.</li>
 <li>Always measure first: monitor read/write usage and cache hit rates before committing.</li>
 </ul>
 
-  </div>
-  <footer class="entry-footer"><span title='2025-08-10 11:11:51 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: DynamoDB & DAX Cost Factors" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: DynamoDB Basics
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore <strong>AWS DynamoDB</strong>.</p>
-<h3 id="database-types">Database Types</h3>
-<p>There are two main types of databases:</p>
-<ul>
-<li><strong>Relational Databases</strong> (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.</li>
-<li><strong>NoSQL Databases</strong>: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.</li>
-</ul>
-<blockquote>
-<p>If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.</p></blockquote>
-<h3 id="key-features-of-dynamodb">Key Features of DynamoDB</h3>
-<ul>
-<li><strong>Fully Managed</strong>: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling.</li>
-<li><strong>Performance at Scale</strong>: It automatically scales up and down to adjust for capacity and maintain performance.</li>
-<li><strong>Flexible Data Model</strong>: Supports key-value and document data structures, allowing for a variety of use cases.</li>
-<li><strong>Built-in Security</strong>: Offers encryption at rest and in transit, along with fine-grained access control.</li>
-</ul>
-<p>So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.</p>
-<h4 id="key-concepts">Key Concepts</h4>
-<ul>
-<li><strong>Tables</strong>: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item.</li>
-<li><strong>Items</strong>: Individual records in a table, similar to rows in a relational database.</li>
-<li><strong>Attributes</strong>: The data fields in an item, similar to columns in a relational database.</li>
-<li><strong>Primary Key</strong>: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key).</li>
-<li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
-</ul>
-<p>A simple item in a DynamoDB table might look like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
-<ul>
-<li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
-<li><strong>Performance</strong>: Provides low-latency data access, making it suitable for real-time applications.</li>
-<li><strong>Flexibility</strong>: Supports various data models, allowing developers to choose the best fit for their application.</li>
-<li><strong>Cost-Effective</strong>: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads.</li>
-<li><strong>Integration with AWS Services</strong>: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging.</li>
-<li><strong>TTL (Time to Live)</strong>: Automatically deletes expired items, helping manage storage costs and data lifecycle.</li>
-</ul>
-<h3 id="performance-considerations">Performance Considerations</h3>
-<ul>
-<li><strong>Provisioned Throughput</strong>: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle.</li>
-<li><strong>On-Demand Capacity</strong>: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads.</li>
-<li><strong>Caching</strong>: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads.</li>
-<li><strong>Batch Operations</strong>: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database.</li>
-</ul>
-<h4 id="without-dax">Without DAX</h4>
-<ul>
-<li>Reads and writes are directly from the DynamoDB table.</li>
-<li>Each read or write operation incurs a latency based on the network and DynamoDB&rsquo;s processing time.</li>
-</ul>
-<h4 id="with-dax">With DAX</h4>
-<ul>
-<li>DAX acts as an in-memory cache, reducing the latency for read operations.</li>
-<li>DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests.</li>
-<li>This significantly speeds up read operations, especially for frequently accessed data.</li>
-</ul>
-<h3 id="when-not-to-use-dynamodb">When not to Use DynamoDB</h3>
-<p>While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:</p>
-<ul>
-<li><strong>Complex Queries</strong>: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable.</li>
-<li><strong>Transactional Support</strong>: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions.</li>
-<li><strong>Large Binary Objects</strong>: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata.</li>
-<li><strong>High Write Throughput</strong>: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra.</li>
-</ul>
-<p>DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you&rsquo;re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.</p>
-<p>Of course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.</p>
 
   </div>
-  <footer class="entry-footer"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: DynamoDB Basics" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/aws/">AWS</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/dynamodb/">DynamoDB</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/nosql/">NoSQL</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/dax/">DaX</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/costs/">Costs</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/aws_sam_intro/">
+    <span class="title">Next »</span>
+    <br>
+    <span>AWS: SAM Introduction</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
     </main>
     
@@ -397,6 +409,53 @@ DAX pricing is per node-hour, depending on node type:</li>
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

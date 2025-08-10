@@ -3,12 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://hazriqpedia.github.io/tags/aws/</loc>
-    <lastmod>2025-08-03T07:34:21+08:00</lastmod>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/posts/aws_sam_intro/</loc>
-    <lastmod>2025-08-03T07:34:21+08:00</lastmod>
+    <loc>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/costs/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/dax/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/dynamodb/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/nosql/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/</loc>
+    <lastmod>2025-08-10T11:11:51+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/aws_sam_intro/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/iac/</loc>
@@ -17,16 +38,10 @@
     <loc>https://hazriqpedia.github.io/tags/infrastructure-as-code/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/posts/</loc>
-    <lastmod>2025-08-03T07:34:21+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/tags/sam/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/serverless/</loc>
-    <lastmod>2025-08-03T07:34:21+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/posts/aws_lambda_intro/</loc>
@@ -39,12 +54,6 @@
     <lastmod>2025-07-27T06:56:44+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/posts/aws_dynamodb_intro/</loc>
-    <lastmod>2025-07-20T05:42:27+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/dynamodb/</loc>
-    <lastmod>2025-07-20T05:42:27+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/nosql/</loc>
     <lastmod>2025-07-20T05:42:27+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/</loc>
