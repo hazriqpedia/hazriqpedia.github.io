@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>AWS: DynamoDB &amp; IA Class | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="AWS, DynamoDB, NoSQL, costs">
+<meta name="description" content="If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.
+What if you could store that cold data somewhere cheaper without changing your code or losing availability?
+That’s exactly what DynamoDB Standard-IA (Infrequent Access) is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hazriqpedia.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/">
+  <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:title" content="AWS: DynamoDB & IA Class">
+  <meta property="og:description" content="If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.
+What if you could store that cold data somewhere cheaper without changing your code or losing availability?
+That’s exactly what DynamoDB Standard-IA (Infrequent Access) is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-10T13:15:40+08:00">
+    <meta property="article:modified_time" content="2025-08-10T13:15:40+08:00">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="DynamoDB">
+    <meta property="article:tag" content="NoSQL">
+    <meta property="article:tag" content="Costs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AWS: DynamoDB &amp; IA Class">
+<meta name="twitter:description" content="If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.
+What if you could store that cold data somewhere cheaper without changing your code or losing availability?
+That’s exactly what DynamoDB Standard-IA (Infrequent Access) is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "AWS: DynamoDB \u0026 IA Class",
+      "item": "https://hazriqpedia.github.io/posts/aws_ddb_ia_class/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AWS: DynamoDB \u0026 IA Class",
+  "name": "AWS: DynamoDB \u0026 IA Class",
+  "description": "If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.\nWhat if you could store that cold data somewhere cheaper without changing your code or losing availability?\nThat’s exactly what DynamoDB Standard-IA (Infrequent Access) is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.\n",
+  "keywords": [
+    "AWS", "DynamoDB", "NoSQL", "costs"
+  ],
+  "articleBody": "If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.\nWhat if you could store that cold data somewhere cheaper without changing your code or losing availability?\nThat’s exactly what DynamoDB Standard-IA (Infrequent Access) is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.\nRecap on previous post:\nAWS: DynamoDB \u0026 DAX Cost Factors AWS: DynamoDB Basics DynamoDB Table Classes DynamoDB offers different table classes to optimize costs based on your access patterns:\nStandard – For data you access frequently. Designed for low-latency access any time. Best for your main, active application data. The default table class when you create a new DynamoDB table. Suitable for most workloads. Provides high availability and durability. Standard-IA (Infrequent Access) – For data you rarely read or write. Designed for data that is not accessed often but needs to be available when needed. Offers lower storage costs compared to Standard. Higher retrieval costs, so it’s best for data that you access less than once a month. Both table classes work exactly the same way from a developer’s point of view:\nSame APIs Same queries Same AWS Console experience The only difference? How AWS stores it behind the scenes and how much you pay.\nWhat is Standard-IA? Standard-IA is a table class designed for data that you access infrequently. It’s like a storage locker for your cold data — it’s still there when you need it, but it costs less to keep it around.\nThink of it like moving your old books to a basement shelf:\nThey’re still yours. You can still get them any time. But they’re not taking up expensive prime shelf space. How can it save you money? The main savings come from storage pricing:\nStorage Class Price per GB/month Standard ~$0.25 Standard-IA ~$0.10 That’s about 60% cheaper for storage.\nExample: If you have 100 GB of archived order history:\nStandard = ~$25/month Standard-IA = ~$10/month 💡 That’s $15/month saved — or $180/year — just for one table.\nThe Catch But it’s not all sunshine and rainbows. There are some important trade-offs to consider:\nRetrieval Costs – Around $0.01 per GB each time you read data from IA. Minimum 30-Day Storage Billing – You pay for at least 30 days even if you delete earlier. Not for Hot Data – If accessed often, retrieval fees can eat up savings. Whole-Table Setting – You can’t mix Standard and IA in one table. Best Practice before Switching Check Access Patterns — Use CloudWatch metrics to see how often the table is read. Move Predictable Cold Data — Avoid sudden spikes in retrieval. Test on a Smaller Table First — See if retrieval costs are low enough to justify the switch. Combine With TTL — Automatically delete expired data to save more. DynamoDB Standard-IA is like a budget-friendly storage locker for data you still need but rarely touch. It can cut storage costs by more than half — but only if you choose the right workloads.\nRule of thumb: If it’s predictable, cold, and still worth keeping — IA is your friend.\n",
+  "wordCount" : "563",
+  "inLanguage": "en",
+  "datePublished": "2025-08-10T13:15:40+08:00",
+  "dateModified": "2025-08-10T13:15:40+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/aws_ddb_ia_class/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hazriqpedia.github.io/" accesskey="h" title="Hazriq&#39;s Dev Chaos (Alt + H)">Hazriq&#39;s Dev Chaos</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hazriqpedia.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      AWS: DynamoDB &amp; IA Class
+    </h1>
+    <div class="post-meta"><span title='2025-08-10 13:15:40 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.</p>
+<p>What if you could store that cold data somewhere cheaper without changing your code or losing availability?</p>
+<p>That’s exactly what <strong>DynamoDB Standard-IA (Infrequent Access)</strong> is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.</p>
+<p>Recap on previous post:</p>
+<ul>
+<li><a href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">AWS: DynamoDB &amp; DAX Cost Factors</a></li>
+<li><a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">AWS: DynamoDB Basics</a></li>
+</ul>
+<h3 id="dynamodb-table-classes">DynamoDB Table Classes<a hidden class="anchor" aria-hidden="true" href="#dynamodb-table-classes">#</a></h3>
+<p>DynamoDB offers different table classes to optimize costs based on your access patterns:</p>
+<ol>
+<li><strong>Standard</strong> – For data you access frequently.
+<ul>
+<li>Designed for low-latency access any time.</li>
+<li>Best for your main, active application data.</li>
+<li>The default table class when you create a new DynamoDB table.</li>
+<li>Suitable for most workloads. Provides high availability and durability.</li>
+</ul>
+</li>
+<li><strong>Standard-IA (Infrequent Access)</strong> – For data you rarely read or write.
+<ul>
+<li>Designed for data that is not accessed often but needs to be available when needed.</li>
+<li>Offers lower storage costs compared to Standard.</li>
+<li>Higher retrieval costs, so it’s best for data that you access less than once a month.</li>
+</ul>
+</li>
+</ol>
+<p>Both table classes work exactly the same way from a developer’s point of view:</p>
+<ul>
+<li>Same APIs</li>
+<li>Same queries</li>
+<li>Same AWS Console experience</li>
+</ul>
+<p>The only difference? How AWS stores it behind the scenes and how much you pay.</p>
+<h3 id="what-is-standard-ia">What is Standard-IA?<a hidden class="anchor" aria-hidden="true" href="#what-is-standard-ia">#</a></h3>
+<p>Standard-IA is a table class designed for data that you access infrequently. It’s like a storage locker for your cold data — it’s still there when you need it, but it costs less to keep it around.</p>
+<p>Think of it like moving your old books to a basement shelf:</p>
+<ul>
+<li>They’re still yours.</li>
+<li>You can still get them any time.</li>
+<li>But they’re not taking up expensive prime shelf space.</li>
+</ul>
+<h4 id="how-can-it-save-you-money">How can it save you money?<a hidden class="anchor" aria-hidden="true" href="#how-can-it-save-you-money">#</a></h4>
+<p>The main savings come from storage pricing:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Storage Class</th>
+          <th style="text-align: center">Price per GB/month</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Standard</td>
+          <td style="text-align: center">~$0.25</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Standard-IA</td>
+          <td style="text-align: center">~$0.10</td>
+      </tr>
+  </tbody>
+</table>
+<p>That’s about <strong>60% cheaper</strong> for storage.</p>
+<p>Example:
+If you have 100 GB of archived order history:</p>
+<ul>
+<li>Standard = ~$25/month</li>
+<li>Standard-IA = ~$10/month</li>
+</ul>
+<blockquote>
+<p>💡 That’s $15/month saved — or $180/year — just for one table.</p></blockquote>
+<h3 id="the-catch">The Catch<a hidden class="anchor" aria-hidden="true" href="#the-catch">#</a></h3>
+<p>But it’s not all sunshine and rainbows. There are some important trade-offs to consider:</p>
+<ul>
+<li><strong>Retrieval Costs</strong> – Around $0.01 per GB each time you read data from IA.</li>
+<li><strong>Minimum 30-Day Storage Billing</strong> – You pay for at least 30 days even if you delete earlier.</li>
+<li><strong>Not for Hot Data</strong> – If accessed often, retrieval fees can eat up savings.</li>
+<li><strong>Whole-Table Setting</strong> – You can’t mix Standard and IA in one table.</li>
+</ul>
+<h3 id="best-practice-before-switching">Best Practice before Switching<a hidden class="anchor" aria-hidden="true" href="#best-practice-before-switching">#</a></h3>
+<ul>
+<li><strong>Check Access Patterns</strong> — Use CloudWatch metrics to see how often the table is read.</li>
+<li><strong>Move Predictable Cold Data</strong> — Avoid sudden spikes in retrieval.</li>
+<li><strong>Test on a Smaller Table First</strong> — See if retrieval costs are low enough to justify the switch.</li>
+<li><strong>Combine With TTL</strong> — Automatically delete expired data to save more.</li>
+</ul>
+<hr>
+<p>DynamoDB Standard-IA is like a budget-friendly storage locker for data you still need but rarely touch. It can cut storage costs by more than half — but only if you choose the right workloads.</p>
+<p><strong>Rule of thumb</strong>: If it’s predictable, cold, and still worth keeping — IA is your friend.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/aws/">AWS</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/dynamodb/">DynamoDB</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/nosql/">NoSQL</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/costs/">Costs</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">
+    <span class="title">Next »</span>
+    <br>
+    <span>AWS: DynamoDB &amp; DAX Cost Factors</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://hazriqpedia.github.io/">Hazriq&#39;s Dev Chaos</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

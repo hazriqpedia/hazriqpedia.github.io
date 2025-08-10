@@ -174,6 +174,107 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; IA Class
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.</p>
+<p>What if you could store that cold data somewhere cheaper without changing your code or losing availability?</p>
+<p>That’s exactly what <strong>DynamoDB Standard-IA (Infrequent Access)</strong> is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.</p>
+<p>Recap on previous post:</p>
+<ul>
+<li><a href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">AWS: DynamoDB &amp; DAX Cost Factors</a></li>
+<li><a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">AWS: DynamoDB Basics</a></li>
+</ul>
+<h3 id="dynamodb-table-classes">DynamoDB Table Classes</h3>
+<p>DynamoDB offers different table classes to optimize costs based on your access patterns:</p>
+<ol>
+<li><strong>Standard</strong> – For data you access frequently.
+<ul>
+<li>Designed for low-latency access any time.</li>
+<li>Best for your main, active application data.</li>
+<li>The default table class when you create a new DynamoDB table.</li>
+<li>Suitable for most workloads. Provides high availability and durability.</li>
+</ul>
+</li>
+<li><strong>Standard-IA (Infrequent Access)</strong> – For data you rarely read or write.
+<ul>
+<li>Designed for data that is not accessed often but needs to be available when needed.</li>
+<li>Offers lower storage costs compared to Standard.</li>
+<li>Higher retrieval costs, so it’s best for data that you access less than once a month.</li>
+</ul>
+</li>
+</ol>
+<p>Both table classes work exactly the same way from a developer’s point of view:</p>
+<ul>
+<li>Same APIs</li>
+<li>Same queries</li>
+<li>Same AWS Console experience</li>
+</ul>
+<p>The only difference? How AWS stores it behind the scenes and how much you pay.</p>
+<h3 id="what-is-standard-ia">What is Standard-IA?</h3>
+<p>Standard-IA is a table class designed for data that you access infrequently. It’s like a storage locker for your cold data — it’s still there when you need it, but it costs less to keep it around.</p>
+<p>Think of it like moving your old books to a basement shelf:</p>
+<ul>
+<li>They’re still yours.</li>
+<li>You can still get them any time.</li>
+<li>But they’re not taking up expensive prime shelf space.</li>
+</ul>
+<h4 id="how-can-it-save-you-money">How can it save you money?</h4>
+<p>The main savings come from storage pricing:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Storage Class</th>
+          <th style="text-align: center">Price per GB/month</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Standard</td>
+          <td style="text-align: center">~$0.25</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Standard-IA</td>
+          <td style="text-align: center">~$0.10</td>
+      </tr>
+  </tbody>
+</table>
+<p>That’s about <strong>60% cheaper</strong> for storage.</p>
+<p>Example:
+If you have 100 GB of archived order history:</p>
+<ul>
+<li>Standard = ~$25/month</li>
+<li>Standard-IA = ~$10/month</li>
+</ul>
+<blockquote>
+<p>💡 That’s $15/month saved — or $180/year — just for one table.</p></blockquote>
+<h3 id="the-catch">The Catch</h3>
+<p>But it’s not all sunshine and rainbows. There are some important trade-offs to consider:</p>
+<ul>
+<li><strong>Retrieval Costs</strong> – Around $0.01 per GB each time you read data from IA.</li>
+<li><strong>Minimum 30-Day Storage Billing</strong> – You pay for at least 30 days even if you delete earlier.</li>
+<li><strong>Not for Hot Data</strong> – If accessed often, retrieval fees can eat up savings.</li>
+<li><strong>Whole-Table Setting</strong> – You can’t mix Standard and IA in one table.</li>
+</ul>
+<h3 id="best-practice-before-switching">Best Practice before Switching</h3>
+<ul>
+<li><strong>Check Access Patterns</strong> — Use CloudWatch metrics to see how often the table is read.</li>
+<li><strong>Move Predictable Cold Data</strong> — Avoid sudden spikes in retrieval.</li>
+<li><strong>Test on a Smaller Table First</strong> — See if retrieval costs are low enough to justify the switch.</li>
+<li><strong>Combine With TTL</strong> — Automatically delete expired data to save more.</li>
+</ul>
+<hr>
+<p>DynamoDB Standard-IA is like a budget-friendly storage locker for data you still need but rarely touch. It can cut storage costs by more than half — but only if you choose the right workloads.</p>
+<p><strong>Rule of thumb</strong>: If it’s predictable, cold, and still worth keeping — IA is your friend.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-08-10 13:15:40 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: DynamoDB & IA Class" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">AWS: DynamoDB &amp; DAX Cost Factors
     </h2>
   </header>

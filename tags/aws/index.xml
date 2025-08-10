@@ -6,8 +6,17 @@
     <description>Recent content in AWS on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.147.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Aug 2025 11:11:51 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 Aug 2025 13:15:40 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS: DynamoDB &amp; IA Class</title>
+      <link>https://hazriqpedia.github.io/posts/aws_ddb_ia_class/</link>
+      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_ddb_ia_class/</guid>
+      <description>&lt;p&gt;If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.&lt;/p&gt;
+&lt;p&gt;What if you could store that cold data somewhere cheaper without changing your code or losing availability?&lt;/p&gt;
+&lt;p&gt;That’s exactly what &lt;strong&gt;DynamoDB Standard-IA (Infrequent Access)&lt;/strong&gt; is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>AWS: DynamoDB &amp; DAX Cost Factors</title>
       <link>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</link>
