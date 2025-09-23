@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Performance | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="https://hazriqpedia.github.io/tags/performance/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hazriqpedia.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/performance/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/performance/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/performance/">
+  <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:title" content="Performance">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Performance">
+<meta name="twitter:description" content="">
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hazriqpedia.github.io/" accesskey="h" title="Hazriq&#39;s Dev Chaos (Alt + H)">Hazriq&#39;s Dev Chaos</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hazriqpedia.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    Performance
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Java: Long vs long
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between <code>long</code> and <code>Long</code> in Java.</p>
+<p>And honestly, it hit differently because of how my new company approaches engineering.</p>
+<p>In my previous company, the priority was <em>speed</em>. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.</p>
+<p>But in my new company, the approach is different. We take more time to build the right way — thinking about memory, cost, long-term maintainability, and performance.</p>
+<p>For someone like me with 8 years of experience, this shift has been an eye-opener. It’s one thing to “make it work.” It’s another thing entirely to “make it work well.”</p>
+<p>Which brings me back to… <code>long</code> vs <code>Long</code>.</p>
+<h3 id="primitive-vs-wrapper-a-quick-refresher">Primitive vs Wrapper: A Quick Refresher</h3>
+<p>Java is a bit different from languages like Python or JavaScript. It has two “flavors” of types:</p>
+<ul>
+<li><code>Primitives</code>: raw values like <em>int</em>, <em>long</em>, <em>boolean</em>.</li>
+<li><code>Wrapper Classes</code>: object versions of these primitives: <em>Integer</em>, <em>Long</em>, <em>Boolean</em>.</li>
+</ul>
+<p>This distinction often feels academic at first, but it has real consequences in how your program behaves.</p>
+<p>So what’s the actual difference?</p>
+<ul>
+<li>
+<p><code>long</code>:</p>
+<ul>
+<li>A primitive 64-bit value.</li>
+<li>Default value: 0.</li>
+<li>Lightweight and memory efficient.</li>
+<li>Cannot be null.</li>
+</ul>
+</li>
+<li>
+<p><code>Long</code>:</p>
+<ul>
+<li>A wrapper class around long.</li>
+<li>Default value (when uninitialized in an object): <code>null</code>.</li>
+<li>Heavier — since it’s an object, it lives on the heap.</li>
+<li>Can be used in places where only objects are allowed (like <code>List&lt;Long&gt;</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="autoboxing-and-unboxing">Autoboxing and Unboxing</h3>
+<p>One of the reasons developers sometimes overlook the difference between long and Long is because Java silently converts between them. This feature is called autoboxing and unboxing.</p>
+<ul>
+<li><code>Autoboxing</code>: automatically converting a primitive (<code>long</code>) into its wrapper (<code>Long</code>).</li>
+<li><code>Unboxing</code>: automatically converting a wrapper (<code>Long</code>) back into its primitive (<code>long</code>).</li>
+</ul>
+<p>This allows you to write code that looks simple:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> 5L;   <span style="color:#75715e">// autoboxing: primitive long -&gt; Long object</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a;    <span style="color:#75715e">// unboxing: Long object -&gt; primitive long</span>
+</span></span></code></pre></div><p>Without autoboxing, you’d have to do this manually:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> Long.<span style="color:#a6e22e">valueOf</span>(5L);   <span style="color:#75715e">// boxing</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a.<span style="color:#a6e22e">longValue</span>();      <span style="color:#75715e">// unboxing</span>
+</span></span></code></pre></div><p>Pretty verbose, right? That’s why Java added this feature in Java 5 — to make our lives easier.</p>
+<p>The convenience comes with a trade-off:</p>
+<ul>
+<li><code>Performance cost</code>: Each conversion creates extra instructions, and sometimes even new objects. In a loop that runs millions of times, those hidden allocations can hurt performance.</li>
+<li><code>Null safety</code>: If you try to unbox a Long that’s actually null, you’ll get a NullPointerException. For example:</li>
+</ul>
+<p>This is why being deliberate about whether you use long or Long matters.</p>
+<p>In short:</p>
+<ul>
+<li>Autoboxing and unboxing make your code cleaner.</li>
+<li>But they also hide potential pitfalls in performance and null handling.</li>
+</ul>
+<h3 id="when-to-use-which">When to use which</h3>
+<p>Here’s a practical rule of thumb I picked up from the review:</p>
+<ul>
+<li>Use <code>long</code> when you need raw performance, don’t care about null, and the value is always expected to be present.</li>
+<li>Use <code>Long</code> when you need:
+<ul>
+<li>Nullability (e.g., a database field that may not be set).</li>
+<li>To work with Generics or Collections (<code>List&lt;Long&gt;</code> won’t work with primitives).</li>
+</ul>
+</li>
+</ul>
+<h3 id="closing">Closing</h3>
+<p>This wasn’t just a lesson about <code>long</code> vs <code>Long</code>. It was a reminder that context matters. In a fast-moving environment, you might get away with just shipping things, but in an environment where optimization, cost, and maintainability matter, these small details make a big difference.</p>
+<p>For me, this was an eye-opener even after 8 years in software development. The fundamentals are still powerful, and sometimes revisiting them is the best way to level up.</p>
+<p>The next time you see <code>long</code> vs <code>Long</code>, pause for a moment. Is <code>null</code> a possibility? Do you need collection support? Or do you just need a fast, simple number?</p>
+<p>That little decision can make your codebase more consistent, more efficient, and less bug-prone.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-09-23 22:26:34 +0800 +08'>September 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to Java: Long vs long" href="https://hazriqpedia.github.io/posts/java-long-vs-long/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://hazriqpedia.github.io/">Hazriq&#39;s Dev Chaos</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

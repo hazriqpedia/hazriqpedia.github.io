@@ -26,7 +26,7 @@ print(fruit_counts)
 We will check the fruit_counts dict. If it&rsquo;s there, add more. If not, set it it to 1.">
 <meta name="author" content="">
 <link rel="canonical" href="https://hazriqpedia.github.io/posts/py-defaultdict/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
@@ -234,29 +234,29 @@ We will check the fruit_counts dict. If it&rsquo;s there, add more. If not, set 
 In today&rsquo;s call, I was looking at a simple python solution that will try to count the number of fruits based on types.</p>
 <p>Lets take this example. I want to know how many numbers apple in the list.</p>
 <p>The typical way:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">fruit_counts</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_counts</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">fruit_counts</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Output: {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> fruit <span style="color:#f92672">in</span> fruit_counts:
+</span></span><span style="display:flex;"><span>        fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        fruit_counts[fruit] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(fruit_counts)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1}</span>
 </span></span></code></pre></div><p>We will check the <code>fruit_counts</code> dict. If it&rsquo;s there, add more. If not, set it it to 1.</p>
 <p>Looks simple, but apparently&hellip; There&rsquo;s a way to do this in more pythonic way..</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">fruit_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># defaultdict with a default factory of int (which returns 0)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 0, then 1 is added.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">fruit_counts</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Output: defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1})</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> defaultdict(int) <span style="color:#75715e"># defaultdict with a default factory of int (which returns 0)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
+</span></span><span style="display:flex;"><span>    fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 0, then 1 is added.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(fruit_counts)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1})</span>
 </span></span></code></pre></div><p>If fruit is already a key in fruit_counts, its current value is incremented by 1.
 If fruit is not yet a key in fruit_counts, defaultdict(int) automatically creates fruit_counts[fruit] and initializes its value to 0. Then, 1 is added to it, making its value 1.</p>
 <p>From <a href="https://www.geeksforgeeks.org/defaultdict-in-python/">GeeksforGeeks</a>:</p>
@@ -266,18 +266,18 @@ If fruit is not yet a key in fruit_counts, defaultdict(int) automatically create
 <li>Using <code>str</code>: If you use str, the default value will be an empty string (&rsquo;&rsquo;).</li>
 </ul>
 <p>Now&hellip; What if I want to start from 100? Apparently&hellip; we can! via lambda&hellip;</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fruit_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">50</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 50, then 1 is added.</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">fruit_counts</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># defaultdict(&lt;function &lt;lambda&gt; at 0x7f73165e7d30&gt;, {&#39;apple&#39;: 53, &#39;banana&#39;: 52, &#39;orange&#39;: 51})</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> defaultdict(<span style="color:#66d9ef">lambda</span>: <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 50, then 1 is added.</span>
+</span></span><span style="display:flex;"><span>    fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(fruit_counts)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># defaultdict(&lt;function &lt;lambda&gt; at 0x7f73165e7d30&gt;, {&#39;apple&#39;: 53, &#39;banana&#39;: 52, &#39;orange&#39;: 51})</span>
 </span></span></code></pre></div>
 
   </div>
