@@ -2,17 +2,98 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Hazriq&#39;s Dev Chaos</title>
-    <link>http://localhost:1313/</link>
+    <link>https://hazriqpedia.github.io/</link>
     <description>Recent content on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.147.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Jun 2025 10:01:29 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Aug 2025 13:15:40 +0800</lastBuildDate>
+    <atom:link href="https://hazriqpedia.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS: DynamoDB &amp; IA Class</title>
+      <link>https://hazriqpedia.github.io/posts/aws_ddb_ia_class/</link>
+      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_ddb_ia_class/</guid>
+      <description>&lt;p&gt;If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.&lt;/p&gt;
+&lt;p&gt;What if you could store that cold data somewhere cheaper without changing your code or losing availability?&lt;/p&gt;
+&lt;p&gt;That’s exactly what &lt;strong&gt;DynamoDB Standard-IA (Infrequent Access)&lt;/strong&gt; is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS: DynamoDB &amp; DAX Cost Factors</title>
+      <link>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</link>
+      <pubDate>Sun, 10 Aug 2025 11:11:51 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</guid>
+      <description>&lt;p&gt;We discussed about DynamoDB in &lt;a href=&#34;https://hazriqpedia.github.io/posts/aws_dynamodb_intro/&#34;&gt;previous post&lt;/a&gt;, but let&amp;rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).&lt;/p&gt;
+&lt;h3 id=&#34;recap&#34;&gt;Recap&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amazon DynamoDB (DDB)&lt;/strong&gt; is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amazon DynamoDB Accelerator (DAX)&lt;/strong&gt; is an in-memory caching service for DynamoDB.
+Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS: SAM Introduction</title>
+      <link>https://hazriqpedia.github.io/posts/aws_sam_intro/</link>
+      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_sam_intro/</guid>
+      <description>&lt;p&gt;Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.&lt;/p&gt;
+&lt;h3 id=&#34;what-is-aws-sam&#34;&gt;What is AWS SAM?&lt;/h3&gt;
+&lt;p&gt;AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.&lt;/p&gt;
+&lt;p&gt;It’s designed to simplify your infrastructure-as-code, especially when working with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS Lambda&lt;/li&gt;
+&lt;li&gt;API Gateway&lt;/li&gt;
+&lt;li&gt;DynamoDB&lt;/li&gt;
+&lt;li&gt;EventBridge, SQS, Step Functions, and more&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS: Lambda Basics</title>
+      <link>https://hazriqpedia.github.io/posts/aws_lambda_intro/</link>
+      <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_lambda_intro/</guid>
+      <description>&lt;p&gt;AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.&lt;/p&gt;
+&lt;p&gt;In this post, I will cover the basics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is Lambda?&lt;/li&gt;
+&lt;li&gt;What are the core components?&lt;/li&gt;
+&lt;li&gt;Why use it?&lt;/li&gt;
+&lt;li&gt;A real use case: processing SQS messages in TypeScript&lt;/li&gt;
+&lt;li&gt;Common limitations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;what-is-aws-lambda&#34;&gt;What is AWS Lambda?&lt;/h3&gt;
+&lt;p&gt;AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS: DynamoDB Basics</title>
+      <link>https://hazriqpedia.github.io/posts/aws_dynamodb_intro/</link>
+      <pubDate>Sun, 20 Jul 2025 05:42:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_dynamodb_intro/</guid>
+      <description>&lt;p&gt;Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&amp;rsquo;s performance, scalability, and maintainability. In this post, we&amp;rsquo;ll explore &lt;strong&gt;AWS DynamoDB&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;database-types&#34;&gt;Database Types&lt;/h3&gt;
+&lt;p&gt;There are two main types of databases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Relational Databases&lt;/strong&gt; (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NoSQL Databases&lt;/strong&gt;: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you&amp;rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS: SQS vs SNS</title>
+      <link>https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/</guid>
+      <description>&lt;p&gt;At my new company, we rely heavily on AWS SQS (Simple Queue Service) and SNS (Simple Notification Service) to handle the large volume of records we need to ingest daily.&lt;/p&gt;
+&lt;p&gt;Think of a situation where the system experiences a temporary bottleneck or needs to go offline for maintenance or upgrades. In such cases, SQS acts as a buffer—safely storing incoming records in a queue so they’re not lost. Even during traffic spikes, the messages are queued and processed at our own pace. For example, our AWS Lambda function polls the queue and retrieves messages when it&amp;rsquo;s ready, allowing the system to remain responsive and scalable even under pressure.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>JS: Express.js</title>
-      <link>http://localhost:1313/posts/js-express.js/</link>
+      <link>https://hazriqpedia.github.io/posts/js-express.js/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>http://localhost:1313/posts/js-express.js/</guid>
+      <guid>https://hazriqpedia.github.io/posts/js-express.js/</guid>
       <description>&lt;p&gt;&lt;code&gt;Express.js&lt;/code&gt; is a minimalist and flexible &lt;code&gt;Node.js&lt;/code&gt; web application framework that provides a robust set of features for building web and mobile applications and APIs. If you&amp;rsquo;re looking to build fast, scalable, and efficient server-side applications with JavaScript, Express.js is your go-to choice. Its unopinionated nature gives you immense freedom,
 &lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;h3 id=&#34;setting-up&#34;&gt;Setting Up&lt;/h3&gt;
@@ -20,9 +101,9 @@
     </item>
     <item>
       <title>PY: defaultdict()</title>
-      <link>http://localhost:1313/posts/py-defaultdict/</link>
+      <link>https://hazriqpedia.github.io/posts/py-defaultdict/</link>
       <pubDate>Wed, 11 Jun 2025 17:13:13 +0800</pubDate>
-      <guid>http://localhost:1313/posts/py-defaultdict/</guid>
+      <guid>https://hazriqpedia.github.io/posts/py-defaultdict/</guid>
       <description>&lt;p&gt;A &lt;code&gt;defaultdict&lt;/code&gt; is a subclass of dict that calls a factory function to supply missing values for any requested key.&lt;/p&gt;
 &lt;p&gt;&amp;hellip;
 In today&amp;rsquo;s call, I was looking at a simple python solution that will try to count the number of fruits based on types.&lt;/p&gt;
@@ -43,9 +124,9 @@ In today&amp;rsquo;s call, I was looking at a simple python solution that will t
     </item>
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://hazriqpedia.github.io/about/</link>
       <pubDate>Wed, 04 Jun 2025 14:53:16 +0800</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://hazriqpedia.github.io/about/</guid>
       <description>&lt;p&gt;Hi, I&amp;rsquo;m @Hazriq. I&amp;rsquo;m a software developer exploring backend, AI, and open source.&lt;/p&gt;
 &lt;p&gt;I write this blog to share what I&amp;rsquo;m learning, building, and obviously&amp;hellip;. breaking.&lt;/p&gt;
 &lt;p&gt;Feel free to reach out or connect!&lt;/p&gt;
@@ -56,9 +137,9 @@ In today&amp;rsquo;s call, I was looking at a simple python solution that will t
     </item>
     <item>
       <title>My First Post</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
+      <link>https://hazriqpedia.github.io/posts/my-first-post/</link>
       <pubDate>Wed, 04 Jun 2025 14:38:26 +0800</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <guid>https://hazriqpedia.github.io/posts/my-first-post/</guid>
       <description>&lt;p&gt;Hellow World!&lt;/p&gt;</description>
     </item>
   </channel>

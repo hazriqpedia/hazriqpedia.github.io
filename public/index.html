@@ -2,25 +2,25 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.147.7"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.147.7"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Hazriq&#39;s Dev Chaos</title>
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/">
+<link rel="canonical" href="https://hazriqpedia.github.io/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hazriqpedia.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/">
 <noscript>
     <style>
         #theme-toggle,
@@ -57,7 +57,28 @@
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/">
+  <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:title" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hazriq&#39;s Dev Chaos">
+<meta name="twitter:description" content="">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Hazriq's Dev Chaos",
+  "url": "https://hazriqpedia.github.io/",
+  "description": "",
+  "logo": "https://hazriqpedia.github.io/favicon.ico",
+  "sameAs": [
+      "https://github.com/hazriqpedia", "https://www.linkedin.com/in/hazriqishak/"
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -75,7 +96,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Hazriq&#39;s Dev Chaos (Alt + H)">Hazriq&#39;s Dev Chaos</a>
+            <a href="https://hazriqpedia.github.io/" accesskey="h" title="Hazriq&#39;s Dev Chaos (Alt + H)">Hazriq&#39;s Dev Chaos</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -101,17 +122,17 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/posts/" title="Posts">
+                <a href="https://hazriqpedia.github.io/posts/" title="Posts">
                     <span>Posts</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="About">
+                <a href="https://hazriqpedia.github.io/about/" title="About">
                     <span>About</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://hazriqpedia.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -149,6 +170,600 @@
 </div>
 
     </footer>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; IA Class
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.</p>
+<p>What if you could store that cold data somewhere cheaper without changing your code or losing availability?</p>
+<p>That’s exactly what <strong>DynamoDB Standard-IA (Infrequent Access)</strong> is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.</p>
+<p>Recap on previous post:</p>
+<ul>
+<li><a href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">AWS: DynamoDB &amp; DAX Cost Factors</a></li>
+<li><a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">AWS: DynamoDB Basics</a></li>
+</ul>
+<h3 id="dynamodb-table-classes">DynamoDB Table Classes</h3>
+<p>DynamoDB offers different table classes to optimize costs based on your access patterns:</p>
+<ol>
+<li><strong>Standard</strong> – For data you access frequently.
+<ul>
+<li>Designed for low-latency access any time.</li>
+<li>Best for your main, active application data.</li>
+<li>The default table class when you create a new DynamoDB table.</li>
+<li>Suitable for most workloads. Provides high availability and durability.</li>
+</ul>
+</li>
+<li><strong>Standard-IA (Infrequent Access)</strong> – For data you rarely read or write.
+<ul>
+<li>Designed for data that is not accessed often but needs to be available when needed.</li>
+<li>Offers lower storage costs compared to Standard.</li>
+<li>Higher retrieval costs, so it’s best for data that you access less than once a month.</li>
+</ul>
+</li>
+</ol>
+<p>Both table classes work exactly the same way from a developer’s point of view:</p>
+<ul>
+<li>Same APIs</li>
+<li>Same queries</li>
+<li>Same AWS Console experience</li>
+</ul>
+<p>The only difference? How AWS stores it behind the scenes and how much you pay.</p>
+<h3 id="what-is-standard-ia">What is Standard-IA?</h3>
+<p>Standard-IA is a table class designed for data that you access infrequently. It’s like a storage locker for your cold data — it’s still there when you need it, but it costs less to keep it around.</p>
+<p>Think of it like moving your old books to a basement shelf:</p>
+<ul>
+<li>They’re still yours.</li>
+<li>You can still get them any time.</li>
+<li>But they’re not taking up expensive prime shelf space.</li>
+</ul>
+<h4 id="how-can-it-save-you-money">How can it save you money?</h4>
+<p>The main savings come from storage pricing:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Storage Class</th>
+          <th style="text-align: center">Price per GB/month</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Standard</td>
+          <td style="text-align: center">~$0.25</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Standard-IA</td>
+          <td style="text-align: center">~$0.10</td>
+      </tr>
+  </tbody>
+</table>
+<p>That’s about <strong>60% cheaper</strong> for storage.</p>
+<p>Example:
+If you have 100 GB of archived order history:</p>
+<ul>
+<li>Standard = ~$25/month</li>
+<li>Standard-IA = ~$10/month</li>
+</ul>
+<blockquote>
+<p>💡 That’s $15/month saved — or $180/year — just for one table.</p></blockquote>
+<h3 id="the-catch">The Catch</h3>
+<p>But it’s not all sunshine and rainbows. There are some important trade-offs to consider:</p>
+<ul>
+<li><strong>Retrieval Costs</strong> – Around $0.01 per GB each time you read data from IA.</li>
+<li><strong>Minimum 30-Day Storage Billing</strong> – You pay for at least 30 days even if you delete earlier.</li>
+<li><strong>Not for Hot Data</strong> – If accessed often, retrieval fees can eat up savings.</li>
+<li><strong>Whole-Table Setting</strong> – You can’t mix Standard and IA in one table.</li>
+</ul>
+<h3 id="best-practice-before-switching">Best Practice before Switching</h3>
+<ul>
+<li><strong>Check Access Patterns</strong> — Use CloudWatch metrics to see how often the table is read.</li>
+<li><strong>Move Predictable Cold Data</strong> — Avoid sudden spikes in retrieval.</li>
+<li><strong>Test on a Smaller Table First</strong> — See if retrieval costs are low enough to justify the switch.</li>
+<li><strong>Combine With TTL</strong> — Automatically delete expired data to save more.</li>
+</ul>
+<hr>
+<p>DynamoDB Standard-IA is like a budget-friendly storage locker for data you still need but rarely touch. It can cut storage costs by more than half — but only if you choose the right workloads.</p>
+<p><strong>Rule of thumb</strong>: If it’s predictable, cold, and still worth keeping — IA is your friend.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-08-10 13:15:40 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: DynamoDB & IA Class" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; DAX Cost Factors
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>We discussed about DynamoDB in <a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">previous post</a>, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).</p>
+<h3 id="recap">Recap</h3>
+<ul>
+<li>
+<p><strong>Amazon DynamoDB (DDB)</strong> is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.</p>
+</li>
+<li>
+<p><strong>Amazon DynamoDB Accelerator (DAX)</strong> is an in-memory caching service for DynamoDB.
+Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.</p>
+</li>
+</ul>
+<p>Together, DDB and DAX can significantly improve application performance — but they also come with different cost models you’ll want to understand before adopting.</p>
+<h4 id="when-to-use-dax">When to Use DAX?</h4>
+<p>DAX is particularly useful when:</p>
+<ul>
+<li>Your workload has high read traffic with repeated queries for the same items.</li>
+<li>You want microsecond read latency for real-time user experience.</li>
+<li>You aim to offload read traffic from DynamoDB to reduce provisioned read capacity usage.</li>
+</ul>
+<p><strong>Example</strong>: A database for AI model training, where the same training data is accessed repeatedly.</p>
+<h4 id="skip-dax-when">Skip DAX when:</h4>
+<ul>
+<li>Your workload is write-heavy with low read repetition.</li>
+<li>Your queries are strongly consistent (DAX only supports eventually consistent reads).</li>
+<li>Your access patterns are highly dynamic and unpredictable — the cache hit rate might be low.</li>
+</ul>
+<h3 id="understanding-dynamodb-costs">Understanding DynamoDB Costs</h3>
+<p>DynamoDB costs come from three main areas:</p>
+<ul>
+<li><strong>Reading Data</strong>
+<ul>
+<li>Imagine a reading allowance — every time you check a page from a book, it uses part of your allowance.</li>
+<li>You can either pay per read (On-Demand) or buy a monthly “reading subscription” (Provisioned) if you know your usual usage.</li>
+</ul>
+</li>
+<li><strong>Writing Data</strong>
+<ul>
+<li>Adding or updating books also uses an allowance — think of it as your “writing subscription” or “per-write” payment.</li>
+</ul>
+</li>
+<li><strong>Storing Data</strong>
+<ul>
+<li>This is your bookshelf space.</li>
+<li>Regular storage (Standard) is always ready but costs more.</li>
+<li>Cheaper storage (Standard-IA) is for books you rarely read, but you’ll pay a small fee each time you take one.</li>
+</ul>
+</li>
+</ul>
+<p>Extras You Might Pay For:</p>
+<ul>
+<li>Backups — like taking daily photos of your bookshelf.</li>
+<li>Copies in other regions — like having the same library in multiple cities.</li>
+</ul>
+<h3 id="understanding-dax-costs">Understanding DAX Costs</h3>
+<ol start="5">
+<li>DAX Costs
+DAX pricing is per node-hour, depending on node type:</li>
+</ol>
+<ul>
+<li>Smallest node (dax.t3.small) is the cheapest, suitable for dev/test.</li>
+<li>Larger nodes (dax.r5.large, etc.) cost more but handle higher throughput.</li>
+<li>DAX clusters require at least 3 nodes for fault tolerance in production.</li>
+</ul>
+<p>Note: DAX charges are separate from DynamoDB — even if your reads come from the cache.</p>
+<h3 id="cost-comparison">Cost Comparison</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Component</th>
+          <th style="text-align: center">Without DAX (Provisioned)</th>
+          <th style="text-align: center">With DAX (Provisioned)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Read Capacity Cost</td>
+          <td style="text-align: center">High (due to all reads hitting DDB)</td>
+          <td style="text-align: center">Lower (fewer RCUs needed)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Write Capacity Cost</td>
+          <td style="text-align: center">Same</td>
+          <td style="text-align: center">Same</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Storage Cost</td>
+          <td style="text-align: center">Same</td>
+          <td style="text-align: center">Same</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">DAX Cost</td>
+          <td style="text-align: center">$0</td>
+          <td style="text-align: center">Node-hour charges</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>If your cache hit rate is low, DAX might increase costs without much benefit.</p></blockquote>
+<h3 id="final-thoughts">Final Thoughts</h3>
+<ul>
+<li>Use DAX if you have heavy, repeated reads and need lightning-fast results.</li>
+<li>Use Standard-IA storage for rarely accessed data — but don’t forget the retrieval cost.</li>
+<li>Always measure first: monitor read/write usage and cache hit rates before committing.</li>
+</ul>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-08-10 11:11:51 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: DynamoDB & DAX Cost Factors" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: SAM Introduction
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.</p>
+<h3 id="what-is-aws-sam">What is AWS SAM?</h3>
+<p>AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.</p>
+<p>It’s designed to simplify your infrastructure-as-code, especially when working with:</p>
+<ul>
+<li>AWS Lambda</li>
+<li>API Gateway</li>
+<li>DynamoDB</li>
+<li>EventBridge, SQS, Step Functions, and more</li>
+</ul>
+<p>At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.</p>
+<h3 id="why-use-aws-sam">Why Use AWS SAM?</h3>
+<p>You should consider SAM when:</p>
+<ul>
+<li>You’re building serverless applications using AWS services like Lambda and API Gateway.</li>
+<li>You want to define infrastructure as code but find raw CloudFormation too verbose.</li>
+<li>You want to test Lambda functions locally using Docker.</li>
+<li>You prefer guided deployment over manually zipping and uploading code.</li>
+</ul>
+<p>SAM is ideal for:</p>
+<ul>
+<li>Quick prototyping of serverless apps</li>
+<li>Developer teams who want simplicity without giving up AWS-native IaC</li>
+<li>Learning how serverless works with real AWS infrastructure</li>
+</ul>
+<h3 id="sam-vs-cloudformation-whats-the-difference">SAM vs. CloudFormation: what&rsquo;s the difference?</h3>
+<p>SAM is built on top of CloudFormation, so it inherits all the benefits of CloudFormation while providing a simpler syntax for serverless applications. Here are some key differences:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Feature</th>
+          <th style="text-align: center">AWS CloudFormation</th>
+          <th style="text-align: center">AWS SAM</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Purpose</td>
+          <td style="text-align: center">Define any AWS infrastructure</td>
+          <td style="text-align: center">Focused on serverless apps</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Syntax</td>
+          <td style="text-align: center">YAML/JSON (verbose)</td>
+          <td style="text-align: center">Simplified YAML with shorthand</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Testing</td>
+          <td style="text-align: center">❌ No built-in local testing</td>
+          <td style="text-align: center">✅ Local testing with Docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Deployment CLI</td>
+          <td style="text-align: center">aws cloudformation deploy</td>
+          <td style="text-align: center">sam deploy &ndash;guided</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Abstraction Layer</td>
+          <td style="text-align: center">Base layer</td>
+          <td style="text-align: center">Built on top of CloudFormation</td>
+      </tr>
+  </tbody>
+</table>
+<p>In short: SAM is CloudFormation — just way easier for serverless.</p>
+<p>You still get all the benefits of CloudFormation (rollback, drift detection, etc.), but with less effort and boilerplate.</p>
+<h3 id="sam-main-components">SAM Main Components</h3>
+<ol>
+<li>template.yaml</li>
+</ol>
+<p>Your SAM template is the blueprint of your application — it declares all the AWS resources your app needs.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HelloWorldFunction</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Serverless::Function</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CodeUri</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Handler</span><span class="p">:</span><span class="w"> </span><span class="l">app.lambda_handler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Events</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">HelloWorld</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">Api</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l">/hello</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Method</span><span class="p">:</span><span class="w"> </span><span class="l">get</span><span class="w">
+</span></span></span></code></pre></div><ol start="2">
+<li><strong>samconfig.toml</strong>: Configuration for Reusability &amp; Environments</li>
+</ol>
+<p>When you run <code>sam deploy --guided</code>, SAM generates a <code>samconfig.toml</code> file. This file stores deployment settings like your S3 bucket, stack name, region, and parameter overrides — so you don’t need to type them every time.</p>
+<p>But beyond that, you can define multiple environments using named configurations. Example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">staging</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-staging&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-staging&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=staging&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">prod</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-prod&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-prod&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=prod&#34;</span>
+</span></span></code></pre></div><p>Now you can deploy using:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sam deploy --config-env staging
+</span></span><span class="line"><span class="cl">sam deploy --config-env prod
+</span></span></code></pre></div><p>This allows:</p>
+<ul>
+<li>Cleaner separation between dev/staging/prod</li>
+<li>Safer deployment practices</li>
+<li>Per-env overrides for Lambda environment variables, tags, etc.</li>
+</ul>
+<ol start="3">
+<li>SAM CLI</li>
+</ol>
+<p>A command-line tool that simplifies development and deployment:</p>
+<ul>
+<li><code>sam init</code> – scaffold a new project</li>
+<li><code>sam build</code> – package your code</li>
+<li><code>sam deploy</code> – push it to AWS</li>
+<li><code>sam local invoke</code> – test individual functions locally</li>
+<li><code>sam local start-api</code> – emulate full API locally</li>
+</ul>
+<p>If you’re starting your journey into serverless with AWS, SAM is one of the best tools to learn and use. It removes the friction of writing raw CloudFormation, supports local development, and lets you ship your ideas quickly.</p>
+<p>It’s not just beginner-friendly — it’s also powerful enough to be used in production systems, especially when paired with other AWS services like DynamoDB, Step Functions, and EventBridge.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-08-03 07:34:21 +0800 +08'>August 3, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: SAM Introduction" href="https://hazriqpedia.github.io/posts/aws_sam_intro/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: Lambda Basics
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.</p>
+<p>In this post, I will cover the basics:</p>
+<ul>
+<li>What is Lambda?</li>
+<li>What are the core components?</li>
+<li>Why use it?</li>
+<li>A real use case: processing SQS messages in TypeScript</li>
+<li>Common limitations</li>
+</ul>
+<h3 id="what-is-aws-lambda">What is AWS Lambda?</h3>
+<p>AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.</p>
+<p>You don’t manage servers. You just focus on the code, and Lambda takes care of:</p>
+<ul>
+<li>Running it</li>
+<li>Scaling it automatically</li>
+<li>Charging you only when it runs</li>
+</ul>
+<h3 id="key-components-of-aws-lambda">Key Components of AWS Lambda</h3>
+<ol>
+<li><strong>Handlers</strong>: The entry point for your Lambda function. It&rsquo;s the method that AWS Lambda calls to start execution.</li>
+<li><strong>Events</strong>: Lambda functions are triggered by events, which can come from various AWS services like S3, DynamoDB, API Gateway, or even custom events.</li>
+<li><strong>Context</strong>: Provides runtime information to your Lambda function, such as the function name, version, and remaining execution time.</li>
+<li><strong>IAM Roles</strong>: AWS Identity and Access Management (IAM) roles define the permissions for your Lambda function, allowing it to access other AWS services securely.</li>
+<li><strong>Environment Variables</strong>: Key-value pairs that you can use to pass configuration settings to your Lambda function at runtime.</li>
+<li><strong>Timeouts and Memory</strong>: You can configure the maximum execution time and memory allocated to your Lambda function, which affects performance and cost.</li>
+<li><strong>CloudWatch Logs</strong>: Automatically logs the output of your Lambda function, which you can use for debugging and monitoring.</li>
+</ol>
+<h3 id="why-use-aws-lambda">Why Use AWS Lambda?</h3>
+<ul>
+<li><strong>Cost-Effective</strong>: You only pay for the compute time you consume. There are no charges when your code is not running.</li>
+<li><strong>Scalability</strong>: Automatically scales your application by running code in response to each event, so you don’t have to worry about scaling your infrastructure.</li>
+<li><strong>Flexibility</strong>: Supports multiple programming languages (Node.js, Python, Java, Go, C#, Ruby, and custom runtimes) and can be used for a wide range of applications, from simple scripts to complex microservices.</li>
+<li><strong>Event-Driven</strong>: Easily integrates with other AWS services, allowing you to build event-driven architectures that respond to changes in your data or system state.</li>
+<li><strong>Zero Administration</strong>: No need to manage servers or runtime environments. AWS handles all the infrastructure management tasks, including patching, scaling, and availability.</li>
+</ul>
+<h3 id="real-use-case-typescript-lambda-to-process-sqs--dynamodb">Real Use Case: TypeScript Lambda to Process SQS → DynamoDB</h3>
+<p>In my current role, we use AWS Lambda to process messages from SQS queues. Here’s a simple example of how you can set up a Lambda function in TypeScript to process messages from an SQS queue and store them in DynamoDB.</p>
+<p>Lets say we receive messages in SQS that contain user data, and we want to store this data in DynamoDB.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SQSHandler</span><span class="p">,</span> <span class="nx">SQSEvent</span><span class="p">,</span> <span class="nx">Context</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-lambda&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DynamoDB</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-sdk&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">dynamoDb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DynamoDB</span><span class="p">.</span><span class="nx">DocumentClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">handler</span>: <span class="kt">SQSHandler</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">event</span>: <span class="kt">SQSEvent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">context</span>: <span class="kt">Context</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">record</span> <span class="k">of</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">TableName</span><span class="o">:</span> <span class="s2">&#34;Users&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">Item</span>: <span class="kt">userData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="nx">dynamoDb</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">promise</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>In this example:</p>
+<ul>
+<li>We import necessary types from <code>aws-lambda</code> and the <code>DynamoDB</code> client from <code>aws-sdk</code>.</li>
+<li>The <code>handler</code> function processes each message in the SQS event.</li>
+<li>We parse the message body and store it in a DynamoDB table named <code>Users</code>.</li>
+</ul>
+<p>This function will be uploaded to AWS Lambda, and you can configure it to trigger whenever new messages arrive in the SQS queue.</p>
+<h3 id="common-limitations-of-aws-lambda">Common Limitations of AWS Lambda</h3>
+<ul>
+<li><strong>Execution Time</strong>: Lambda functions have a maximum execution time of 15 minutes. If your task takes longer, you may need to break it into smaller functions or use other services.</li>
+<li><strong>Cold Starts</strong>: When a Lambda function is invoked after being idle, it may take longer to start due to the initialization time (cold start). This can affect performance, especially for latency-sensitive applications.</li>
+<li><strong>Limited Resources</strong>: Each Lambda function has a maximum memory limit (up to 1024 MB) and a maximum package size (50 MB for direct upload, 250 MB when using layers). This can be a constraint for resource-intensive applications.</li>
+<li><strong>Limited Runtime Environment</strong>: While Lambda supports multiple programming languages, you may encounter limitations with certain libraries or dependencies that require a specific runtime environment.</li>
+<li><strong>State Management</strong>: Lambda functions are stateless, meaning they do not retain any state between invocations. If you need to maintain state, you will have to use external storage solutions like DynamoDB or S3.</li>
+<li><strong>Concurrency Limits</strong>: There are limits on the number of concurrent executions for Lambda functions. If your application experiences a sudden spike in traffic, you may hit these limits, leading to throttling of requests.</li>
+<li><strong>Vendor Lock-In</strong>: Using AWS Lambda ties you to the AWS ecosystem, which can make it challenging to migrate to other cloud providers or on-premises in the future.</li>
+</ul>
+<h3 id="wrap-up">Wrap-Up</h3>
+<p>AWS Lambda is a powerful tool for building serverless applications that can scale automatically and respond to events without the need for server management. By understanding its core components and limitations, you can effectively leverage Lambda to build efficient, cost-effective applications that meet your business needs.</p>
+<p>Whether you’re processing SQS messages, building APIs with API Gateway, or integrating with other AWS services, Lambda provides a flexible and scalable solution that can adapt to your application’s requirements.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-07-27 06:56:44 +0800 +08'>July 27, 2025</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: Lambda Basics" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: DynamoDB Basics
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore <strong>AWS DynamoDB</strong>.</p>
+<h3 id="database-types">Database Types</h3>
+<p>There are two main types of databases:</p>
+<ul>
+<li><strong>Relational Databases</strong> (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.</li>
+<li><strong>NoSQL Databases</strong>: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.</li>
+</ul>
+<blockquote>
+<p>If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.</p></blockquote>
+<h3 id="key-features-of-dynamodb">Key Features of DynamoDB</h3>
+<ul>
+<li><strong>Fully Managed</strong>: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling.</li>
+<li><strong>Performance at Scale</strong>: It automatically scales up and down to adjust for capacity and maintain performance.</li>
+<li><strong>Flexible Data Model</strong>: Supports key-value and document data structures, allowing for a variety of use cases.</li>
+<li><strong>Built-in Security</strong>: Offers encryption at rest and in transit, along with fine-grained access control.</li>
+</ul>
+<p>So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.</p>
+<h4 id="key-concepts">Key Concepts</h4>
+<ul>
+<li><strong>Tables</strong>: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item.</li>
+<li><strong>Items</strong>: Individual records in a table, similar to rows in a relational database.</li>
+<li><strong>Attributes</strong>: The data fields in an item, similar to columns in a relational database.</li>
+<li><strong>Primary Key</strong>: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key).</li>
+<li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
+</ul>
+<p>A simple item in a DynamoDB table might look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
+<ul>
+<li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
+<li><strong>Performance</strong>: Provides low-latency data access, making it suitable for real-time applications.</li>
+<li><strong>Flexibility</strong>: Supports various data models, allowing developers to choose the best fit for their application.</li>
+<li><strong>Cost-Effective</strong>: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads.</li>
+<li><strong>Integration with AWS Services</strong>: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging.</li>
+<li><strong>TTL (Time to Live)</strong>: Automatically deletes expired items, helping manage storage costs and data lifecycle.</li>
+</ul>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<ul>
+<li><strong>Provisioned Throughput</strong>: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle.</li>
+<li><strong>On-Demand Capacity</strong>: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads.</li>
+<li><strong>Caching</strong>: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads.</li>
+<li><strong>Batch Operations</strong>: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database.</li>
+</ul>
+<h4 id="without-dax">Without DAX</h4>
+<ul>
+<li>Reads and writes are directly from the DynamoDB table.</li>
+<li>Each read or write operation incurs a latency based on the network and DynamoDB&rsquo;s processing time.</li>
+</ul>
+<h4 id="with-dax">With DAX</h4>
+<ul>
+<li>DAX acts as an in-memory cache, reducing the latency for read operations.</li>
+<li>DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests.</li>
+<li>This significantly speeds up read operations, especially for frequently accessed data.</li>
+</ul>
+<h3 id="when-not-to-use-dynamodb">When not to Use DynamoDB</h3>
+<p>While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:</p>
+<ul>
+<li><strong>Complex Queries</strong>: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable.</li>
+<li><strong>Transactional Support</strong>: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions.</li>
+<li><strong>Large Binary Objects</strong>: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata.</li>
+<li><strong>High Write Throughput</strong>: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra.</li>
+</ul>
+<p>DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you&rsquo;re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.</p>
+<p>Of course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: DynamoDB Basics" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: SQS vs SNS
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>At my new company, we rely heavily on AWS SQS (Simple Queue Service) and SNS (Simple Notification Service) to handle the large volume of records we need to ingest daily.</p>
+<p>Think of a situation where the system experiences a temporary bottleneck or needs to go offline for maintenance or upgrades. In such cases, SQS acts as a buffer—safely storing incoming records in a queue so they’re not lost. Even during traffic spikes, the messages are queued and processed at our own pace. For example, our AWS Lambda function polls the queue and retrieves messages when it&rsquo;s ready, allowing the system to remain responsive and scalable even under pressure.</p>
+<h3 id="core-components-of-sqs-and-sns">Core Components of SQS and SNS</h3>
+<p>To better understand how SQS and SNS work, it helps to break down their main components.</p>
+<h4 id="-sqs-main-components">📨 SQS Main Components:</h4>
+<ul>
+<li><em>Queue</em>: The main container where messages are stored temporarily until processed.</li>
+<li><em>Producer</em>: The system or service that sends messages to the queue.</li>
+<li><em>Consumer</em>: The service (e.g. Lambda, EC2) that polls the queue and processes the message.</li>
+<li><em>Visibility Timeout</em>: A short period where the message becomes invisible to other consumers once picked up—helps avoid duplicate processing.</li>
+<li><em>DLQ (Dead-Letter Queue)</em>: A separate queue that stores messages that couldn&rsquo;t be successfully processed after several retry attempts. Useful for debugging failed messages.</li>
+</ul>
+<h4 id="-sns-main-components">📣 SNS Main Components:</h4>
+<ul>
+<li><em>Topic</em>: The central component that receives messages from publishers.</li>
+<li><em>Publisher</em>: The producer that sends a message to a topic.</li>
+<li><em>Subscriber</em>: Services or endpoints (like Lambda, SQS queue, HTTPS endpoint, email) that receive messages pushed from the topic.</li>
+<li><em>Subscription Filter Policy</em>: You can apply rules to decide which subscribers should receive which messages (useful for message routing).</li>
+</ul>
+<h3 id="sqs-vs-sns--whats-the-difference">SQS vs SNS – What&rsquo;s the Difference?</h3>
+<p>While both SQS and SNS are messaging services provided by AWS, they serve very different purposes:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Feature</th>
+          <th style="text-align: center">SQS (Simple Queue Service)</th>
+          <th style="text-align: center">SNS (Simple Notification Service)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Message Pattern</td>
+          <td style="text-align: center">Point-to-point (Queue-based)</td>
+          <td style="text-align: center">Publish/Subscribe (Fan-out)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Delivery Target</td>
+          <td style="text-align: center">Message goes to one consumer</td>
+          <td style="text-align: center">Message goes to multiple subscribers</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Storage</td>
+          <td style="text-align: center">Messages are stored temporarily in a queue</td>
+          <td style="text-align: center">Messages are pushed immediately, not stored by default</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Use Case</td>
+          <td style="text-align: center">Decouple producer and consumer; reliable message handling</td>
+          <td style="text-align: center">Broadcast messages to multiple endpoints/services</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Consumer Behaviour</td>
+          <td style="text-align: center">Consumers poll the queue</td>
+          <td style="text-align: center">Subscribers receive push notifications</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>Use <em>SQS</em> when you want to decouple your producer and consumer, especially if the consumer might be temporarily unavailable.</li>
+<li>Use <em>SNS</em> when you want to broadcast messages to multiple services (e.g., notify a Lambda, an email service, and an HTTP endpoint at the same time).</li>
+</ul>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-07-15 06:17:54 +0800 +08'>July 15, 2025</span>&nbsp;·&nbsp;2 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: SQS vs SNS" href="https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -296,7 +911,7 @@
 
   </div>
   <footer class="entry-footer"><span title='2025-06-23 10:01:29 +0800 +08'>June 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to JS: Express.js" href="http://localhost:1313/posts/js-express.js/"></a>
+  <a class="entry-link" aria-label="post link to JS: Express.js" href="https://hazriqpedia.github.io/posts/js-express.js/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -357,7 +972,7 @@ If fruit is not yet a key in fruit_counts, defaultdict(int) automatically create
 </span></span></code></pre></div>
   </div>
   <footer class="entry-footer"><span title='2025-06-11 17:13:13 +0800 +08'>June 11, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to PY: defaultdict()" href="http://localhost:1313/posts/py-defaultdict/"></a>
+  <a class="entry-link" aria-label="post link to PY: defaultdict()" href="https://hazriqpedia.github.io/posts/py-defaultdict/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -370,12 +985,12 @@ If fruit is not yet a key in fruit_counts, defaultdict(int) automatically create
 
   </div>
   <footer class="entry-footer"><span title='2025-06-04 14:38:26 +0800 +08'>June 4, 2025</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to My First Post" href="http://localhost:1313/posts/my-first-post/"></a>
+  <a class="entry-link" aria-label="post link to My First Post" href="https://hazriqpedia.github.io/posts/my-first-post/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Hazriq&#39;s Dev Chaos</a></span> · 
+        <span>&copy; 2025 <a href="https://hazriqpedia.github.io/">Hazriq&#39;s Dev Chaos</a></span> · 
 
     <span>
         Powered by
