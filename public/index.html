@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.147.7"><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.150.0"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://hazriqpedia.github.io/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
@@ -170,6 +170,92 @@
 </div>
 
     </footer>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Java: Long vs long
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between <code>long</code> and <code>Long</code> in Java.</p>
+<p>And honestly, it hit differently because of how my new company approaches engineering.</p>
+<p>In my previous company, the priority was <em>speed</em>. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.</p>
+<p>But in my new company, the approach is different. We take more time to build the right way — thinking about memory, cost, long-term maintainability, and performance.</p>
+<p>For someone like me with 8 years of experience, this shift has been an eye-opener. It’s one thing to “make it work.” It’s another thing entirely to “make it work well.”</p>
+<p>Which brings me back to… <code>long</code> vs <code>Long</code>.</p>
+<h3 id="primitive-vs-wrapper-a-quick-refresher">Primitive vs Wrapper: A Quick Refresher</h3>
+<p>Java is a bit different from languages like Python or JavaScript. It has two “flavors” of types:</p>
+<ul>
+<li><code>Primitives</code>: raw values like <em>int</em>, <em>long</em>, <em>boolean</em>.</li>
+<li><code>Wrapper Classes</code>: object versions of these primitives: <em>Integer</em>, <em>Long</em>, <em>Boolean</em>.</li>
+</ul>
+<p>This distinction often feels academic at first, but it has real consequences in how your program behaves.</p>
+<p>So what’s the actual difference?</p>
+<ul>
+<li>
+<p><code>long</code>:</p>
+<ul>
+<li>A primitive 64-bit value.</li>
+<li>Default value: 0.</li>
+<li>Lightweight and memory efficient.</li>
+<li>Cannot be null.</li>
+</ul>
+</li>
+<li>
+<p><code>Long</code>:</p>
+<ul>
+<li>A wrapper class around long.</li>
+<li>Default value (when uninitialized in an object): <code>null</code>.</li>
+<li>Heavier — since it’s an object, it lives on the heap.</li>
+<li>Can be used in places where only objects are allowed (like <code>List&lt;Long&gt;</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="autoboxing-and-unboxing">Autoboxing and Unboxing</h3>
+<p>One of the reasons developers sometimes overlook the difference between long and Long is because Java silently converts between them. This feature is called autoboxing and unboxing.</p>
+<ul>
+<li><code>Autoboxing</code>: automatically converting a primitive (<code>long</code>) into its wrapper (<code>Long</code>).</li>
+<li><code>Unboxing</code>: automatically converting a wrapper (<code>Long</code>) back into its primitive (<code>long</code>).</li>
+</ul>
+<p>This allows you to write code that looks simple:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> 5L;   <span style="color:#75715e">// autoboxing: primitive long -&gt; Long object</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a;    <span style="color:#75715e">// unboxing: Long object -&gt; primitive long</span>
+</span></span></code></pre></div><p>Without autoboxing, you’d have to do this manually:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> Long.<span style="color:#a6e22e">valueOf</span>(5L);   <span style="color:#75715e">// boxing</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a.<span style="color:#a6e22e">longValue</span>();      <span style="color:#75715e">// unboxing</span>
+</span></span></code></pre></div><p>Pretty verbose, right? That’s why Java added this feature in Java 5 — to make our lives easier.</p>
+<p>The convenience comes with a trade-off:</p>
+<ul>
+<li><code>Performance cost</code>: Each conversion creates extra instructions, and sometimes even new objects. In a loop that runs millions of times, those hidden allocations can hurt performance.</li>
+<li><code>Null safety</code>: If you try to unbox a Long that’s actually null, you’ll get a NullPointerException. For example:</li>
+</ul>
+<p>This is why being deliberate about whether you use long or Long matters.</p>
+<p>In short:</p>
+<ul>
+<li>Autoboxing and unboxing make your code cleaner.</li>
+<li>But they also hide potential pitfalls in performance and null handling.</li>
+</ul>
+<h3 id="when-to-use-which">When to use which</h3>
+<p>Here’s a practical rule of thumb I picked up from the review:</p>
+<ul>
+<li>Use <code>long</code> when you need raw performance, don’t care about null, and the value is always expected to be present.</li>
+<li>Use <code>Long</code> when you need:
+<ul>
+<li>Nullability (e.g., a database field that may not be set).</li>
+<li>To work with Generics or Collections (<code>List&lt;Long&gt;</code> won’t work with primitives).</li>
+</ul>
+</li>
+</ul>
+<h3 id="closing">Closing</h3>
+<p>This wasn’t just a lesson about <code>long</code> vs <code>Long</code>. It was a reminder that context matters. In a fast-moving environment, you might get away with just shipping things, but in an environment where optimization, cost, and maintainability matter, these small details make a big difference.</p>
+<p>For me, this was an eye-opener even after 8 years in software development. The fundamentals are still powerful, and sometimes revisiting them is the best way to level up.</p>
+<p>The next time you see <code>long</code> vs <code>Long</code>, pause for a moment. Is <code>null</code> a possibility? Do you need collection support? Or do you just need a fast, simple number?</p>
+<p>That little decision can make your codebase more consistent, more efficient, and less bug-prone.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-09-23 22:26:34 +0800 +08'>September 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to Java: Long vs long" href="https://hazriqpedia.github.io/posts/java_long_vs_long/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -465,41 +551,41 @@ DAX pricing is per node-hour, depending on node type:</li>
 <li>template.yaml</li>
 </ol>
 <p>Your SAM template is the blueprint of your application — it declares all the AWS resources your app needs.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HelloWorldFunction</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Serverless::Function</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CodeUri</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Handler</span><span class="p">:</span><span class="w"> </span><span class="l">app.lambda_handler</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.12</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Events</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">HelloWorld</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">Api</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l">/hello</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Method</span><span class="p">:</span><span class="w"> </span><span class="l">get</span><span class="w">
-</span></span></span></code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">HelloWorldFunction</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span>: <span style="color:#ae81ff">AWS::Serverless::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CodeUri</span>: <span style="color:#ae81ff">hello_world/</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span>: <span style="color:#ae81ff">app.lambda_handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Runtime</span>: <span style="color:#ae81ff">python3.12</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Events</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">HelloWorld</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Type</span>: <span style="color:#ae81ff">Api</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Properties</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Path</span>: <span style="color:#ae81ff">/hello</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Method</span>: <span style="color:#ae81ff">get</span>
+</span></span></code></pre></div><ol start="2">
 <li><strong>samconfig.toml</strong>: Configuration for Reusability &amp; Environments</li>
 </ol>
 <p>When you run <code>sam deploy --guided</code>, SAM generates a <code>samconfig.toml</code> file. This file stores deployment settings like your S3 bucket, stack name, region, and parameter overrides — so you don’t need to type them every time.</p>
 <p>But beyond that, you can define multiple environments using named configurations. Example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="mf">0.1</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">staging</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-staging&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-staging&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=staging&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">prod</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-prod&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-prod&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=prod&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">version</span> = <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">staging</span>.<span style="color:#a6e22e">deploy</span>.<span style="color:#a6e22e">parameters</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stack_name</span> = <span style="color:#e6db74">&#34;my-sam-app-staging&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-southeast-1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3_bucket</span> = <span style="color:#e6db74">&#34;my-sam-artifacts-staging&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">capabilities</span> = <span style="color:#e6db74">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parameter_overrides</span> = <span style="color:#e6db74">&#34;Environment=staging&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">prod</span>.<span style="color:#a6e22e">deploy</span>.<span style="color:#a6e22e">parameters</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stack_name</span> = <span style="color:#e6db74">&#34;my-sam-app-prod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-southeast-1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3_bucket</span> = <span style="color:#e6db74">&#34;my-sam-artifacts-prod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">capabilities</span> = <span style="color:#e6db74">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parameter_overrides</span> = <span style="color:#e6db74">&#34;Environment=prod&#34;</span>
 </span></span></code></pre></div><p>Now you can deploy using:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sam deploy --config-env staging
-</span></span><span class="line"><span class="cl">sam deploy --config-env prod
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sam deploy --config-env staging
+</span></span><span style="display:flex;"><span>sam deploy --config-env prod
 </span></span></code></pre></div><p>This allows:</p>
 <ul>
 <li>Cleaner separation between dev/staging/prod</li>
@@ -569,24 +655,24 @@ DAX pricing is per node-hour, depending on node type:</li>
 <h3 id="real-use-case-typescript-lambda-to-process-sqs--dynamodb">Real Use Case: TypeScript Lambda to Process SQS → DynamoDB</h3>
 <p>In my current role, we use AWS Lambda to process messages from SQS queues. Here’s a simple example of how you can set up a Lambda function in TypeScript to process messages from an SQS queue and store them in DynamoDB.</p>
 <p>Lets say we receive messages in SQS that contain user data, and we want to store this data in DynamoDB.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SQSHandler</span><span class="p">,</span> <span class="nx">SQSEvent</span><span class="p">,</span> <span class="nx">Context</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-lambda&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DynamoDB</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-sdk&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">dynamoDb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DynamoDB</span><span class="p">.</span><span class="nx">DocumentClient</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">handler</span>: <span class="kt">SQSHandler</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">event</span>: <span class="kt">SQSEvent</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">context</span>: <span class="kt">Context</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">record</span> <span class="k">of</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">TableName</span><span class="o">:</span> <span class="s2">&#34;Users&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">Item</span>: <span class="kt">userData</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="nx">dynamoDb</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">promise</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SQSHandler</span>, <span style="color:#a6e22e">SQSEvent</span>, <span style="color:#a6e22e">Context</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-lambda&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DynamoDB</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-sdk&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dynamoDb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DynamoDB</span>.<span style="color:#a6e22e">DocumentClient</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span>: <span style="color:#66d9ef">SQSHandler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">event</span>: <span style="color:#66d9ef">SQSEvent</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">Context</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">record</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">Records</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">record</span>.<span style="color:#a6e22e">body</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">TableName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Users&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Item</span>: <span style="color:#66d9ef">userData</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">dynamoDb</span>.<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>In this example:</p>
 <ul>
 <li>We import necessary types from <code>aws-lambda</code> and the <code>DynamoDB</code> client from <code>aws-sdk</code>.</li>
@@ -645,11 +731,11 @@ DAX pricing is per node-hour, depending on node type:</li>
 <li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
 </ul>
 <p>A simple item in a DynamoDB table might look like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;UserId&#34;</span>: <span style="color:#e6db74">&#34;12345&#34;</span>, <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">Unique</span> <span style="color:#960050;background-color:#1e0010">identifier</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">user.</span> <span style="color:#960050;background-color:#1e0010">Primary</span> <span style="color:#960050;background-color:#1e0010">key.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;Hazriq&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Email&#34;</span>: <span style="color:#e6db74">&#34;hazriq@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
 <ul>
 <li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
@@ -793,45 +879,45 @@ DAX pricing is per node-hour, depending on node type:</li>
 <li><code>PUT</code>: Update existing data (e.g., modifying a user&rsquo;s details).</li>
 <li><code>DELETE</code>: Remove data (e.g., deleting a user).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;express&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// GET request to the root URL
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Hello from Express!&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// GET request to /users
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/users&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">([</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Alice&#34;</span> <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Bob&#34;</span> <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="p">]);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// POST request to /users
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/users&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// Logic to create a new user
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;User created successfully!&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server listening at http://localhost:</span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Route Parameters:
-</span></span></span><span class="line"><span class="cl"><span class="c1">// Example URL: /users/123
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/users/:id&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`Fetching user with ID: </span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// Query Parameters:
-</span></span></span><span class="line"><span class="cl"><span class="c1">// Example URL: /search?q=nodejs&amp;category=backend
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/search&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span> <span class="nx">q</span><span class="o">:</span> <span class="nx">searchTerm</span><span class="p">,</span> <span class="nx">category</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`Searching for &#34;</span><span class="si">${</span><span class="nx">searchTerm</span><span class="si">}</span><span class="sb">&#34; in &#34;</span><span class="si">${</span><span class="nx">category</span><span class="si">}</span><span class="sb">&#34; category.`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;express&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to the root URL
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Hello from Express!&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to /users
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>([
+</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Alice&#34;</span> },
+</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bob&#34;</span> },
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// POST request to /users
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Logic to create a new user
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">201</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;User created successfully!&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Server listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Route Parameters:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /users/123
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Fetching user with ID: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Query Parameters:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /search?q=nodejs&amp;category=backend
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/search&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">q</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">searchTerm</span>, <span style="color:#a6e22e">category</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Searching for &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">searchTerm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; in &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">category</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; category.`</span>);
+</span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><h4 id="middleware">Middleware</h4>
 <p>Middleware functions are core to Express.js. They are functions that have access to the <code>request</code> object (<code>req</code>), the response object (<code>res</code>), and the <code>next()</code> function in the application&rsquo;s request-response cycle. The <code>next()</code> function is crucial as it passes control to the next middleware function.</p>
 <p>Think of middleware as a series of steps a request goes through before reaching its final route handler.</p>
@@ -851,17 +937,17 @@ DAX pricing is per node-hour, depending on node type:</li>
 </li>
 </ul>
 <p>Example of Custom Middleware:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// A simple logger middleware
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[</span><span class="si">${</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span><span class="si">}</span><span class="sb">] </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">next</span><span class="p">();</span> <span class="c1">// Pass control to the next handler
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">);</span> <span class="c1">// Use the middleware for all incoming requests
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Home Page with Logger!&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// A simple logger middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logger</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`[</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">] </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">next</span>(); <span style="color:#75715e">// Pass control to the next handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">logger</span>); <span style="color:#75715e">// Use the middleware for all incoming requests
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Home Page with Logger!&#34;</span>);
+</span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><h4 id="handling-request-req-and-response-res">Handling Request (req) and Response (res)</h4>
 <ul>
 <li><code>req</code> (Request Object):
@@ -925,29 +1011,29 @@ DAX pricing is per node-hour, depending on node type:</li>
 In today&rsquo;s call, I was looking at a simple python solution that will try to count the number of fruits based on types.</p>
 <p>Lets take this example. I want to know how many numbers apple in the list.</p>
 <p>The typical way:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">fruit_counts</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_counts</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">fruit_counts</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Output: {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> fruit <span style="color:#f92672">in</span> fruit_counts:
+</span></span><span style="display:flex;"><span>        fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        fruit_counts[fruit] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(fruit_counts)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1}</span>
 </span></span></code></pre></div><p>We will check the <code>fruit_counts</code> dict. If it&rsquo;s there, add more. If not, set it it to 1.</p>
 <p>Looks simple, but apparently&hellip; There&rsquo;s a way to do this in more pythonic way..</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">fruit_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># defaultdict with a default factory of int (which returns 0)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 0, then 1 is added.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">fruit_counts</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Output: defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1})</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> defaultdict(int) <span style="color:#75715e"># defaultdict with a default factory of int (which returns 0)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
+</span></span><span style="display:flex;"><span>    fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 0, then 1 is added.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(fruit_counts)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1})</span>
 </span></span></code></pre></div><p>If fruit is already a key in fruit_counts, its current value is incremented by 1.
 If fruit is not yet a key in fruit_counts, defaultdict(int) automatically creates fruit_counts[fruit] and initializes its value to 0. Then, 1 is added to it, making its value 1.</p>
 <p>From <a href="https://www.geeksforgeeks.org/defaultdict-in-python/">GeeksforGeeks</a>:</p>
@@ -957,18 +1043,18 @@ If fruit is not yet a key in fruit_counts, defaultdict(int) automatically create
 <li>Using <code>str</code>: If you use str, the default value will be an empty string (&rsquo;&rsquo;).</li>
 </ul>
 <p>Now&hellip; What if I want to start from 100? Apparently&hellip; we can! via lambda&hellip;</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fruit_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">50</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 50, then 1 is added.</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fruit_counts</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">fruit_counts</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># defaultdict(&lt;function &lt;lambda&gt; at 0x7f73165e7d30&gt;, {&#39;apple&#39;: 53, &#39;banana&#39;: 52, &#39;orange&#39;: 51})</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> defaultdict(<span style="color:#66d9ef">lambda</span>: <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 50, then 1 is added.</span>
+</span></span><span style="display:flex;"><span>    fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(fruit_counts)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># defaultdict(&lt;function &lt;lambda&gt; at 0x7f73165e7d30&gt;, {&#39;apple&#39;: 53, &#39;banana&#39;: 52, &#39;orange&#39;: 51})</span>
 </span></span></code></pre></div>
   </div>
   <footer class="entry-footer"><span title='2025-06-11 17:13:13 +0800 +08'>June 11, 2025</span>&nbsp;·&nbsp;2 min</footer>
