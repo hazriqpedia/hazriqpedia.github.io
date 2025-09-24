@@ -5,11 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Code Review | Hazriq&#39;s Dev Chaos</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+<title>Java: Long vs long | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="Java, Primitives, Wrapper Classes, Autoboxing, Performance, Code Review">
+<meta name="description" content="Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between long and Long in Java.
+And honestly, it hit differently because of how my new company approaches engineering.
+In my previous company, the priority was speed. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/code-review/">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/java_long_vs_long/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +20,7 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/code-review/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/code-review/">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/java_long_vs_long/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,18 +57,82 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/code-review/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/java_long_vs_long/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Code Review">
+  <meta property="og:title" content="Java: Long vs long">
+  <meta property="og:description" content="Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between long and Long in Java.
+And honestly, it hit differently because of how my new company approaches engineering.
+In my previous company, the priority was speed. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.">
   <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-23T22:26:34+08:00">
+    <meta property="article:modified_time" content="2025-09-23T22:26:34+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Primitives">
+    <meta property="article:tag" content="Wrapper Classes">
+    <meta property="article:tag" content="Autoboxing">
+    <meta property="article:tag" content="Performance">
+    <meta property="article:tag" content="Code Review">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code Review">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Java: Long vs long">
+<meta name="twitter:description" content="Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between long and Long in Java.
+And honestly, it hit differently because of how my new company approaches engineering.
+In my previous company, the priority was speed. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.">
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Java: Long vs long",
+      "item": "https://hazriqpedia.github.io/posts/java_long_vs_long/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java: Long vs long",
+  "name": "Java: Long vs long",
+  "description": "Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between long and Long in Java.\nAnd honestly, it hit differently because of how my new company approaches engineering.\nIn my previous company, the priority was speed. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.\n",
+  "keywords": [
+    "Java", "Primitives", "Wrapper Classes", "Autoboxing", "Performance", "Code Review"
+  ],
+  "articleBody": "Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between long and Long in Java.\nAnd honestly, it hit differently because of how my new company approaches engineering.\nIn my previous company, the priority was speed. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.\nBut in my new company, the approach is different. We take more time to build the right way — thinking about memory, cost, long-term maintainability, and performance.\nFor someone like me with 8 years of experience, this shift has been an eye-opener. It’s one thing to “make it work.” It’s another thing entirely to “make it work well.”\nWhich brings me back to… long vs Long.\nPrimitive vs Wrapper: A Quick Refresher Java is a bit different from languages like Python or JavaScript. It has two “flavors” of types:\nPrimitives: raw values like int, long, boolean. Wrapper Classes: object versions of these primitives: Integer, Long, Boolean. This distinction often feels academic at first, but it has real consequences in how your program behaves.\nSo what’s the actual difference?\nlong:\nA primitive 64-bit value. Default value: 0. Lightweight and memory efficient. Cannot be null. Long:\nA wrapper class around long. Default value (when uninitialized in an object): null. Heavier — since it’s an object, it lives on the heap. Can be used in places where only objects are allowed (like List). Autoboxing and Unboxing One of the reasons developers sometimes overlook the difference between long and Long is because Java silently converts between them. This feature is called autoboxing and unboxing.\nAutoboxing: automatically converting a primitive (long) into its wrapper (Long). Unboxing: automatically converting a wrapper (Long) back into its primitive (long). This allows you to write code that looks simple:\nLong a = 5L; // autoboxing: primitive long -\u003e Long object long b = a; // unboxing: Long object -\u003e primitive long Without autoboxing, you’d have to do this manually:\nLong a = Long.valueOf(5L); // boxing long b = a.longValue(); // unboxing Pretty verbose, right? That’s why Java added this feature in Java 5 — to make our lives easier.\nThe convenience comes with a trade-off:\nPerformance cost: Each conversion creates extra instructions, and sometimes even new objects. In a loop that runs millions of times, those hidden allocations can hurt performance. Null safety: If you try to unbox a Long that’s actually null, you’ll get a NullPointerException. For example: This is why being deliberate about whether you use long or Long matters.\nIn short:\nAutoboxing and unboxing make your code cleaner. But they also hide potential pitfalls in performance and null handling. When to use which Here’s a practical rule of thumb I picked up from the review:\nUse long when you need raw performance, don’t care about null, and the value is always expected to be present. Use Long when you need: Nullability (e.g., a database field that may not be set). To work with Generics or Collections (List won’t work with primitives). Closing This wasn’t just a lesson about long vs Long. It was a reminder that context matters. In a fast-moving environment, you might get away with just shipping things, but in an environment where optimization, cost, and maintainability matter, these small details make a big difference.\nFor me, this was an eye-opener even after 8 years in software development. The fundamentals are still powerful, and sometimes revisiting them is the best way to level up.\nThe next time you see long vs Long, pause for a moment. Is null a possibility? Do you need collection support? Or do you just need a fast, simple number?\nThat little decision can make your codebase more consistent, more efficient, and less bug-prone.\n",
+  "wordCount" : "643",
+  "inLanguage": "en",
+  "datePublished": "2025-09-23T22:26:34+08:00",
+  "dateModified": "2025-09-23T22:26:34+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/java_long_vs_long/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -125,26 +190,25 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Code Review
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Java: Long vs long
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between <code>long</code> and <code>Long</code> in Java.</p>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Java: Long vs long
+    </h1>
+    <div class="post-meta"><span title='2025-09-23 22:26:34 +0800 +08'>September 23, 2025</span>&nbsp;·&nbsp;4 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between <code>long</code> and <code>Long</code> in Java.</p>
 <p>And honestly, it hit differently because of how my new company approaches engineering.</p>
 <p>In my previous company, the priority was <em>speed</em>. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.</p>
 <p>But in my new company, the approach is different. We take more time to build the right way — thinking about memory, cost, long-term maintainability, and performance.</p>
 <p>For someone like me with 8 years of experience, this shift has been an eye-opener. It’s one thing to “make it work.” It’s another thing entirely to “make it work well.”</p>
 <p>Which brings me back to… <code>long</code> vs <code>Long</code>.</p>
-<h3 id="primitive-vs-wrapper-a-quick-refresher">Primitive vs Wrapper: A Quick Refresher</h3>
+<h3 id="primitive-vs-wrapper-a-quick-refresher">Primitive vs Wrapper: A Quick Refresher<a hidden class="anchor" aria-hidden="true" href="#primitive-vs-wrapper-a-quick-refresher">#</a></h3>
 <p>Java is a bit different from languages like Python or JavaScript. It has two “flavors” of types:</p>
 <ul>
 <li><code>Primitives</code>: raw values like <em>int</em>, <em>long</em>, <em>boolean</em>.</li>
@@ -172,7 +236,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="autoboxing-and-unboxing">Autoboxing and Unboxing</h3>
+<h3 id="autoboxing-and-unboxing">Autoboxing and Unboxing<a hidden class="anchor" aria-hidden="true" href="#autoboxing-and-unboxing">#</a></h3>
 <p>One of the reasons developers sometimes overlook the difference between long and Long is because Java silently converts between them. This feature is called autoboxing and unboxing.</p>
 <ul>
 <li><code>Autoboxing</code>: automatically converting a primitive (<code>long</code>) into its wrapper (<code>Long</code>).</li>
@@ -196,7 +260,7 @@
 <li>Autoboxing and unboxing make your code cleaner.</li>
 <li>But they also hide potential pitfalls in performance and null handling.</li>
 </ul>
-<h3 id="when-to-use-which">When to use which</h3>
+<h3 id="when-to-use-which">When to use which<a hidden class="anchor" aria-hidden="true" href="#when-to-use-which">#</a></h3>
 <p>Here’s a practical rule of thumb I picked up from the review:</p>
 <ul>
 <li>Use <code>long</code> when you need raw performance, don’t care about null, and the value is always expected to be present.</li>
@@ -207,15 +271,33 @@
 </ul>
 </li>
 </ul>
-<h3 id="closing">Closing</h3>
+<h3 id="closing">Closing<a hidden class="anchor" aria-hidden="true" href="#closing">#</a></h3>
 <p>This wasn’t just a lesson about <code>long</code> vs <code>Long</code>. It was a reminder that context matters. In a fast-moving environment, you might get away with just shipping things, but in an environment where optimization, cost, and maintainability matter, these small details make a big difference.</p>
 <p>For me, this was an eye-opener even after 8 years in software development. The fundamentals are still powerful, and sometimes revisiting them is the best way to level up.</p>
 <p>The next time you see <code>long</code> vs <code>Long</code>, pause for a moment. Is <code>null</code> a possibility? Do you need collection support? Or do you just need a fast, simple number?</p>
 <p>That little decision can make your codebase more consistent, more efficient, and less bug-prone.</p>
 
+
   </div>
-  <footer class="entry-footer"><span title='2025-09-23 22:26:34 +0800 +08'>September 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to Java: Long vs long" href="https://hazriqpedia.github.io/posts/java_long_vs_long/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/java/">Java</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/primitives/">Primitives</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/wrapper-classes/">Wrapper Classes</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/autoboxing/">Autoboxing</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/performance/">Performance</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/code-review/">Code Review</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/">
+    <span class="title">Next »</span>
+    <br>
+    <span>AWS: DynamoDB &amp; IA Class</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
     </main>
     
@@ -287,6 +369,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
