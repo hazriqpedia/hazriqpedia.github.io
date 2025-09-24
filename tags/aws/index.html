@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://hazriqpedia.github.io/tags/aws/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
@@ -425,41 +425,41 @@ DAX pricing is per node-hour, depending on node type:</li>
 <li>template.yaml</li>
 </ol>
 <p>Your SAM template is the blueprint of your application — it declares all the AWS resources your app needs.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HelloWorldFunction</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Serverless::Function</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CodeUri</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Handler</span><span class="p">:</span><span class="w"> </span><span class="l">app.lambda_handler</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.12</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Events</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">HelloWorld</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">Api</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l">/hello</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Method</span><span class="p">:</span><span class="w"> </span><span class="l">get</span><span class="w">
-</span></span></span></code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">HelloWorldFunction</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span>: <span style="color:#ae81ff">AWS::Serverless::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CodeUri</span>: <span style="color:#ae81ff">hello_world/</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span>: <span style="color:#ae81ff">app.lambda_handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Runtime</span>: <span style="color:#ae81ff">python3.12</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Events</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">HelloWorld</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Type</span>: <span style="color:#ae81ff">Api</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Properties</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Path</span>: <span style="color:#ae81ff">/hello</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Method</span>: <span style="color:#ae81ff">get</span>
+</span></span></code></pre></div><ol start="2">
 <li><strong>samconfig.toml</strong>: Configuration for Reusability &amp; Environments</li>
 </ol>
 <p>When you run <code>sam deploy --guided</code>, SAM generates a <code>samconfig.toml</code> file. This file stores deployment settings like your S3 bucket, stack name, region, and parameter overrides — so you don’t need to type them every time.</p>
 <p>But beyond that, you can define multiple environments using named configurations. Example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="mf">0.1</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">staging</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-staging&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-staging&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=staging&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">prod</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-prod&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-prod&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=prod&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">version</span> = <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">staging</span>.<span style="color:#a6e22e">deploy</span>.<span style="color:#a6e22e">parameters</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stack_name</span> = <span style="color:#e6db74">&#34;my-sam-app-staging&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-southeast-1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3_bucket</span> = <span style="color:#e6db74">&#34;my-sam-artifacts-staging&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">capabilities</span> = <span style="color:#e6db74">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parameter_overrides</span> = <span style="color:#e6db74">&#34;Environment=staging&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">prod</span>.<span style="color:#a6e22e">deploy</span>.<span style="color:#a6e22e">parameters</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stack_name</span> = <span style="color:#e6db74">&#34;my-sam-app-prod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-southeast-1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3_bucket</span> = <span style="color:#e6db74">&#34;my-sam-artifacts-prod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">capabilities</span> = <span style="color:#e6db74">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parameter_overrides</span> = <span style="color:#e6db74">&#34;Environment=prod&#34;</span>
 </span></span></code></pre></div><p>Now you can deploy using:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sam deploy --config-env staging
-</span></span><span class="line"><span class="cl">sam deploy --config-env prod
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sam deploy --config-env staging
+</span></span><span style="display:flex;"><span>sam deploy --config-env prod
 </span></span></code></pre></div><p>This allows:</p>
 <ul>
 <li>Cleaner separation between dev/staging/prod</li>
@@ -529,24 +529,24 @@ DAX pricing is per node-hour, depending on node type:</li>
 <h3 id="real-use-case-typescript-lambda-to-process-sqs--dynamodb">Real Use Case: TypeScript Lambda to Process SQS → DynamoDB</h3>
 <p>In my current role, we use AWS Lambda to process messages from SQS queues. Here’s a simple example of how you can set up a Lambda function in TypeScript to process messages from an SQS queue and store them in DynamoDB.</p>
 <p>Lets say we receive messages in SQS that contain user data, and we want to store this data in DynamoDB.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SQSHandler</span><span class="p">,</span> <span class="nx">SQSEvent</span><span class="p">,</span> <span class="nx">Context</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-lambda&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DynamoDB</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;aws-sdk&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">dynamoDb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DynamoDB</span><span class="p">.</span><span class="nx">DocumentClient</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">handler</span>: <span class="kt">SQSHandler</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">event</span>: <span class="kt">SQSEvent</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">context</span>: <span class="kt">Context</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">record</span> <span class="k">of</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">TableName</span><span class="o">:</span> <span class="s2">&#34;Users&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">Item</span>: <span class="kt">userData</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="nx">dynamoDb</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">promise</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SQSHandler</span>, <span style="color:#a6e22e">SQSEvent</span>, <span style="color:#a6e22e">Context</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-lambda&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DynamoDB</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-sdk&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dynamoDb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DynamoDB</span>.<span style="color:#a6e22e">DocumentClient</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span>: <span style="color:#66d9ef">SQSHandler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">event</span>: <span style="color:#66d9ef">SQSEvent</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">Context</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">record</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">Records</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">record</span>.<span style="color:#a6e22e">body</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">TableName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Users&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Item</span>: <span style="color:#66d9ef">userData</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">dynamoDb</span>.<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>In this example:</p>
 <ul>
 <li>We import necessary types from <code>aws-lambda</code> and the <code>DynamoDB</code> client from <code>aws-sdk</code>.</li>
@@ -605,11 +605,11 @@ DAX pricing is per node-hour, depending on node type:</li>
 <li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
 </ul>
 <p>A simple item in a DynamoDB table might look like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;UserId&#34;</span><span class="p">:</span> <span class="s2">&#34;12345&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">Unique</span> <span class="err">identifier</span> <span class="err">for</span> <span class="err">the</span> <span class="err">user.</span> <span class="err">Primary</span> <span class="err">key.</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;Hazriq&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Email&#34;</span><span class="p">:</span> <span class="s2">&#34;hazriq@example.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;UserId&#34;</span>: <span style="color:#e6db74">&#34;12345&#34;</span>, <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">Unique</span> <span style="color:#960050;background-color:#1e0010">identifier</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">user.</span> <span style="color:#960050;background-color:#1e0010">Primary</span> <span style="color:#960050;background-color:#1e0010">key.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;Hazriq&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Email&#34;</span>: <span style="color:#e6db74">&#34;hazriq@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
 <ul>
 <li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>

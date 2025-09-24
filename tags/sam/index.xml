@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>SAM on Hazriq&#39;s Dev Chaos</title>
     <link>https://hazriqpedia.github.io/tags/sam/</link>
     <description>Recent content in SAM on Hazriq&#39;s Dev Chaos</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Aug 2025 07:34:21 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/sam/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,17 @@
       <link>https://hazriqpedia.github.io/posts/aws_sam_intro/</link>
       <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/posts/aws_sam_intro/</guid>
-      <description>&lt;p&gt;Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-is-aws-sam&#34;&gt;What is AWS SAM?&lt;/h3&gt;&#xA;&lt;p&gt;AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.&lt;/p&gt;&#xA;&lt;p&gt;It’s designed to simplify your infrastructure-as-code, especially when working with:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;AWS Lambda&lt;/li&gt;&#xA;&lt;li&gt;API Gateway&lt;/li&gt;&#xA;&lt;li&gt;DynamoDB&lt;/li&gt;&#xA;&lt;li&gt;EventBridge, SQS, Step Functions, and more&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Serverless is one of the most exciting ways to build modern cloud applications — and AWS SAM makes it even easier.&lt;/p&gt;
+&lt;h3 id=&#34;what-is-aws-sam&#34;&gt;What is AWS SAM?&lt;/h3&gt;
+&lt;p&gt;AWS Serverless Application Model (SAM) is an open-source framework that helps you build and deploy serverless applications on AWS.&lt;/p&gt;
+&lt;p&gt;It’s designed to simplify your infrastructure-as-code, especially when working with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS Lambda&lt;/li&gt;
+&lt;li&gt;API Gateway&lt;/li&gt;
+&lt;li&gt;DynamoDB&lt;/li&gt;
+&lt;li&gt;EventBridge, SQS, Step Functions, and more&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

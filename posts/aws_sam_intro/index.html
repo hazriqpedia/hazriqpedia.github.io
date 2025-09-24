@@ -20,7 +20,7 @@ EventBridge, SQS, Step Functions, and more
 At its core, SAM is just a shorthand syntax for AWS CloudFormation — making your templates cleaner, easier to write, and faster to iterate.">
 <meta name="author" content="">
 <link rel="canonical" href="https://hazriqpedia.github.io/posts/aws_sam_intro/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.170b97b89ce8a1eca332d5180fdd23dc33dcfb0b92c6a197897bbe0c311687d3.css" integrity="sha256-FwuXuJzooeyjMtUYD90j3DPc&#43;wuSxqGXiXu&#43;DDEWh9M=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
@@ -288,41 +288,41 @@ At its core, SAM is just a shorthand syntax for AWS CloudFormation — making yo
 <li>template.yaml</li>
 </ol>
 <p>Your SAM template is the blueprint of your application — it declares all the AWS resources your app needs.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HelloWorldFunction</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Serverless::Function</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CodeUri</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Handler</span><span class="p">:</span><span class="w"> </span><span class="l">app.lambda_handler</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.12</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Events</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">HelloWorld</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">Api</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Path</span><span class="p">:</span><span class="w"> </span><span class="l">/hello</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">Method</span><span class="p">:</span><span class="w"> </span><span class="l">get</span><span class="w">
-</span></span></span></code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">HelloWorldFunction</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span>: <span style="color:#ae81ff">AWS::Serverless::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CodeUri</span>: <span style="color:#ae81ff">hello_world/</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span>: <span style="color:#ae81ff">app.lambda_handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Runtime</span>: <span style="color:#ae81ff">python3.12</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Events</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">HelloWorld</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Type</span>: <span style="color:#ae81ff">Api</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Properties</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Path</span>: <span style="color:#ae81ff">/hello</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Method</span>: <span style="color:#ae81ff">get</span>
+</span></span></code></pre></div><ol start="2">
 <li><strong>samconfig.toml</strong>: Configuration for Reusability &amp; Environments</li>
 </ol>
 <p>When you run <code>sam deploy --guided</code>, SAM generates a <code>samconfig.toml</code> file. This file stores deployment settings like your S3 bucket, stack name, region, and parameter overrides — so you don’t need to type them every time.</p>
 <p>But beyond that, you can define multiple environments using named configurations. Example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="mf">0.1</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">staging</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-staging&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-staging&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=staging&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">prod</span><span class="p">.</span><span class="nx">deploy</span><span class="p">.</span><span class="nx">parameters</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">stack_name</span> <span class="p">=</span> <span class="s2">&#34;my-sam-app-prod&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">region</span> <span class="p">=</span> <span class="s2">&#34;ap-southeast-1&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">s3_bucket</span> <span class="p">=</span> <span class="s2">&#34;my-sam-artifacts-prod&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">capabilities</span> <span class="p">=</span> <span class="s2">&#34;CAPABILITY_IAM&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">parameter_overrides</span> <span class="p">=</span> <span class="s2">&#34;Environment=prod&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">version</span> = <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">staging</span>.<span style="color:#a6e22e">deploy</span>.<span style="color:#a6e22e">parameters</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stack_name</span> = <span style="color:#e6db74">&#34;my-sam-app-staging&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-southeast-1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3_bucket</span> = <span style="color:#e6db74">&#34;my-sam-artifacts-staging&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">capabilities</span> = <span style="color:#e6db74">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parameter_overrides</span> = <span style="color:#e6db74">&#34;Environment=staging&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">prod</span>.<span style="color:#a6e22e">deploy</span>.<span style="color:#a6e22e">parameters</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stack_name</span> = <span style="color:#e6db74">&#34;my-sam-app-prod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-southeast-1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3_bucket</span> = <span style="color:#e6db74">&#34;my-sam-artifacts-prod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">capabilities</span> = <span style="color:#e6db74">&#34;CAPABILITY_IAM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parameter_overrides</span> = <span style="color:#e6db74">&#34;Environment=prod&#34;</span>
 </span></span></code></pre></div><p>Now you can deploy using:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sam deploy --config-env staging
-</span></span><span class="line"><span class="cl">sam deploy --config-env prod
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sam deploy --config-env staging
+</span></span><span style="display:flex;"><span>sam deploy --config-env prod
 </span></span></code></pre></div><p>This allows:</p>
 <ul>
 <li>Cleaner separation between dev/staging/prod</li>

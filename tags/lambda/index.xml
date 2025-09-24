@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Lambda on Hazriq&#39;s Dev Chaos</title>
     <link>https://hazriqpedia.github.io/tags/lambda/</link>
     <description>Recent content in Lambda on Hazriq&#39;s Dev Chaos</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 27 Jul 2025 06:56:44 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/lambda/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,17 @@
       <link>https://hazriqpedia.github.io/posts/aws_lambda_intro/</link>
       <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/posts/aws_lambda_intro/</guid>
-      <description>&lt;p&gt;AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.&lt;/p&gt;&#xA;&lt;p&gt;In this post, I will cover the basics:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;What is Lambda?&lt;/li&gt;&#xA;&lt;li&gt;What are the core components?&lt;/li&gt;&#xA;&lt;li&gt;Why use it?&lt;/li&gt;&#xA;&lt;li&gt;A real use case: processing SQS messages in TypeScript&lt;/li&gt;&#xA;&lt;li&gt;Common limitations&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;what-is-aws-lambda&#34;&gt;What is AWS Lambda?&lt;/h3&gt;&#xA;&lt;p&gt;AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.&lt;/p&gt;</description>
+      <description>&lt;p&gt;AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.&lt;/p&gt;
+&lt;p&gt;In this post, I will cover the basics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is Lambda?&lt;/li&gt;
+&lt;li&gt;What are the core components?&lt;/li&gt;
+&lt;li&gt;Why use it?&lt;/li&gt;
+&lt;li&gt;A real use case: processing SQS messages in TypeScript&lt;/li&gt;
+&lt;li&gt;Common limitations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;what-is-aws-lambda&#34;&gt;What is AWS Lambda?&lt;/h3&gt;
+&lt;p&gt;AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
