@@ -6,8 +6,23 @@
     <description>Recent content in Posts on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Sep 2025 22:26:34 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Sep 2025 22:26:44 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java Back to Basics: Primitive Data Types vs Wrapper Classes</title>
+      <link>https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/</link>
+      <pubDate>Sat, 27 Sep 2025 22:26:44 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;https://hazriqpedia.github.io/posts/java_long_vs_long&#34;&gt;previous post&lt;/a&gt;, we looked at the difference between &lt;code&gt;long&lt;/code&gt; (a primitive) and &lt;code&gt;Long&lt;/code&gt; (its wrapper class). That was just one example — but in fact, &lt;strong&gt;every primitive type in Java has a wrapper class&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So in this post, let’s zoom out and cover the bigger picture:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What are primitive data types?&lt;/li&gt;
+&lt;li&gt;What are wrapper classes?&lt;/li&gt;
+&lt;li&gt;How are they initialized?&lt;/li&gt;
+&lt;li&gt;What are the benefits, differences, and when should you use one over the other?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By the end, you’ll have a simple rule of thumb that will save you from confusion: &lt;em&gt;stick to primitives by default, use wrappers only when you need object features&lt;/em&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Java: Long vs long</title>
       <link>https://hazriqpedia.github.io/posts/java_long_vs_long/</link>

@@ -5,11 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Java | Hazriq&#39;s Dev Chaos</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+<title>Java Back to Basics: Primitive Data Types vs Wrapper Classes | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="java, beginner, back-to-basics">
+<meta name="description" content="In the previous post, we looked at the difference between long (a primitive) and Long (its wrapper class). That was just one example — but in fact, every primitive type in Java has a wrapper class.
+So in this post, let’s zoom out and cover the bigger picture:
+
+What are primitive data types?
+What are wrapper classes?
+How are they initialized?
+What are the benefits, differences, and when should you use one over the other?
+
+By the end, you’ll have a simple rule of thumb that will save you from confusion: stick to primitives by default, use wrappers only when you need object features.">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/java/">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +26,7 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/java/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/java/">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,18 +63,85 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/java/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Java">
+  <meta property="og:title" content="Java Back to Basics: Primitive Data Types vs Wrapper Classes">
+  <meta property="og:description" content="In the previous post, we looked at the difference between long (a primitive) and Long (its wrapper class). That was just one example — but in fact, every primitive type in Java has a wrapper class.
+So in this post, let’s zoom out and cover the bigger picture:
+What are primitive data types? What are wrapper classes? How are they initialized? What are the benefits, differences, and when should you use one over the other? By the end, you’ll have a simple rule of thumb that will save you from confusion: stick to primitives by default, use wrappers only when you need object features.">
   <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-27T22:26:44+08:00">
+    <meta property="article:modified_time" content="2025-09-27T22:26:44+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Beginner">
+    <meta property="article:tag" content="Back-to-Basics">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Java Back to Basics: Primitive Data Types vs Wrapper Classes">
+<meta name="twitter:description" content="In the previous post, we looked at the difference between long (a primitive) and Long (its wrapper class). That was just one example — but in fact, every primitive type in Java has a wrapper class.
+So in this post, let’s zoom out and cover the bigger picture:
 
+What are primitive data types?
+What are wrapper classes?
+How are they initialized?
+What are the benefits, differences, and when should you use one over the other?
+
+By the end, you’ll have a simple rule of thumb that will save you from confusion: stick to primitives by default, use wrappers only when you need object features.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Java Back to Basics: Primitive Data Types vs Wrapper Classes",
+      "item": "https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java Back to Basics: Primitive Data Types vs Wrapper Classes",
+  "name": "Java Back to Basics: Primitive Data Types vs Wrapper Classes",
+  "description": "In the previous post, we looked at the difference between long (a primitive) and Long (its wrapper class). That was just one example — but in fact, every primitive type in Java has a wrapper class.\nSo in this post, let’s zoom out and cover the bigger picture:\nWhat are primitive data types? What are wrapper classes? How are they initialized? What are the benefits, differences, and when should you use one over the other? By the end, you’ll have a simple rule of thumb that will save you from confusion: stick to primitives by default, use wrappers only when you need object features.\n",
+  "keywords": [
+    "java", "beginner", "back-to-basics"
+  ],
+  "articleBody": "In the previous post, we looked at the difference between long (a primitive) and Long (its wrapper class). That was just one example — but in fact, every primitive type in Java has a wrapper class.\nSo in this post, let’s zoom out and cover the bigger picture:\nWhat are primitive data types? What are wrapper classes? How are they initialized? What are the benefits, differences, and when should you use one over the other? By the end, you’ll have a simple rule of thumb that will save you from confusion: stick to primitives by default, use wrappers only when you need object features.\n–\n1. Primitive Data Types Primitives are the basic building blocks of data in Java. They are not objects and store their values directly in memory (usually on the stack).\nJava provides 8 primitive types:\nbyte, short, int, long (integers) float, double (floating-point numbers) char (character) boolean (true/false) Example:\nint number = 10; boolean isActive = true; They are fast, memory-efficient, and always hold an actual value.\n2. Wrapper Classes For every primitive, Java provides a corresponding wrapper class in the java.lang package. These are objects that “wrap” a primitive inside a class. •\tByte, Short, Integer, Long •\tFloat, Double •\tCharacter •\tBoolean\nInteger numberObj = Integer.valueOf(10); Boolean isActiveObj = Boolean.TRUE; Wrappers are essential when:\nWorking with Collections (e.g., List instead of List). You need to represent null (absence of a value). You want to use utility methods (like parsing strings into numbers). 2.5 Initializing Primitives vs Wrappers Primitive Initialization\nDirect and straightforward. Local variables must be initialized before use. Class fields get a default value (int → 0, boolean → false). int x = 10; // explicit initialization boolean flag; // flag must be assigned before use Wrapper Initialization\nWrappers are objects, so they can be null. Default value for wrapper fields is null. Different ways to initialize: Integer a = new Integer(10); // old (not recommended) Integer b = Integer.valueOf(10); // preferred Integer c = 10; // autoboxing (simplest) Similar but Different\nint x = 0; → raw value stored directly. Integer y = 0; → an object reference pointing to an Integer. So while syntax can look similar, the memory model and behavior are not the same.\n3. Key Differences Primitive Wrapper Class Stored directly in memory (stack) Stored as an object reference (heap) Faster and more memory-efficient Slightly slower, more memory use Cannot be null Can be null No methods available Comes with utility methods Value can be reassigned directly Immutable object (once created, can’t be changed) 4. Autoboxing \u0026 Unboxing Java makes conversion between primitives and wrappers seamless.\nAutoboxing: primitive → wrapper Unboxing: wrapper → primitive Integer obj = 5; // autoboxing int num = obj; // unboxing This is convenient, but can introduce performance overhead if overused.\n5. Benefits of Wrapper Classes Collections \u0026 Generics: You can’t store int in a List, but you can store Integer. List\u003cInteger\u003e numbers = new ArrayList\u003c\u003e(); numbers.add(5); Utility Methods: int parsed = Integer.parseInt(\"123\"); Null Handling: Sometimes you need null to represent “no value”. 6. When to Use Primitives → default choice. Use them when performance matters (loops, counters, math). Wrappers → when you need: Collections Nullability Utility methods 6.5 Rule of Thumb Default to primitives – they are faster, memory-friendly, and straightforward. Use wrappers only when necessary, such as: You need to store them in Collections / Generics. You need to represent null (e.g., database values). You want to leverage utility methods (Integer.parseInt, Boolean.valueOf, etc.). 👉 In short: always use primitive unless there’s a clear reason to use the wrapper.\n–\n⚡ Bonus: What About String?\nIf you’re wondering where String fits in — it’s not a primitive, nor a wrapper. String is a regular class in java.lang, but Java gives it special treatment so it behaves almost like a primitive in many cases.\nFor example:\nString name = \"Hazriq\"; looks as simple as assigning an int or boolean. But under the hood, String is an object, immutable, and stored differently from primitives.\nThis is why you can do things like:\nint length = name.length(); // methods available So:\nPrimitives = raw values Wrappers = object versions of primitives String = class, not a primitive, but commonly treated as a “basic type” in day-to-day Java 7. Best Practices \u0026 Gotchas Avoid unnecessary boxing/unboxing in performance-critical code. Be careful comparing wrappers: Integer a = 1000; Integer b = 1000; System.out.println(a == b); // false (different objects) System.out.println(a.equals(b)); // true Remember: wrapper classes and String are immutable. Once created, their value never changes — any “modification” actually creates a new object. (We’ll explore immutability in depth in a future post.) –\nPrimitives are simple and fast, wrappers are flexible and object-friendly, and String is a special class that feels primitive but isn’t.\nUnderstanding when to use each is one of those small but important skills that makes you write cleaner and more efficient Java code.\n",
+  "wordCount" : "821",
+  "inLanguage": "en",
+  "datePublished": "2025-09-27T22:26:44+08:00",
+  "dateModified": "2025-09-27T22:26:44+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -125,20 +199,19 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Java
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Java Back to Basics: Primitive Data Types vs Wrapper Classes
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="/posts/java_long_vs_long">previous post</a>, we looked at the difference between <code>long</code> (a primitive) and <code>Long</code> (its wrapper class). That was just one example — but in fact, <strong>every primitive type in Java has a wrapper class</strong>.</p>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Java Back to Basics: Primitive Data Types vs Wrapper Classes
+    </h1>
+    <div class="post-meta"><span title='2025-09-27 22:26:44 +0800 +08'>September 27, 2025</span>&nbsp;·&nbsp;4 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>In the <a href="/posts/java_long_vs_long">previous post</a>, we looked at the difference between <code>long</code> (a primitive) and <code>Long</code> (its wrapper class). That was just one example — but in fact, <strong>every primitive type in Java has a wrapper class</strong>.</p>
 <p>So in this post, let’s zoom out and cover the bigger picture:</p>
 <ul>
 <li>What are primitive data types?</li>
@@ -148,7 +221,7 @@
 </ul>
 <p>By the end, you’ll have a simple rule of thumb that will save you from confusion: <em>stick to primitives by default, use wrappers only when you need object features</em>.</p>
 <p>&ndash;</p>
-<h2 id="1-primitive-data-types">1. Primitive Data Types</h2>
+<h2 id="1-primitive-data-types">1. Primitive Data Types<a hidden class="anchor" aria-hidden="true" href="#1-primitive-data-types">#</a></h2>
 <p>Primitives are the <strong>basic building blocks</strong> of data in Java. They are <strong>not objects</strong> and store their values directly in memory (usually on the stack).</p>
 <p>Java provides 8 primitive types:</p>
 <ul>
@@ -161,7 +234,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> number <span style="color:#f92672">=</span> 10;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> isActive <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
 </span></span></code></pre></div><p>They are fast, memory-efficient, and always hold an actual value.</p>
-<h2 id="2-wrapper-classes">2. Wrapper Classes</h2>
+<h2 id="2-wrapper-classes">2. Wrapper Classes<a hidden class="anchor" aria-hidden="true" href="#2-wrapper-classes">#</a></h2>
 <p>For every primitive, Java provides a corresponding wrapper class in the <code>java.lang</code> package. These are objects that “wrap” a primitive inside a class.
 •	Byte, Short, Integer, Long
 •	Float, Double
@@ -175,7 +248,7 @@
 <li>You need to represent <code>null</code> (absence of a value).</li>
 <li>You want to use utility methods (like parsing strings into numbers).</li>
 </ul>
-<h3 id="25-initializing-primitives-vs-wrappers">2.5 Initializing Primitives vs Wrappers</h3>
+<h3 id="25-initializing-primitives-vs-wrappers">2.5 Initializing Primitives vs Wrappers<a hidden class="anchor" aria-hidden="true" href="#25-initializing-primitives-vs-wrappers">#</a></h3>
 <p><strong>Primitive Initialization</strong></p>
 <ul>
 <li>Direct and straightforward.</li>
@@ -199,7 +272,7 @@
 <li><code>Integer y = 0;</code> → an object reference pointing to an Integer.</li>
 </ul>
 <p>So while syntax can look similar, the memory model and behavior are not the same.</p>
-<h2 id="3-key-differences">3. Key Differences</h2>
+<h2 id="3-key-differences">3. Key Differences<a hidden class="anchor" aria-hidden="true" href="#3-key-differences">#</a></h2>
 <table>
   <thead>
       <tr>
@@ -230,7 +303,7 @@
       </tr>
   </tbody>
 </table>
-<h2 id="4-autoboxing--unboxing">4. Autoboxing &amp; Unboxing</h2>
+<h2 id="4-autoboxing--unboxing">4. Autoboxing &amp; Unboxing<a hidden class="anchor" aria-hidden="true" href="#4-autoboxing--unboxing">#</a></h2>
 <p>Java makes conversion between primitives and wrappers seamless.</p>
 <ul>
 <li>Autoboxing: primitive → wrapper</li>
@@ -239,7 +312,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer obj <span style="color:#f92672">=</span> 5;   <span style="color:#75715e">// autoboxing</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> obj;     <span style="color:#75715e">// unboxing</span>
 </span></span></code></pre></div><p>This is convenient, but can introduce performance overhead if overused.</p>
-<h2 id="5-benefits-of-wrapper-classes">5. Benefits of Wrapper Classes</h2>
+<h2 id="5-benefits-of-wrapper-classes">5. Benefits of Wrapper Classes<a hidden class="anchor" aria-hidden="true" href="#5-benefits-of-wrapper-classes">#</a></h2>
 <ul>
 <li><strong>Collections &amp; Generics</strong>: You can’t store int in a List, but you can store Integer.</li>
 </ul>
@@ -252,7 +325,7 @@
 </span></span></code></pre></div><ul>
 <li><strong>Null Handling</strong>: Sometimes you need null to represent “no value”.</li>
 </ul>
-<h2 id="6-when-to-use">6. When to Use</h2>
+<h2 id="6-when-to-use">6. When to Use<a hidden class="anchor" aria-hidden="true" href="#6-when-to-use">#</a></h2>
 <ul>
 <li><strong>Primitives</strong> → default choice. Use them when performance matters (loops, counters, math).</li>
 <li><strong>Wrappers</strong> → when you need:
@@ -263,7 +336,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="65-rule-of-thumb">6.5 Rule of Thumb</h3>
+<h3 id="65-rule-of-thumb">6.5 Rule of Thumb<a hidden class="anchor" aria-hidden="true" href="#65-rule-of-thumb">#</a></h3>
 <ul>
 <li>Default to primitives – they are faster, memory-friendly, and straightforward.</li>
 <li>Use wrappers only when necessary, such as:
@@ -290,7 +363,7 @@ String is a regular class in java.lang, but Java gives it special treatment so i
 <li><code>Wrappers</code> = object versions of primitives</li>
 <li><code>String</code> = class, not a primitive, but commonly treated as a “basic type” in day-to-day Java</li>
 </ul>
-<h2 id="7-best-practices--gotchas">7. Best Practices &amp; Gotchas</h2>
+<h2 id="7-best-practices--gotchas">7. Best Practices &amp; Gotchas<a hidden class="anchor" aria-hidden="true" href="#7-best-practices--gotchas">#</a></h2>
 <ul>
 <li>Avoid unnecessary boxing/unboxing in performance-critical code.</li>
 <li>Be careful comparing wrappers:</li>
@@ -309,95 +382,24 @@ Once created, their value never changes — any “modification” actually crea
 <p><strong>Primitives</strong> are simple and fast, <strong>wrappers</strong> are flexible and object-friendly, and <strong>String</strong> is a special class that feels primitive but isn’t.</p>
 <p>Understanding when to use each is one of those small but important skills that makes you write cleaner and more efficient Java code.</p>
 
-  </div>
-  <footer class="entry-footer"><span title='2025-09-27 22:26:44 +0800 +08'>September 27, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to Java Back to Basics: Primitive Data Types vs Wrapper Classes" href="https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Java: Long vs long
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between <code>long</code> and <code>Long</code> in Java.</p>
-<p>And honestly, it hit differently because of how my new company approaches engineering.</p>
-<p>In my previous company, the priority was <em>speed</em>. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.</p>
-<p>But in my new company, the approach is different. We take more time to build the right way — thinking about memory, cost, long-term maintainability, and performance.</p>
-<p>For someone like me with 8 years of experience, this shift has been an eye-opener. It’s one thing to “make it work.” It’s another thing entirely to “make it work well.”</p>
-<p>Which brings me back to… <code>long</code> vs <code>Long</code>.</p>
-<h3 id="primitive-vs-wrapper-a-quick-refresher">Primitive vs Wrapper: A Quick Refresher</h3>
-<p>Java is a bit different from languages like Python or JavaScript. It has two “flavors” of types:</p>
-<ul>
-<li><code>Primitives</code>: raw values like <em>int</em>, <em>long</em>, <em>boolean</em>.</li>
-<li><code>Wrapper Classes</code>: object versions of these primitives: <em>Integer</em>, <em>Long</em>, <em>Boolean</em>.</li>
-</ul>
-<p>This distinction often feels academic at first, but it has real consequences in how your program behaves.</p>
-<p>So what’s the actual difference?</p>
-<ul>
-<li>
-<p><code>long</code>:</p>
-<ul>
-<li>A primitive 64-bit value.</li>
-<li>Default value: 0.</li>
-<li>Lightweight and memory efficient.</li>
-<li>Cannot be null.</li>
-</ul>
-</li>
-<li>
-<p><code>Long</code>:</p>
-<ul>
-<li>A wrapper class around long.</li>
-<li>Default value (when uninitialized in an object): <code>null</code>.</li>
-<li>Heavier — since it’s an object, it lives on the heap.</li>
-<li>Can be used in places where only objects are allowed (like <code>List&lt;Long&gt;</code>).</li>
-</ul>
-</li>
-</ul>
-<h3 id="autoboxing-and-unboxing">Autoboxing and Unboxing</h3>
-<p>One of the reasons developers sometimes overlook the difference between long and Long is because Java silently converts between them. This feature is called autoboxing and unboxing.</p>
-<ul>
-<li><code>Autoboxing</code>: automatically converting a primitive (<code>long</code>) into its wrapper (<code>Long</code>).</li>
-<li><code>Unboxing</code>: automatically converting a wrapper (<code>Long</code>) back into its primitive (<code>long</code>).</li>
-</ul>
-<p>This allows you to write code that looks simple:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> 5L;   <span style="color:#75715e">// autoboxing: primitive long -&gt; Long object</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a;    <span style="color:#75715e">// unboxing: Long object -&gt; primitive long</span>
-</span></span></code></pre></div><p>Without autoboxing, you’d have to do this manually:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> Long.<span style="color:#a6e22e">valueOf</span>(5L);   <span style="color:#75715e">// boxing</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a.<span style="color:#a6e22e">longValue</span>();      <span style="color:#75715e">// unboxing</span>
-</span></span></code></pre></div><p>Pretty verbose, right? That’s why Java added this feature in Java 5 — to make our lives easier.</p>
-<p>The convenience comes with a trade-off:</p>
-<ul>
-<li><code>Performance cost</code>: Each conversion creates extra instructions, and sometimes even new objects. In a loop that runs millions of times, those hidden allocations can hurt performance.</li>
-<li><code>Null safety</code>: If you try to unbox a Long that’s actually null, you’ll get a NullPointerException. For example:</li>
-</ul>
-<p>This is why being deliberate about whether you use long or Long matters.</p>
-<p>In short:</p>
-<ul>
-<li>Autoboxing and unboxing make your code cleaner.</li>
-<li>But they also hide potential pitfalls in performance and null handling.</li>
-</ul>
-<h3 id="when-to-use-which">When to use which</h3>
-<p>Here’s a practical rule of thumb I picked up from the review:</p>
-<ul>
-<li>Use <code>long</code> when you need raw performance, don’t care about null, and the value is always expected to be present.</li>
-<li>Use <code>Long</code> when you need:
-<ul>
-<li>Nullability (e.g., a database field that may not be set).</li>
-<li>To work with Generics or Collections (<code>List&lt;Long&gt;</code> won’t work with primitives).</li>
-</ul>
-</li>
-</ul>
-<h3 id="closing">Closing</h3>
-<p>This wasn’t just a lesson about <code>long</code> vs <code>Long</code>. It was a reminder that context matters. In a fast-moving environment, you might get away with just shipping things, but in an environment where optimization, cost, and maintainability matter, these small details make a big difference.</p>
-<p>For me, this was an eye-opener even after 8 years in software development. The fundamentals are still powerful, and sometimes revisiting them is the best way to level up.</p>
-<p>The next time you see <code>long</code> vs <code>Long</code>, pause for a moment. Is <code>null</code> a possibility? Do you need collection support? Or do you just need a fast, simple number?</p>
-<p>That little decision can make your codebase more consistent, more efficient, and less bug-prone.</p>
 
   </div>
-  <footer class="entry-footer"><span title='2025-09-23 22:26:34 +0800 +08'>September 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to Java: Long vs long" href="https://hazriqpedia.github.io/posts/java_long_vs_long/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/java/">Java</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/beginner/">Beginner</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/back-to-basics/">Back-to-Basics</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/java_long_vs_long/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Java: Long vs long</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
     </main>
     
@@ -469,6 +471,53 @@ Once created, their value never changes — any “modification” actually crea
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
