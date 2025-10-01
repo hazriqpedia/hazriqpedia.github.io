@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Performance on Hazriq&#39;s Dev Chaos</title>
-    <link>https://hazriqpedia.github.io/tags/performance/</link>
-    <description>Recent content in Performance on Hazriq&#39;s Dev Chaos</description>
+    <title>Non-Blocking on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/non-blocking/</link>
+    <description>Recent content in Non-Blocking on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 01 Oct 2025 17:08:30 +0800</lastBuildDate>
-    <atom:link href="https://hazriqpedia.github.io/tags/performance/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hazriqpedia.github.io/tags/non-blocking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java and Quarkus</title>
       <link>https://hazriqpedia.github.io/posts/java-quarkus/</link>
@@ -24,15 +24,6 @@
 &lt;li&gt;Developer experience (hot reload, unified config, reactive support)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;It’s often described as &amp;ldquo;Supersonic Subatomic Java.&amp;rdquo;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Java: Long vs long</title>
-      <link>https://hazriqpedia.github.io/posts/java_long_vs_long/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/posts/java_long_vs_long/</guid>
-      <description>&lt;p&gt;Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between &lt;code&gt;long&lt;/code&gt; and &lt;code&gt;Long&lt;/code&gt; in Java.&lt;/p&gt;
-&lt;p&gt;And honestly, it hit differently because of how my new company approaches engineering.&lt;/p&gt;
-&lt;p&gt;In my previous company, the priority was &lt;em&gt;speed&lt;/em&gt;. We had the luxury of pushing features straight to production quickly. Optimization, memory efficiency, and cost tuning weren’t the main focus. The mission was simple: deliver fast, and move on.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

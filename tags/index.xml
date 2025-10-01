@@ -6,8 +6,57 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 27 Sep 2025 22:26:44 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Oct 2025 17:08:30 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloud-Native</title>
+      <link>https://hazriqpedia.github.io/tags/cloud-native/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/cloud-native/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Framework</title>
+      <link>https://hazriqpedia.github.io/tags/framework/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/framework/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>https://hazriqpedia.github.io/tags/java/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Non-Blocking</title>
+      <link>https://hazriqpedia.github.io/tags/non-blocking/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/non-blocking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Performance</title>
+      <link>https://hazriqpedia.github.io/tags/performance/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/performance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Quarkus</title>
+      <link>https://hazriqpedia.github.io/tags/quarkus/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/quarkus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reactive</title>
+      <link>https://hazriqpedia.github.io/tags/reactive/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/reactive/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Back-to-Basics</title>
       <link>https://hazriqpedia.github.io/tags/back-to-basics/</link>
@@ -23,13 +72,6 @@
       <description></description>
     </item>
     <item>
-      <title>Java</title>
-      <link>https://hazriqpedia.github.io/tags/java/</link>
-      <pubDate>Sat, 27 Sep 2025 22:26:44 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/java/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Autoboxing</title>
       <link>https://hazriqpedia.github.io/tags/autoboxing/</link>
       <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
@@ -41,13 +83,6 @@
       <link>https://hazriqpedia.github.io/tags/code-review/</link>
       <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/code-review/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Performance</title>
-      <link>https://hazriqpedia.github.io/tags/performance/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/performance/</guid>
       <description></description>
     </item>
     <item>

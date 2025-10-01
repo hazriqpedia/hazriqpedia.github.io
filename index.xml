@@ -6,8 +6,25 @@
     <description>Recent content on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 27 Sep 2025 22:26:44 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Oct 2025 17:08:30 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java and Quarkus</title>
+      <link>https://hazriqpedia.github.io/posts/java-quarkus/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/java-quarkus/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Back to Java, Now with Quarkus&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;After years of writing mostly in JavaScript and Python, I recently joined a company that relies on Java with Quarkus. Coming back to Java, I quickly realized Quarkus isn’t just &amp;ldquo;another framework&amp;rdquo;—it’s Java re-imagined for today’s cloud-native world.&lt;/p&gt;
+&lt;h3 id=&#34;what-is-quarkus&#34;&gt;What is Quarkus?&lt;/h3&gt;
+&lt;p&gt;Quarkus is a Kubernetes-native Java framework built for modern apps. It’s optimized for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cloud (runs smoothly on Kubernetes, serverless, containers)&lt;/li&gt;
+&lt;li&gt;Performance (fast boot time, low memory)&lt;/li&gt;
+&lt;li&gt;Developer experience (hot reload, unified config, reactive support)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It’s often described as &amp;ldquo;Supersonic Subatomic Java.&amp;rdquo;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Java Back to Basics: Primitive Data Types vs Wrapper Classes</title>
       <link>https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/</link>

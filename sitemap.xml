@@ -2,25 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hazriqpedia.github.io/tags/cloud-native/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/framework/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/java/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/java-quarkus/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/non-blocking/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/performance/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/quarkus/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/reactive/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/</loc>
+    <lastmod>2025-10-01T17:08:30+08:00</lastmod>
+  </url><url>
     <loc>https://hazriqpedia.github.io/tags/back-to-basics/</loc>
     <lastmod>2025-09-27T22:26:44+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/beginner/</loc>
     <lastmod>2025-09-27T22:26:44+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/</loc>
-    <lastmod>2025-09-27T22:26:44+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/java/</loc>
-    <lastmod>2025-09-27T22:26:44+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/</loc>
-    <lastmod>2025-09-27T22:26:44+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/posts/</loc>
-    <lastmod>2025-09-27T22:26:44+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/</loc>
     <lastmod>2025-09-27T22:26:44+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/autoboxing/</loc>
@@ -30,9 +51,6 @@
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/posts/java_long_vs_long/</loc>
-    <lastmod>2025-09-23T22:26:34+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/performance/</loc>
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/primitives/</loc>

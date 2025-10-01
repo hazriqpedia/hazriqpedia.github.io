@@ -149,6 +149,159 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Java and Quarkus
+    </h2>
+  </header>
+  <div class="entry-content">
+    <blockquote>
+<p>Back to Java, Now with Quarkus</p></blockquote>
+<p>After years of writing mostly in JavaScript and Python, I recently joined a company that relies on Java with Quarkus. Coming back to Java, I quickly realized Quarkus isn’t just &ldquo;another framework&rdquo;—it’s Java re-imagined for today’s cloud-native world.</p>
+<h3 id="what-is-quarkus">What is Quarkus?</h3>
+<p>Quarkus is a Kubernetes-native Java framework built for modern apps. It’s optimized for:</p>
+<ul>
+<li>Cloud (runs smoothly on Kubernetes, serverless, containers)</li>
+<li>Performance (fast boot time, low memory)</li>
+<li>Developer experience (hot reload, unified config, reactive support)</li>
+</ul>
+<p>It’s often described as &ldquo;Supersonic Subatomic Java.&rdquo;</p>
+<h3 id="whats-the-difference">What’s the Difference?</h3>
+<p>Compared to traditional Java frameworks (like Spring Boot or Jakarta EE):</p>
+<ul>
+<li><strong>Startup time</strong>: Quarkus apps start in milliseconds, not seconds.</li>
+<li><strong>Memory footprint</strong>: Uses less RAM—great for microservices in containers.</li>
+<li><strong>Native compilation</strong>: Works with GraalVM to compile Java into native binaries.</li>
+<li><strong>Reactive by design</strong>: Built to handle modern async workloads.</li>
+</ul>
+<h3 id="reactive-programming-in-quarkus">Reactive Programming in Quarkus</h3>
+<p>One thing you’ll hear often in the Quarkus world is <em>reactive</em> programming.</p>
+<p>At a high level:</p>
+<ul>
+<li>Traditional Java apps are usually blocking → one request = one thread. If that thread is waiting for a database or network response, it just sits idle until the result comes back.</li>
+<li>Reactive apps are non-blocking → threads don’t get stuck. Instead, when an I/O call is made (like fetching from a DB or API), the thread is freed to do other work. When the result is ready, the app picks it back up asynchronously.</li>
+</ul>
+<p>Think of it like this:</p>
+<ul>
+<li>Blocking (restaurant analogy): A waiter takes your order, then just stands at the kitchen until your food is ready. They can’t serve anyone else.</li>
+<li>Non-blocking (reactive): The waiter takes your order, gives it to the kitchen, and immediately goes to serve another table. When your food is ready, they bring it over. Same waiter, more customers served.</li>
+</ul>
+<h3 id="blocking-vs-non-blocking-in-quarkus">Blocking vs Non-blocking in Quarkus</h3>
+<p>Blocking Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/blocking&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BlockingResource</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getData</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate slow service</span>
+</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(2000);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Blocking response after 2s&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Each request holds a thread for 2 seconds.</li>
+<li>If 100 users hit this at once, you need 100 threads just waiting.</li>
+</ul>
+<p>Non-blocking Example with Mutiny:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> io.smallrye.mutiny.Uni;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.Duration;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/non-blocking&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonBlockingResource</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getData</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate async response</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Uni.<span style="color:#a6e22e">createFrom</span>()
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">item</span>(<span style="color:#e6db74">&#34;Non-blocking response after 2s&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">delayIt</span>().<span style="color:#a6e22e">by</span>(Duration.<span style="color:#a6e22e">ofSeconds</span>(2));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The thread is released immediately.</li>
+<li>Quarkus will resume the request once the result is ready, without hogging threads.</li>
+<li>Much more scalable in high-concurrency environments.</li>
+</ul>
+<p>👉 In short: Reactive = Non-blocking = More scalable and efficient in modern distributed systems.</p>
+<blockquote>
+<p>💡 Note on Mutiny
+Quarkus doesn’t invent its own reactive system from scratch. Instead, it builds on Vert.x (a popular reactive toolkit for the JVM) and introduces Mutiny as a friendly API for developers.</p></blockquote>
+<ul>
+<li><code>Uni&lt;T&gt;</code> → like a Promise of a single item in the future.</li>
+<li><code>Multi&lt;T&gt;</code> → like a stream of multiple items over time.</li>
+</ul>
+<p>So when you see Uni or Multi in Quarkus code, that’s Mutiny helping you handle non-blocking results in a clean, developer-friendly way.</p>
+<h3 id="when-should-developers-consider-quarkus">When Should Developers Consider Quarkus?</h3>
+<p>You don’t always need Quarkus. Here are scenarios where it makes sense:</p>
+<ul>
+<li>✅ Microservices – You’re building many small services that need to be fast, lightweight, and cloud-friendly.</li>
+<li>✅ Containers &amp; Kubernetes – Your apps are deployed in Docker/K8s and you want to reduce memory costs.</li>
+<li>✅ Serverless – Functions that need to start fast and consume minimal resources.</li>
+<li>✅ Event-driven / Reactive systems – You’re working with Kafka, messaging, or need to handle high concurrency.</li>
+<li>✅ Cloud cost optimization – Running many services at scale and every MB of memory counts.</li>
+</ul>
+<p>On the other hand:</p>
+<ul>
+<li>If you’re running a monolithic enterprise app on a stable server, traditional Java frameworks may be simpler.</li>
+<li>If your team is heavily invested in another ecosystem (e.g., Spring), migration cost could outweigh the benefit.</li>
+</ul>
+<h3 id="benefits-at-a-glance">Benefits at a Glance:</h3>
+<ul>
+<li>🚀 <strong>Fast</strong>: Startup in milliseconds.</li>
+<li>🐇 <strong>Lightweight</strong>: Minimal memory usage.</li>
+<li>🐳 <strong>Container-native</strong>: Tailored for Docker/Kubernetes.</li>
+<li>🔌 <strong>Reactive-ready</strong>: Async handling out of the box.</li>
+<li>🔥 <strong>Fun to dev</strong>: Hot reload + clear config = better DX.</li>
+</ul>
+<h3 id="java-vs-quarkus-a-quick-comparison">Java vs Quarkus: A Quick Comparison</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Feature</th>
+          <th style="text-align: center">Traditional Java (e.g., Spring Boot)</th>
+          <th style="text-align: center">Quarkus</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Startup Time</td>
+          <td style="text-align: center">Seconds (2–5s or more)</td>
+          <td style="text-align: center">Milliseconds (&lt;1s possible)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Memory Usage</td>
+          <td style="text-align: center">Higher (hundreds MB)</td>
+          <td style="text-align: center">Lower (tens of MB)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Deployment Style</td>
+          <td style="text-align: center">Typically fat JARs</td>
+          <td style="text-align: center">JVM mode or Native binary</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Container/Cloud Ready</td>
+          <td style="text-align: center">Works but heavy</td>
+          <td style="text-align: center">Built for it</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Dev Experience</td>
+          <td style="text-align: center">Restart for changes</td>
+          <td style="text-align: center">Live reload (quarkus:dev)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Reactive Support</td>
+          <td style="text-align: center">Add-on via frameworks</td>
+          <td style="text-align: center">Built-in (Mutiny, Vert.x)</td>
+      </tr>
+  </tbody>
+</table>
+<p>For me, Quarkus feels like Java reborn for the cloud era. It keeps the strengths of Java (ecosystem, type safety, mature libraries) but strips away the heavyweight feel.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-10-01 17:08:30 +0800 +08'>October 1, 2025</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to Java and Quarkus" href="https://hazriqpedia.github.io/posts/java-quarkus/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Java Back to Basics: Primitive Data Types vs Wrapper Classes
     </h2>
   </header>
@@ -1155,67 +1308,6 @@ DAX pricing is per node-hour, depending on node type:</li>
   </div>
   <footer class="entry-footer"><span title='2025-06-23 10:01:29 +0800 +08'>June 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
   <a class="entry-link" aria-label="post link to JS: Express.js" href="https://hazriqpedia.github.io/posts/js-express.js/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">PY: defaultdict()
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>A <code>defaultdict</code> is a subclass of dict that calls a factory function to supply missing values for any requested key.</p>
-<p>&hellip;
-In today&rsquo;s call, I was looking at a simple python solution that will try to count the number of fruits based on types.</p>
-<p>Lets take this example. I want to know how many numbers apple in the list.</p>
-<p>The typical way:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
-</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> fruit <span style="color:#f92672">in</span> fruit_counts:
-</span></span><span style="display:flex;"><span>        fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>        fruit_counts[fruit] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(fruit_counts)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1}</span>
-</span></span></code></pre></div><p>We will check the <code>fruit_counts</code> dict. If it&rsquo;s there, add more. If not, set it it to 1.</p>
-<p>Looks simple, but apparently&hellip; There&rsquo;s a way to do this in more pythonic way..</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
-</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> defaultdict(int) <span style="color:#75715e"># defaultdict with a default factory of int (which returns 0)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
-</span></span><span style="display:flex;"><span>    fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 0, then 1 is added.</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(fruit_counts)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1})</span>
-</span></span></code></pre></div><p>If fruit is already a key in fruit_counts, its current value is incremented by 1.
-If fruit is not yet a key in fruit_counts, defaultdict(int) automatically creates fruit_counts[fruit] and initializes its value to 0. Then, 1 is added to it, making its value 1.</p>
-<p>From <a href="https://www.geeksforgeeks.org/defaultdict-in-python/">GeeksforGeeks</a>:</p>
-<ul>
-<li>Using <code>int</code>: If you use int as the factory function, the default value will be 0 (since int() returns 0).</li>
-<li>Using <code>list</code>: If you use list as the factory function, the default value will be an empty list ([]).</li>
-<li>Using <code>str</code>: If you use str, the default value will be an empty string (&rsquo;&rsquo;).</li>
-</ul>
-<p>Now&hellip; What if I want to start from 100? Apparently&hellip; we can! via lambda&hellip;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>fruit_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;banana&#34;</span>, <span style="color:#e6db74">&#34;apple&#34;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>fruit_counts <span style="color:#f92672">=</span> defaultdict(<span style="color:#66d9ef">lambda</span>: <span style="color:#ae81ff">50</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruit_list:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If &#39;fruit&#39; is not in fruit_counts, it defaults to 50, then 1 is added.</span>
-</span></span><span style="display:flex;"><span>    fruit_counts[fruit] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(fruit_counts)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># defaultdict(&lt;function &lt;lambda&gt; at 0x7f73165e7d30&gt;, {&#39;apple&#39;: 53, &#39;banana&#39;: 52, &#39;orange&#39;: 51})</span>
-</span></span></code></pre></div>
-  </div>
-  <footer class="entry-footer"><span title='2025-06-11 17:13:13 +0800 +08'>June 11, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to PY: defaultdict()" href="https://hazriqpedia.github.io/posts/py-defaultdict/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
