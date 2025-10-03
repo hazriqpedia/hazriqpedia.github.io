@@ -149,6 +149,149 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Java: Reactive Programming in Quarkus with Mutiny
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In my <a href="/posts/java-quarkus">previous post</a>, I introduced Quarkus and touched briefly on reactive programming. We saw how non-blocking code allows threads to do more work instead of waiting around.</p>
+<p>This time, let’s go deeper — into Mutiny, Quarkus’ reactive programming library — and see how its chaining style makes reactive code both powerful and readable.</p>
+<p>&ndash;</p>
+<p>Traditional Java frameworks are blocking: <code>one request</code> = <code>one thread</code>. If the thread waits on I/O (DB, API, file), it’s stuck.</p>
+<p>Reactive programming is non-blocking: the thread is freed while waiting, and picks up the result asynchronously. This makes applications more scalable and efficient, especially in the cloud.</p>
+<p>That’s the foundation. Now let’s talk about Mutiny.</p>
+<h3 id="what-is-mutiny">What is Mutiny?</h3>
+<p>Mutiny is the reactive programming API in Quarkus. It’s built on top of <code>Vert.x</code> but designed to be developer-friendly.</p>
+<p>Its two core types are:</p>
+<ul>
+<li><code>Uni&lt;T&gt;</code> → a promise of one item in the future (like JavaScript’s <code>Promise&lt;T&gt;</code>).</li>
+<li><code>Multi&lt;T&gt;</code> → a stream of many items over time.</li>
+</ul>
+<p>But the real magic of Mutiny is in its fluent chaining style.</p>
+<p><strong>Example: Calling an External API with Mutiny</strong></p>
+<p>Imagine you’re building a service that fetches user info from an external API (which might be slow). Instead of blocking while waiting, we’ll use Mutiny + chaining.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> io.smallrye.mutiny.Uni;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.inject.Inject;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.GET;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.Path;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.eclipse.microprofile.rest.client.inject.RestClient;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserResource</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Inject</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@RestClient</span>
+</span></span><span style="display:flex;"><span>    ExternalUserService externalUserService; <span style="color:#75715e">// REST client interface</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getUserData</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> externalUserService.<span style="color:#a6e22e">fetchUser</span>()  <span style="color:#75715e">// Uni&lt;User&gt;</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Step 1: uppercase the name</span>
+</span></span><span style="display:flex;"><span>                String upperName <span style="color:#f92672">=</span> user.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Step 2: return formatted string</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> upperName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with id &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getId</span>();
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback user&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Alternative</strong>: Split Into Multiple Steps</p>
+<p>Some developers prefer breaking the chain into smaller, clearer transformations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> externalUserService.<span style="color:#a6e22e">fetchUser</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 1: uppercase the name</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">new</span> User(user.<span style="color:#a6e22e">getId</span>(), user.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>()))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: format the message</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getName</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with id &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getId</span>())
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 3: fallback if something fails</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback user&#34;</span>);
+</span></span></code></pre></div><p>Both versions are valid — it depends if you want compact or step-by-step clarity.</p>
+<p>&ndash;</p>
+<h4 id="without-mutiny-blocking-example">Without Mutiny: Blocking Example</h4>
+<p>If we weren’t using Mutiny, the call to fetchUser() would be blocking:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users-blocking&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BlockingUserResource</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getUserData</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate a slow external API call</span>
+</span></span><span style="display:flex;"><span>        User user <span style="color:#f92672">=</span> externalUserService.<span style="color:#a6e22e">fetchUserBlocking</span>(); <span style="color:#75715e">// blocks thread</span>
+</span></span><span style="display:flex;"><span>        String upperName <span style="color:#f92672">=</span> user.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> upperName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with id &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getId</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this case:</p>
+<ul>
+<li>The thread waits until <code>fetchUserBlocking()</code> returns.</li>
+<li>While waiting, the thread does nothing else.</li>
+<li>If <code>100 requests</code> arrive at once → you need <code>100 threads</code> just sitting idle, each waiting for its response.</li>
+<li>This quickly becomes heavy, especially in microservices where memory and threads are limited.</li>
+</ul>
+<p><strong>With Mutiny,</strong> the call returns immediately as a <code>Uni&lt;User&gt;</code>:</p>
+<ul>
+<li>The thread is released right away and can handle another request.</li>
+<li>When the external API responds, Quarkus resumes the pipeline and finishes processing.</li>
+<li>If <code>100 requests</code> arrive at once → you still only need a <code>small pool of threads</code>, since none of them sit idle waiting.</li>
+<li>This means the service can scale much more efficiently with the same resources.</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="common-mutiny-operators-beyond-transform">Common Mutiny Operators (Beyond transform)</h3>
+<p>Mutiny has a rich set of operators to handle different scenarios. Some useful ones:</p>
+<ul>
+<li><code>onItem()</code> – work with the item if it arrives.
+<ul>
+<li><code>.transform(x -&gt; ...)</code> → transform the result.</li>
+<li><code>.invoke(x -&gt; ...)</code> → side-effect (like logging) without changing the result.</li>
+</ul>
+</li>
+<li><code>onFailure()</code> – handle errors.
+<ul>
+<li><code>.recoverWithItem(&quot;fallback&quot;)</code> → return a default value.</li>
+<li><code>.retry().atMost(3)</code> → retry the operation up to 3 times.</li>
+</ul>
+</li>
+<li><code>onCompletion()</code> – run something once the pipeline is finished (success or failure).</li>
+<li>Multi operators – streaming equivalents, e.g. <code>.map()</code>, <code>.filter()</code>, <code>.select().first(n)</code>.</li>
+<li><code>combine()</code> – merge results from multiple Unis.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Uni.<span style="color:#a6e22e">combine</span>().<span style="color:#a6e22e">all</span>().<span style="color:#a6e22e">unis</span>(api1.<span style="color:#a6e22e">call</span>(), api2.<span style="color:#a6e22e">call</span>())
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">asTuple</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(tuple <span style="color:#f92672">-&gt;</span> tuple.<span style="color:#a6e22e">getItem1</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &amp; &#34;</span> <span style="color:#f92672">+</span> tuple.<span style="color:#a6e22e">getItem2</span>());
+</span></span></code></pre></div><p>&ndash;</p>
+<h3 id="why-mutinys-chaining-matters">Why Mutiny’s Chaining Matters</h3>
+<ul>
+<li><strong>Readable</strong> → async pipelines look like synchronous code.</li>
+<li><strong>Composable</strong> → add/remove steps easily without rewriting everything.</li>
+<li><strong>Declarative</strong> → you describe what should happen, not how.</li>
+<li><strong>Error handling inline</strong> → <code>.onFailure().recoverWithItem()</code> instead of try/catch gymnastics.</li>
+</ul>
+<p>Compared to raw Java CompletableFuture or even RxJava/Reactor, Mutiny feels lighter and easier to follow.</p>
+<h3 id="where-to-use-reactive--mutiny">Where to Use Reactive + Mutiny</h3>
+<p>Reactive code shines in:</p>
+<ul>
+<li>High-concurrency APIs → e.g., chat apps, booking systems, trading platforms.</li>
+<li>Streaming/event-driven systems → Kafka, AMQP, live data.</li>
+<li>Serverless apps → quick startup, minimal resource use.</li>
+<li>Cloud-native microservices → scaling up/down efficiently.</li>
+</ul>
+<p>But if you’re writing a small monolithic app, blocking may still be simpler and good enough.</p>
+<h3></h3>
+<p>Trade-offs to Keep in Mind</p>
+<ul>
+<li>Learning curve → async code requires a shift in thinking.</li>
+<li>Debugging → stack traces are harder to follow.</li>
+<li>Overhead → reactive isn’t <strong>&ldquo;free&rdquo;</strong>; don’t use it unless concurrency/scalability matter.</li>
+</ul>
+<p>&ndash;</p>
+<p><code>Quarkus + Mutiny</code> turns reactive programming from a <strong>&ldquo;scary async monster&rdquo;</strong> into something that feels natural and even elegant.</p>
+<p>For me, the fluent chaining style is the deal-breaker — it makes reactive code look like a narrative, not a puzzle.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-10-03 22:26:58 +0800 +08'>October 3, 2025</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to Java: Reactive Programming in Quarkus with Mutiny" href="https://hazriqpedia.github.io/posts/java-reactive-programming/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Java: And Quarkus
     </h2>
   </header>
@@ -1160,154 +1303,6 @@ DAX pricing is per node-hour, depending on node type:</li>
   </div>
   <footer class="entry-footer"><span title='2025-07-15 06:17:54 +0800 +08'>July 15, 2025</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to AWS: SQS vs SNS" href="https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">JS: Express.js
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p><code>Express.js</code> is a minimalist and flexible <code>Node.js</code> web application framework that provides a robust set of features for building web and mobile applications and APIs. If you&rsquo;re looking to build fast, scalable, and efficient server-side applications with JavaScript, Express.js is your go-to choice. Its unopinionated nature gives you immense freedom,
-<!-- raw HTML omitted --></p>
-<h3 id="setting-up">Setting Up</h3>
-<p>Getting started with Express.js is straightforward. If you already have a Node.js project, or if you&rsquo;re starting a new one, follow these simple steps:</p>
-<ul>
-<li>Initializing a Node.js project (<code>npm init</code>).</li>
-<li>Installing Express.js (<code>npm install express</code>).</li>
-</ul>
-<p>Now, you&rsquo;re ready to create your first Express server!</p>
-<h3 id="core-concepts">Core Concepts</h3>
-<p>Understanding these fundamental concepts is key to mastering Express.js:</p>
-<h4 id="routing">Routing</h4>
-<p>Routing is the process of determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, PUT, DELETE, etc.).</p>
-<p>In Express.js, you define routes using methods corresponding to HTTP verbs on the app object (an instance of Express).</p>
-<p>HTTP Methods (Verbs): These map directly to common operations:</p>
-<ul>
-<li><code>GET</code>: Retrieve data (e.g., fetching a list of users).</li>
-<li><code>POST</code>: Submit data to be processed (e.g., creating a new user).</li>
-<li><code>PUT</code>: Update existing data (e.g., modifying a user&rsquo;s details).</li>
-<li><code>DELETE</code>: Remove data (e.g., deleting a user).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;express&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to the root URL
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Hello from Express!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>([
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Alice&#34;</span> },
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bob&#34;</span> },
-</span></span><span style="display:flex;"><span>  ]);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// POST request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Logic to create a new user
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">201</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;User created successfully!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Server listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Route Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /users/123
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Fetching user with ID: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Query Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /search?q=nodejs&amp;category=backend
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/search&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">q</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">searchTerm</span>, <span style="color:#a6e22e">category</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Searching for &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">searchTerm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; in &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">category</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; category.`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h4 id="middleware">Middleware</h4>
-<p>Middleware functions are core to Express.js. They are functions that have access to the <code>request</code> object (<code>req</code>), the response object (<code>res</code>), and the <code>next()</code> function in the application&rsquo;s request-response cycle. The <code>next()</code> function is crucial as it passes control to the next middleware function.</p>
-<p>Think of middleware as a series of steps a request goes through before reaching its final route handler.</p>
-<ul>
-<li>
-<p>How Middleware Works: Requests flow sequentially through middleware functions. Each function can perform operations, modify <code>req</code> or <code>res</code>, end the cycle by sending a response, or pass control to the next middleware via <code>next()</code>.</p>
-</li>
-<li>
-<p>Common Use Cases:</p>
-<ul>
-<li><strong>Logging</strong>: Recording details about incoming requests.</li>
-<li><strong>Authentication/Authorization</strong>: Verifying user credentials and permissions.</li>
-<li><strong>Body Parsing</strong>: Express itself doesn&rsquo;t parse request bodies by default. Middleware like <code>express.json()</code> and <code>express.urlencoded()</code> are essential for handling JSON and URL-encoded form data.</li>
-<li><strong>Serving Static Files</strong>: Handled by express.static().</li>
-<li><strong>Error Handling</strong>: Special middleware for catching and processing errors.</li>
-</ul>
-</li>
-</ul>
-<p>Example of Custom Middleware:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// A simple logger middleware
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logger</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`[</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">] </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">next</span>(); <span style="color:#75715e">// Pass control to the next handler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">logger</span>); <span style="color:#75715e">// Use the middleware for all incoming requests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Home Page with Logger!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h4 id="handling-request-req-and-response-res">Handling Request (req) and Response (res)</h4>
-<ul>
-<li><code>req</code> (Request Object):
-<ul>
-<li>Accessing request headers (<code>req.header</code>).</li>
-<li>Accessing route and query parameters (<code>req.params</code>, <code>req.query</code>).</li>
-<li>Accessing the request body (<code>req.body</code>).</li>
-</ul>
-</li>
-<li><code>res</code> (Response Object):
-<ul>
-<li>Sending various types of responses: <code>res.send()</code>, <code>res.json()</code>, <code>res.sendFile()</code>.</li>
-<li>Setting HTTP status codes: <code>res.status()</code>.</li>
-<li>Redirecting requests: <code>res.redirect()</code>.</li>
-<li>Chaining methods (e.g., <code>res.status(200).json(...)</code>).</li>
-</ul>
-</li>
-</ul>
-<h3 id="typical-project-structure">Typical Project Structure</h3>
-<p>While Express is unopinionated, a well-organized project structure is crucial for maintainability and scalability, especially as your application grows. Here&rsquo;s a common pattern:</p>
-<pre tabindex="0"><code>my-express-app/
-├── node_modules/
-├── server.js             # Entry point: Starts the server, sets up environment
-├── app.js                # Express app configuration: Defines middleware, connects routes
-├── routes/               # Defines API endpoints and links to controllers
-│   ├── auth.routes.js
-│   └── user.routes.js
-├── controllers/          # Contains request handlers: Logic for specific routes, interacts with services
-│   ├── auth.controller.js
-│   └── user.controller.js
-├── services/             # Business logic: Handles complex operations, orchestrates data flow
-│   ├── auth.service.js
-│   └── user.service.js
-├── models/               # Data schema definitions (e.g., Mongoose schemas, Sequelize models)
-│   ├── User.js
-│   └── Product.js
-├── middlewares/          # Custom middleware functions
-│   ├── auth.middleware.js
-│   └── error.middleware.js
-├── config/               # Configuration files (database settings, environment variables)
-│   └── db.config.js
-├── package.json
-├── package-lock.json
-└── .env                  # Environment variables
-</code></pre><h3 id="sample-project">Sample Project</h3>
-<p>( coming soon )</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-06-23 10:01:29 +0800 +08'>June 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to JS: Express.js" href="https://hazriqpedia.github.io/posts/js-express.js/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Mutiny on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/mutiny/</link>
+    <description>Recent content in Mutiny on Hazriq&#39;s Dev Chaos</description>
+    <generator>Hugo -- 0.150.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Oct 2025 22:26:58 +0800</lastBuildDate>
+    <atom:link href="https://hazriqpedia.github.io/tags/mutiny/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java: Reactive Programming in Quarkus with Mutiny</title>
+      <link>https://hazriqpedia.github.io/posts/java-reactive-programming/</link>
+      <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/java-reactive-programming/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;https://hazriqpedia.github.io/posts/java-quarkus&#34;&gt;previous post&lt;/a&gt;, I introduced Quarkus and touched briefly on reactive programming. We saw how non-blocking code allows threads to do more work instead of waiting around.&lt;/p&gt;
+&lt;p&gt;This time, let’s go deeper — into Mutiny, Quarkus’ reactive programming library — and see how its chaining style makes reactive code both powerful and readable.&lt;/p&gt;
+&lt;p&gt;&amp;ndash;&lt;/p&gt;
+&lt;p&gt;Traditional Java frameworks are blocking: &lt;code&gt;one request&lt;/code&gt; = &lt;code&gt;one thread&lt;/code&gt;. If the thread waits on I/O (DB, API, file), it’s stuck.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
