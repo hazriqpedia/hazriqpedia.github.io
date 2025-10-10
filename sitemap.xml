@@ -2,10 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hazriqpedia.github.io/tags/framework/</loc>
-    <lastmod>2025-10-03T22:26:58+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/latency/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/load/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/testing/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/testing-load-latency/</loc>
+    <lastmod>2025-10-04T23:00:38+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/framework/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/java/</loc>
@@ -20,16 +38,10 @@
     <loc>https://hazriqpedia.github.io/tags/non-blocking/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/posts/</loc>
-    <lastmod>2025-10-03T22:26:58+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/tags/quarkus/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/reactive/</loc>
-    <lastmod>2025-10-03T22:26:58+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/cloud-native/</loc>

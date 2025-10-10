@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Testing: Load with Latency | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="testing, load, latency">
+<meta name="description" content="When I was asked to test the performance of a new API endpoint, I quickly realized: I had never done load or latency testing before. I knew performance mattered, but I didn’t know how to measure it, what numbers to care about, or how to even start.
+This post is my attempt to write down what I learned. I’ll explain the terms in plain English, the different types of tests, and show a simple example of how to run your first load test. If you’ve ever seen words like p95 latency or throughput and felt lost—this one is for you.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/testing-load-latency/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hazriqpedia.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hazriqpedia.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/testing-load-latency/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/testing-load-latency/">
+  <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:title" content="Testing: Load with Latency">
+  <meta property="og:description" content="When I was asked to test the performance of a new API endpoint, I quickly realized: I had never done load or latency testing before. I knew performance mattered, but I didn’t know how to measure it, what numbers to care about, or how to even start.
+This post is my attempt to write down what I learned. I’ll explain the terms in plain English, the different types of tests, and show a simple example of how to run your first load test. If you’ve ever seen words like p95 latency or throughput and felt lost—this one is for you.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-10-04T23:00:38+08:00">
+    <meta property="article:modified_time" content="2025-10-04T23:00:38+08:00">
+    <meta property="article:tag" content="Testing">
+    <meta property="article:tag" content="Load">
+    <meta property="article:tag" content="Latency">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Testing: Load with Latency">
+<meta name="twitter:description" content="When I was asked to test the performance of a new API endpoint, I quickly realized: I had never done load or latency testing before. I knew performance mattered, but I didn’t know how to measure it, what numbers to care about, or how to even start.
+This post is my attempt to write down what I learned. I’ll explain the terms in plain English, the different types of tests, and show a simple example of how to run your first load test. If you’ve ever seen words like p95 latency or throughput and felt lost—this one is for you.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Testing: Load with Latency",
+      "item": "https://hazriqpedia.github.io/posts/testing-load-latency/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Testing: Load with Latency",
+  "name": "Testing: Load with Latency",
+  "description": "When I was asked to test the performance of a new API endpoint, I quickly realized: I had never done load or latency testing before. I knew performance mattered, but I didn’t know how to measure it, what numbers to care about, or how to even start.\nThis post is my attempt to write down what I learned. I’ll explain the terms in plain English, the different types of tests, and show a simple example of how to run your first load test. If you’ve ever seen words like p95 latency or throughput and felt lost—this one is for you.\n",
+  "keywords": [
+    "testing", "load", "latency"
+  ],
+  "articleBody": "When I was asked to test the performance of a new API endpoint, I quickly realized: I had never done load or latency testing before. I knew performance mattered, but I didn’t know how to measure it, what numbers to care about, or how to even start.\nThis post is my attempt to write down what I learned. I’ll explain the terms in plain English, the different types of tests, and show a simple example of how to run your first load test. If you’ve ever seen words like p95 latency or throughput and felt lost—this one is for you.\nKey Terms Explained Latency: simply how long a request takes. If a user clicks “Save Preference” and the response comes back in 180 ms, that’s the latency for that request. Why not average? Let’s say 9 requests are really fast (~100 ms), but 1 request is very slow (~900 ms).\nAverage latency looks like ~200 ms (which hides the slow request). p50 (median) means “50% of requests are faster than this” (maybe ~120 ms). p95 means “95% of requests are faster than this” (maybe ~200 ms). p99 means “99% of requests are faster than this” (maybe ~900 ms). Users notice the slow ones (the “tail”), so we measure p95 and p99 in addition to averages.\nThroughput (RPS/QPS): Requests per second. How many requests your service can process in a given time.\nConcurrency: How many requests are being processed at once.\nErrors: Non-2xx responses (500, 502) or timeouts. Even a 1% error rate is a red flag in production.\n–\nTypes of Performance Tests Smoke Test – A tiny test (1 request per second for 1 min) just to check if the endpoint works. Baseline Test – Light load to capture normal latency under “calm” conditions. Load Test – Run the system at expected traffic (say 100 RPS) for 10–15 minutes. Does it still meet your latency/error targets? Stress Test – Push past expected traffic until it breaks. This tells you where the limits are. Spike Test – Jump suddenly from low → high traffic. Can the system autoscale? Soak Test – Run for hours at moderate load. Useful to find memory leaks or slow drifts. Each one answers a different question.\nStrategy: How to Run Your First Test Define success first. Example: “At 100 RPS, p95 ≤ 300 ms, error rate ≤ 0.1%.” Start small. Run a smoke test: 1 VU (virtual user), 1 request per second. Ramp up gradually. Increase RPS step by step until you reach your target. Measure carefully. Look at p50/p95/p99 latency, errors, throughput. Observe your system. Is CPU near 100%? Are DB connections maxed? Is an external service slow? Document the results. Write down what you tested, the numbers, and what you learned. –\nWhat to Look For in Results Good signs p95 stable across the run Errors \u003c 0.1% CPU and DB usage below ~70% Warning signs p95/p99 climbing while p50 stays flat → system under strain Errors/timeouts creeping in DB or external services throttling Wrap-Up When I started, terms like p95 and throughput felt intimidating. But once I ran my first smoke test, it clicked: latency is just “how long it takes,” and load testing is just “seeing if it still works when many requests come in.”\nThe important part is to:\nLearn the basic terms (p95, RPS, errors). Run small tests first. Build up to realistic load. Watch how your system behaves, not just the test numbers. If you’ve never done load testing before, I encourage you to try a 5-minute k6 script on your own API. It’s eye-opening to see how your service behaves under pressure.\n",
+  "wordCount" : "605",
+  "inLanguage": "en",
+  "datePublished": "2025-10-04T23:00:38+08:00",
+  "dateModified": "2025-10-04T23:00:38+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/testing-load-latency/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hazriqpedia.github.io/" accesskey="h" title="Hazriq&#39;s Dev Chaos (Alt + H)">Hazriq&#39;s Dev Chaos</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hazriqpedia.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hazriqpedia.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Testing: Load with Latency
+    </h1>
+    <div class="post-meta"><span title='2025-10-04 23:00:38 +0800 +08'>October 4, 2025</span>&nbsp;·&nbsp;3 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>When I was asked to test the performance of a new API endpoint, I quickly realized: I had never done load or latency testing before. I knew performance mattered, but I didn’t know how to measure it, what numbers to care about, or how to even start.</p>
+<p>This post is my attempt to write down what I learned. I’ll explain the terms in plain English, the different types of tests, and show a simple example of how to run your first load test. If you’ve ever seen words like <strong>p95</strong> latency or throughput and felt lost—this one is for you.</p>
+<h3 id="key-terms-explained">Key Terms Explained<a hidden class="anchor" aria-hidden="true" href="#key-terms-explained">#</a></h3>
+<ul>
+<li><strong>Latency</strong>: simply how long a request takes. If a user clicks “Save Preference” and the response comes back in 180 ms, that’s the latency for that request.</li>
+</ul>
+<h4 id="why-not-average">Why not average?<a hidden class="anchor" aria-hidden="true" href="#why-not-average">#</a></h4>
+<p>Let’s say 9 requests are really fast (~100 ms), but 1 request is very slow (~900 ms).</p>
+<ul>
+<li>Average latency looks like ~200 ms (which hides the slow request).</li>
+<li><code>p50</code> (median) means “50% of requests are faster than this” (maybe ~120 ms).</li>
+<li><code>p95</code> means “95% of requests are faster than this” (maybe ~200 ms).</li>
+<li><code>p99</code> means “99% of requests are faster than this” (maybe ~900 ms).</li>
+</ul>
+<p>Users notice the slow ones (the “tail”), so we measure p95 and p99 in addition to averages.</p>
+<ul>
+<li>
+<p><strong>Throughput (RPS/QPS)</strong>: Requests per second. How many requests your service can process in a given time.</p>
+</li>
+<li>
+<p><strong>Concurrency</strong>: How many requests are being processed at once.</p>
+</li>
+<li>
+<p><strong>Errors</strong>: Non-2xx responses (500, 502) or timeouts. Even a 1% error rate is a red flag in production.</p>
+</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="types-of-performance-tests">Types of Performance Tests<a hidden class="anchor" aria-hidden="true" href="#types-of-performance-tests">#</a></h3>
+<ul>
+<li><strong>Smoke Test</strong> – A tiny test (1 request per second for 1 min) just to check if the endpoint works.</li>
+<li><strong>Baseline Test</strong> – Light load to capture normal latency under “calm” conditions.</li>
+<li><strong>Load Test</strong> – Run the system at expected traffic (say 100 RPS) for 10–15 minutes. Does it still meet your latency/error targets?</li>
+<li><strong>Stress Test</strong> – Push past expected traffic until it breaks. This tells you where the limits are.</li>
+<li><strong>Spike Test</strong> – Jump suddenly from low → high traffic. Can the system autoscale?</li>
+<li><strong>Soak Test</strong> – Run for hours at moderate load. Useful to find memory leaks or slow drifts.</li>
+</ul>
+<p>Each one answers a different question.</p>
+<h2 id="strategy-how-to-run-your-first-test">Strategy: How to Run Your First Test<a hidden class="anchor" aria-hidden="true" href="#strategy-how-to-run-your-first-test">#</a></h2>
+<ol>
+<li>Define success first.</li>
+</ol>
+<ul>
+<li>Example: “At 100 RPS, p95 ≤ 300 ms, error rate ≤ 0.1%.”</li>
+</ul>
+<ol start="2">
+<li>Start small.</li>
+</ol>
+<ul>
+<li>Run a smoke test: 1 VU (virtual user), 1 request per second.</li>
+</ul>
+<ol start="3">
+<li>Ramp up gradually.</li>
+</ol>
+<ul>
+<li>Increase RPS step by step until you reach your target.</li>
+</ul>
+<ol start="4">
+<li>Measure carefully.</li>
+</ol>
+<ul>
+<li>Look at p50/p95/p99 latency, errors, throughput.</li>
+</ul>
+<ol start="5">
+<li>Observe your system.</li>
+</ol>
+<ul>
+<li>Is CPU near 100%?</li>
+<li>Are DB connections maxed?</li>
+<li>Is an external service slow?</li>
+</ul>
+<ol start="6">
+<li>Document the results.</li>
+</ol>
+<ul>
+<li>Write down what you tested, the numbers, and what you learned.</li>
+</ul>
+<p>&ndash;</p>
+<h2 id="what-to-look-for-in-results">What to Look For in Results<a hidden class="anchor" aria-hidden="true" href="#what-to-look-for-in-results">#</a></h2>
+<ul>
+<li>Good signs</li>
+<li>p95 stable across the run</li>
+<li>Errors &lt; 0.1%</li>
+<li>CPU and DB usage below ~70%</li>
+<li>Warning signs</li>
+<li>p95/p99 climbing while p50 stays flat → system under strain</li>
+<li>Errors/timeouts creeping in</li>
+<li>DB or external services throttling</li>
+</ul>
+<h2 id="wrap-up">Wrap-Up<a hidden class="anchor" aria-hidden="true" href="#wrap-up">#</a></h2>
+<p>When I started, terms like <code>p95</code> and <code>throughput</code> felt intimidating. But once I ran my first smoke test, it clicked: latency is just “how long it takes,” and load testing is just “seeing if it still works when many requests come in.”</p>
+<p>The important part is to:</p>
+<ul>
+<li>Learn the basic terms (p95, RPS, errors).</li>
+<li>Run small tests first.</li>
+<li>Build up to realistic load.</li>
+<li>Watch how your system behaves, not just the test numbers.</li>
+</ul>
+<p>If you’ve never done load testing before, I encourage you to try a 5-minute k6 script on your own API. It’s eye-opening to see how your service behaves under pressure.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/testing/">Testing</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/load/">Load</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/latency/">Latency</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/java-reactive-programming/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Java: Reactive Programming in Quarkus with Mutiny</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://hazriqpedia.github.io/">Hazriq&#39;s Dev Chaos</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
