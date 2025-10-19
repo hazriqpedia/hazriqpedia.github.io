@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Beginner | Hazriq&#39;s Dev Chaos</title>
+<title>Float | Hazriq&#39;s Dev Chaos</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/beginner/">
+<link rel="canonical" href="https://hazriqpedia.github.io/tags/float/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/beginner/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/beginner/">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/float/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/float/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/beginner/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/float/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Beginner">
+  <meta property="og:title" content="Float">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Beginner">
+<meta name="twitter:title" content="Float">
 <meta name="twitter:description" content="">
 
 </head>
@@ -128,7 +128,7 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    Beginner
+    Float
   </h1>
 </header>
 
@@ -264,188 +264,6 @@ and most of the time, <code>double</code> is that balanced middle ground — it�
   </div>
   <footer class="entry-footer"><span title='2025-10-19 09:30:00 +0800 +08'>October 19, 2025</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to Java: Decimals" href="https://hazriqpedia.github.io/posts/java-decimals/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Java: Primitive Data Types vs Wrapper Classes
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="/posts/java_long_vs_long">previous post</a>, we looked at the difference between <code>long</code> (a primitive) and <code>Long</code> (its wrapper class). That was just one example — but in fact, <strong>every primitive type in Java has a wrapper class</strong>.</p>
-<p>So in this post, let’s zoom out and cover the bigger picture:</p>
-<ul>
-<li>What are primitive data types?</li>
-<li>What are wrapper classes?</li>
-<li>How are they initialized?</li>
-<li>What are the benefits, differences, and when should you use one over the other?</li>
-</ul>
-<p>By the end, you’ll have a simple rule of thumb that will save you from confusion: <em>stick to primitives by default, use wrappers only when you need object features</em>.</p>
-<p>&ndash;</p>
-<h2 id="1-primitive-data-types">1. Primitive Data Types</h2>
-<p>Primitives are the <strong>basic building blocks</strong> of data in Java. They are <strong>not objects</strong> and store their values directly in memory (usually on the stack).</p>
-<p>Java provides 8 primitive types:</p>
-<ul>
-<li><code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code> (integers)</li>
-<li><code>float</code>, <code>double</code> (floating-point numbers)</li>
-<li><code>char</code> (character)</li>
-<li><code>boolean</code> (true/false)</li>
-</ul>
-<p>Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> number <span style="color:#f92672">=</span> 10;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> isActive <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-</span></span></code></pre></div><p>They are fast, memory-efficient, and always hold an actual value.</p>
-<h2 id="2-wrapper-classes">2. Wrapper Classes</h2>
-<p>For every primitive, Java provides a corresponding wrapper class in the <code>java.lang</code> package. These are objects that “wrap” a primitive inside a class.
-•	Byte, Short, Integer, Long
-•	Float, Double
-•	Character
-•	Boolean</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer numberObj <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">valueOf</span>(10);
-</span></span><span style="display:flex;"><span>Boolean isActiveObj <span style="color:#f92672">=</span> Boolean.<span style="color:#a6e22e">TRUE</span>;
-</span></span></code></pre></div><p>Wrappers are essential when:</p>
-<ul>
-<li>Working with Collections (e.g., <code>List&lt;Integer&gt;</code> instead of <code>List&lt;int&gt;</code>).</li>
-<li>You need to represent <code>null</code> (absence of a value).</li>
-<li>You want to use utility methods (like parsing strings into numbers).</li>
-</ul>
-<h3 id="25-initializing-primitives-vs-wrappers">2.5 Initializing Primitives vs Wrappers</h3>
-<p><strong>Primitive Initialization</strong></p>
-<ul>
-<li>Direct and straightforward.</li>
-<li>Local variables must be initialized before use.</li>
-<li>Class fields get a default value (int → 0, boolean → false).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 10;        <span style="color:#75715e">// explicit initialization</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> flag;      <span style="color:#75715e">// flag must be assigned before use</span>
-</span></span></code></pre></div><p><strong>Wrapper Initialization</strong></p>
-<ul>
-<li>Wrappers are objects, so they can be <code>null</code>.</li>
-<li>Default value for wrapper fields is <code>null</code>.</li>
-<li>Different ways to initialize:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Integer(10);     <span style="color:#75715e">// old (not recommended)</span>
-</span></span><span style="display:flex;"><span>Integer b <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">valueOf</span>(10); <span style="color:#75715e">// preferred</span>
-</span></span><span style="display:flex;"><span>Integer c <span style="color:#f92672">=</span> 10;   <span style="color:#75715e">// autoboxing (simplest)</span>
-</span></span></code></pre></div><p>Similar but Different</p>
-<ul>
-<li><code>int x = 0;</code> → raw value stored directly.</li>
-<li><code>Integer y = 0;</code> → an object reference pointing to an Integer.</li>
-</ul>
-<p>So while syntax can look similar, the memory model and behavior are not the same.</p>
-<h2 id="3-key-differences">3. Key Differences</h2>
-<table>
-  <thead>
-      <tr>
-          <th style="text-align: center">Primitive</th>
-          <th style="text-align: center">Wrapper Class</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">Stored directly in memory (stack)</td>
-          <td style="text-align: center">Stored as an object reference (heap)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Faster and more memory-efficient</td>
-          <td style="text-align: center">Slightly slower, more memory use</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Cannot be <code>null</code></td>
-          <td style="text-align: center">Can be <code>null</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: center">No methods available</td>
-          <td style="text-align: center">Comes with utility methods</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Value can be reassigned directly</td>
-          <td style="text-align: center">Immutable object (once created, can’t be changed)</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="4-autoboxing--unboxing">4. Autoboxing &amp; Unboxing</h2>
-<p>Java makes conversion between primitives and wrappers seamless.</p>
-<ul>
-<li>Autoboxing: primitive → wrapper</li>
-<li>Unboxing: wrapper → primitive</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer obj <span style="color:#f92672">=</span> 5;   <span style="color:#75715e">// autoboxing</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> obj;     <span style="color:#75715e">// unboxing</span>
-</span></span></code></pre></div><p>This is convenient, but can introduce performance overhead if overused.</p>
-<h2 id="5-benefits-of-wrapper-classes">5. Benefits of Wrapper Classes</h2>
-<ul>
-<li><strong>Collections &amp; Generics</strong>: You can’t store int in a List, but you can store Integer.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
-</span></span><span style="display:flex;"><span>numbers.<span style="color:#a6e22e">add</span>(5);
-</span></span></code></pre></div><ul>
-<li><strong>Utility Methods</strong>:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> parsed <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">parseInt</span>(<span style="color:#e6db74">&#34;123&#34;</span>);
-</span></span></code></pre></div><ul>
-<li><strong>Null Handling</strong>: Sometimes you need null to represent “no value”.</li>
-</ul>
-<h2 id="6-when-to-use">6. When to Use</h2>
-<ul>
-<li><strong>Primitives</strong> → default choice. Use them when performance matters (loops, counters, math).</li>
-<li><strong>Wrappers</strong> → when you need:
-<ul>
-<li>Collections</li>
-<li>Nullability</li>
-<li>Utility methods</li>
-</ul>
-</li>
-</ul>
-<h3 id="65-rule-of-thumb">6.5 Rule of Thumb</h3>
-<ul>
-<li>Default to primitives – they are faster, memory-friendly, and straightforward.</li>
-<li>Use wrappers only when necessary, such as:
-<ul>
-<li>You need to store them in Collections / Generics.</li>
-<li>You need to represent null (e.g., database values).</li>
-<li>You want to leverage utility methods (Integer.parseInt, Boolean.valueOf, etc.).</li>
-</ul>
-</li>
-</ul>
-<p>👉 In short: always use primitive unless there’s a clear reason to use the wrapper.</p>
-<p>&ndash;</p>
-<p>⚡ Bonus: What About <strong>String</strong>?</p>
-<p>If you’re wondering where <code>String</code> fits in — it’s not a primitive, nor a wrapper.
-String is a regular class in java.lang, but Java gives it special treatment so it behaves almost like a primitive in many cases.</p>
-<p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hazriq&#34;</span>;
-</span></span></code></pre></div><p>looks as simple as assigning an <code>int</code> or <code>boolean</code>. But under the hood, <code>String</code> is an object, immutable, and stored differently from primitives.</p>
-<p>This is why you can do things like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> length <span style="color:#f92672">=</span> name.<span style="color:#a6e22e">length</span>();   <span style="color:#75715e">// methods available</span>
-</span></span></code></pre></div><p>So:</p>
-<ul>
-<li><code>Primitives</code> = raw values</li>
-<li><code>Wrappers</code> = object versions of primitives</li>
-<li><code>String</code> = class, not a primitive, but commonly treated as a “basic type” in day-to-day Java</li>
-</ul>
-<h2 id="7-best-practices--gotchas">7. Best Practices &amp; Gotchas</h2>
-<ul>
-<li>Avoid unnecessary boxing/unboxing in performance-critical code.</li>
-<li>Be careful comparing wrappers:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer a <span style="color:#f92672">=</span> 1000;
-</span></span><span style="display:flex;"><span>Integer b <span style="color:#f92672">=</span> 1000;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a <span style="color:#f92672">==</span> b);      <span style="color:#75715e">// false (different objects)</span>
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a.<span style="color:#a6e22e">equals</span>(b)); <span style="color:#75715e">// true</span>
-</span></span></code></pre></div><ul>
-<li>Remember: <code>wrapper classes</code> and <code>String</code> are <strong>immutable</strong>.
-Once created, their value never changes — any “modification” actually creates a new object.
-(We’ll explore immutability in depth in a future post.)</li>
-</ul>
-<p>&ndash;</p>
-<p><strong>Primitives</strong> are simple and fast, <strong>wrappers</strong> are flexible and object-friendly, and <strong>String</strong> is a special class that feels primitive but isn’t.</p>
-<p>Understanding when to use each is one of those small but important skills that makes you write cleaner and more efficient Java code.</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-09-27 22:26:44 +0800 +08'>September 27, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to Java: Primitive Data Types vs Wrapper Classes" href="https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/"></a>
 </article>
     </main>
     

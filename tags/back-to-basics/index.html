@@ -134,6 +134,140 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Java: Decimals
+    </h2>
+  </header>
+  <div class="entry-content">
+    <blockquote>
+<p>Revisiting the basics — understanding floating-point numbers in Java.</p></blockquote>
+<p>In my ongoing <em>Back to Java</em> series, I’ve been rediscovering parts of the language that I used years ago but never really thought deeply about.<br>
+Today’s topic: <strong><code>double</code> vs <code>float</code></strong> — two simple types that can quietly cause big differences in performance and precision.</p>
+<hr>
+<h3 id="what-are-float-and-double">What Are <code>float</code> and <code>double</code>?</h3>
+<p>Both are <strong>floating-point data types</strong> used for storing decimal numbers.</p>
+<p>The key differences are in their <strong>size</strong>, <strong>precision</strong>, and <strong>use cases</strong>.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Approx. Range</th>
+          <th>Decimal Precision</th>
+          <th>Default Literal Suffix</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>float</code></td>
+          <td>32-bit</td>
+          <td>±3.4 × 10³⁸</td>
+          <td>~6–7 digits</td>
+          <td><code>f</code> or <code>F</code></td>
+      </tr>
+      <tr>
+          <td><code>double</code></td>
+          <td>64-bit</td>
+          <td>±1.7 × 10³⁰⁸</td>
+          <td>~15–16 digits</td>
+          <td>none or <code>d</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>So, <code>double</code> literally means <em>double-precision floating point</em> — twice the size and precision of <code>float</code>.</p>
+<hr>
+<h3 id="double-is-the-default-for-decimals-in-java">Double Is the Default for Decimals in Java</h3>
+<p>One thing that often surprises new Java developers:</p>
+<blockquote>
+<p><strong>In Java, all decimal literals are treated as <code>double</code> by default.</strong></p></blockquote>
+<p>That’s why you can write this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> pi <span style="color:#f92672">=</span> 3.<span style="color:#a6e22e">14159</span>; <span style="color:#75715e">// ✅ works fine</span>
+</span></span></code></pre></div><p>But this won’t compile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99</span>; <span style="color:#75715e">// ❌ error: possible lossy conversion from double to float</span>
+</span></span></code></pre></div><p>You have to explicitly mark it as a float:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99f</span>; <span style="color:#75715e">// ✅ correct</span>
+</span></span></code></pre></div><p>Java does this to favor precision over size — it assumes you want a double unless you tell it otherwise.</p>
+<p>&ndash;</p>
+<h3 id="when-to-use-which">When to Use Which</h3>
+<p>✅ Use <strong>float</strong> when:</p>
+<ul>
+<li>Memory is limited (e.g., large arrays, 3D graphics, sensor data).</li>
+<li>You don’t need extreme precision (6–7 digits is enough).</li>
+</ul>
+<p>✅ Use <strong>double</strong> when:</p>
+<ul>
+<li>Precision matters (scientific calculations, analytics, or financial models).</li>
+<li>You want the default — most math operations and decimal constants in Java use double.</li>
+</ul>
+<p>💡 Rule of thumb:</p>
+<ul>
+<li>Use <strong>double</strong> by default. Use float only when you know you need to save space.</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="precision-pitfalls">Precision Pitfalls</h3>
+<p>Floating-point numbers can’t always represent decimals exactly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> a <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> b <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">2</span>;
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a <span style="color:#f92672">+</span> b); <span style="color:#75715e">// prints 0.30000000000000004</span>
+</span></span></code></pre></div><p>Why?
+Binary floating-point can’t represent 0.1 precisely — it’s a repeating fraction in base 2.
+This tiny difference often doesn’t matter, but it can accumulate in calculations.</p>
+<p>&ndash;</p>
+<h3 id="a-quick-look-at-bigdecimal">A Quick Look at BigDecimal</h3>
+<p>When you need exact decimal precision, especially in financial or accounting systems,
+you should use <strong>BigDecimal</strong> — a class from the <code>java.math</code> package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.math.BigDecimal;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BigDecimal price <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;19.99&#34;</span>);
+</span></span><span style="display:flex;"><span>BigDecimal quantity <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;3&#34;</span>);
+</span></span><span style="display:flex;"><span>BigDecimal total <span style="color:#f92672">=</span> price.<span style="color:#a6e22e">multiply</span>(quantity);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(total); <span style="color:#75715e">// prints 59.97 exactly</span>
+</span></span></code></pre></div><ul>
+<li>BigDecimal stores numbers as unscaled integers + scale (not binary floating point).</li>
+<li>It avoids rounding errors that can happen with float or double.</li>
+<li>Downside: it’s slower and uses more memory, but you get perfect accuracy.</li>
+</ul>
+<p>👉 That’s why it’s commonly used in banking, billing, and currency calculations.</p>
+<p>&ndash;</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Use Case</th>
+          <th style="text-align: center">Recommended Type</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">General math or analytics</td>
+          <td style="text-align: center">double</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">High-performance graphics / sensors</td>
+          <td style="text-align: center">float</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Exact financial or monetary values</td>
+          <td style="text-align: center">BigDecimal</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Integer-only math</td>
+          <td style="text-align: center">int or</td>
+      </tr>
+  </tbody>
+</table>
+<p>For years, I used double by habit — it worked, so I never questioned it.
+But learning about precision again reminded me that choosing the right type is part of writing reliable code.</p>
+<p>Sometimes you need speed (<code>float</code>), sometimes you need safety (<code>BigDecimal</code>),
+and most of the time, <code>double</code> is that balanced middle ground — it’s even the default for decimals in Java.</p>
+<p>&ndash;</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-10-19 09:30:00 +0800 +08'>October 19, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to Java: Decimals" href="https://hazriqpedia.github.io/posts/java-decimals/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Java: Primitive Data Types vs Wrapper Classes
     </h2>
   </header>

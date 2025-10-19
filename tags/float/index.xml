@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Float on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/float/</link>
+    <description>Recent content in Float on Hazriq&#39;s Dev Chaos</description>
+    <generator>Hugo -- 0.150.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Oct 2025 09:30:00 +0800</lastBuildDate>
+    <atom:link href="https://hazriqpedia.github.io/tags/float/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java: Decimals</title>
+      <link>https://hazriqpedia.github.io/posts/java-decimals/</link>
+      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/java-decimals/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Revisiting the basics — understanding floating-point numbers in Java.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;In my ongoing &lt;em&gt;Back to Java&lt;/em&gt; series, I’ve been rediscovering parts of the language that I used years ago but never really thought deeply about.&lt;br&gt;
+Today’s topic: &lt;strong&gt;&lt;code&gt;double&lt;/code&gt; vs &lt;code&gt;float&lt;/code&gt;&lt;/strong&gt; — two simple types that can quietly cause big differences in performance and precision.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;what-are-float-and-double&#34;&gt;What Are &lt;code&gt;float&lt;/code&gt; and &lt;code&gt;double&lt;/code&gt;?&lt;/h3&gt;
+&lt;p&gt;Both are &lt;strong&gt;floating-point data types&lt;/strong&gt; used for storing decimal numbers.&lt;/p&gt;
+&lt;p&gt;The key differences are in their &lt;strong&gt;size&lt;/strong&gt;, &lt;strong&gt;precision&lt;/strong&gt;, and &lt;strong&gt;use cases&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

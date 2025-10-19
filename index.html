@@ -174,6 +174,140 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Java: Decimals
+    </h2>
+  </header>
+  <div class="entry-content">
+    <blockquote>
+<p>Revisiting the basics — understanding floating-point numbers in Java.</p></blockquote>
+<p>In my ongoing <em>Back to Java</em> series, I’ve been rediscovering parts of the language that I used years ago but never really thought deeply about.<br>
+Today’s topic: <strong><code>double</code> vs <code>float</code></strong> — two simple types that can quietly cause big differences in performance and precision.</p>
+<hr>
+<h3 id="what-are-float-and-double">What Are <code>float</code> and <code>double</code>?</h3>
+<p>Both are <strong>floating-point data types</strong> used for storing decimal numbers.</p>
+<p>The key differences are in their <strong>size</strong>, <strong>precision</strong>, and <strong>use cases</strong>.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Approx. Range</th>
+          <th>Decimal Precision</th>
+          <th>Default Literal Suffix</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>float</code></td>
+          <td>32-bit</td>
+          <td>±3.4 × 10³⁸</td>
+          <td>~6–7 digits</td>
+          <td><code>f</code> or <code>F</code></td>
+      </tr>
+      <tr>
+          <td><code>double</code></td>
+          <td>64-bit</td>
+          <td>±1.7 × 10³⁰⁸</td>
+          <td>~15–16 digits</td>
+          <td>none or <code>d</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>So, <code>double</code> literally means <em>double-precision floating point</em> — twice the size and precision of <code>float</code>.</p>
+<hr>
+<h3 id="double-is-the-default-for-decimals-in-java">Double Is the Default for Decimals in Java</h3>
+<p>One thing that often surprises new Java developers:</p>
+<blockquote>
+<p><strong>In Java, all decimal literals are treated as <code>double</code> by default.</strong></p></blockquote>
+<p>That’s why you can write this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> pi <span style="color:#f92672">=</span> 3.<span style="color:#a6e22e">14159</span>; <span style="color:#75715e">// ✅ works fine</span>
+</span></span></code></pre></div><p>But this won’t compile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99</span>; <span style="color:#75715e">// ❌ error: possible lossy conversion from double to float</span>
+</span></span></code></pre></div><p>You have to explicitly mark it as a float:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99f</span>; <span style="color:#75715e">// ✅ correct</span>
+</span></span></code></pre></div><p>Java does this to favor precision over size — it assumes you want a double unless you tell it otherwise.</p>
+<p>&ndash;</p>
+<h3 id="when-to-use-which">When to Use Which</h3>
+<p>✅ Use <strong>float</strong> when:</p>
+<ul>
+<li>Memory is limited (e.g., large arrays, 3D graphics, sensor data).</li>
+<li>You don’t need extreme precision (6–7 digits is enough).</li>
+</ul>
+<p>✅ Use <strong>double</strong> when:</p>
+<ul>
+<li>Precision matters (scientific calculations, analytics, or financial models).</li>
+<li>You want the default — most math operations and decimal constants in Java use double.</li>
+</ul>
+<p>💡 Rule of thumb:</p>
+<ul>
+<li>Use <strong>double</strong> by default. Use float only when you know you need to save space.</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="precision-pitfalls">Precision Pitfalls</h3>
+<p>Floating-point numbers can’t always represent decimals exactly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> a <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> b <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">2</span>;
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a <span style="color:#f92672">+</span> b); <span style="color:#75715e">// prints 0.30000000000000004</span>
+</span></span></code></pre></div><p>Why?
+Binary floating-point can’t represent 0.1 precisely — it’s a repeating fraction in base 2.
+This tiny difference often doesn’t matter, but it can accumulate in calculations.</p>
+<p>&ndash;</p>
+<h3 id="a-quick-look-at-bigdecimal">A Quick Look at BigDecimal</h3>
+<p>When you need exact decimal precision, especially in financial or accounting systems,
+you should use <strong>BigDecimal</strong> — a class from the <code>java.math</code> package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.math.BigDecimal;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BigDecimal price <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;19.99&#34;</span>);
+</span></span><span style="display:flex;"><span>BigDecimal quantity <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;3&#34;</span>);
+</span></span><span style="display:flex;"><span>BigDecimal total <span style="color:#f92672">=</span> price.<span style="color:#a6e22e">multiply</span>(quantity);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(total); <span style="color:#75715e">// prints 59.97 exactly</span>
+</span></span></code></pre></div><ul>
+<li>BigDecimal stores numbers as unscaled integers + scale (not binary floating point).</li>
+<li>It avoids rounding errors that can happen with float or double.</li>
+<li>Downside: it’s slower and uses more memory, but you get perfect accuracy.</li>
+</ul>
+<p>👉 That’s why it’s commonly used in banking, billing, and currency calculations.</p>
+<p>&ndash;</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Use Case</th>
+          <th style="text-align: center">Recommended Type</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">General math or analytics</td>
+          <td style="text-align: center">double</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">High-performance graphics / sensors</td>
+          <td style="text-align: center">float</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Exact financial or monetary values</td>
+          <td style="text-align: center">BigDecimal</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Integer-only math</td>
+          <td style="text-align: center">int or</td>
+      </tr>
+  </tbody>
+</table>
+<p>For years, I used double by habit — it worked, so I never questioned it.
+But learning about precision again reminded me that choosing the right type is part of writing reliable code.</p>
+<p>Sometimes you need speed (<code>float</code>), sometimes you need safety (<code>BigDecimal</code>),
+and most of the time, <code>double</code> is that balanced middle ground — it’s even the default for decimals in Java.</p>
+<p>&ndash;</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-10-19 09:30:00 +0800 +08'>October 19, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to Java: Decimals" href="https://hazriqpedia.github.io/posts/java-decimals/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Testing: Load with Latency
     </h2>
   </header>
@@ -1285,86 +1419,6 @@ DAX pricing is per node-hour, depending on node type:</li>
   </div>
   <footer class="entry-footer"><span title='2025-07-27 06:56:44 +0800 +08'>July 27, 2025</span>&nbsp;·&nbsp;5 min</footer>
   <a class="entry-link" aria-label="post link to AWS: Lambda Basics" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: DynamoDB Basics
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Datastore is always a crucial part of any application, and choosing the right database can significantly impact your application&rsquo;s performance, scalability, and maintainability. In this post, we&rsquo;ll explore <strong>AWS DynamoDB</strong>.</p>
-<h3 id="database-types">Database Types</h3>
-<p>There are two main types of databases:</p>
-<ul>
-<li><strong>Relational Databases</strong> (RDBMS): These databases use structured query language (SQL) and are designed to handle structured data with predefined schemas. Examples include MySQL, PostgreSQL, and Oracle.</li>
-<li><strong>NoSQL Databases</strong>: These databases are designed to handle unstructured or semi-structured data. They provide flexibility in data modeling and can scale horizontally. Examples include MongoDB, Cassandra, and DynamoDB.</li>
-</ul>
-<blockquote>
-<p>If you&rsquo;re coming from MySQL or PostgreSQL, imagine removing JOINs and replacing rows with JSON-like documents stored under a single key.</p></blockquote>
-<h3 id="key-features-of-dynamodb">Key Features of DynamoDB</h3>
-<ul>
-<li><strong>Fully Managed</strong>: DynamoDB is a fully managed service, meaning AWS handles the operational aspects such as hardware provisioning, setup, configuration, and scaling.</li>
-<li><strong>Performance at Scale</strong>: It automatically scales up and down to adjust for capacity and maintain performance.</li>
-<li><strong>Flexible Data Model</strong>: Supports key-value and document data structures, allowing for a variety of use cases.</li>
-<li><strong>Built-in Security</strong>: Offers encryption at rest and in transit, along with fine-grained access control.</li>
-</ul>
-<p>So, what is DynamoDB? DynamoDB is a fully managed NoSQL database service provided by AWS that offers fast and predictable performance with seamless scalability. It is designed to handle large amounts of data and high request rates, making it ideal for applications that require low-latency data access.</p>
-<h4 id="key-concepts">Key Concepts</h4>
-<ul>
-<li><strong>Tables</strong>: The primary structure in DynamoDB, similar to tables in relational databases. Each table has a primary key that uniquely identifies each item.</li>
-<li><strong>Items</strong>: Individual records in a table, similar to rows in a relational database.</li>
-<li><strong>Attributes</strong>: The data fields in an item, similar to columns in a relational database.</li>
-<li><strong>Primary Key</strong>: Uniquely identifies each item in a table. It can be a simple primary key (partition key) or a composite primary key (partition key and sort key).</li>
-<li><strong>Indexes</strong>: Allow for efficient querying of data. DynamoDB supports both global secondary indexes (GSI) and local secondary indexes (LSI).</li>
-</ul>
-<p>A simple item in a DynamoDB table might look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;UserId&#34;</span>: <span style="color:#e6db74">&#34;12345&#34;</span>, <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">Unique</span> <span style="color:#960050;background-color:#1e0010">identifier</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">user.</span> <span style="color:#960050;background-color:#1e0010">Primary</span> <span style="color:#960050;background-color:#1e0010">key.</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;Hazriq&#34;</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Email&#34;</span>: <span style="color:#e6db74">&#34;hazriq@example.com&#34;</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="benefits-of-using-dynamodb">Benefits of Using DynamoDB</h3>
-<ul>
-<li><strong>Scalability</strong>: Automatically scales to handle large amounts of data and high request rates without manual intervention.</li>
-<li><strong>Performance</strong>: Provides low-latency data access, making it suitable for real-time applications.</li>
-<li><strong>Flexibility</strong>: Supports various data models, allowing developers to choose the best fit for their application.</li>
-<li><strong>Cost-Effective</strong>: Pay-as-you-go pricing model, where you only pay for the resources you use, making it cost-effective for applications with variable workloads.</li>
-<li><strong>Integration with AWS Services</strong>: Seamlessly integrates with other AWS services like Lambda, API Gateway, and CloudWatch for monitoring and logging.</li>
-<li><strong>TTL (Time to Live)</strong>: Automatically deletes expired items, helping manage storage costs and data lifecycle.</li>
-</ul>
-<h3 id="performance-considerations">Performance Considerations</h3>
-<ul>
-<li><strong>Provisioned Throughput</strong>: You can specify the read and write capacity units for your table, which determines how many reads and writes per second your table can handle.</li>
-<li><strong>On-Demand Capacity</strong>: Automatically scales to accommodate workload changes, making it suitable for unpredictable workloads.</li>
-<li><strong>Caching</strong>: Use DynamoDB Accelerator (DAX) for in-memory caching to improve read performance for read-heavy workloads.</li>
-<li><strong>Batch Operations</strong>: Use batch operations for efficient processing of multiple items in a single request, reducing the number of round trips to the database.</li>
-</ul>
-<h4 id="without-dax">Without DAX</h4>
-<ul>
-<li>Reads and writes are directly from the DynamoDB table.</li>
-<li>Each read or write operation incurs a latency based on the network and DynamoDB&rsquo;s processing time.</li>
-</ul>
-<h4 id="with-dax">With DAX</h4>
-<ul>
-<li>DAX acts as an in-memory cache, reducing the latency for read operations.</li>
-<li>DAX handles cache misses by fetching data from DynamoDB and storing it in memory for subsequent requests.</li>
-<li>This significantly speeds up read operations, especially for frequently accessed data.</li>
-</ul>
-<h3 id="when-not-to-use-dynamodb">When not to Use DynamoDB</h3>
-<p>While DynamoDB is a powerful tool, it may not be the best fit for every use case. Here are some scenarios where you might consider alternatives:</p>
-<ul>
-<li><strong>Complex Queries</strong>: If your application requires complex queries with multiple joins or aggregations, a relational database might be more suitable.</li>
-<li><strong>Transactional Support</strong>: If your application requires complex transactions involving multiple items or tables, consider using a relational database or a database that supports multi-item transactions.</li>
-<li><strong>Large Binary Objects</strong>: If your application needs to store large binary objects (BLOBs), such as images or videos, consider using Amazon S3 for storage and DynamoDB for metadata.</li>
-<li><strong>High Write Throughput</strong>: If your application requires extremely high write throughput, consider using Amazon S3 or a distributed database like Apache Cassandra.</li>
-</ul>
-<p>DynamoDB shines when you need a fast, scalable, and fully managed database that just works — whether you&rsquo;re powering a real-time leaderboard, handling millions of API requests, or storing user sessions with minimal latency. By understanding its core concepts and performance features like DAX, you can unlock a powerful tool that fits right into modern, serverless-first architectures.</p>
-<p>Of course, like any tool, it’s not a one-size-fits-all solution. Knowing when and how to use DynamoDB effectively is key — and that journey starts with grasping its strengths.</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-07-20 05:42:27 +0800 +08'>July 20, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: DynamoDB Basics" href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
