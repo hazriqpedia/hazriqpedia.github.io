@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Javascript on Hazriq&#39;s Dev Chaos</title>
-    <link>https://hazriqpedia.github.io/tags/javascript/</link>
-    <description>Recent content in Javascript on Hazriq&#39;s Dev Chaos</description>
+    <title>Concurrency on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/concurrency/</link>
+    <description>Recent content in Concurrency on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 20 Oct 2025 19:09:50 +0800</lastBuildDate>
-    <atom:link href="https://hazriqpedia.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hazriqpedia.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java Threads: The Basics Before Going Reactive</title>
       <link>https://hazriqpedia.github.io/posts/java-threads/</link>
@@ -18,16 +18,6 @@
 Today’s topic is one of the most fundamental — and honestly, one of the most misunderstood: &lt;strong&gt;Threads&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Threads are the foundation of concurrency in Java.&lt;br&gt;
 And before I dive deeper into Quarkus’ &lt;em&gt;reactive and non-blocking world&lt;/em&gt;, I want to understand what happens underneath.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>JS: Express.js</title>
-      <link>https://hazriqpedia.github.io/posts/js-express.js/</link>
-      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/posts/js-express.js/</guid>
-      <description>&lt;p&gt;&lt;code&gt;Express.js&lt;/code&gt; is a minimalist and flexible &lt;code&gt;Node.js&lt;/code&gt; web application framework that provides a robust set of features for building web and mobile applications and APIs. If you&amp;rsquo;re looking to build fast, scalable, and efficient server-side applications with JavaScript, Express.js is your go-to choice. Its unopinionated nature gives you immense freedom,
-&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h3 id=&#34;setting-up&#34;&gt;Setting Up&lt;/h3&gt;
-&lt;p&gt;Getting started with Express.js is straightforward. If you already have a Node.js project, or if you&amp;rsquo;re starting a new one, follow these simple steps:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -6,20 +6,62 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Oct 2025 09:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Oct 2025 19:09:50 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Async</title>
+      <link>https://hazriqpedia.github.io/tags/async/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/async/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Back-to-Basics</title>
       <link>https://hazriqpedia.github.io/tags/back-to-basics/</link>
-      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/back-to-basics/</guid>
       <description></description>
     </item>
     <item>
       <title>Beginner</title>
       <link>https://hazriqpedia.github.io/tags/beginner/</link>
-      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/beginner/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Concurrency</title>
+      <link>https://hazriqpedia.github.io/tags/concurrency/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/concurrency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>https://hazriqpedia.github.io/tags/java/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Javascript</title>
+      <link>https://hazriqpedia.github.io/tags/javascript/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Quarkus</title>
+      <link>https://hazriqpedia.github.io/tags/quarkus/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/quarkus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Threads</title>
+      <link>https://hazriqpedia.github.io/tags/threads/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/threads/</guid>
       <description></description>
     </item>
     <item>
@@ -48,13 +90,6 @@
       <link>https://hazriqpedia.github.io/tags/float/</link>
       <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/float/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Java</title>
-      <link>https://hazriqpedia.github.io/tags/java/</link>
-      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/java/</guid>
       <description></description>
     </item>
     <item>
@@ -104,13 +139,6 @@
       <link>https://hazriqpedia.github.io/tags/non-blocking/</link>
       <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/non-blocking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Quarkus</title>
-      <link>https://hazriqpedia.github.io/tags/quarkus/</link>
-      <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/quarkus/</guid>
       <description></description>
     </item>
     <item>
@@ -272,13 +300,6 @@
       <link>https://hazriqpedia.github.io/tags/express/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/express/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Javascript</title>
-      <link>https://hazriqpedia.github.io/tags/javascript/</link>
-      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/javascript/</guid>
       <description></description>
     </item>
     <item>

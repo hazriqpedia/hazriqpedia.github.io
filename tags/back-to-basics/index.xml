@@ -6,8 +6,19 @@
     <description>Recent content in Back-to-Basics on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Oct 2025 09:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Oct 2025 19:09:50 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/back-to-basics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java Threads: The Basics Before Going Reactive</title>
+      <link>https://hazriqpedia.github.io/posts/java-threads/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/java-threads/</guid>
+      <description>&lt;p&gt;Understanding how Java handles multiple things at once — and how Quarkus changes the game.&lt;/p&gt;
+&lt;p&gt;In my &lt;em&gt;Back to Java&lt;/em&gt; journey, I’ve been rediscovering parts of the language that I used years ago but never really understood deeply.&lt;br&gt;
+Today’s topic is one of the most fundamental — and honestly, one of the most misunderstood: &lt;strong&gt;Threads&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Threads are the foundation of concurrency in Java.&lt;br&gt;
+And before I dive deeper into Quarkus’ &lt;em&gt;reactive and non-blocking world&lt;/em&gt;, I want to understand what happens underneath.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Java: Decimals</title>
       <link>https://hazriqpedia.github.io/posts/java-decimals/</link>

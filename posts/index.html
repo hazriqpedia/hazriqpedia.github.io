@@ -149,6 +149,332 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Java Threads: The Basics Before Going Reactive
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Understanding how Java handles multiple things at once — and how Quarkus changes the game.</p>
+<p>In my <em>Back to Java</em> journey, I’ve been rediscovering parts of the language that I used years ago but never really understood deeply.<br>
+Today’s topic is one of the most fundamental — and honestly, one of the most misunderstood: <strong>Threads</strong>.</p>
+<p>Threads are the foundation of concurrency in Java.<br>
+And before I dive deeper into Quarkus’ <em>reactive and non-blocking world</em>, I want to understand what happens underneath.</p>
+<hr>
+<h3 id="what-are-threads-in-general">What Are Threads (in general)?</h3>
+<p>A <strong>thread</strong> is like a <strong>worker</strong> inside your program — an independent flow of execution that can run code in parallel with others.</p>
+<p>When you run a Java program, it always starts with <strong>one main thread</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MainExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Output:</p>
+<pre tabindex="0"><code>Running in: main
+</code></pre><p>That’s your main worker.<br>
+Every additional thread you create runs <em>alongside</em> it.</p>
+<p>&ndash;</p>
+<h3 id="creating-threads-in-java">Creating Threads in Java</h3>
+<p>There are two common ways to create threads:</p>
+<h4 id="1-extend-the-thread-class">1. Extend the <code>Thread</code> class</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span> <span style="color:#66d9ef">extends</span> Thread {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        MyThread t1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThread();
+</span></span><span style="display:flex;"><span>        t1.<span style="color:#a6e22e">start</span>(); <span style="color:#75715e">// Start a new thread</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Main: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>start()</code> creates a <em>new</em> thread and calls <code>run()</code> asynchronously.</li>
+<li>If you call <code>run()</code> directly, it just runs on the <strong>same thread</strong> — no concurrency.</li>
+</ul>
+<h4 id="2-use-a-runnable-preferred-approach">2. Use a <code>Runnable</code> (preferred approach)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RunnableExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Runnable task <span style="color:#f92672">=</span> () <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>        Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(task);
+</span></span><span style="display:flex;"><span>        thread.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>Runnable</code> separates the <em>work</em> (the code you want to run) from the <em>worker</em> (the Thread).</p>
+<p>&ndash;</p>
+<h3 id="threads-in-practice-a-quick-hands-on">Threads in Practice: A Quick Hands-On</h3>
+<p>Let’s simulate doing two things at once — something slow, like making coffee ☕ and toasting bread 🍞.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Breakfast</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Thread coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(() <span style="color:#f92672">-&gt;</span> makeCoffee());
+</span></span><span style="display:flex;"><span>        Thread toast <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(() <span style="color:#f92672">-&gt;</span> toastBread());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        coffee.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>        toast.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeCoffee</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(2000);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;☕ Coffee is ready!&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">toastBread</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(3000);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;🍞 Bread is toasted!&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Output (order may vary):</p>
+<pre tabindex="0"><code>☕ Coffee is ready!
+🍞 Bread is toasted!
+</code></pre><p>Both tasks run <em>at the same time</em> — this is concurrency in action.<br>
+Each task gets its own <strong>thread</strong>, and the program doesn’t wait for one to finish before starting the other.</p>
+<p>&ndash;</p>
+<h3 id="thread-pools-managing-many-tasks">Thread Pools: Managing Many Tasks</h3>
+<p>Creating new threads every time can be expensive.<br>
+A better way is to <strong>reuse</strong> threads using an <strong>ExecutorService</strong> (a thread pool).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ExecutorService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadPoolExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        ExecutorService pool <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newFixedThreadPool</span>(3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;=</span> 5; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> taskId <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>            pool.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running task &#34;</span> <span style="color:#f92672">+</span> taskId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; on &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>())
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        pool.<span style="color:#a6e22e">shutdown</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This allows multiple tasks to share a limited number of threads efficiently — something frameworks like Quarkus also do under the hood.</p>
+<p>&ndash;</p>
+<h3 id="java-threads-vs-javascript-async-same-goal-different-path">Java Threads vs JavaScript Async (Same Goal, Different Path)</h3>
+<p>Java uses <strong>multiple threads</strong> to handle concurrency.</p>
+<p>JavaScript (and TypeScript) runs on a <strong>single thread</strong> but uses an <strong>event loop</strong> to handle async operations (like <code>fetch</code>, <code>setTimeout</code>, etc.).</p>
+<table>
+  <thead>
+      <tr>
+          <th>Feature</th>
+          <th>Java</th>
+          <th>JavaScript / TypeScript</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Execution Model</td>
+          <td>Multi-threaded</td>
+          <td>Single-threaded with event loop</td>
+      </tr>
+      <tr>
+          <td>Parallel Execution</td>
+          <td>Yes (real threads)</td>
+          <td>No (cooperative async via callbacks/promises)</td>
+      </tr>
+      <tr>
+          <td>Example</td>
+          <td><code>new Thread()</code></td>
+          <td><code>setTimeout()</code>, <code>fetch()</code>, <code>Promise</code></td>
+      </tr>
+      <tr>
+          <td>Blocking Behavior</td>
+          <td>Can block (<code>Thread.sleep</code>)</td>
+          <td>Never blocks (async callback queued)</td>
+      </tr>
+  </tbody>
+</table>
+<p>💡 So both aim to “do many things at once,” but JavaScript uses <strong>asynchronous scheduling</strong>, while Java can literally <strong>run multiple threads</strong> in parallel.</p>
+<p>&ndash;</p>
+<h3 id="threads-and-quarkus-same-idea-smarter-execution">Threads and Quarkus: Same Idea, Smarter Execution</h3>
+<p>Quarkus applications still use <strong>threads</strong> — but they’re used <strong>more efficiently</strong>.</p>
+<p>Traditional Java apps (like Spring or Servlet-based apps) use a <strong>thread per request</strong> model:</p>
+<ul>
+<li>Every incoming HTTP request gets its own thread.</li>
+<li>If a thread waits for a DB or network call, it’s blocked.</li>
+</ul>
+<p>Quarkus, on the other hand, is built for <strong>non-blocking I/O</strong>:</p>
+<ul>
+<li>Threads don’t sit idle waiting for I/O.</li>
+<li>A small pool of threads can handle thousands of concurrent requests.</li>
+<li>Reactive frameworks (like Mutiny and Vert.x) schedule work when data arrives — instead of holding a thread hostage.</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Concept</th>
+          <th>Traditional Java</th>
+          <th>Quarkus Reactive</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Model</td>
+          <td>Thread per request</td>
+          <td>Event-driven, non-blocking</td>
+      </tr>
+      <tr>
+          <td>Threads used</td>
+          <td>Many</td>
+          <td>Few (efficient reuse)</td>
+      </tr>
+      <tr>
+          <td>Behavior</td>
+          <td>Blocking</td>
+          <td>Reactive</td>
+      </tr>
+      <tr>
+          <td>Library</td>
+          <td><code>Thread</code>, <code>ExecutorService</code></td>
+          <td><code>Uni</code>, <code>Multi</code> (Mutiny)</td>
+      </tr>
+  </tbody>
+</table>
+<p>👉 So, threads are still there — Quarkus just uses them smarter.</p>
+<p>&ndash;</p>
+<h3 id="real-life-scenario-1000-requests-hitting-the-same-endpoint">Real-Life Scenario: 1000 Requests Hitting the Same Endpoint</h3>
+<p>Imagine this common situation:<br>
+You’ve built an endpoint <code>/users/profile</code> that calls an <strong>external user service</strong> (maybe a third-party authentication API).<br>
+Sometimes it’s fast (50 ms), sometimes slow (2 s).<br>
+Now — 1000 users open the app at once.</p>
+<p>&ndash;</p>
+<h4 id="traditional-java-blocking-io"><strong>Traditional Java (Blocking I/O)</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserResource</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/profile&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getProfile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Blocking call to external API</span>
+</span></span><span style="display:flex;"><span>        String user <span style="color:#f92672">=</span> externalService.<span style="color:#a6e22e">getUserData</span>(); 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Profile: &#34;</span> <span style="color:#f92672">+</span> user;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Each request is assigned <strong>its own thread</strong> from a pool (say, 200 threads).</li>
+<li>The thread makes the external call and then <strong>waits</strong>.</li>
+<li>Once all 200 threads are busy, new requests are queued until one is free.</li>
+</ul>
+<p><strong>If 1000 requests come in:</strong></p>
+<ul>
+<li>200 active threads, 800 waiting.</li>
+<li>Threads consume memory even while idle.</li>
+<li>Response time grows as requests queue up.</li>
+<li>CPU usage stays low (most threads are sleeping).</li>
+</ul>
+<p>&ndash;</p>
+<h4 id="quarkus-reactive--non-blocking-io"><strong>Quarkus (Reactive / Non-Blocking I/O)</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReactiveUserResource</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/profile&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getProfile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> externalService.<span style="color:#a6e22e">getUserDataAsync</span>() <span style="color:#75715e">// returns Uni&lt;String&gt;</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Profile: &#34;</span> <span style="color:#f92672">+</span> user)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback profile&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The call is <strong>non-blocking</strong> — it sends the HTTP request and releases the thread.</li>
+<li>The same few event-loop threads handle other requests while waiting for responses.</li>
+<li>When the API responds, the result is processed asynchronously.</li>
+</ul>
+<p><strong>If 1000 requests come in:</strong></p>
+<ul>
+<li>The same 8–16 event-loop threads can manage them all.</li>
+<li>No threads sit idle; they’re constantly reused.</li>
+<li>Memory footprint stays low, and response times remain stable even if some APIs are slow.</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Step</th>
+          <th>Traditional Java (Blocking)</th>
+          <th>Quarkus Reactive (Non-Blocking)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Request arrives</td>
+          <td>Takes a thread from pool</td>
+          <td>Uses small event-loop thread</td>
+      </tr>
+      <tr>
+          <td>External call</td>
+          <td>Thread waits</td>
+          <td>Thread released immediately</td>
+      </tr>
+      <tr>
+          <td>While waiting</td>
+          <td>Idle</td>
+          <td>Reused for other requests</td>
+      </tr>
+      <tr>
+          <td>Response arrives</td>
+          <td>Thread resumes work</td>
+          <td>Async callback resumes pipeline</td>
+      </tr>
+      <tr>
+          <td>1000 concurrent requests</td>
+          <td>Needs ~1000 threads (or queues)</td>
+          <td>Same small pool handles all</td>
+      </tr>
+  </tbody>
+</table>
+<p>💬 <strong>In short:</strong></p>
+<blockquote>
+<p>Traditional Java: many threads that spend most time waiting.<br>
+Quarkus: fewer threads that never wait — they react when data is ready.</p></blockquote>
+<p>&ndash;</p>
+<h4 id="what-this-means-in-real-life">What This Means in Real Life</h4>
+<ul>
+<li><strong>Predictable performance:</strong> Even if a third-party API slows down, Quarkus keeps serving others.</li>
+<li><strong>Lower cost:</strong> Fewer threads → lower memory, better CPU utilization.</li>
+<li><strong>Massive scalability:</strong> A single service can handle thousands of concurrent users.</li>
+<li><strong>Still Java:</strong> It’s still built on threads — just orchestrated smarter.</li>
+</ul>
+<h4 id="-analogy">☕ Analogy</h4>
+<p>Think of a coffee shop:</p>
+<ul>
+<li><strong>Traditional Java:</strong> one barista per customer — efficient until the queue grows.</li>
+<li><strong>Quarkus:</strong> a few baristas multitasking, preparing drinks while others brew — no one stands idle.</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="scenarios-where-threads-are-useful">Scenarios Where Threads Are Useful</h3>
+<ol>
+<li><strong>Parallel processing:</strong> Doing multiple independent computations (e.g., processing files).</li>
+<li><strong>Background tasks:</strong> Logging, cleanup, or asynchronous notifications.</li>
+<li><strong>Simulations or CPU-bound tasks:</strong> Heavy calculations that benefit from multiple cores.</li>
+<li><strong>Learning async behavior:</strong> Understanding how frameworks like Quarkus optimize concurrency.</li>
+</ol>
+<p>&ndash;</p>
+<h3 id="bringing-it-all-together">Bringing It All Together</h3>
+<ul>
+<li>Threads are <strong>workers</strong> that help Java do multiple things at once.</li>
+<li>Quarkus still relies on them — but in a <strong>reactive, efficient</strong> way.</li>
+<li>JavaScript handles concurrency differently — single-threaded but event-driven.</li>
+<li>And understanding these fundamentals helps make sense of why <em>reactive programming</em> feels so different (yet familiar).</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="closing">Closing</h3>
+<p>Before learning Quarkus’ reactive style, I used to think “threads” were just a low-level concept from the old Java days.<br>
+But understanding how they work — and how Quarkus builds on top of them — makes the <em>reactive magic</em> feel more logical than mysterious.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-10-20 19:09:50 +0800 +08'>October 20, 2025</span>&nbsp;·&nbsp;7 min</footer>
+  <a class="entry-link" aria-label="post link to Java Threads: The Basics Before Going Reactive" href="https://hazriqpedia.github.io/posts/java-threads/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Java: Decimals
     </h2>
   </header>
@@ -1306,94 +1632,6 @@ DAX pricing is per node-hour, depending on node type:</li>
   </div>
   <footer class="entry-footer"><span title='2025-08-03 07:34:21 +0800 +08'>August 3, 2025</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to AWS: SAM Introduction" href="https://hazriqpedia.github.io/posts/aws_sam_intro/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: Lambda Basics
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.</p>
-<p>In this post, I will cover the basics:</p>
-<ul>
-<li>What is Lambda?</li>
-<li>What are the core components?</li>
-<li>Why use it?</li>
-<li>A real use case: processing SQS messages in TypeScript</li>
-<li>Common limitations</li>
-</ul>
-<h3 id="what-is-aws-lambda">What is AWS Lambda?</h3>
-<p>AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.</p>
-<p>You don’t manage servers. You just focus on the code, and Lambda takes care of:</p>
-<ul>
-<li>Running it</li>
-<li>Scaling it automatically</li>
-<li>Charging you only when it runs</li>
-</ul>
-<h3 id="key-components-of-aws-lambda">Key Components of AWS Lambda</h3>
-<ol>
-<li><strong>Handlers</strong>: The entry point for your Lambda function. It&rsquo;s the method that AWS Lambda calls to start execution.</li>
-<li><strong>Events</strong>: Lambda functions are triggered by events, which can come from various AWS services like S3, DynamoDB, API Gateway, or even custom events.</li>
-<li><strong>Context</strong>: Provides runtime information to your Lambda function, such as the function name, version, and remaining execution time.</li>
-<li><strong>IAM Roles</strong>: AWS Identity and Access Management (IAM) roles define the permissions for your Lambda function, allowing it to access other AWS services securely.</li>
-<li><strong>Environment Variables</strong>: Key-value pairs that you can use to pass configuration settings to your Lambda function at runtime.</li>
-<li><strong>Timeouts and Memory</strong>: You can configure the maximum execution time and memory allocated to your Lambda function, which affects performance and cost.</li>
-<li><strong>CloudWatch Logs</strong>: Automatically logs the output of your Lambda function, which you can use for debugging and monitoring.</li>
-</ol>
-<h3 id="why-use-aws-lambda">Why Use AWS Lambda?</h3>
-<ul>
-<li><strong>Cost-Effective</strong>: You only pay for the compute time you consume. There are no charges when your code is not running.</li>
-<li><strong>Scalability</strong>: Automatically scales your application by running code in response to each event, so you don’t have to worry about scaling your infrastructure.</li>
-<li><strong>Flexibility</strong>: Supports multiple programming languages (Node.js, Python, Java, Go, C#, Ruby, and custom runtimes) and can be used for a wide range of applications, from simple scripts to complex microservices.</li>
-<li><strong>Event-Driven</strong>: Easily integrates with other AWS services, allowing you to build event-driven architectures that respond to changes in your data or system state.</li>
-<li><strong>Zero Administration</strong>: No need to manage servers or runtime environments. AWS handles all the infrastructure management tasks, including patching, scaling, and availability.</li>
-</ul>
-<h3 id="real-use-case-typescript-lambda-to-process-sqs--dynamodb">Real Use Case: TypeScript Lambda to Process SQS → DynamoDB</h3>
-<p>In my current role, we use AWS Lambda to process messages from SQS queues. Here’s a simple example of how you can set up a Lambda function in TypeScript to process messages from an SQS queue and store them in DynamoDB.</p>
-<p>Lets say we receive messages in SQS that contain user data, and we want to store this data in DynamoDB.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SQSHandler</span>, <span style="color:#a6e22e">SQSEvent</span>, <span style="color:#a6e22e">Context</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-lambda&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DynamoDB</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-sdk&#34;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dynamoDb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DynamoDB</span>.<span style="color:#a6e22e">DocumentClient</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span>: <span style="color:#66d9ef">SQSHandler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">event</span>: <span style="color:#66d9ef">SQSEvent</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">Context</span>
-</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">record</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">Records</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">record</span>.<span style="color:#a6e22e">body</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">TableName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Users&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Item</span>: <span style="color:#66d9ef">userData</span>,
-</span></span><span style="display:flex;"><span>    };
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">dynamoDb</span>.<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>In this example:</p>
-<ul>
-<li>We import necessary types from <code>aws-lambda</code> and the <code>DynamoDB</code> client from <code>aws-sdk</code>.</li>
-<li>The <code>handler</code> function processes each message in the SQS event.</li>
-<li>We parse the message body and store it in a DynamoDB table named <code>Users</code>.</li>
-</ul>
-<p>This function will be uploaded to AWS Lambda, and you can configure it to trigger whenever new messages arrive in the SQS queue.</p>
-<h3 id="common-limitations-of-aws-lambda">Common Limitations of AWS Lambda</h3>
-<ul>
-<li><strong>Execution Time</strong>: Lambda functions have a maximum execution time of 15 minutes. If your task takes longer, you may need to break it into smaller functions or use other services.</li>
-<li><strong>Cold Starts</strong>: When a Lambda function is invoked after being idle, it may take longer to start due to the initialization time (cold start). This can affect performance, especially for latency-sensitive applications.</li>
-<li><strong>Limited Resources</strong>: Each Lambda function has a maximum memory limit (up to 1024 MB) and a maximum package size (50 MB for direct upload, 250 MB when using layers). This can be a constraint for resource-intensive applications.</li>
-<li><strong>Limited Runtime Environment</strong>: While Lambda supports multiple programming languages, you may encounter limitations with certain libraries or dependencies that require a specific runtime environment.</li>
-<li><strong>State Management</strong>: Lambda functions are stateless, meaning they do not retain any state between invocations. If you need to maintain state, you will have to use external storage solutions like DynamoDB or S3.</li>
-<li><strong>Concurrency Limits</strong>: There are limits on the number of concurrent executions for Lambda functions. If your application experiences a sudden spike in traffic, you may hit these limits, leading to throttling of requests.</li>
-<li><strong>Vendor Lock-In</strong>: Using AWS Lambda ties you to the AWS ecosystem, which can make it challenging to migrate to other cloud providers or on-premises in the future.</li>
-</ul>
-<h3 id="wrap-up">Wrap-Up</h3>
-<p>AWS Lambda is a powerful tool for building serverless applications that can scale automatically and respond to events without the need for server management. By understanding its core components and limitations, you can effectively leverage Lambda to build efficient, cost-effective applications that meet your business needs.</p>
-<p>Whether you’re processing SQS messages, building APIs with API Gateway, or integrating with other AWS services, Lambda provides a flexible and scalable solution that can adapt to your application’s requirements.</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-07-27 06:56:44 +0800 +08'>July 27, 2025</span>&nbsp;·&nbsp;5 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: Lambda Basics" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

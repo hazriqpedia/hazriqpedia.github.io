@@ -149,6 +149,94 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">AWS: Lambda Basics
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>AWS Lambda is one of the most exciting services in the serverless world. It lets you write code that automatically responds to events — without needing to worry about provisioning servers or managing infrastructure.</p>
+<p>In this post, I will cover the basics:</p>
+<ul>
+<li>What is Lambda?</li>
+<li>What are the core components?</li>
+<li>Why use it?</li>
+<li>A real use case: processing SQS messages in TypeScript</li>
+<li>Common limitations</li>
+</ul>
+<h3 id="what-is-aws-lambda">What is AWS Lambda?</h3>
+<p>AWS Lambda is a serverless compute service that lets you run code in response to events without provisioning or managing servers. You can use Lambda to run code for virtually any type of application or backend service with zero administration. Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.</p>
+<p>You don’t manage servers. You just focus on the code, and Lambda takes care of:</p>
+<ul>
+<li>Running it</li>
+<li>Scaling it automatically</li>
+<li>Charging you only when it runs</li>
+</ul>
+<h3 id="key-components-of-aws-lambda">Key Components of AWS Lambda</h3>
+<ol>
+<li><strong>Handlers</strong>: The entry point for your Lambda function. It&rsquo;s the method that AWS Lambda calls to start execution.</li>
+<li><strong>Events</strong>: Lambda functions are triggered by events, which can come from various AWS services like S3, DynamoDB, API Gateway, or even custom events.</li>
+<li><strong>Context</strong>: Provides runtime information to your Lambda function, such as the function name, version, and remaining execution time.</li>
+<li><strong>IAM Roles</strong>: AWS Identity and Access Management (IAM) roles define the permissions for your Lambda function, allowing it to access other AWS services securely.</li>
+<li><strong>Environment Variables</strong>: Key-value pairs that you can use to pass configuration settings to your Lambda function at runtime.</li>
+<li><strong>Timeouts and Memory</strong>: You can configure the maximum execution time and memory allocated to your Lambda function, which affects performance and cost.</li>
+<li><strong>CloudWatch Logs</strong>: Automatically logs the output of your Lambda function, which you can use for debugging and monitoring.</li>
+</ol>
+<h3 id="why-use-aws-lambda">Why Use AWS Lambda?</h3>
+<ul>
+<li><strong>Cost-Effective</strong>: You only pay for the compute time you consume. There are no charges when your code is not running.</li>
+<li><strong>Scalability</strong>: Automatically scales your application by running code in response to each event, so you don’t have to worry about scaling your infrastructure.</li>
+<li><strong>Flexibility</strong>: Supports multiple programming languages (Node.js, Python, Java, Go, C#, Ruby, and custom runtimes) and can be used for a wide range of applications, from simple scripts to complex microservices.</li>
+<li><strong>Event-Driven</strong>: Easily integrates with other AWS services, allowing you to build event-driven architectures that respond to changes in your data or system state.</li>
+<li><strong>Zero Administration</strong>: No need to manage servers or runtime environments. AWS handles all the infrastructure management tasks, including patching, scaling, and availability.</li>
+</ul>
+<h3 id="real-use-case-typescript-lambda-to-process-sqs--dynamodb">Real Use Case: TypeScript Lambda to Process SQS → DynamoDB</h3>
+<p>In my current role, we use AWS Lambda to process messages from SQS queues. Here’s a simple example of how you can set up a Lambda function in TypeScript to process messages from an SQS queue and store them in DynamoDB.</p>
+<p>Lets say we receive messages in SQS that contain user data, and we want to store this data in DynamoDB.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SQSHandler</span>, <span style="color:#a6e22e">SQSEvent</span>, <span style="color:#a6e22e">Context</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-lambda&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DynamoDB</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;aws-sdk&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dynamoDb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DynamoDB</span>.<span style="color:#a6e22e">DocumentClient</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span>: <span style="color:#66d9ef">SQSHandler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">event</span>: <span style="color:#66d9ef">SQSEvent</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">Context</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">record</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">Records</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">record</span>.<span style="color:#a6e22e">body</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">TableName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Users&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Item</span>: <span style="color:#66d9ef">userData</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">dynamoDb</span>.<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>In this example:</p>
+<ul>
+<li>We import necessary types from <code>aws-lambda</code> and the <code>DynamoDB</code> client from <code>aws-sdk</code>.</li>
+<li>The <code>handler</code> function processes each message in the SQS event.</li>
+<li>We parse the message body and store it in a DynamoDB table named <code>Users</code>.</li>
+</ul>
+<p>This function will be uploaded to AWS Lambda, and you can configure it to trigger whenever new messages arrive in the SQS queue.</p>
+<h3 id="common-limitations-of-aws-lambda">Common Limitations of AWS Lambda</h3>
+<ul>
+<li><strong>Execution Time</strong>: Lambda functions have a maximum execution time of 15 minutes. If your task takes longer, you may need to break it into smaller functions or use other services.</li>
+<li><strong>Cold Starts</strong>: When a Lambda function is invoked after being idle, it may take longer to start due to the initialization time (cold start). This can affect performance, especially for latency-sensitive applications.</li>
+<li><strong>Limited Resources</strong>: Each Lambda function has a maximum memory limit (up to 1024 MB) and a maximum package size (50 MB for direct upload, 250 MB when using layers). This can be a constraint for resource-intensive applications.</li>
+<li><strong>Limited Runtime Environment</strong>: While Lambda supports multiple programming languages, you may encounter limitations with certain libraries or dependencies that require a specific runtime environment.</li>
+<li><strong>State Management</strong>: Lambda functions are stateless, meaning they do not retain any state between invocations. If you need to maintain state, you will have to use external storage solutions like DynamoDB or S3.</li>
+<li><strong>Concurrency Limits</strong>: There are limits on the number of concurrent executions for Lambda functions. If your application experiences a sudden spike in traffic, you may hit these limits, leading to throttling of requests.</li>
+<li><strong>Vendor Lock-In</strong>: Using AWS Lambda ties you to the AWS ecosystem, which can make it challenging to migrate to other cloud providers or on-premises in the future.</li>
+</ul>
+<h3 id="wrap-up">Wrap-Up</h3>
+<p>AWS Lambda is a powerful tool for building serverless applications that can scale automatically and respond to events without the need for server management. By understanding its core components and limitations, you can effectively leverage Lambda to build efficient, cost-effective applications that meet your business needs.</p>
+<p>Whether you’re processing SQS messages, building APIs with API Gateway, or integrating with other AWS services, Lambda provides a flexible and scalable solution that can adapt to your application’s requirements.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-07-27 06:56:44 +0800 +08'>July 27, 2025</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to AWS: Lambda Basics" href="https://hazriqpedia.github.io/posts/aws_lambda_intro/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">AWS: DynamoDB Basics
     </h2>
   </header>

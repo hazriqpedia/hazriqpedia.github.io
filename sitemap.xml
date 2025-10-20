@@ -2,11 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hazriqpedia.github.io/tags/async/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
     <loc>https://hazriqpedia.github.io/tags/back-to-basics/</loc>
-    <lastmod>2025-10-19T09:30:00+08:00</lastmod>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/beginner/</loc>
-    <lastmod>2025-10-19T09:30:00+08:00</lastmod>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/concurrency/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/java/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/java-threads/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/javascript/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/quarkus/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/threads/</loc>
+    <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/bigdecimal/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
@@ -20,22 +50,10 @@
     <loc>https://hazriqpedia.github.io/tags/float/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/</loc>
-    <lastmod>2025-10-19T09:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/java/</loc>
-    <lastmod>2025-10-19T09:30:00+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/posts/java-decimals/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/posts/</loc>
-    <lastmod>2025-10-19T09:30:00+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/tags/primitive/</loc>
-    <lastmod>2025-10-19T09:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/latency/</loc>
@@ -60,9 +78,6 @@
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/non-blocking/</loc>
-    <lastmod>2025-10-03T22:26:58+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/quarkus/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/reactive/</loc>
@@ -159,9 +174,6 @@
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/express/</loc>
-    <lastmod>2025-06-23T10:01:29+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/javascript/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/js/</loc>
