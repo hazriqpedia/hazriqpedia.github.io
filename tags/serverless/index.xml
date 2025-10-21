@@ -6,8 +6,23 @@
     <description>Recent content in Serverless on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Aug 2025 07:34:21 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Oct 2025 18:54:27 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/serverless/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS: EC2 vs Lambda</title>
+      <link>https://hazriqpedia.github.io/posts/aws-lambda-vs-ec2/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/aws-lambda-vs-ec2/</guid>
+      <description>&lt;p&gt;If you’ve read my &lt;a href=&#34;https://hazriqpedia.github.io/posts/aws_lambda_intro/&#34;&gt;previous post on AWS Lambda&lt;/a&gt;, you already know how magical it feels to just upload your code and let AWS handle the rest.&lt;/p&gt;
+&lt;p&gt;But here’s a question most beginners eventually ask:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“If Lambda can already run my code, why do people still use EC2?”&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Good question. Let’s break it down in plain English.&lt;/p&gt;
+&lt;p&gt;&amp;ndash;&lt;/p&gt;
+&lt;h2 id=&#34;ec2--the-always-on-office-pc&#34;&gt;EC2 — The Always-On Office PC&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;EC2&lt;/strong&gt; is like renting your own computer in the cloud.&lt;br&gt;
+You control everything — OS, software, uptime — but you also pay even when you’re not using it.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>AWS: SAM Introduction</title>
       <link>https://hazriqpedia.github.io/posts/aws_sam_intro/</link>

@@ -6,8 +6,43 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Oct 2025 19:09:50 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Oct 2025 18:54:27 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS</title>
+      <link>https://hazriqpedia.github.io/tags/aws/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cloud</title>
+      <link>https://hazriqpedia.github.io/tags/cloud/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/cloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>EC2</title>
+      <link>https://hazriqpedia.github.io/tags/ec2/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/ec2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lambda</title>
+      <link>https://hazriqpedia.github.io/tags/lambda/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/lambda/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Serverless</title>
+      <link>https://hazriqpedia.github.io/tags/serverless/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/serverless/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Async</title>
       <link>https://hazriqpedia.github.io/tags/async/</link>
@@ -191,13 +226,6 @@
       <description></description>
     </item>
     <item>
-      <title>AWS</title>
-      <link>https://hazriqpedia.github.io/tags/aws/</link>
-      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/aws/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Costs</title>
       <link>https://hazriqpedia.github.io/tags/costs/</link>
       <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
@@ -247,24 +275,10 @@
       <description></description>
     </item>
     <item>
-      <title>Serverless</title>
-      <link>https://hazriqpedia.github.io/tags/serverless/</link>
-      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/serverless/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Functions</title>
       <link>https://hazriqpedia.github.io/tags/functions/</link>
       <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/functions/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Lambda</title>
-      <link>https://hazriqpedia.github.io/tags/lambda/</link>
-      <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/lambda/</guid>
       <description></description>
     </item>
     <item>
