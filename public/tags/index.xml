@@ -2,220 +2,381 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Hazriq&#39;s Dev Chaos</title>
-    <link>https://hazriqpedia.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
-    <generator>Hugo -- 0.150.0</generator>
+    <generator>Hugo -- 0.147.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Sep 2025 22:26:34 +0800</lastBuildDate>
-    <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Dec 2025 17:30:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Autoboxing</title>
-      <link>https://hazriqpedia.github.io/tags/autoboxing/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/autoboxing/</guid>
+      <title>Backend</title>
+      <link>http://localhost:1313/tags/backend/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/backend/</guid>
       <description></description>
     </item>
     <item>
-      <title>Code Review</title>
-      <link>https://hazriqpedia.github.io/tags/code-review/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/code-review/</guid>
+      <title>DTO</title>
+      <link>http://localhost:1313/tags/dto/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/dto/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>https://hazriqpedia.github.io/tags/java/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/java/</guid>
+      <link>http://localhost:1313/tags/java/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/java/</guid>
       <description></description>
     </item>
     <item>
-      <title>Performance</title>
-      <link>https://hazriqpedia.github.io/tags/performance/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/performance/</guid>
+      <title>Quarkus</title>
+      <link>http://localhost:1313/tags/quarkus/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/quarkus/</guid>
       <description></description>
     </item>
     <item>
-      <title>Primitives</title>
-      <link>https://hazriqpedia.github.io/tags/primitives/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/primitives/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Wrapper Classes</title>
-      <link>https://hazriqpedia.github.io/tags/wrapper-classes/</link>
-      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/wrapper-classes/</guid>
+      <title>Record</title>
+      <link>http://localhost:1313/tags/record/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/record/</guid>
       <description></description>
     </item>
     <item>
       <title>AWS</title>
-      <link>https://hazriqpedia.github.io/tags/aws/</link>
-      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/aws/</guid>
+      <link>http://localhost:1313/tags/aws/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>http://localhost:1313/tags/aws/</guid>
       <description></description>
     </item>
     <item>
-      <title>Costs</title>
-      <link>https://hazriqpedia.github.io/tags/costs/</link>
-      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/costs/</guid>
+      <title>Cloud</title>
+      <link>http://localhost:1313/tags/cloud/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>http://localhost:1313/tags/cloud/</guid>
       <description></description>
     </item>
     <item>
-      <title>DynamoDB</title>
-      <link>https://hazriqpedia.github.io/tags/dynamodb/</link>
-      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/dynamodb/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>NoSQL</title>
-      <link>https://hazriqpedia.github.io/tags/nosql/</link>
-      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/nosql/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>DaX</title>
-      <link>https://hazriqpedia.github.io/tags/dax/</link>
-      <pubDate>Sun, 10 Aug 2025 11:11:51 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/dax/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>IaC</title>
-      <link>https://hazriqpedia.github.io/tags/iac/</link>
-      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/iac/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Infrastructure-as-Code</title>
-      <link>https://hazriqpedia.github.io/tags/infrastructure-as-code/</link>
-      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/infrastructure-as-code/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>SAM</title>
-      <link>https://hazriqpedia.github.io/tags/sam/</link>
-      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/sam/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Serverless</title>
-      <link>https://hazriqpedia.github.io/tags/serverless/</link>
-      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/serverless/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Functions</title>
-      <link>https://hazriqpedia.github.io/tags/functions/</link>
-      <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/functions/</guid>
+      <title>EC2</title>
+      <link>http://localhost:1313/tags/ec2/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>http://localhost:1313/tags/ec2/</guid>
       <description></description>
     </item>
     <item>
       <title>Lambda</title>
-      <link>https://hazriqpedia.github.io/tags/lambda/</link>
-      <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/lambda/</guid>
+      <link>http://localhost:1313/tags/lambda/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>http://localhost:1313/tags/lambda/</guid>
       <description></description>
     </item>
     <item>
-      <title>SNS</title>
-      <link>https://hazriqpedia.github.io/tags/sns/</link>
-      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/sns/</guid>
+      <title>Serverless</title>
+      <link>http://localhost:1313/tags/serverless/</link>
+      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
+      <guid>http://localhost:1313/tags/serverless/</guid>
       <description></description>
     </item>
     <item>
-      <title>SQS</title>
-      <link>https://hazriqpedia.github.io/tags/sqs/</link>
-      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/sqs/</guid>
+      <title>Async</title>
+      <link>http://localhost:1313/tags/async/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>http://localhost:1313/tags/async/</guid>
       <description></description>
     </item>
     <item>
-      <title>API</title>
-      <link>https://hazriqpedia.github.io/tags/api/</link>
-      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/api/</guid>
+      <title>Back-to-Basics</title>
+      <link>http://localhost:1313/tags/back-to-basics/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>http://localhost:1313/tags/back-to-basics/</guid>
       <description></description>
     </item>
     <item>
-      <title>Backend</title>
-      <link>https://hazriqpedia.github.io/tags/backend/</link>
-      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/backend/</guid>
+      <title>Beginner</title>
+      <link>http://localhost:1313/tags/beginner/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>http://localhost:1313/tags/beginner/</guid>
       <description></description>
     </item>
     <item>
-      <title>Express</title>
-      <link>https://hazriqpedia.github.io/tags/express/</link>
-      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/express/</guid>
+      <title>Concurrency</title>
+      <link>http://localhost:1313/tags/concurrency/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>http://localhost:1313/tags/concurrency/</guid>
       <description></description>
     </item>
     <item>
       <title>Javascript</title>
-      <link>https://hazriqpedia.github.io/tags/javascript/</link>
+      <link>http://localhost:1313/tags/javascript/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>http://localhost:1313/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Threads</title>
+      <link>http://localhost:1313/tags/threads/</link>
+      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
+      <guid>http://localhost:1313/tags/threads/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bigdecimal</title>
+      <link>http://localhost:1313/tags/bigdecimal/</link>
+      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/bigdecimal/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data-Types</title>
+      <link>http://localhost:1313/tags/data-types/</link>
+      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/data-types/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Double</title>
+      <link>http://localhost:1313/tags/double/</link>
+      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/double/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Float</title>
+      <link>http://localhost:1313/tags/float/</link>
+      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/float/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Primitive</title>
+      <link>http://localhost:1313/tags/primitive/</link>
+      <pubDate>Sun, 19 Oct 2025 09:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/primitive/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Latency</title>
+      <link>http://localhost:1313/tags/latency/</link>
+      <pubDate>Sat, 04 Oct 2025 23:00:38 +0800</pubDate>
+      <guid>http://localhost:1313/tags/latency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Load</title>
+      <link>http://localhost:1313/tags/load/</link>
+      <pubDate>Sat, 04 Oct 2025 23:00:38 +0800</pubDate>
+      <guid>http://localhost:1313/tags/load/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing</title>
+      <link>http://localhost:1313/tags/testing/</link>
+      <pubDate>Sat, 04 Oct 2025 23:00:38 +0800</pubDate>
+      <guid>http://localhost:1313/tags/testing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Framework</title>
+      <link>http://localhost:1313/tags/framework/</link>
+      <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
+      <guid>http://localhost:1313/tags/framework/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mutiny</title>
+      <link>http://localhost:1313/tags/mutiny/</link>
+      <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
+      <guid>http://localhost:1313/tags/mutiny/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Non-Blocking</title>
+      <link>http://localhost:1313/tags/non-blocking/</link>
+      <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
+      <guid>http://localhost:1313/tags/non-blocking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reactive</title>
+      <link>http://localhost:1313/tags/reactive/</link>
+      <pubDate>Fri, 03 Oct 2025 22:26:58 +0800</pubDate>
+      <guid>http://localhost:1313/tags/reactive/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cloud-Native</title>
+      <link>http://localhost:1313/tags/cloud-native/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>http://localhost:1313/tags/cloud-native/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Performance</title>
+      <link>http://localhost:1313/tags/performance/</link>
+      <pubDate>Wed, 01 Oct 2025 17:08:30 +0800</pubDate>
+      <guid>http://localhost:1313/tags/performance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Autoboxing</title>
+      <link>http://localhost:1313/tags/autoboxing/</link>
+      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
+      <guid>http://localhost:1313/tags/autoboxing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Code Review</title>
+      <link>http://localhost:1313/tags/code-review/</link>
+      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
+      <guid>http://localhost:1313/tags/code-review/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Primitives</title>
+      <link>http://localhost:1313/tags/primitives/</link>
+      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
+      <guid>http://localhost:1313/tags/primitives/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Wrapper Classes</title>
+      <link>http://localhost:1313/tags/wrapper-classes/</link>
+      <pubDate>Tue, 23 Sep 2025 22:26:34 +0800</pubDate>
+      <guid>http://localhost:1313/tags/wrapper-classes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Costs</title>
+      <link>http://localhost:1313/tags/costs/</link>
+      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
+      <guid>http://localhost:1313/tags/costs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DynamoDB</title>
+      <link>http://localhost:1313/tags/dynamodb/</link>
+      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
+      <guid>http://localhost:1313/tags/dynamodb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NoSQL</title>
+      <link>http://localhost:1313/tags/nosql/</link>
+      <pubDate>Sun, 10 Aug 2025 13:15:40 +0800</pubDate>
+      <guid>http://localhost:1313/tags/nosql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DaX</title>
+      <link>http://localhost:1313/tags/dax/</link>
+      <pubDate>Sun, 10 Aug 2025 11:11:51 +0800</pubDate>
+      <guid>http://localhost:1313/tags/dax/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IaC</title>
+      <link>http://localhost:1313/tags/iac/</link>
+      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
+      <guid>http://localhost:1313/tags/iac/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Infrastructure-as-Code</title>
+      <link>http://localhost:1313/tags/infrastructure-as-code/</link>
+      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
+      <guid>http://localhost:1313/tags/infrastructure-as-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SAM</title>
+      <link>http://localhost:1313/tags/sam/</link>
+      <pubDate>Sun, 03 Aug 2025 07:34:21 +0800</pubDate>
+      <guid>http://localhost:1313/tags/sam/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Functions</title>
+      <link>http://localhost:1313/tags/functions/</link>
+      <pubDate>Sun, 27 Jul 2025 06:56:44 +0800</pubDate>
+      <guid>http://localhost:1313/tags/functions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SNS</title>
+      <link>http://localhost:1313/tags/sns/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>http://localhost:1313/tags/sns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SQS</title>
+      <link>http://localhost:1313/tags/sqs/</link>
+      <pubDate>Tue, 15 Jul 2025 06:17:54 +0800</pubDate>
+      <guid>http://localhost:1313/tags/sqs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>API</title>
+      <link>http://localhost:1313/tags/api/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/javascript/</guid>
+      <guid>http://localhost:1313/tags/api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Express</title>
+      <link>http://localhost:1313/tags/express/</link>
+      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
+      <guid>http://localhost:1313/tags/express/</guid>
       <description></description>
     </item>
     <item>
       <title>JS</title>
-      <link>https://hazriqpedia.github.io/tags/js/</link>
+      <link>http://localhost:1313/tags/js/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/js/</guid>
+      <guid>http://localhost:1313/tags/js/</guid>
       <description></description>
     </item>
     <item>
       <title>Node</title>
-      <link>https://hazriqpedia.github.io/tags/node/</link>
+      <link>http://localhost:1313/tags/node/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/node/</guid>
+      <guid>http://localhost:1313/tags/node/</guid>
       <description></description>
     </item>
     <item>
       <title>Node.js</title>
-      <link>https://hazriqpedia.github.io/tags/node.js/</link>
+      <link>http://localhost:1313/tags/node.js/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/node.js/</guid>
+      <guid>http://localhost:1313/tags/node.js/</guid>
       <description></description>
     </item>
     <item>
       <title>Defaultdict</title>
-      <link>https://hazriqpedia.github.io/tags/defaultdict/</link>
+      <link>http://localhost:1313/tags/defaultdict/</link>
       <pubDate>Wed, 11 Jun 2025 17:13:13 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/defaultdict/</guid>
+      <guid>http://localhost:1313/tags/defaultdict/</guid>
       <description></description>
     </item>
     <item>
       <title>PY</title>
-      <link>https://hazriqpedia.github.io/tags/py/</link>
+      <link>http://localhost:1313/tags/py/</link>
       <pubDate>Wed, 11 Jun 2025 17:13:13 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/py/</guid>
+      <guid>http://localhost:1313/tags/py/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>https://hazriqpedia.github.io/tags/python/</link>
+      <link>http://localhost:1313/tags/python/</link>
       <pubDate>Wed, 11 Jun 2025 17:13:13 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/python/</guid>
+      <guid>http://localhost:1313/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Life</title>
-      <link>https://hazriqpedia.github.io/tags/life/</link>
+      <link>http://localhost:1313/tags/life/</link>
       <pubDate>Wed, 04 Jun 2025 14:38:26 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/life/</guid>
+      <guid>http://localhost:1313/tags/life/</guid>
       <description></description>
     </item>
   </channel>
