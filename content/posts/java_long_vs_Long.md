@@ -2,7 +2,7 @@
 date = '2025-09-23T22:26:34+08:00'
 draft = false
 title = 'Java: Long vs long'
-tags = ["Java", "Primitives", "Wrapper Classes", "Autoboxing", "Performance", "Code Review"]
+tags = ["Java", "Primitives", "Wrapper Classes", "Autoboxing", "Performance", "Code Review", "back-to-basics"]
 +++
 
 Recently, I got a PR review comment that made me pause. It was about something I thought I already knew well: choosing between `long` and `Long` in Java.
