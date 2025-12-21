@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Backend | Hazriq&#39;s Dev Chaos</title>
+<title>Record | Hazriq&#39;s Dev Chaos</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/backend/">
+<link rel="canonical" href="https://hazriqpedia.github.io/tags/record/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/backend/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/backend/">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/record/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/record/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/backend/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/record/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Backend">
+  <meta property="og:title" content="Record">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Backend">
+<meta name="twitter:title" content="Record">
 <meta name="twitter:description" content="">
 
 </head>
@@ -128,7 +128,7 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    Backend
+    Record
   </h1>
 </header>
 
@@ -346,154 +346,6 @@
   </div>
   <footer class="entry-footer"><span title='2025-12-14 17:30:00 +0800 +08'>December 14, 2025</span>&nbsp;·&nbsp;6 min</footer>
   <a class="entry-link" aria-label="post link to Java: Record on Quarkus/ Newer Java" href="https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">JS: Express.js
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p><code>Express.js</code> is a minimalist and flexible <code>Node.js</code> web application framework that provides a robust set of features for building web and mobile applications and APIs. If you&rsquo;re looking to build fast, scalable, and efficient server-side applications with JavaScript, Express.js is your go-to choice. Its unopinionated nature gives you immense freedom,
-<!-- raw HTML omitted --></p>
-<h3 id="setting-up">Setting Up</h3>
-<p>Getting started with Express.js is straightforward. If you already have a Node.js project, or if you&rsquo;re starting a new one, follow these simple steps:</p>
-<ul>
-<li>Initializing a Node.js project (<code>npm init</code>).</li>
-<li>Installing Express.js (<code>npm install express</code>).</li>
-</ul>
-<p>Now, you&rsquo;re ready to create your first Express server!</p>
-<h3 id="core-concepts">Core Concepts</h3>
-<p>Understanding these fundamental concepts is key to mastering Express.js:</p>
-<h4 id="routing">Routing</h4>
-<p>Routing is the process of determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, PUT, DELETE, etc.).</p>
-<p>In Express.js, you define routes using methods corresponding to HTTP verbs on the app object (an instance of Express).</p>
-<p>HTTP Methods (Verbs): These map directly to common operations:</p>
-<ul>
-<li><code>GET</code>: Retrieve data (e.g., fetching a list of users).</li>
-<li><code>POST</code>: Submit data to be processed (e.g., creating a new user).</li>
-<li><code>PUT</code>: Update existing data (e.g., modifying a user&rsquo;s details).</li>
-<li><code>DELETE</code>: Remove data (e.g., deleting a user).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;express&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to the root URL
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Hello from Express!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>([
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Alice&#34;</span> },
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bob&#34;</span> },
-</span></span><span style="display:flex;"><span>  ]);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// POST request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Logic to create a new user
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">201</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;User created successfully!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Server listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Route Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /users/123
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Fetching user with ID: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Query Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /search?q=nodejs&amp;category=backend
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/search&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">q</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">searchTerm</span>, <span style="color:#a6e22e">category</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Searching for &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">searchTerm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; in &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">category</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; category.`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h4 id="middleware">Middleware</h4>
-<p>Middleware functions are core to Express.js. They are functions that have access to the <code>request</code> object (<code>req</code>), the response object (<code>res</code>), and the <code>next()</code> function in the application&rsquo;s request-response cycle. The <code>next()</code> function is crucial as it passes control to the next middleware function.</p>
-<p>Think of middleware as a series of steps a request goes through before reaching its final route handler.</p>
-<ul>
-<li>
-<p>How Middleware Works: Requests flow sequentially through middleware functions. Each function can perform operations, modify <code>req</code> or <code>res</code>, end the cycle by sending a response, or pass control to the next middleware via <code>next()</code>.</p>
-</li>
-<li>
-<p>Common Use Cases:</p>
-<ul>
-<li><strong>Logging</strong>: Recording details about incoming requests.</li>
-<li><strong>Authentication/Authorization</strong>: Verifying user credentials and permissions.</li>
-<li><strong>Body Parsing</strong>: Express itself doesn&rsquo;t parse request bodies by default. Middleware like <code>express.json()</code> and <code>express.urlencoded()</code> are essential for handling JSON and URL-encoded form data.</li>
-<li><strong>Serving Static Files</strong>: Handled by express.static().</li>
-<li><strong>Error Handling</strong>: Special middleware for catching and processing errors.</li>
-</ul>
-</li>
-</ul>
-<p>Example of Custom Middleware:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// A simple logger middleware
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logger</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`[</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">] </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">next</span>(); <span style="color:#75715e">// Pass control to the next handler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">logger</span>); <span style="color:#75715e">// Use the middleware for all incoming requests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Home Page with Logger!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h4 id="handling-request-req-and-response-res">Handling Request (req) and Response (res)</h4>
-<ul>
-<li><code>req</code> (Request Object):
-<ul>
-<li>Accessing request headers (<code>req.header</code>).</li>
-<li>Accessing route and query parameters (<code>req.params</code>, <code>req.query</code>).</li>
-<li>Accessing the request body (<code>req.body</code>).</li>
-</ul>
-</li>
-<li><code>res</code> (Response Object):
-<ul>
-<li>Sending various types of responses: <code>res.send()</code>, <code>res.json()</code>, <code>res.sendFile()</code>.</li>
-<li>Setting HTTP status codes: <code>res.status()</code>.</li>
-<li>Redirecting requests: <code>res.redirect()</code>.</li>
-<li>Chaining methods (e.g., <code>res.status(200).json(...)</code>).</li>
-</ul>
-</li>
-</ul>
-<h3 id="typical-project-structure">Typical Project Structure</h3>
-<p>While Express is unopinionated, a well-organized project structure is crucial for maintainability and scalability, especially as your application grows. Here&rsquo;s a common pattern:</p>
-<pre tabindex="0"><code>my-express-app/
-├── node_modules/
-├── server.js             # Entry point: Starts the server, sets up environment
-├── app.js                # Express app configuration: Defines middleware, connects routes
-├── routes/               # Defines API endpoints and links to controllers
-│   ├── auth.routes.js
-│   └── user.routes.js
-├── controllers/          # Contains request handlers: Logic for specific routes, interacts with services
-│   ├── auth.controller.js
-│   └── user.controller.js
-├── services/             # Business logic: Handles complex operations, orchestrates data flow
-│   ├── auth.service.js
-│   └── user.service.js
-├── models/               # Data schema definitions (e.g., Mongoose schemas, Sequelize models)
-│   ├── User.js
-│   └── Product.js
-├── middlewares/          # Custom middleware functions
-│   ├── auth.middleware.js
-│   └── error.middleware.js
-├── config/               # Configuration files (database settings, environment variables)
-│   └── db.config.js
-├── package.json
-├── package-lock.json
-└── .env                  # Environment variables
-</code></pre><h3 id="sample-project">Sample Project</h3>
-<p>( coming soon )</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-06-23 10:01:29 +0800 +08'>June 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to JS: Express.js" href="https://hazriqpedia.github.io/posts/js-express.js/"></a>
 </article>
     </main>
     

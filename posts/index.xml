@@ -6,8 +6,17 @@
     <description>Recent content in Posts on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Oct 2025 18:54:27 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Dec 2025 17:30:00 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java: Record on Quarkus/ Newer Java</title>
+      <link>https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/</guid>
+      <description>&lt;p&gt;As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the &lt;strong&gt;&lt;code&gt;record&lt;/code&gt;&lt;/strong&gt; keyword.&lt;/p&gt;
+&lt;p&gt;If you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, &lt;code&gt;equals()&lt;/code&gt;, &lt;code&gt;hashCode()&lt;/code&gt;, &lt;code&gt;toString()&lt;/code&gt;—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.&lt;/p&gt;
+&lt;p&gt;In this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>AWS: EC2 vs Lambda</title>
       <link>https://hazriqpedia.github.io/posts/aws-lambda-vs-ec2/</link>

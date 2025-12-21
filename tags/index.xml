@@ -6,8 +6,43 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Oct 2025 18:54:27 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Dec 2025 17:30:00 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Backend</title>
+      <link>https://hazriqpedia.github.io/tags/backend/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/backend/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DTO</title>
+      <link>https://hazriqpedia.github.io/tags/dto/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/dto/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>https://hazriqpedia.github.io/tags/java/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Quarkus</title>
+      <link>https://hazriqpedia.github.io/tags/quarkus/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/quarkus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Record</title>
+      <link>https://hazriqpedia.github.io/tags/record/</link>
+      <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/record/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AWS</title>
       <link>https://hazriqpedia.github.io/tags/aws/</link>
@@ -72,24 +107,10 @@
       <description></description>
     </item>
     <item>
-      <title>Java</title>
-      <link>https://hazriqpedia.github.io/tags/java/</link>
-      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/java/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Javascript</title>
       <link>https://hazriqpedia.github.io/tags/javascript/</link>
       <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/javascript/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Quarkus</title>
-      <link>https://hazriqpedia.github.io/tags/quarkus/</link>
-      <pubDate>Mon, 20 Oct 2025 19:09:50 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/quarkus/</guid>
       <description></description>
     </item>
     <item>
@@ -300,13 +321,6 @@
       <link>https://hazriqpedia.github.io/tags/api/</link>
       <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/api/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Backend</title>
-      <link>https://hazriqpedia.github.io/tags/backend/</link>
-      <pubDate>Mon, 23 Jun 2025 10:01:29 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/backend/</guid>
       <description></description>
     </item>
     <item>

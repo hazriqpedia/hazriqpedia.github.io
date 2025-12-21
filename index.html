@@ -174,6 +174,222 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Java: Record on Quarkus/ Newer Java
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the <strong><code>record</code></strong> keyword.</p>
+<p>If you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.</p>
+<p>In this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.</p>
+<h2 id="what-is-a-record">What is a Record?</h2>
+<p>Introduced officially in Java 16, a <strong>Record</strong> is a special kind of class that acts as a transparent carrier for immutable data.</p>
+<h3 id="the-old-way-java-8">The Old Way (Java 8)</h3>
+<p>To create a simple object to hold a user&rsquo;s data, we had to write this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserDTO</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String email;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">UserDTO</span>(String name, String email) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">email</span> <span style="color:#f92672">=</span> email;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getName</span>() { <span style="color:#66d9ef">return</span> name; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getEmail</span>() { <span style="color:#66d9ef">return</span> email; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... plus equals(), hashCode(), and toString()</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="the-new-way-java-16">The New Way (Java 16+)</h3>
+<p>With Records, the same can be achieved with much less boilerplate:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(String name, String email) {}
+</span></span></code></pre></div><p>The compiler automatically provides the constructor, getters (called accessors), and implementations for <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>.</p>
+<p>That’s it. It is immutable by default, meaning once it&rsquo;s created, the data cannot change. This makes it thread-safe and perfect for passing data around.</p>
+<h2 id="dtos-and-records-a-perfect-match">DTOs and Records: A Perfect Match</h2>
+<p>DTO (Data Transfer Object) is a design pattern. It&rsquo;s an object used to transport data between processes or layers (e.g., from your API to your UI).</p>
+<p>Why we use DTOs:</p>
+<ul>
+<li><strong>Decoupling</strong>: They separate the internal data representation from the external API.</li>
+<li><strong>Validation</strong>: They can enforce data constraints.</li>
+<li><strong>Clarity</strong>: They make it clear what data is being transferred.</li>
+</ul>
+<p>Because DTOs are primarily about carrying data, Records are an excellent fit. They provide a concise way to define these data carriers without unnecessary boilerplate. So when you need a DTO, consider using a Record. Record in Java is created specifically for this purpose.</p>
+<h2 id="using-records-in-a-quarkus-rest-api">Using Records in a Quarkus REST API</h2>
+<p>Let’s see how to use Records in a Quarkus REST API.</p>
+<p>Typical structure of the project:</p>
+<pre tabindex="0"><code>src/main/java/com/example/
+    ├── dto/
+    │   └── UserDTO.java
+    └── controllers/
+        └── UserController.java
+</code></pre><ol>
+<li><strong>Define the Record</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(String name, String email) {}
+</span></span></code></pre></div><ol start="2">
+<li><strong>Create a REST Endpoint</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.core.MediaType;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.core.Response;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.example.dto.UserDTO;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Produces</span>(MediaType.<span style="color:#a6e22e">APPLICATION_JSON</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Consumes</span>(MediaType.<span style="color:#a6e22e">APPLICATION_JSON</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserController</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@POST</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Response <span style="color:#a6e22e">createUser</span>(UserDTO user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Process the user data (e.g., save to database)</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Creating user: &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">name</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with email: &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">email</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response.<span style="color:#a6e22e">status</span>(Response.<span style="color:#a6e22e">Status</span>.<span style="color:#a6e22e">CREATED</span>).<span style="color:#a6e22e">entity</span>(user).<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/{id}&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Response <span style="color:#a6e22e">getUser</span>(<span style="color:#a6e22e">@PathParam</span>(<span style="color:#e6db74">&#34;id&#34;</span>) Long id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate fetching user from database</span>
+</span></span><span style="display:flex;"><span>        UserDTO user <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserDTO(<span style="color:#e6db74">&#34;John Doe&#34;</span>, <span style="color:#e6db74">&#34;john@example.com&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response.<span style="color:#a6e22e">ok</span>(user).<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="sample-request-and-response-payloads">Sample Request and Response Payloads</h2>
+<h3 id="creating-a-user-post-request">Creating a User (POST Request)</h3>
+<p><strong>Request:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8080/users <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;name&#34;: &#34;Alice Johnson&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;email&#34;: &#34;alice@example.com&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }&#39;</span>
+</span></span></code></pre></div><p><strong>Response:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Alice Johnson&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;alice@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="retrieving-a-user-get-request">Retrieving a User (GET Request)</h3>
+<p><strong>Request:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X GET http://localhost:8080/users/1
+</span></span></code></pre></div><p><strong>Response:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;John Doe&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;john@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="how-records-help-with-json-serialization">How Records Help with JSON Serialization</h2>
+<p>One of the biggest advantages of using Records as DTOs is how seamlessly they work with JSON serialization/deserialization:</p>
+<ol>
+<li><strong>Automatic Field Mapping</strong>: The record components automatically map to JSON fields</li>
+<li><strong>Clean JSON Output</strong>: No extra boilerplate fields or methods are serialized</li>
+<li><strong>Type Safety</strong>: The compiler ensures all required fields are present</li>
+<li><strong>Immutability</strong>: Once created, the data cannot be accidentally modified</li>
+</ol>
+<p>Compare this to traditional POJOs where you might accidentally serialize internal state or have inconsistent field naming.</p>
+<h2 id="adding-validation-with-records">Adding Validation with Records</h2>
+<p>Records work excellently with Bean Validation (JSR-303). Let&rsquo;s enhance our <code>UserDTO</code> with validation.</p>
+<p>Before adding validation, our record looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(String name, String email) {}
+</span></span></code></pre></div><p>Now, we improve it by adding validation annotations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.validation.constraints.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span>(message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Name cannot be blank&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Size</span>(min <span style="color:#f92672">=</span> 2, max <span style="color:#f92672">=</span> 50, message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Name must be between 2 and 50 characters&#34;</span>)
+</span></span><span style="display:flex;"><span>    String name,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span>(message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Email cannot be blank&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Email</span>(message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Email should be valid&#34;</span>)
+</span></span><span style="display:flex;"><span>    String email
+</span></span><span style="display:flex;"><span>) {}
+</span></span></code></pre></div><p>PS. It&rsquo;s the same record definition, but with validation annotations. So, this solves the problem of validating incoming data in a clean way.</p>
+<p>Update your controller to handle validation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.validation.Valid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Produces</span>(MediaType.<span style="color:#a6e22e">APPLICATION_JSON</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Consumes</span>(MediaType.<span style="color:#a6e22e">APPLICATION_JSON</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserController</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@POST</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Response <span style="color:#a6e22e">createUser</span>(<span style="color:#a6e22e">@Valid</span> UserDTO user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Validation happens automatically before this method is called</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Creating user: &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">name</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with email: &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">email</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response.<span style="color:#a6e22e">status</span>(Response.<span style="color:#a6e22e">Status</span>.<span style="color:#a6e22e">CREATED</span>).<span style="color:#a6e22e">entity</span>(user).<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... rest of the methods</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>@Valid</code> annotation ensures that the incoming <code>UserDTO</code> is validated according to the constraints defined in the record. If validation fails, Quarkus will automatically return a 400 Bad Request response with details about the violations.</p>
+<h3 id="validation-in-action">Validation in Action</h3>
+<p><strong>Invalid Request:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8080/users <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;name&#34;: &#34;&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;email&#34;: &#34;invalid-email&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }&#39;</span>
+</span></span></code></pre></div><p><strong>Error Response:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Constraint Violation&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#ae81ff">400</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;violations&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Name cannot be blank&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;email&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Email should be valid&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="advanced-record-features">Advanced Record Features</h2>
+<h3 id="custom-methods-in-records">Custom Methods in Records</h3>
+<p>While Records are primarily for data, you can add custom methods:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span> String name,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span> <span style="color:#a6e22e">@Email</span> String email
+</span></span><span style="display:flex;"><span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Custom method to get display name</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">displayName</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> name.<span style="color:#a6e22e">toUpperCase</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validation in constructor</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> UserDTO {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (name <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> name.<span style="color:#a6e22e">trim</span>().<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException(<span style="color:#e6db74">&#34;Name cannot be empty&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="nested-records-for-complex-data">Nested Records for Complex Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">Address</span>(String street, String city, String zipCode) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserProfileDTO</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span> String name,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span> <span style="color:#a6e22e">@Email</span> String email,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Valid</span> Address address
+</span></span><span style="display:flex;"><span>) {}
+</span></span></code></pre></div><h2 id="why-records-are-perfect-for-modern-java-development">Why Records are Perfect for Modern Java Development</h2>
+<ol>
+<li><strong>Less Boilerplate</strong>: Focus on business logic, not getter/setter noise</li>
+<li><strong>Immutability by Default</strong>: Thread-safe and predictable</li>
+<li><strong>Pattern Matching Ready</strong>: Works great with newer Java features like pattern matching (Java 17+)</li>
+<li><strong>Validation Friendly</strong>: Integrates seamlessly with Bean Validation</li>
+<li><strong>JSON Serialization</strong>: Works out-of-the-box with Jackson and other JSON libraries</li>
+<li><strong>Performance</strong>: Often more memory-efficient than traditional classes</li>
+</ol>
+<p>&ndash;</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Records represent a significant step forward in Java&rsquo;s evolution. They eliminate much of the boilerplate code that made Java verbose while providing type safety and immutability.</p>
+<p>For REST APIs in Quarkus, Records make excellent DTOs. They&rsquo;re concise, safe, and integrate well with validation and serialization frameworks. If you&rsquo;re working with Java 16+ (and you should be!), start using Records for your data transfer objects.</p>
+<p>Next time you need to create a DTO, skip the traditional class and reach for a Record. Your future self will thank you for the cleaner, more maintainable code.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-12-14 17:30:00 +0800 +08'>December 14, 2025</span>&nbsp;·&nbsp;6 min</footer>
+  <a class="entry-link" aria-label="post link to Java: Record on Quarkus/ Newer Java" href="https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">AWS: EC2 vs Lambda
     </h2>
   </header>
@@ -1517,122 +1733,6 @@ If you have 100 GB of archived order history:</p>
   </div>
   <footer class="entry-footer"><span title='2025-08-10 13:15:40 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to AWS: DynamoDB & IA Class" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; DAX Cost Factors
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>We discussed about DynamoDB in <a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">previous post</a>, but let&rsquo;s dive deeper into the cost factors associated with DynamoDB and its accelerator, DAX (DynamoDB Accelerator).</p>
-<h3 id="recap">Recap</h3>
-<ul>
-<li>
-<p><strong>Amazon DynamoDB (DDB)</strong> is AWS’s fully managed NoSQL database service, designed for applications that require consistent performance at any scale.</p>
-</li>
-<li>
-<p><strong>Amazon DynamoDB Accelerator (DAX)</strong> is an in-memory caching service for DynamoDB.
-Think of it as a turbocharger — it reduces read latency from milliseconds to microseconds by storing frequently accessed data in memory.</p>
-</li>
-</ul>
-<p>Together, DDB and DAX can significantly improve application performance — but they also come with different cost models you’ll want to understand before adopting.</p>
-<h4 id="when-to-use-dax">When to Use DAX?</h4>
-<p>DAX is particularly useful when:</p>
-<ul>
-<li>Your workload has high read traffic with repeated queries for the same items.</li>
-<li>You want microsecond read latency for real-time user experience.</li>
-<li>You aim to offload read traffic from DynamoDB to reduce provisioned read capacity usage.</li>
-</ul>
-<p><strong>Example</strong>: A database for AI model training, where the same training data is accessed repeatedly.</p>
-<h4 id="skip-dax-when">Skip DAX when:</h4>
-<ul>
-<li>Your workload is write-heavy with low read repetition.</li>
-<li>Your queries are strongly consistent (DAX only supports eventually consistent reads).</li>
-<li>Your access patterns are highly dynamic and unpredictable — the cache hit rate might be low.</li>
-</ul>
-<h3 id="understanding-dynamodb-costs">Understanding DynamoDB Costs</h3>
-<p>DynamoDB costs come from three main areas:</p>
-<ul>
-<li><strong>Reading Data</strong>
-<ul>
-<li>Imagine a reading allowance — every time you check a page from a book, it uses part of your allowance.</li>
-<li>You can either pay per read (On-Demand) or buy a monthly “reading subscription” (Provisioned) if you know your usual usage.</li>
-</ul>
-</li>
-<li><strong>Writing Data</strong>
-<ul>
-<li>Adding or updating books also uses an allowance — think of it as your “writing subscription” or “per-write” payment.</li>
-</ul>
-</li>
-<li><strong>Storing Data</strong>
-<ul>
-<li>This is your bookshelf space.</li>
-<li>Regular storage (Standard) is always ready but costs more.</li>
-<li>Cheaper storage (Standard-IA) is for books you rarely read, but you’ll pay a small fee each time you take one.</li>
-</ul>
-</li>
-</ul>
-<p>Extras You Might Pay For:</p>
-<ul>
-<li>Backups — like taking daily photos of your bookshelf.</li>
-<li>Copies in other regions — like having the same library in multiple cities.</li>
-</ul>
-<h3 id="understanding-dax-costs">Understanding DAX Costs</h3>
-<ol start="5">
-<li>DAX Costs
-DAX pricing is per node-hour, depending on node type:</li>
-</ol>
-<ul>
-<li>Smallest node (dax.t3.small) is the cheapest, suitable for dev/test.</li>
-<li>Larger nodes (dax.r5.large, etc.) cost more but handle higher throughput.</li>
-<li>DAX clusters require at least 3 nodes for fault tolerance in production.</li>
-</ul>
-<p>Note: DAX charges are separate from DynamoDB — even if your reads come from the cache.</p>
-<h3 id="cost-comparison">Cost Comparison</h3>
-<table>
-  <thead>
-      <tr>
-          <th style="text-align: center">Component</th>
-          <th style="text-align: center">Without DAX (Provisioned)</th>
-          <th style="text-align: center">With DAX (Provisioned)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">Read Capacity Cost</td>
-          <td style="text-align: center">High (due to all reads hitting DDB)</td>
-          <td style="text-align: center">Lower (fewer RCUs needed)</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Write Capacity Cost</td>
-          <td style="text-align: center">Same</td>
-          <td style="text-align: center">Same</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Storage Cost</td>
-          <td style="text-align: center">Same</td>
-          <td style="text-align: center">Same</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">DAX Cost</td>
-          <td style="text-align: center">$0</td>
-          <td style="text-align: center">Node-hour charges</td>
-      </tr>
-  </tbody>
-</table>
-<blockquote>
-<p>If your cache hit rate is low, DAX might increase costs without much benefit.</p></blockquote>
-<h3 id="final-thoughts">Final Thoughts</h3>
-<ul>
-<li>Use DAX if you have heavy, repeated reads and need lightning-fast results.</li>
-<li>Use Standard-IA storage for rarely accessed data — but don’t forget the retrieval cost.</li>
-<li>Always measure first: monitor read/write usage and cache hit rates before committing.</li>
-</ul>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-08-10 11:11:51 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: DynamoDB & DAX Cost Factors" href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

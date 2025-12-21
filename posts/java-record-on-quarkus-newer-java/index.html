@@ -5,11 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Backend | Hazriq&#39;s Dev Chaos</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+<title>Java: Record on Quarkus/ Newer Java | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="java, quarkus, backend, Record, DTO">
+<meta name="description" content="As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the record keyword.
+If you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, equals(), hashCode(), toString()—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.
+In this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/tags/backend/">
+<link rel="canonical" href="https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -18,8 +20,7 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/backend/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/backend/">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,18 +57,81 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/backend/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Backend">
+  <meta property="og:title" content="Java: Record on Quarkus/ Newer Java">
+  <meta property="og:description" content="As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the record keyword.
+If you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, equals(), hashCode(), toString()—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.
+In this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.">
   <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-14T17:30:00+08:00">
+    <meta property="article:modified_time" content="2025-12-14T17:30:00+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Quarkus">
+    <meta property="article:tag" content="Backend">
+    <meta property="article:tag" content="Record">
+    <meta property="article:tag" content="DTO">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Backend">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Java: Record on Quarkus/ Newer Java">
+<meta name="twitter:description" content="As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the record keyword.
+If you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, equals(), hashCode(), toString()—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.
+In this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.">
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hazriqpedia.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Java: Record on Quarkus/ Newer Java",
+      "item": "https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java: Record on Quarkus/ Newer Java",
+  "name": "Java: Record on Quarkus\/ Newer Java",
+  "description": "As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the record keyword.\nIf you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, equals(), hashCode(), toString()—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.\nIn this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.\n",
+  "keywords": [
+    "java", "quarkus", "backend", "Record", "DTO"
+  ],
+  "articleBody": "As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the record keyword.\nIf you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, equals(), hashCode(), toString()—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.\nIn this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.\nWhat is a Record? Introduced officially in Java 16, a Record is a special kind of class that acts as a transparent carrier for immutable data.\nThe Old Way (Java 8) To create a simple object to hold a user’s data, we had to write this:\npublic class UserDTO { private final String name; private final String email; public UserDTO(String name, String email) { this.name = name; this.email = email; } public String getName() { return name; } public String getEmail() { return email; } // ... plus equals(), hashCode(), and toString() } The New Way (Java 16+) With Records, the same can be achieved with much less boilerplate:\npublic record UserDTO(String name, String email) {} The compiler automatically provides the constructor, getters (called accessors), and implementations for equals(), hashCode(), and toString().\nThat’s it. It is immutable by default, meaning once it’s created, the data cannot change. This makes it thread-safe and perfect for passing data around.\nDTOs and Records: A Perfect Match DTO (Data Transfer Object) is a design pattern. It’s an object used to transport data between processes or layers (e.g., from your API to your UI).\nWhy we use DTOs:\nDecoupling: They separate the internal data representation from the external API. Validation: They can enforce data constraints. Clarity: They make it clear what data is being transferred. Because DTOs are primarily about carrying data, Records are an excellent fit. They provide a concise way to define these data carriers without unnecessary boilerplate. So when you need a DTO, consider using a Record. Record in Java is created specifically for this purpose.\nUsing Records in a Quarkus REST API Let’s see how to use Records in a Quarkus REST API.\nTypical structure of the project:\nsrc/main/java/com/example/ ├── dto/ │ └── UserDTO.java └── controllers/ └── UserController.java Define the Record: public record UserDTO(String name, String email) {} Create a REST Endpoint: import jakarta.ws.rs.*; import jakarta.ws.rs.core.MediaType; import jakarta.ws.rs.core.Response; import com.example.dto.UserDTO; @Path(\"/users\") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON) public class UserController { @POST public Response createUser(UserDTO user) { // Process the user data (e.g., save to database) System.out.println(\"Creating user: \" + user.name() + \" with email: \" + user.email()); return Response.status(Response.Status.CREATED).entity(user).build(); } @GET @Path(\"/{id}\") public Response getUser(@PathParam(\"id\") Long id) { // Simulate fetching user from database UserDTO user = new UserDTO(\"John Doe\", \"john@example.com\"); return Response.ok(user).build(); } } Sample Request and Response Payloads Creating a User (POST Request) Request:\ncurl -X POST http://localhost:8080/users \\ -H \"Content-Type: application/json\" \\ -d '{ \"name\": \"Alice Johnson\", \"email\": \"alice@example.com\" }' Response:\n{ \"name\": \"Alice Johnson\", \"email\": \"alice@example.com\" } Retrieving a User (GET Request) Request:\ncurl -X GET http://localhost:8080/users/1 Response:\n{ \"name\": \"John Doe\", \"email\": \"john@example.com\" } How Records Help with JSON Serialization One of the biggest advantages of using Records as DTOs is how seamlessly they work with JSON serialization/deserialization:\nAutomatic Field Mapping: The record components automatically map to JSON fields Clean JSON Output: No extra boilerplate fields or methods are serialized Type Safety: The compiler ensures all required fields are present Immutability: Once created, the data cannot be accidentally modified Compare this to traditional POJOs where you might accidentally serialize internal state or have inconsistent field naming.\nAdding Validation with Records Records work excellently with Bean Validation (JSR-303). Let’s enhance our UserDTO with validation.\nBefore adding validation, our record looks like this:\npublic record UserDTO(String name, String email) {} Now, we improve it by adding validation annotations:\nimport jakarta.validation.constraints.*; public record UserDTO( @NotBlank(message = \"Name cannot be blank\") @Size(min = 2, max = 50, message = \"Name must be between 2 and 50 characters\") String name, @NotBlank(message = \"Email cannot be blank\") @Email(message = \"Email should be valid\") String email ) {} PS. It’s the same record definition, but with validation annotations. So, this solves the problem of validating incoming data in a clean way.\nUpdate your controller to handle validation:\nimport jakarta.validation.Valid; @Path(\"/users\") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON) public class UserController { @POST public Response createUser(@Valid UserDTO user) { // Validation happens automatically before this method is called System.out.println(\"Creating user: \" + user.name() + \" with email: \" + user.email()); return Response.status(Response.Status.CREATED).entity(user).build(); } // ... rest of the methods } The @Valid annotation ensures that the incoming UserDTO is validated according to the constraints defined in the record. If validation fails, Quarkus will automatically return a 400 Bad Request response with details about the violations.\nValidation in Action Invalid Request:\ncurl -X POST http://localhost:8080/users \\ -H \"Content-Type: application/json\" \\ -d '{ \"name\": \"\", \"email\": \"invalid-email\" }' Error Response:\n{ \"title\": \"Constraint Violation\", \"status\": 400, \"violations\": [ { \"field\": \"name\", \"message\": \"Name cannot be blank\" }, { \"field\": \"email\", \"message\": \"Email should be valid\" } ] } Advanced Record Features Custom Methods in Records While Records are primarily for data, you can add custom methods:\npublic record UserDTO( @NotBlank String name, @NotBlank @Email String email ) { // Custom method to get display name public String displayName() { return name.toUpperCase(); } // Validation in constructor public UserDTO { if (name != null \u0026\u0026 name.trim().isEmpty()) { throw new IllegalArgumentException(\"Name cannot be empty\"); } } } Nested Records for Complex Data public record Address(String street, String city, String zipCode) {} public record UserProfileDTO( @NotBlank String name, @NotBlank @Email String email, @Valid Address address ) {} Why Records are Perfect for Modern Java Development Less Boilerplate: Focus on business logic, not getter/setter noise Immutability by Default: Thread-safe and predictable Pattern Matching Ready: Works great with newer Java features like pattern matching (Java 17+) Validation Friendly: Integrates seamlessly with Bean Validation JSON Serialization: Works out-of-the-box with Jackson and other JSON libraries Performance: Often more memory-efficient than traditional classes –\nConclusion Records represent a significant step forward in Java’s evolution. They eliminate much of the boilerplate code that made Java verbose while providing type safety and immutability.\nFor REST APIs in Quarkus, Records make excellent DTOs. They’re concise, safe, and integrate well with validation and serialization frameworks. If you’re working with Java 16+ (and you should be!), start using Records for your data transfer objects.\nNext time you need to create a DTO, skip the traditional class and reach for a Record. Your future self will thank you for the cleaner, more maintainable code.\n",
+  "wordCount" : "1104",
+  "inLanguage": "en",
+  "datePublished": "2025-12-14T17:30:00+08:00",
+  "dateModified": "2025-12-14T17:30:00+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hazriq's Dev Chaos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hazriqpedia.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -125,25 +189,24 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Backend
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Java: Record on Quarkus/ Newer Java
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the <strong><code>record</code></strong> keyword.</p>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Java: Record on Quarkus/ Newer Java
+    </h1>
+    <div class="post-meta"><span title='2025-12-14 17:30:00 +0800 +08'>December 14, 2025</span>&nbsp;·&nbsp;6 min
+
+</div>
+  </header> 
+  <div class="post-content"><p>As I continue re-learning Java after my time away since Java 8, one of the most pleasant surprises has been the <strong><code>record</code></strong> keyword.</p>
 <p>If you remember the pain of creating POJOs (Plain Old Java Objects) in the past—private fields, getters, setters, <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>—you know it was mostly noise. Lombok helped, but now, this capability is baked right into the language.</p>
 <p>In this post, we’ll look at what Records are, why they make perfect Data Transfer Objects (DTOs), and how to use them in a Quarkus REST API.</p>
-<h2 id="what-is-a-record">What is a Record?</h2>
+<h2 id="what-is-a-record">What is a Record?<a hidden class="anchor" aria-hidden="true" href="#what-is-a-record">#</a></h2>
 <p>Introduced officially in Java 16, a <strong>Record</strong> is a special kind of class that acts as a transparent carrier for immutable data.</p>
-<h3 id="the-old-way-java-8">The Old Way (Java 8)</h3>
+<h3 id="the-old-way-java-8">The Old Way (Java 8)<a hidden class="anchor" aria-hidden="true" href="#the-old-way-java-8">#</a></h3>
 <p>To create a simple object to hold a user&rsquo;s data, we had to write this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserDTO</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String name;
@@ -159,12 +222,12 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... plus equals(), hashCode(), and toString()</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="the-new-way-java-16">The New Way (Java 16+)</h3>
+</span></span></code></pre></div><h3 id="the-new-way-java-16">The New Way (Java 16+)<a hidden class="anchor" aria-hidden="true" href="#the-new-way-java-16">#</a></h3>
 <p>With Records, the same can be achieved with much less boilerplate:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(String name, String email) {}
 </span></span></code></pre></div><p>The compiler automatically provides the constructor, getters (called accessors), and implementations for <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>.</p>
 <p>That’s it. It is immutable by default, meaning once it&rsquo;s created, the data cannot change. This makes it thread-safe and perfect for passing data around.</p>
-<h2 id="dtos-and-records-a-perfect-match">DTOs and Records: A Perfect Match</h2>
+<h2 id="dtos-and-records-a-perfect-match">DTOs and Records: A Perfect Match<a hidden class="anchor" aria-hidden="true" href="#dtos-and-records-a-perfect-match">#</a></h2>
 <p>DTO (Data Transfer Object) is a design pattern. It&rsquo;s an object used to transport data between processes or layers (e.g., from your API to your UI).</p>
 <p>Why we use DTOs:</p>
 <ul>
@@ -173,7 +236,7 @@
 <li><strong>Clarity</strong>: They make it clear what data is being transferred.</li>
 </ul>
 <p>Because DTOs are primarily about carrying data, Records are an excellent fit. They provide a concise way to define these data carriers without unnecessary boilerplate. So when you need a DTO, consider using a Record. Record in Java is created specifically for this purpose.</p>
-<h2 id="using-records-in-a-quarkus-rest-api">Using Records in a Quarkus REST API</h2>
+<h2 id="using-records-in-a-quarkus-rest-api">Using Records in a Quarkus REST API<a hidden class="anchor" aria-hidden="true" href="#using-records-in-a-quarkus-rest-api">#</a></h2>
 <p>Let’s see how to use Records in a Quarkus REST API.</p>
 <p>Typical structure of the project:</p>
 <pre tabindex="0"><code>src/main/java/com/example/
@@ -212,8 +275,8 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response.<span style="color:#a6e22e">ok</span>(user).<span style="color:#a6e22e">build</span>();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="sample-request-and-response-payloads">Sample Request and Response Payloads</h2>
-<h3 id="creating-a-user-post-request">Creating a User (POST Request)</h3>
+</span></span></code></pre></div><h2 id="sample-request-and-response-payloads">Sample Request and Response Payloads<a hidden class="anchor" aria-hidden="true" href="#sample-request-and-response-payloads">#</a></h2>
+<h3 id="creating-a-user-post-request">Creating a User (POST Request)<a hidden class="anchor" aria-hidden="true" href="#creating-a-user-post-request">#</a></h3>
 <p><strong>Request:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8080/users <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
@@ -226,7 +289,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Alice Johnson&#34;</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;alice@example.com&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="retrieving-a-user-get-request">Retrieving a User (GET Request)</h3>
+</span></span></code></pre></div><h3 id="retrieving-a-user-get-request">Retrieving a User (GET Request)<a hidden class="anchor" aria-hidden="true" href="#retrieving-a-user-get-request">#</a></h3>
 <p><strong>Request:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X GET http://localhost:8080/users/1
 </span></span></code></pre></div><p><strong>Response:</strong></p>
@@ -234,7 +297,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;John Doe&#34;</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;john@example.com&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="how-records-help-with-json-serialization">How Records Help with JSON Serialization</h2>
+</span></span></code></pre></div><h2 id="how-records-help-with-json-serialization">How Records Help with JSON Serialization<a hidden class="anchor" aria-hidden="true" href="#how-records-help-with-json-serialization">#</a></h2>
 <p>One of the biggest advantages of using Records as DTOs is how seamlessly they work with JSON serialization/deserialization:</p>
 <ol>
 <li><strong>Automatic Field Mapping</strong>: The record components automatically map to JSON fields</li>
@@ -243,7 +306,7 @@
 <li><strong>Immutability</strong>: Once created, the data cannot be accidentally modified</li>
 </ol>
 <p>Compare this to traditional POJOs where you might accidentally serialize internal state or have inconsistent field naming.</p>
-<h2 id="adding-validation-with-records">Adding Validation with Records</h2>
+<h2 id="adding-validation-with-records">Adding Validation with Records<a hidden class="anchor" aria-hidden="true" href="#adding-validation-with-records">#</a></h2>
 <p>Records work excellently with Bean Validation (JSR-303). Let&rsquo;s enhance our <code>UserDTO</code> with validation.</p>
 <p>Before adding validation, our record looks like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(String name, String email) {}
@@ -278,7 +341,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... rest of the methods</span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The <code>@Valid</code> annotation ensures that the incoming <code>UserDTO</code> is validated according to the constraints defined in the record. If validation fails, Quarkus will automatically return a 400 Bad Request response with details about the violations.</p>
-<h3 id="validation-in-action">Validation in Action</h3>
+<h3 id="validation-in-action">Validation in Action<a hidden class="anchor" aria-hidden="true" href="#validation-in-action">#</a></h3>
 <p><strong>Invalid Request:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8080/users <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
@@ -301,8 +364,8 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  ]
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="advanced-record-features">Advanced Record Features</h2>
-<h3 id="custom-methods-in-records">Custom Methods in Records</h3>
+</span></span></code></pre></div><h2 id="advanced-record-features">Advanced Record Features<a hidden class="anchor" aria-hidden="true" href="#advanced-record-features">#</a></h2>
+<h3 id="custom-methods-in-records">Custom Methods in Records<a hidden class="anchor" aria-hidden="true" href="#custom-methods-in-records">#</a></h3>
 <p>While Records are primarily for data, you can add custom methods:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserDTO</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span> String name,
@@ -320,7 +383,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="nested-records-for-complex-data">Nested Records for Complex Data</h3>
+</span></span></code></pre></div><h3 id="nested-records-for-complex-data">Nested Records for Complex Data<a hidden class="anchor" aria-hidden="true" href="#nested-records-for-complex-data">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">Address</span>(String street, String city, String zipCode) {}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">UserProfileDTO</span>(
@@ -328,7 +391,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NotBlank</span> <span style="color:#a6e22e">@Email</span> String email,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Valid</span> Address address
 </span></span><span style="display:flex;"><span>) {}
-</span></span></code></pre></div><h2 id="why-records-are-perfect-for-modern-java-development">Why Records are Perfect for Modern Java Development</h2>
+</span></span></code></pre></div><h2 id="why-records-are-perfect-for-modern-java-development">Why Records are Perfect for Modern Java Development<a hidden class="anchor" aria-hidden="true" href="#why-records-are-perfect-for-modern-java-development">#</a></h2>
 <ol>
 <li><strong>Less Boilerplate</strong>: Focus on business logic, not getter/setter noise</li>
 <li><strong>Immutability by Default</strong>: Thread-safe and predictable</li>
@@ -338,162 +401,31 @@
 <li><strong>Performance</strong>: Often more memory-efficient than traditional classes</li>
 </ol>
 <p>&ndash;</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
 <p>Records represent a significant step forward in Java&rsquo;s evolution. They eliminate much of the boilerplate code that made Java verbose while providing type safety and immutability.</p>
 <p>For REST APIs in Quarkus, Records make excellent DTOs. They&rsquo;re concise, safe, and integrate well with validation and serialization frameworks. If you&rsquo;re working with Java 16+ (and you should be!), start using Records for your data transfer objects.</p>
 <p>Next time you need to create a DTO, skip the traditional class and reach for a Record. Your future self will thank you for the cleaner, more maintainable code.</p>
 
-  </div>
-  <footer class="entry-footer"><span title='2025-12-14 17:30:00 +0800 +08'>December 14, 2025</span>&nbsp;·&nbsp;6 min</footer>
-  <a class="entry-link" aria-label="post link to Java: Record on Quarkus/ Newer Java" href="https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">JS: Express.js
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p><code>Express.js</code> is a minimalist and flexible <code>Node.js</code> web application framework that provides a robust set of features for building web and mobile applications and APIs. If you&rsquo;re looking to build fast, scalable, and efficient server-side applications with JavaScript, Express.js is your go-to choice. Its unopinionated nature gives you immense freedom,
-<!-- raw HTML omitted --></p>
-<h3 id="setting-up">Setting Up</h3>
-<p>Getting started with Express.js is straightforward. If you already have a Node.js project, or if you&rsquo;re starting a new one, follow these simple steps:</p>
-<ul>
-<li>Initializing a Node.js project (<code>npm init</code>).</li>
-<li>Installing Express.js (<code>npm install express</code>).</li>
-</ul>
-<p>Now, you&rsquo;re ready to create your first Express server!</p>
-<h3 id="core-concepts">Core Concepts</h3>
-<p>Understanding these fundamental concepts is key to mastering Express.js:</p>
-<h4 id="routing">Routing</h4>
-<p>Routing is the process of determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, PUT, DELETE, etc.).</p>
-<p>In Express.js, you define routes using methods corresponding to HTTP verbs on the app object (an instance of Express).</p>
-<p>HTTP Methods (Verbs): These map directly to common operations:</p>
-<ul>
-<li><code>GET</code>: Retrieve data (e.g., fetching a list of users).</li>
-<li><code>POST</code>: Submit data to be processed (e.g., creating a new user).</li>
-<li><code>PUT</code>: Update existing data (e.g., modifying a user&rsquo;s details).</li>
-<li><code>DELETE</code>: Remove data (e.g., deleting a user).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;express&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to the root URL
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Hello from Express!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>([
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Alice&#34;</span> },
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bob&#34;</span> },
-</span></span><span style="display:flex;"><span>  ]);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// POST request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Logic to create a new user
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">201</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;User created successfully!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Server listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Route Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /users/123
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Fetching user with ID: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Query Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /search?q=nodejs&amp;category=backend
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/search&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">q</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">searchTerm</span>, <span style="color:#a6e22e">category</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Searching for &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">searchTerm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; in &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">category</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; category.`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h4 id="middleware">Middleware</h4>
-<p>Middleware functions are core to Express.js. They are functions that have access to the <code>request</code> object (<code>req</code>), the response object (<code>res</code>), and the <code>next()</code> function in the application&rsquo;s request-response cycle. The <code>next()</code> function is crucial as it passes control to the next middleware function.</p>
-<p>Think of middleware as a series of steps a request goes through before reaching its final route handler.</p>
-<ul>
-<li>
-<p>How Middleware Works: Requests flow sequentially through middleware functions. Each function can perform operations, modify <code>req</code> or <code>res</code>, end the cycle by sending a response, or pass control to the next middleware via <code>next()</code>.</p>
-</li>
-<li>
-<p>Common Use Cases:</p>
-<ul>
-<li><strong>Logging</strong>: Recording details about incoming requests.</li>
-<li><strong>Authentication/Authorization</strong>: Verifying user credentials and permissions.</li>
-<li><strong>Body Parsing</strong>: Express itself doesn&rsquo;t parse request bodies by default. Middleware like <code>express.json()</code> and <code>express.urlencoded()</code> are essential for handling JSON and URL-encoded form data.</li>
-<li><strong>Serving Static Files</strong>: Handled by express.static().</li>
-<li><strong>Error Handling</strong>: Special middleware for catching and processing errors.</li>
-</ul>
-</li>
-</ul>
-<p>Example of Custom Middleware:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// A simple logger middleware
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logger</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`[</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">] </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">next</span>(); <span style="color:#75715e">// Pass control to the next handler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">logger</span>); <span style="color:#75715e">// Use the middleware for all incoming requests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Home Page with Logger!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h4 id="handling-request-req-and-response-res">Handling Request (req) and Response (res)</h4>
-<ul>
-<li><code>req</code> (Request Object):
-<ul>
-<li>Accessing request headers (<code>req.header</code>).</li>
-<li>Accessing route and query parameters (<code>req.params</code>, <code>req.query</code>).</li>
-<li>Accessing the request body (<code>req.body</code>).</li>
-</ul>
-</li>
-<li><code>res</code> (Response Object):
-<ul>
-<li>Sending various types of responses: <code>res.send()</code>, <code>res.json()</code>, <code>res.sendFile()</code>.</li>
-<li>Setting HTTP status codes: <code>res.status()</code>.</li>
-<li>Redirecting requests: <code>res.redirect()</code>.</li>
-<li>Chaining methods (e.g., <code>res.status(200).json(...)</code>).</li>
-</ul>
-</li>
-</ul>
-<h3 id="typical-project-structure">Typical Project Structure</h3>
-<p>While Express is unopinionated, a well-organized project structure is crucial for maintainability and scalability, especially as your application grows. Here&rsquo;s a common pattern:</p>
-<pre tabindex="0"><code>my-express-app/
-├── node_modules/
-├── server.js             # Entry point: Starts the server, sets up environment
-├── app.js                # Express app configuration: Defines middleware, connects routes
-├── routes/               # Defines API endpoints and links to controllers
-│   ├── auth.routes.js
-│   └── user.routes.js
-├── controllers/          # Contains request handlers: Logic for specific routes, interacts with services
-│   ├── auth.controller.js
-│   └── user.controller.js
-├── services/             # Business logic: Handles complex operations, orchestrates data flow
-│   ├── auth.service.js
-│   └── user.service.js
-├── models/               # Data schema definitions (e.g., Mongoose schemas, Sequelize models)
-│   ├── User.js
-│   └── Product.js
-├── middlewares/          # Custom middleware functions
-│   ├── auth.middleware.js
-│   └── error.middleware.js
-├── config/               # Configuration files (database settings, environment variables)
-│   └── db.config.js
-├── package.json
-├── package-lock.json
-└── .env                  # Environment variables
-</code></pre><h3 id="sample-project">Sample Project</h3>
-<p>( coming soon )</p>
 
   </div>
-  <footer class="entry-footer"><span title='2025-06-23 10:01:29 +0800 +08'>June 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to JS: Express.js" href="https://hazriqpedia.github.io/posts/js-express.js/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hazriqpedia.github.io/tags/java/">Java</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/quarkus/">Quarkus</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/backend/">Backend</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/record/">Record</a></li>
+      <li><a href="https://hazriqpedia.github.io/tags/dto/">DTO</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://hazriqpedia.github.io/posts/aws-lambda-vs-ec2/">
+    <span class="title">Next »</span>
+    <br>
+    <span>AWS: EC2 vs Lambda</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
     </main>
     
@@ -565,6 +497,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
