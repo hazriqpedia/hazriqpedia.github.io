@@ -2,237 +2,246 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/tags/backend/</loc>
+    <loc>https://hazriqpedia.github.io/tags/data-engineering/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/databricks/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/databricks-what-is-that/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/pandas/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/python/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/spark/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/</loc>
+    <lastmod>2025-12-25T18:00:14+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/backend/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/dto/</loc>
+    <loc>https://hazriqpedia.github.io/tags/dto/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://hazriqpedia.github.io/tags/java/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/java/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java-record-on-quarkus-newer-java/</loc>
+    <loc>https://hazriqpedia.github.io/tags/quarkus/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://hazriqpedia.github.io/tags/record/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/quarkus/</loc>
-    <lastmod>2025-12-14T17:30:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/record/</loc>
-    <lastmod>2025-12-14T17:30:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-12-14T17:30:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/aws/</loc>
+    <loc>https://hazriqpedia.github.io/tags/aws/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws-lambda-vs-ec2/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws-lambda-vs-ec2/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cloud/</loc>
+    <loc>https://hazriqpedia.github.io/tags/cloud/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/ec2/</loc>
+    <loc>https://hazriqpedia.github.io/tags/ec2/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/lambda/</loc>
+    <loc>https://hazriqpedia.github.io/tags/lambda/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/serverless/</loc>
+    <loc>https://hazriqpedia.github.io/tags/serverless/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/async/</loc>
+    <loc>https://hazriqpedia.github.io/tags/async/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/back-to-basics/</loc>
+    <loc>https://hazriqpedia.github.io/tags/back-to-basics/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/beginner/</loc>
+    <loc>https://hazriqpedia.github.io/tags/beginner/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/concurrency/</loc>
+    <loc>https://hazriqpedia.github.io/tags/concurrency/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java-threads/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java-threads/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/javascript/</loc>
+    <loc>https://hazriqpedia.github.io/tags/javascript/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/threads/</loc>
+    <loc>https://hazriqpedia.github.io/tags/threads/</loc>
     <lastmod>2025-10-20T19:09:50+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/bigdecimal/</loc>
+    <loc>https://hazriqpedia.github.io/tags/bigdecimal/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/data-types/</loc>
+    <loc>https://hazriqpedia.github.io/tags/data-types/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/double/</loc>
+    <loc>https://hazriqpedia.github.io/tags/double/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/float/</loc>
+    <loc>https://hazriqpedia.github.io/tags/float/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java-decimals/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java-decimals/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/primitive/</loc>
+    <loc>https://hazriqpedia.github.io/tags/primitive/</loc>
     <lastmod>2025-10-19T09:30:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/latency/</loc>
+    <loc>https://hazriqpedia.github.io/tags/latency/</loc>
     <lastmod>2025-10-04T23:00:38+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/load/</loc>
+    <loc>https://hazriqpedia.github.io/tags/load/</loc>
     <lastmod>2025-10-04T23:00:38+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/testing/</loc>
+    <loc>https://hazriqpedia.github.io/tags/testing/</loc>
     <lastmod>2025-10-04T23:00:38+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/testing-load-latency/</loc>
+    <loc>https://hazriqpedia.github.io/posts/testing-load-latency/</loc>
     <lastmod>2025-10-04T23:00:38+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/framework/</loc>
+    <loc>https://hazriqpedia.github.io/tags/framework/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java-reactive-programming/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java-reactive-programming/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/mutiny/</loc>
+    <loc>https://hazriqpedia.github.io/tags/mutiny/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/non-blocking/</loc>
+    <loc>https://hazriqpedia.github.io/tags/non-blocking/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/reactive/</loc>
+    <loc>https://hazriqpedia.github.io/tags/reactive/</loc>
     <lastmod>2025-10-03T22:26:58+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cloud-native/</loc>
+    <loc>https://hazriqpedia.github.io/tags/cloud-native/</loc>
     <lastmod>2025-10-01T17:08:30+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java-quarkus/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java-quarkus/</loc>
     <lastmod>2025-10-01T17:08:30+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/performance/</loc>
+    <loc>https://hazriqpedia.github.io/tags/performance/</loc>
     <lastmod>2025-10-01T17:08:30+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java-primitive_vs_wrapper/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java-primitive_vs_wrapper/</loc>
     <lastmod>2025-09-27T22:26:44+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/autoboxing/</loc>
+    <loc>https://hazriqpedia.github.io/tags/autoboxing/</loc>
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/code-review/</loc>
+    <loc>https://hazriqpedia.github.io/tags/code-review/</loc>
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java_long_vs_long/</loc>
+    <loc>https://hazriqpedia.github.io/posts/java_long_vs_long/</loc>
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/primitives/</loc>
+    <loc>https://hazriqpedia.github.io/tags/primitives/</loc>
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/wrapper-classes/</loc>
+    <loc>https://hazriqpedia.github.io/tags/wrapper-classes/</loc>
     <lastmod>2025-09-23T22:26:34+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws_ddb_ia_class/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws_ddb_ia_class/</loc>
     <lastmod>2025-08-10T13:15:40+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/costs/</loc>
+    <loc>https://hazriqpedia.github.io/tags/costs/</loc>
     <lastmod>2025-08-10T13:15:40+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/dynamodb/</loc>
+    <loc>https://hazriqpedia.github.io/tags/dynamodb/</loc>
     <lastmod>2025-08-10T13:15:40+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/nosql/</loc>
+    <loc>https://hazriqpedia.github.io/tags/nosql/</loc>
     <lastmod>2025-08-10T13:15:40+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws_ddb_dax_cost_factor/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/</loc>
     <lastmod>2025-08-10T11:11:51+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/dax/</loc>
+    <loc>https://hazriqpedia.github.io/tags/dax/</loc>
     <lastmod>2025-08-10T11:11:51+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws_sam_intro/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws_sam_intro/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/iac/</loc>
+    <loc>https://hazriqpedia.github.io/tags/iac/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/infrastructure-as-code/</loc>
+    <loc>https://hazriqpedia.github.io/tags/infrastructure-as-code/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/sam/</loc>
+    <loc>https://hazriqpedia.github.io/tags/sam/</loc>
     <lastmod>2025-08-03T07:34:21+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws_lambda_intro/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws_lambda_intro/</loc>
     <lastmod>2025-07-27T06:56:44+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/functions/</loc>
+    <loc>https://hazriqpedia.github.io/tags/functions/</loc>
     <lastmod>2025-07-27T06:56:44+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws_dynamodb_intro/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws_dynamodb_intro/</loc>
     <lastmod>2025-07-20T05:42:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aws_sqs_sns_basic/</loc>
+    <loc>https://hazriqpedia.github.io/posts/aws_sqs_sns_basic/</loc>
     <lastmod>2025-07-15T06:17:54+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/sns/</loc>
+    <loc>https://hazriqpedia.github.io/tags/sns/</loc>
     <lastmod>2025-07-15T06:17:54+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/sqs/</loc>
+    <loc>https://hazriqpedia.github.io/tags/sqs/</loc>
     <lastmod>2025-07-15T06:17:54+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/api/</loc>
+    <loc>https://hazriqpedia.github.io/tags/api/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/express/</loc>
+    <loc>https://hazriqpedia.github.io/tags/express/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/js/</loc>
+    <loc>https://hazriqpedia.github.io/tags/js/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/js-express.js/</loc>
+    <loc>https://hazriqpedia.github.io/posts/js-express.js/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/node/</loc>
+    <loc>https://hazriqpedia.github.io/tags/node/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/node.js/</loc>
+    <loc>https://hazriqpedia.github.io/tags/node.js/</loc>
     <lastmod>2025-06-23T10:01:29+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/ts-prisma.js/</loc>
-    <lastmod>2025-06-12T12:19:57+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/ts-nest.js/</loc>
-    <lastmod>2025-06-12T11:49:17+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/defaultdict/</loc>
+    <loc>https://hazriqpedia.github.io/tags/defaultdict/</loc>
     <lastmod>2025-06-11T17:13:13+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/py/</loc>
+    <loc>https://hazriqpedia.github.io/tags/py/</loc>
     <lastmod>2025-06-11T17:13:13+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/py-defaultdict/</loc>
+    <loc>https://hazriqpedia.github.io/posts/py-defaultdict/</loc>
     <lastmod>2025-06-11T17:13:13+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/python/</loc>
-    <lastmod>2025-06-11T17:13:13+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://hazriqpedia.github.io/about/</loc>
     <lastmod>2025-06-04T14:53:16+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/life/</loc>
+    <loc>https://hazriqpedia.github.io/tags/life/</loc>
     <lastmod>2025-06-04T14:38:26+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/my-first-post/</loc>
+    <loc>https://hazriqpedia.github.io/posts/my-first-post/</loc>
     <lastmod>2025-06-04T14:38:26+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://hazriqpedia.github.io/categories/</loc>
   </url>
 </urlset>
