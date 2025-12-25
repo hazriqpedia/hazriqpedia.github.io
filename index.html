@@ -174,6 +174,150 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Databricks: What Is That?
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>For a long time, <strong>Python + pandas</strong> was more than enough for me.</p>
+<p>Read some data, process it, send/ save the result somewhere.</p>
+<p>Simple. Familiar. Productive.</p>
+<p>Until one day… it wasn’t.</p>
+<p>&ndash;</p>
+<h3 id="my-usual-flow-python--pandas">My Usual Flow: Python + Pandas</h3>
+<p>My default approach was always the same:</p>
+<ol>
+<li>Use pandas to read data</li>
+<li>Apply business logic</li>
+<li>Push results to another system</li>
+</ol>
+<p>It worked well, especially for:</p>
+<ul>
+<li>Small to medium datasets</li>
+<li>One-off jobs</li>
+<li>Quick experiments</li>
+</ul>
+<p>If you’ve written backend scripts or data utilities in Python, this probably feels familiar.</p>
+<p>&ndash;</p>
+<h3 id="when-pandas-starts-to-hurt">When Pandas Starts to Hurt</h3>
+<p>As data grew, so did the problems:</p>
+<ul>
+<li>🚨 Data no longer fits nicely into memory</li>
+<li>🚨 Scripts become slower as data grows</li>
+<li>🚨 Running multiple jobs at the same time becomes painful</li>
+<li>🚨 “Which machine should this run on?” suddenly matters</li>
+<li>🚨 Sharing scripts with teammates isn’t straightforward</li>
+</ul>
+<p>At some point, you realize:</p>
+<blockquote>
+<p>Pandas is great — but it’s still single-machine thinking.</p></blockquote>
+<p>This is where Databricks entered my life.</p>
+<p>&ndash;</p>
+<h3 id="enter-databricks-without-the-hype">Enter Databricks (Without the Hype)</h3>
+<p>I didn’t move to Databricks because I wanted to “do big data”.</p>
+<p>I moved because I wanted:</p>
+<ul>
+<li>To keep writing Python</li>
+<li>To stop worrying about machine size</li>
+<li>To process larger datasets safely</li>
+<li>To schedule jobs without duct tape</li>
+</ul>
+<p>Databricks is essentially:</p>
+<ul>
+<li>A managed platform for Apache Spark</li>
+<li>With notebooks</li>
+<li>With scheduling</li>
+<li>With collaboration built in</li>
+</ul>
+<p>You write code, Databricks worries about the rest.</p>
+<p>&ndash;</p>
+<h3 id="a-typical-flow-from-my-actual-work">A Typical Flow (From My Actual Work)</h3>
+<p>Here’s what my day-to-day flow looks like now:</p>
+<ol>
+<li>📚 Data already exists in the Databricks Catalog</li>
+<li>📓 I create a Python notebook</li>
+<li>🔄 Read data using Spark</li>
+<li>🧠 Apply business logic</li>
+<li>📤 Publish results to SQS</li>
+<li>⏰ Schedule it to run every 3 hours</li>
+</ol>
+<p>No servers to provision. No EC2 sizing debates.</p>
+<p>&ndash;</p>
+<h4 id="reading-data-with-spark-feels-familiar">Reading Data with Spark (Feels Familiar)</h4>
+<p>Instead of Pandas, I now use PySpark:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>table(<span style="color:#e6db74">&#34;catalog_name.schema_name.source_table&#34;</span>)
+</span></span></code></pre></div><p>Under the hood, Spark:</p>
+<ul>
+<li>Splits data</li>
+<li>Processes it in parallel</li>
+<li>Handles datasets much larger than memory</li>
+</ul>
+<p>&ndash;</p>
+<h4 id="doing-business-logic-still-just-python">Doing Business Logic (Still Just Python)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pyspark.sql.functions <span style="color:#f92672">import</span> col
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>processed_df <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    df
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>filter(col(<span style="color:#e6db74">&#34;status&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;ACTIVE&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>withColumn(<span style="color:#e6db74">&#34;total_amount&#34;</span>, col(<span style="color:#e6db74">&#34;price&#34;</span>) <span style="color:#f92672">*</span> col(<span style="color:#e6db74">&#34;quantity&#34;</span>))
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>&ndash;</p>
+<h4 id="the-rest">The rest</h4>
+<p>After processing, I can:</p>
+<ul>
+<li>Write results back to tables</li>
+<li>Send data to external systems (like SQS)</li>
+<li>Schedule notebooks to run automatically</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="why-spark-beats-pandas-here-simply-put">Why Spark Beats Pandas Here (Simply Put)</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Pandas</th>
+          <th>Spark (via Databricks)</th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Single-machine</td>
+          <td>Distributed across many machines</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Limited by RAM</td>
+          <td>Scales with cluster size</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Manual scheduling</td>
+          <td>Built-in job scheduling</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Great for small data</td>
+          <td>Handles big data seamlessly</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>&ndash;</p>
+<p>I:</p>
+<ul>
+<li>Still write Python</li>
+<li>Still think in business logic</li>
+</ul>
+<p>Just stopped worrying about scale and infrastructure</p>
+<p><code>Databricks</code> + <code>Spark</code> let me grow without rewriting how I think.</p>
+<p>If you’re comfortable with Python and Pandas, this transition is far less scary than it sounds.</p>
+
+  </div>
+  <footer class="entry-footer"><span title='2025-12-25 18:00:14 +0800 +08'>December 25, 2025</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to Databricks: What Is That?" href="https://hazriqpedia.github.io/posts/databricks-what-is-that/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Java: Record on Quarkus/ Newer Java
     </h2>
   </header>
@@ -1632,107 +1776,6 @@ Once created, their value never changes — any “modification” actually crea
   </div>
   <footer class="entry-footer"><span title='2025-09-23 22:26:34 +0800 +08'>September 23, 2025</span>&nbsp;·&nbsp;4 min</footer>
   <a class="entry-link" aria-label="post link to Java: Long vs long" href="https://hazriqpedia.github.io/posts/java_long_vs_long/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AWS: DynamoDB &amp; IA Class
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>If you’ve been using Amazon DynamoDB for a while, you’ve probably noticed something: not all your data gets the same attention. Some of it is “hot” — frequently accessed, constantly updated. But a lot of it is “cold” — just sitting there, costing you money every month.</p>
-<p>What if you could store that cold data somewhere cheaper without changing your code or losing availability?</p>
-<p>That’s exactly what <strong>DynamoDB Standard-IA (Infrequent Access)</strong> is for. In this post, we’ll break down what it is, how it works, how it can save you money, and when it might not be the best idea.</p>
-<p>Recap on previous post:</p>
-<ul>
-<li><a href="https://hazriqpedia.github.io/posts/aws_ddb_dax_cost_factor/">AWS: DynamoDB &amp; DAX Cost Factors</a></li>
-<li><a href="https://hazriqpedia.github.io/posts/aws_dynamodb_intro/">AWS: DynamoDB Basics</a></li>
-</ul>
-<h3 id="dynamodb-table-classes">DynamoDB Table Classes</h3>
-<p>DynamoDB offers different table classes to optimize costs based on your access patterns:</p>
-<ol>
-<li><strong>Standard</strong> – For data you access frequently.
-<ul>
-<li>Designed for low-latency access any time.</li>
-<li>Best for your main, active application data.</li>
-<li>The default table class when you create a new DynamoDB table.</li>
-<li>Suitable for most workloads. Provides high availability and durability.</li>
-</ul>
-</li>
-<li><strong>Standard-IA (Infrequent Access)</strong> – For data you rarely read or write.
-<ul>
-<li>Designed for data that is not accessed often but needs to be available when needed.</li>
-<li>Offers lower storage costs compared to Standard.</li>
-<li>Higher retrieval costs, so it’s best for data that you access less than once a month.</li>
-</ul>
-</li>
-</ol>
-<p>Both table classes work exactly the same way from a developer’s point of view:</p>
-<ul>
-<li>Same APIs</li>
-<li>Same queries</li>
-<li>Same AWS Console experience</li>
-</ul>
-<p>The only difference? How AWS stores it behind the scenes and how much you pay.</p>
-<h3 id="what-is-standard-ia">What is Standard-IA?</h3>
-<p>Standard-IA is a table class designed for data that you access infrequently. It’s like a storage locker for your cold data — it’s still there when you need it, but it costs less to keep it around.</p>
-<p>Think of it like moving your old books to a basement shelf:</p>
-<ul>
-<li>They’re still yours.</li>
-<li>You can still get them any time.</li>
-<li>But they’re not taking up expensive prime shelf space.</li>
-</ul>
-<h4 id="how-can-it-save-you-money">How can it save you money?</h4>
-<p>The main savings come from storage pricing:</p>
-<table>
-  <thead>
-      <tr>
-          <th style="text-align: center">Storage Class</th>
-          <th style="text-align: center">Price per GB/month</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">Standard</td>
-          <td style="text-align: center">~$0.25</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">Standard-IA</td>
-          <td style="text-align: center">~$0.10</td>
-      </tr>
-  </tbody>
-</table>
-<p>That’s about <strong>60% cheaper</strong> for storage.</p>
-<p>Example:
-If you have 100 GB of archived order history:</p>
-<ul>
-<li>Standard = ~$25/month</li>
-<li>Standard-IA = ~$10/month</li>
-</ul>
-<blockquote>
-<p>💡 That’s $15/month saved — or $180/year — just for one table.</p></blockquote>
-<h3 id="the-catch">The Catch</h3>
-<p>But it’s not all sunshine and rainbows. There are some important trade-offs to consider:</p>
-<ul>
-<li><strong>Retrieval Costs</strong> – Around $0.01 per GB each time you read data from IA.</li>
-<li><strong>Minimum 30-Day Storage Billing</strong> – You pay for at least 30 days even if you delete earlier.</li>
-<li><strong>Not for Hot Data</strong> – If accessed often, retrieval fees can eat up savings.</li>
-<li><strong>Whole-Table Setting</strong> – You can’t mix Standard and IA in one table.</li>
-</ul>
-<h3 id="best-practice-before-switching">Best Practice before Switching</h3>
-<ul>
-<li><strong>Check Access Patterns</strong> — Use CloudWatch metrics to see how often the table is read.</li>
-<li><strong>Move Predictable Cold Data</strong> — Avoid sudden spikes in retrieval.</li>
-<li><strong>Test on a Smaller Table First</strong> — See if retrieval costs are low enough to justify the switch.</li>
-<li><strong>Combine With TTL</strong> — Automatically delete expired data to save more.</li>
-</ul>
-<hr>
-<p>DynamoDB Standard-IA is like a budget-friendly storage locker for data you still need but rarely touch. It can cut storage costs by more than half — but only if you choose the right workloads.</p>
-<p><strong>Rule of thumb</strong>: If it’s predictable, cold, and still worth keeping — IA is your friend.</p>
-
-  </div>
-  <footer class="entry-footer"><span title='2025-08-10 13:15:40 +0800 +08'>August 10, 2025</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to AWS: DynamoDB & IA Class" href="https://hazriqpedia.github.io/posts/aws_ddb_ia_class/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

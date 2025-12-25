@@ -6,8 +6,33 @@
     <description>Recent content on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Dec 2025 17:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Dec 2025 18:00:14 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Databricks: What Is That?</title>
+      <link>https://hazriqpedia.github.io/posts/databricks-what-is-that/</link>
+      <pubDate>Thu, 25 Dec 2025 18:00:14 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/databricks-what-is-that/</guid>
+      <description>&lt;p&gt;For a long time, &lt;strong&gt;Python + pandas&lt;/strong&gt; was more than enough for me.&lt;/p&gt;
+&lt;p&gt;Read some data, process it, send/ save the result somewhere.&lt;/p&gt;
+&lt;p&gt;Simple. Familiar. Productive.&lt;/p&gt;
+&lt;p&gt;Until one day… it wasn’t.&lt;/p&gt;
+&lt;p&gt;&amp;ndash;&lt;/p&gt;
+&lt;h3 id=&#34;my-usual-flow-python--pandas&#34;&gt;My Usual Flow: Python + Pandas&lt;/h3&gt;
+&lt;p&gt;My default approach was always the same:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Use pandas to read data&lt;/li&gt;
+&lt;li&gt;Apply business logic&lt;/li&gt;
+&lt;li&gt;Push results to another system&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It worked well, especially for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Small to medium datasets&lt;/li&gt;
+&lt;li&gt;One-off jobs&lt;/li&gt;
+&lt;li&gt;Quick experiments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you’ve written backend scripts or data utilities in Python, this probably feels familiar.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Java: Record on Quarkus/ Newer Java</title>
       <link>https://hazriqpedia.github.io/posts/java-record-on-quarkus-newer-java/</link>

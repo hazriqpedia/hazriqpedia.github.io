@@ -6,8 +6,43 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Dec 2025 17:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Dec 2025 18:00:14 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Engineering</title>
+      <link>https://hazriqpedia.github.io/tags/data-engineering/</link>
+      <pubDate>Thu, 25 Dec 2025 18:00:14 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/data-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Databricks</title>
+      <link>https://hazriqpedia.github.io/tags/databricks/</link>
+      <pubDate>Thu, 25 Dec 2025 18:00:14 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/databricks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pandas</title>
+      <link>https://hazriqpedia.github.io/tags/pandas/</link>
+      <pubDate>Thu, 25 Dec 2025 18:00:14 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/pandas/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://hazriqpedia.github.io/tags/python/</link>
+      <pubDate>Thu, 25 Dec 2025 18:00:14 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spark</title>
+      <link>https://hazriqpedia.github.io/tags/spark/</link>
+      <pubDate>Thu, 25 Dec 2025 18:00:14 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/spark/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Backend</title>
       <link>https://hazriqpedia.github.io/tags/backend/</link>
@@ -363,13 +398,6 @@
       <link>https://hazriqpedia.github.io/tags/py/</link>
       <pubDate>Wed, 11 Jun 2025 17:13:13 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/py/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Python</title>
-      <link>https://hazriqpedia.github.io/tags/python/</link>
-      <pubDate>Wed, 11 Jun 2025 17:13:13 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/python/</guid>
       <description></description>
     </item>
     <item>
