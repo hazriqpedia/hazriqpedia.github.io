@@ -154,57 +154,57 @@
 <p>But the real magic of Mutiny is in its fluent chaining style.</p>
 <p><strong>Example: Calling an External API with Mutiny</strong></p>
 <p>Imagine you’re building a service that fetches user info from an external API (which might be slow). Instead of blocking while waiting, we’ll use Mutiny + chaining.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> io.smallrye.mutiny.Uni;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.inject.Inject;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.GET;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jakarta.ws.rs.Path;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.eclipse.microprofile.rest.client.inject.RestClient;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Inject</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@RestClient</span>
-</span></span><span style="display:flex;"><span>    ExternalUserService externalUserService; <span style="color:#75715e">// REST client interface</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getUserData</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> externalUserService.<span style="color:#a6e22e">fetchUser</span>()  <span style="color:#75715e">// Uni&lt;User&gt;</span>
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> {
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Step 1: uppercase the name</span>
-</span></span><span style="display:flex;"><span>                String upperName <span style="color:#f92672">=</span> user.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Step 2: return formatted string</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> upperName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with id &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getId</span>();
-</span></span><span style="display:flex;"><span>            })
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback user&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>Alternative</strong>: Split Into Multiple Steps</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">io.smallrye.mutiny.Uni</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.inject.Inject</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.ws.rs.GET</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.ws.rs.Path</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.rest.client.inject.RestClient</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Inject</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@RestClient</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ExternalUserService</span><span class="w"> </span><span class="n">externalUserService</span><span class="p">;</span><span class="w"> </span><span class="c1">// REST client interface</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Uni</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUserData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">externalUserService</span><span class="p">.</span><span class="na">fetchUser</span><span class="p">()</span><span class="w">  </span><span class="c1">// Uni&lt;User&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">transform</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// Step 1: uppercase the name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">upperName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getName</span><span class="p">().</span><span class="na">toUpperCase</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// Step 2: return formatted string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Hello &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">upperName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; with id &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onFailure</span><span class="p">().</span><span class="na">recoverWithItem</span><span class="p">(</span><span class="s">&#34;Fallback user&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>Alternative</strong>: Split Into Multiple Steps</p>
 <p>Some developers prefer breaking the chain into smaller, clearer transformations:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> externalUserService.<span style="color:#a6e22e">fetchUser</span>()
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 1: uppercase the name</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">new</span> User(user.<span style="color:#a6e22e">getId</span>(), user.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>()))
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: format the message</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getName</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with id &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getId</span>())
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 3: fallback if something fails</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback user&#34;</span>);
-</span></span></code></pre></div><p>Both versions are valid — it depends if you want compact or step-by-step clarity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">externalUserService</span><span class="p">.</span><span class="na">fetchUser</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Step 1: uppercase the name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">transform</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getName</span><span class="p">().</span><span class="na">toUpperCase</span><span class="p">()))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Step 2: format the message</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">transform</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&#34;Hello &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; with id &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Step 3: fallback if something fails</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">onFailure</span><span class="p">().</span><span class="na">recoverWithItem</span><span class="p">(</span><span class="s">&#34;Fallback user&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Both versions are valid — it depends if you want compact or step-by-step clarity.</p>
 <p>&ndash;</p>
 <h4 id="without-mutiny-blocking-example">Without Mutiny: Blocking Example</h4>
 <p>If we weren’t using Mutiny, the call to fetchUser() would be blocking:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users-blocking&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BlockingUserResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getUserData</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate a slow external API call</span>
-</span></span><span style="display:flex;"><span>        User user <span style="color:#f92672">=</span> externalUserService.<span style="color:#a6e22e">fetchUserBlocking</span>(); <span style="color:#75715e">// blocks thread</span>
-</span></span><span style="display:flex;"><span>        String upperName <span style="color:#f92672">=</span> user.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> upperName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with id &#34;</span> <span style="color:#f92672">+</span> user.<span style="color:#a6e22e">getId</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>In this case:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/users-blocking&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BlockingUserResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getUserData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Simulate a slow external API call</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">externalUserService</span><span class="p">.</span><span class="na">fetchUserBlocking</span><span class="p">();</span><span class="w"> </span><span class="c1">// blocks thread</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">upperName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getName</span><span class="p">().</span><span class="na">toUpperCase</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Hello &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">upperName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; with id &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>In this case:</p>
 <ul>
 <li>The thread waits until <code>fetchUserBlocking()</code> returns.</li>
 <li>While waiting, the thread does nothing else.</li>
@@ -238,10 +238,10 @@
 <li>Multi operators – streaming equivalents, e.g. <code>.map()</code>, <code>.filter()</code>, <code>.select().first(n)</code>.</li>
 <li><code>combine()</code> – merge results from multiple Unis.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Uni.<span style="color:#a6e22e">combine</span>().<span style="color:#a6e22e">all</span>().<span style="color:#a6e22e">unis</span>(api1.<span style="color:#a6e22e">call</span>(), api2.<span style="color:#a6e22e">call</span>())
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">asTuple</span>()
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(tuple <span style="color:#f92672">-&gt;</span> tuple.<span style="color:#a6e22e">getItem1</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &amp; &#34;</span> <span style="color:#f92672">+</span> tuple.<span style="color:#a6e22e">getItem2</span>());
-</span></span></code></pre></div><p>&ndash;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Uni</span><span class="p">.</span><span class="na">combine</span><span class="p">().</span><span class="na">all</span><span class="p">().</span><span class="na">unis</span><span class="p">(</span><span class="n">api1</span><span class="p">.</span><span class="na">call</span><span class="p">(),</span><span class="w"> </span><span class="n">api2</span><span class="p">.</span><span class="na">call</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">asTuple</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">transform</span><span class="p">(</span><span class="n">tuple</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="p">.</span><span class="na">getItem1</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; &amp; &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tuple</span><span class="p">.</span><span class="na">getItem2</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><p>&ndash;</p>
 <h3 id="why-mutinys-chaining-matters">Why Mutiny’s Chaining Matters</h3>
 <ul>
 <li><strong>Readable</strong> → async pipelines look like synchronous code.</li>

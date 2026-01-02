@@ -147,12 +147,12 @@ And before I dive deeper into Quarkus’ <em>reactive and non-blocking world</em
 <h3 id="what-are-threads-in-general">What Are Threads (in general)?</h3>
 <p>A <strong>thread</strong> is like a <strong>worker</strong> inside your program — an independent flow of execution that can run code in parallel with others.</p>
 <p>When you run a Java program, it always starts with <strong>one main thread</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MainExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running in: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Output:</p>
 <pre tabindex="0"><code>Running in: main
 </code></pre><p>That’s your main worker.<br>
 Every additional thread you create runs <em>alongside</em> it.</p>
@@ -160,61 +160,61 @@ Every additional thread you create runs <em>alongside</em> it.</p>
 <h3 id="creating-threads-in-java">Creating Threads in Java</h3>
 <p>There are two common ways to create threads:</p>
 <h4 id="1-extend-the-thread-class">1. Extend the <code>Thread</code> class</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span> <span style="color:#66d9ef">extends</span> Thread {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        MyThread t1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThread();
-</span></span><span style="display:flex;"><span>        t1.<span style="color:#a6e22e">start</span>(); <span style="color:#75715e">// Start a new thread</span>
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Main: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThread</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running in: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"> </span><span class="c1">// Start a new thread</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Main: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>start()</code> creates a <em>new</em> thread and calls <code>run()</code> asynchronously.</li>
 <li>If you call <code>run()</code> directly, it just runs on the <strong>same thread</strong> — no concurrency.</li>
 </ul>
 <h4 id="2-use-a-runnable-preferred-approach">2. Use a <code>Runnable</code> (preferred approach)</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RunnableExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        Runnable task <span style="color:#f92672">=</span> () <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>        Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(task);
-</span></span><span style="display:flex;"><span>        thread.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><code>Runnable</code> separates the <em>work</em> (the code you want to run) from the <em>worker</em> (the Thread).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RunnableExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running in: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">thread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>Runnable</code> separates the <em>work</em> (the code you want to run) from the <em>worker</em> (the Thread).</p>
 <p>&ndash;</p>
 <h3 id="threads-in-practice-a-quick-hands-on">Threads in Practice: A Quick Hands-On</h3>
 <p>Let’s simulate doing two things at once — something slow, like making coffee ☕ and toasting bread 🍞.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Breakfast</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        Thread coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(() <span style="color:#f92672">-&gt;</span> makeCoffee());
-</span></span><span style="display:flex;"><span>        Thread toast <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(() <span style="color:#f92672">-&gt;</span> toastBread());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        coffee.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>        toast.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeCoffee</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(2000);
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;☕ Coffee is ready!&#34;</span>);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">toastBread</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(3000);
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;🍞 Bread is toasted!&#34;</span>);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Output (order may vary):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Breakfast</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">coffee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">makeCoffee</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">toast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">toastBread</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">coffee</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">toast</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">makeCoffee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;☕ Coffee is ready!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">toastBread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;🍞 Bread is toasted!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Output (order may vary):</p>
 <pre tabindex="0"><code>☕ Coffee is ready!
 🍞 Bread is toasted!
 </code></pre><p>Both tasks run <em>at the same time</em> — this is concurrency in action.<br>
@@ -223,24 +223,24 @@ Each task gets its own <strong>thread</strong>, and the program doesn’t wait f
 <h3 id="thread-pools-managing-many-tasks">Thread Pools: Managing Many Tasks</h3>
 <p>Creating new threads every time can be expensive.<br>
 A better way is to <strong>reuse</strong> threads using an <strong>ExecutorService</strong> (a thread pool).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ExecutorService;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadPoolExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        ExecutorService pool <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newFixedThreadPool</span>(3);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;=</span> 5; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> taskId <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>            pool.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span>
-</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running task &#34;</span> <span style="color:#f92672">+</span> taskId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; on &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>())
-</span></span><span style="display:flex;"><span>            );
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        pool.<span style="color:#a6e22e">shutdown</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This allows multiple tasks to share a limited number of threads efficiently — something frameworks like Quarkus also do under the hood.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ExecutorService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.Executors</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadPoolExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newFixedThreadPool</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">pool</span><span class="p">.</span><span class="na">submit</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running task &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; on &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pool</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>This allows multiple tasks to share a limited number of threads efficiently — something frameworks like Quarkus also do under the hood.</p>
 <p>&ndash;</p>
 <h3 id="java-threads-vs-javascript-async-same-goal-different-path">Java Threads vs JavaScript Async (Same Goal, Different Path)</h3>
 <p>Java uses <strong>multiple threads</strong> to handle concurrency.</p>
@@ -331,18 +331,18 @@ Sometimes it’s fast (50 ms), sometimes slow (2 s).<br>
 Now — 1000 users open the app at once.</p>
 <p>&ndash;</p>
 <h4 id="traditional-java-blocking-io"><strong>Traditional Java (Blocking I/O)</strong></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/profile&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getProfile</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Blocking call to external API</span>
-</span></span><span style="display:flex;"><span>        String user <span style="color:#f92672">=</span> externalService.<span style="color:#a6e22e">getUserData</span>(); 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Profile: &#34;</span> <span style="color:#f92672">+</span> user;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/profile&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getProfile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Blocking call to external API</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">externalService</span><span class="p">.</span><span class="na">getUserData</span><span class="p">();</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Profile: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>Each request is assigned <strong>its own thread</strong> from a pool (say, 200 threads).</li>
 <li>The thread makes the external call and then <strong>waits</strong>.</li>
 <li>Once all 200 threads are busy, new requests are queued until one is free.</li>
@@ -356,18 +356,18 @@ Now — 1000 users open the app at once.</p>
 </ul>
 <p>&ndash;</p>
 <h4 id="quarkus-reactive--non-blocking-io"><strong>Quarkus (Reactive / Non-Blocking I/O)</strong></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReactiveUserResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/profile&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getProfile</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> externalService.<span style="color:#a6e22e">getUserDataAsync</span>() <span style="color:#75715e">// returns Uni&lt;String&gt;</span>
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Profile: &#34;</span> <span style="color:#f92672">+</span> user)
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback profile&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReactiveUserResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/profile&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Uni</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getProfile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">externalService</span><span class="p">.</span><span class="na">getUserDataAsync</span><span class="p">()</span><span class="w"> </span><span class="c1">// returns Uni&lt;String&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">transform</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&#34;Profile: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onFailure</span><span class="p">().</span><span class="na">recoverWithItem</span><span class="p">(</span><span class="s">&#34;Fallback profile&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>The call is <strong>non-blocking</strong> — it sends the HTTP request and releases the thread.</li>
 <li>The same few event-loop threads handle other requests while waiting for responses.</li>
 <li>When the API responds, the result is processed asynchronously.</li>
@@ -506,12 +506,12 @@ Today’s topic: <strong><code>double</code> vs <code>float</code></strong> — 
 <blockquote>
 <p><strong>In Java, all decimal literals are treated as <code>double</code> by default.</strong></p></blockquote>
 <p>That’s why you can write this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> pi <span style="color:#f92672">=</span> 3.<span style="color:#a6e22e">14159</span>; <span style="color:#75715e">// ✅ works fine</span>
-</span></span></code></pre></div><p>But this won’t compile:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99</span>; <span style="color:#75715e">// ❌ error: possible lossy conversion from double to float</span>
-</span></span></code></pre></div><p>You have to explicitly mark it as a float:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99f</span>; <span style="color:#75715e">// ✅ correct</span>
-</span></span></code></pre></div><p>Java does this to favor precision over size — it assumes you want a double unless you tell it otherwise.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">3</span><span class="p">.</span><span class="na">14159</span><span class="p">;</span><span class="w"> </span><span class="c1">// ✅ works fine</span><span class="w">
+</span></span></span></code></pre></div><p>But this won’t compile:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">float</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">19</span><span class="p">.</span><span class="na">99</span><span class="p">;</span><span class="w"> </span><span class="c1">// ❌ error: possible lossy conversion from double to float</span><span class="w">
+</span></span></span></code></pre></div><p>You have to explicitly mark it as a float:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">float</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">19</span><span class="p">.</span><span class="na">99f</span><span class="p">;</span><span class="w"> </span><span class="c1">// ✅ correct</span><span class="w">
+</span></span></span></code></pre></div><p>Java does this to favor precision over size — it assumes you want a double unless you tell it otherwise.</p>
 <p>&ndash;</p>
 <h3 id="when-to-use-which">When to Use Which</h3>
 <p>✅ Use <strong>float</strong> when:</p>
@@ -531,24 +531,24 @@ Today’s topic: <strong><code>double</code> vs <code>float</code></strong> — 
 <p>&ndash;</p>
 <h3 id="precision-pitfalls">Precision Pitfalls</h3>
 <p>Floating-point numbers can’t always represent decimals exactly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> a <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> b <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">2</span>;
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a <span style="color:#f92672">+</span> b); <span style="color:#75715e">// prints 0.30000000000000004</span>
-</span></span></code></pre></div><p>Why?
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints 0.30000000000000004</span><span class="w">
+</span></span></span></code></pre></div><p>Why?
 Binary floating-point can’t represent 0.1 precisely — it’s a repeating fraction in base 2.
 This tiny difference often doesn’t matter, but it can accumulate in calculations.</p>
 <p>&ndash;</p>
 <h3 id="a-quick-look-at-bigdecimal">A Quick Look at BigDecimal</h3>
 <p>When you need exact decimal precision, especially in financial or accounting systems,
 you should use <strong>BigDecimal</strong> — a class from the <code>java.math</code> package.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.math.BigDecimal;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>BigDecimal price <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;19.99&#34;</span>);
-</span></span><span style="display:flex;"><span>BigDecimal quantity <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;3&#34;</span>);
-</span></span><span style="display:flex;"><span>BigDecimal total <span style="color:#f92672">=</span> price.<span style="color:#a6e22e">multiply</span>(quantity);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(total); <span style="color:#75715e">// prints 59.97 exactly</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigDecimal</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&#34;19.99&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">price</span><span class="p">.</span><span class="na">multiply</span><span class="p">(</span><span class="n">quantity</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">total</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints 59.97 exactly</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>BigDecimal stores numbers as unscaled integers + scale (not binary floating point).</li>
 <li>It avoids rounding errors that can happen with float or double.</li>
 <li>Downside: it’s slower and uses more memory, but you get perfect accuracy.</li>
@@ -618,18 +618,18 @@ and most of the time, <code>double</code> is that balanced middle ground — it�
 <li><code>boolean</code> (true/false)</li>
 </ul>
 <p>Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> number <span style="color:#f92672">=</span> 10;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> isActive <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-</span></span></code></pre></div><p>They are fast, memory-efficient, and always hold an actual value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">boolean</span><span class="w"> </span><span class="n">isActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>They are fast, memory-efficient, and always hold an actual value.</p>
 <h2 id="2-wrapper-classes">2. Wrapper Classes</h2>
 <p>For every primitive, Java provides a corresponding wrapper class in the <code>java.lang</code> package. These are objects that “wrap” a primitive inside a class.
 •	Byte, Short, Integer, Long
 •	Float, Double
 •	Character
 •	Boolean</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer numberObj <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">valueOf</span>(10);
-</span></span><span style="display:flex;"><span>Boolean isActiveObj <span style="color:#f92672">=</span> Boolean.<span style="color:#a6e22e">TRUE</span>;
-</span></span></code></pre></div><p>Wrappers are essential when:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">numberObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Boolean</span><span class="w"> </span><span class="n">isActiveObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Wrappers are essential when:</p>
 <ul>
 <li>Working with Collections (e.g., <code>List&lt;Integer&gt;</code> instead of <code>List&lt;int&gt;</code>).</li>
 <li>You need to represent <code>null</code> (absence of a value).</li>
@@ -642,18 +642,18 @@ and most of the time, <code>double</code> is that balanced middle ground — it�
 <li>Local variables must be initialized before use.</li>
 <li>Class fields get a default value (int → 0, boolean → false).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 10;        <span style="color:#75715e">// explicit initialization</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> flag;      <span style="color:#75715e">// flag must be assigned before use</span>
-</span></span></code></pre></div><p><strong>Wrapper Initialization</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">        </span><span class="c1">// explicit initialization</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">boolean</span><span class="w"> </span><span class="n">flag</span><span class="p">;</span><span class="w">      </span><span class="c1">// flag must be assigned before use</span><span class="w">
+</span></span></span></code></pre></div><p><strong>Wrapper Initialization</strong></p>
 <ul>
 <li>Wrappers are objects, so they can be <code>null</code>.</li>
 <li>Default value for wrapper fields is <code>null</code>.</li>
 <li>Different ways to initialize:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Integer(10);     <span style="color:#75715e">// old (not recommended)</span>
-</span></span><span style="display:flex;"><span>Integer b <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">valueOf</span>(10); <span style="color:#75715e">// preferred</span>
-</span></span><span style="display:flex;"><span>Integer c <span style="color:#f92672">=</span> 10;   <span style="color:#75715e">// autoboxing (simplest)</span>
-</span></span></code></pre></div><p>Similar but Different</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Integer</span><span class="p">(</span><span class="n">10</span><span class="p">);</span><span class="w">     </span><span class="c1">// old (not recommended)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// preferred</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">   </span><span class="c1">// autoboxing (simplest)</span><span class="w">
+</span></span></span></code></pre></div><p>Similar but Different</p>
 <ul>
 <li><code>int x = 0;</code> → raw value stored directly.</li>
 <li><code>Integer y = 0;</code> → an object reference pointing to an Integer.</li>
@@ -696,20 +696,20 @@ and most of the time, <code>double</code> is that balanced middle ground — it�
 <li>Autoboxing: primitive → wrapper</li>
 <li>Unboxing: wrapper → primitive</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer obj <span style="color:#f92672">=</span> 5;   <span style="color:#75715e">// autoboxing</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> obj;     <span style="color:#75715e">// unboxing</span>
-</span></span></code></pre></div><p>This is convenient, but can introduce performance overhead if overused.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">5</span><span class="p">;</span><span class="w">   </span><span class="c1">// autoboxing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span><span class="w">     </span><span class="c1">// unboxing</span><span class="w">
+</span></span></span></code></pre></div><p>This is convenient, but can introduce performance overhead if overused.</p>
 <h2 id="5-benefits-of-wrapper-classes">5. Benefits of Wrapper Classes</h2>
 <ul>
 <li><strong>Collections &amp; Generics</strong>: You can’t store int in a List, but you can store Integer.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
-</span></span><span style="display:flex;"><span>numbers.<span style="color:#a6e22e">add</span>(5);
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">numbers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">5</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><strong>Utility Methods</strong>:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> parsed <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">parseInt</span>(<span style="color:#e6db74">&#34;123&#34;</span>);
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">parsed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="s">&#34;123&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><strong>Null Handling</strong>: Sometimes you need null to represent “no value”.</li>
 </ul>
 <h2 id="6-when-to-use">6. When to Use</h2>
@@ -740,11 +740,11 @@ and most of the time, <code>double</code> is that balanced middle ground — it�
 <p>If you’re wondering where <code>String</code> fits in — it’s not a primitive, nor a wrapper.
 String is a regular class in java.lang, but Java gives it special treatment so it behaves almost like a primitive in many cases.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hazriq&#34;</span>;
-</span></span></code></pre></div><p>looks as simple as assigning an <code>int</code> or <code>boolean</code>. But under the hood, <code>String</code> is an object, immutable, and stored differently from primitives.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Hazriq&#34;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>looks as simple as assigning an <code>int</code> or <code>boolean</code>. But under the hood, <code>String</code> is an object, immutable, and stored differently from primitives.</p>
 <p>This is why you can do things like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> length <span style="color:#f92672">=</span> name.<span style="color:#a6e22e">length</span>();   <span style="color:#75715e">// methods available</span>
-</span></span></code></pre></div><p>So:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w">   </span><span class="c1">// methods available</span><span class="w">
+</span></span></span></code></pre></div><p>So:</p>
 <ul>
 <li><code>Primitives</code> = raw values</li>
 <li><code>Wrappers</code> = object versions of primitives</li>
@@ -755,12 +755,12 @@ String is a regular class in java.lang, but Java gives it special treatment so i
 <li>Avoid unnecessary boxing/unboxing in performance-critical code.</li>
 <li>Be careful comparing wrappers:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Integer a <span style="color:#f92672">=</span> 1000;
-</span></span><span style="display:flex;"><span>Integer b <span style="color:#f92672">=</span> 1000;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a <span style="color:#f92672">==</span> b);      <span style="color:#75715e">// false (different objects)</span>
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a.<span style="color:#a6e22e">equals</span>(b)); <span style="color:#75715e">// true</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1000</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1000</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">      </span><span class="c1">// false (different objects)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">b</span><span class="p">));</span><span class="w"> </span><span class="c1">// true</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>Remember: <code>wrapper classes</code> and <code>String</code> are <strong>immutable</strong>.
 Once created, their value never changes — any “modification” actually creates a new object.
 (We’ll explore immutability in depth in a future post.)</li>

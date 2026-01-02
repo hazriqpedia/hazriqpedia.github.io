@@ -171,36 +171,36 @@
 </ul>
 <h3 id="blocking-vs-non-blocking-in-quarkus">Blocking vs Non-blocking in Quarkus</h3>
 <p>Blocking Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/blocking&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BlockingResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getData</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate slow service</span>
-</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(2000);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Blocking response after 2s&#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/blocking&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BlockingResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Simulate slow service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Blocking response after 2s&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>Each request holds a thread for 2 seconds.</li>
 <li>If 100 users hit this at once, you need 100 threads just waiting.</li>
 </ul>
 <p>Non-blocking Example with Mutiny:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> io.smallrye.mutiny.Uni;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.Duration;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/non-blocking&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonBlockingResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getData</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate async response</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Uni.<span style="color:#a6e22e">createFrom</span>()
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">item</span>(<span style="color:#e6db74">&#34;Non-blocking response after 2s&#34;</span>)
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">delayIt</span>().<span style="color:#a6e22e">by</span>(Duration.<span style="color:#a6e22e">ofSeconds</span>(2));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">io.smallrye.mutiny.Uni</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/non-blocking&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NonBlockingResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Uni</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Simulate async response</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Uni</span><span class="p">.</span><span class="na">createFrom</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">item</span><span class="p">(</span><span class="s">&#34;Non-blocking response after 2s&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">delayIt</span><span class="p">().</span><span class="na">by</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="n">2</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>The thread is released immediately.</li>
 <li>Quarkus will resume the request once the result is ready, without hogging threads.</li>
 <li>Much more scalable in high-concurrency environments.</li>
@@ -332,12 +332,12 @@ Quarkus doesn’t invent its own reactive system from scratch. Instead, it build
 <li><code>Unboxing</code>: automatically converting a wrapper (<code>Long</code>) back into its primitive (<code>long</code>).</li>
 </ul>
 <p>This allows you to write code that looks simple:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> 5L;   <span style="color:#75715e">// autoboxing: primitive long -&gt; Long object</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a;    <span style="color:#75715e">// unboxing: Long object -&gt; primitive long</span>
-</span></span></code></pre></div><p>Without autoboxing, you’d have to do this manually:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Long a <span style="color:#f92672">=</span> Long.<span style="color:#a6e22e">valueOf</span>(5L);   <span style="color:#75715e">// boxing</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> a.<span style="color:#a6e22e">longValue</span>();      <span style="color:#75715e">// unboxing</span>
-</span></span></code></pre></div><p>Pretty verbose, right? That’s why Java added this feature in Java 5 — to make our lives easier.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Long</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">5L</span><span class="p">;</span><span class="w">   </span><span class="c1">// autoboxing: primitive long -&gt; Long object</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">    </span><span class="c1">// unboxing: Long object -&gt; primitive long</span><span class="w">
+</span></span></span></code></pre></div><p>Without autoboxing, you’d have to do this manually:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Long</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">5L</span><span class="p">);</span><span class="w">   </span><span class="c1">// boxing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="na">longValue</span><span class="p">();</span><span class="w">      </span><span class="c1">// unboxing</span><span class="w">
+</span></span></span></code></pre></div><p>Pretty verbose, right? That’s why Java added this feature in Java 5 — to make our lives easier.</p>
 <p>The convenience comes with a trade-off:</p>
 <ul>
 <li><code>Performance cost</code>: Each conversion creates extra instructions, and sometimes even new objects. In a loop that runs millions of times, those hidden allocations can hurt performance.</li>

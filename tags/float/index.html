@@ -180,12 +180,12 @@ Today’s topic: <strong><code>double</code> vs <code>float</code></strong> — 
 <blockquote>
 <p><strong>In Java, all decimal literals are treated as <code>double</code> by default.</strong></p></blockquote>
 <p>That’s why you can write this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> pi <span style="color:#f92672">=</span> 3.<span style="color:#a6e22e">14159</span>; <span style="color:#75715e">// ✅ works fine</span>
-</span></span></code></pre></div><p>But this won’t compile:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99</span>; <span style="color:#75715e">// ❌ error: possible lossy conversion from double to float</span>
-</span></span></code></pre></div><p>You have to explicitly mark it as a float:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> price <span style="color:#f92672">=</span> 19.<span style="color:#a6e22e">99f</span>; <span style="color:#75715e">// ✅ correct</span>
-</span></span></code></pre></div><p>Java does this to favor precision over size — it assumes you want a double unless you tell it otherwise.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">3</span><span class="p">.</span><span class="na">14159</span><span class="p">;</span><span class="w"> </span><span class="c1">// ✅ works fine</span><span class="w">
+</span></span></span></code></pre></div><p>But this won’t compile:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">float</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">19</span><span class="p">.</span><span class="na">99</span><span class="p">;</span><span class="w"> </span><span class="c1">// ❌ error: possible lossy conversion from double to float</span><span class="w">
+</span></span></span></code></pre></div><p>You have to explicitly mark it as a float:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">float</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">19</span><span class="p">.</span><span class="na">99f</span><span class="p">;</span><span class="w"> </span><span class="c1">// ✅ correct</span><span class="w">
+</span></span></span></code></pre></div><p>Java does this to favor precision over size — it assumes you want a double unless you tell it otherwise.</p>
 <p>&ndash;</p>
 <h3 id="when-to-use-which">When to Use Which</h3>
 <p>✅ Use <strong>float</strong> when:</p>
@@ -205,24 +205,24 @@ Today’s topic: <strong><code>double</code> vs <code>float</code></strong> — 
 <p>&ndash;</p>
 <h3 id="precision-pitfalls">Precision Pitfalls</h3>
 <p>Floating-point numbers can’t always represent decimals exactly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> a <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> b <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">2</span>;
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(a <span style="color:#f92672">+</span> b); <span style="color:#75715e">// prints 0.30000000000000004</span>
-</span></span></code></pre></div><p>Why?
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints 0.30000000000000004</span><span class="w">
+</span></span></span></code></pre></div><p>Why?
 Binary floating-point can’t represent 0.1 precisely — it’s a repeating fraction in base 2.
 This tiny difference often doesn’t matter, but it can accumulate in calculations.</p>
 <p>&ndash;</p>
 <h3 id="a-quick-look-at-bigdecimal">A Quick Look at BigDecimal</h3>
 <p>When you need exact decimal precision, especially in financial or accounting systems,
 you should use <strong>BigDecimal</strong> — a class from the <code>java.math</code> package.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.math.BigDecimal;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>BigDecimal price <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;19.99&#34;</span>);
-</span></span><span style="display:flex;"><span>BigDecimal quantity <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BigDecimal(<span style="color:#e6db74">&#34;3&#34;</span>);
-</span></span><span style="display:flex;"><span>BigDecimal total <span style="color:#f92672">=</span> price.<span style="color:#a6e22e">multiply</span>(quantity);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(total); <span style="color:#75715e">// prints 59.97 exactly</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigDecimal</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&#34;19.99&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">price</span><span class="p">.</span><span class="na">multiply</span><span class="p">(</span><span class="n">quantity</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">total</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints 59.97 exactly</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>BigDecimal stores numbers as unscaled integers + scale (not binary floating point).</li>
 <li>It avoids rounding errors that can happen with float or double.</li>
 <li>Downside: it’s slower and uses more memory, but you get perfect accuracy.</li>

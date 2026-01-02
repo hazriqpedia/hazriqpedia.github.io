@@ -252,36 +252,36 @@ It’s often described as &ldquo;Supersonic Subatomic Java.&rdquo;">
 </ul>
 <h3 id="blocking-vs-non-blocking-in-quarkus">Blocking vs Non-blocking in Quarkus<a hidden class="anchor" aria-hidden="true" href="#blocking-vs-non-blocking-in-quarkus">#</a></h3>
 <p>Blocking Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/blocking&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BlockingResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getData</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate slow service</span>
-</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(2000);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Blocking response after 2s&#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/blocking&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BlockingResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Simulate slow service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Blocking response after 2s&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>Each request holds a thread for 2 seconds.</li>
 <li>If 100 users hit this at once, you need 100 threads just waiting.</li>
 </ul>
 <p>Non-blocking Example with Mutiny:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> io.smallrye.mutiny.Uni;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.Duration;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/non-blocking&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonBlockingResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getData</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate async response</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Uni.<span style="color:#a6e22e">createFrom</span>()
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">item</span>(<span style="color:#e6db74">&#34;Non-blocking response after 2s&#34;</span>)
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">delayIt</span>().<span style="color:#a6e22e">by</span>(Duration.<span style="color:#a6e22e">ofSeconds</span>(2));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">io.smallrye.mutiny.Uni</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/non-blocking&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NonBlockingResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Uni</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Simulate async response</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Uni</span><span class="p">.</span><span class="na">createFrom</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">item</span><span class="p">(</span><span class="s">&#34;Non-blocking response after 2s&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">delayIt</span><span class="p">().</span><span class="na">by</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="n">2</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>The thread is released immediately.</li>
 <li>Quarkus will resume the request once the result is ready, without hogging threads.</li>
 <li>Much more scalable in high-concurrency environments.</li>

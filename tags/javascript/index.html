@@ -147,12 +147,12 @@ And before I dive deeper into Quarkus’ <em>reactive and non-blocking world</em
 <h3 id="what-are-threads-in-general">What Are Threads (in general)?</h3>
 <p>A <strong>thread</strong> is like a <strong>worker</strong> inside your program — an independent flow of execution that can run code in parallel with others.</p>
 <p>When you run a Java program, it always starts with <strong>one main thread</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MainExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running in: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Output:</p>
 <pre tabindex="0"><code>Running in: main
 </code></pre><p>That’s your main worker.<br>
 Every additional thread you create runs <em>alongside</em> it.</p>
@@ -160,61 +160,61 @@ Every additional thread you create runs <em>alongside</em> it.</p>
 <h3 id="creating-threads-in-java">Creating Threads in Java</h3>
 <p>There are two common ways to create threads:</p>
 <h4 id="1-extend-the-thread-class">1. Extend the <code>Thread</code> class</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span> <span style="color:#66d9ef">extends</span> Thread {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        MyThread t1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThread();
-</span></span><span style="display:flex;"><span>        t1.<span style="color:#a6e22e">start</span>(); <span style="color:#75715e">// Start a new thread</span>
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Main: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThread</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running in: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"> </span><span class="c1">// Start a new thread</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Main: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>start()</code> creates a <em>new</em> thread and calls <code>run()</code> asynchronously.</li>
 <li>If you call <code>run()</code> directly, it just runs on the <strong>same thread</strong> — no concurrency.</li>
 </ul>
 <h4 id="2-use-a-runnable-preferred-approach">2. Use a <code>Runnable</code> (preferred approach)</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RunnableExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        Runnable task <span style="color:#f92672">=</span> () <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running in: &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
-</span></span><span style="display:flex;"><span>        Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(task);
-</span></span><span style="display:flex;"><span>        thread.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><code>Runnable</code> separates the <em>work</em> (the code you want to run) from the <em>worker</em> (the Thread).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RunnableExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running in: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">thread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>Runnable</code> separates the <em>work</em> (the code you want to run) from the <em>worker</em> (the Thread).</p>
 <p>&ndash;</p>
 <h3 id="threads-in-practice-a-quick-hands-on">Threads in Practice: A Quick Hands-On</h3>
 <p>Let’s simulate doing two things at once — something slow, like making coffee ☕ and toasting bread 🍞.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Breakfast</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        Thread coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(() <span style="color:#f92672">-&gt;</span> makeCoffee());
-</span></span><span style="display:flex;"><span>        Thread toast <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(() <span style="color:#f92672">-&gt;</span> toastBread());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        coffee.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>        toast.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeCoffee</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(2000);
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;☕ Coffee is ready!&#34;</span>);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">toastBread</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(3000);
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;🍞 Bread is toasted!&#34;</span>);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Output (order may vary):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Breakfast</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">coffee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">makeCoffee</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">toast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">toastBread</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">coffee</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">toast</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">makeCoffee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;☕ Coffee is ready!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">toastBread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;🍞 Bread is toasted!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Output (order may vary):</p>
 <pre tabindex="0"><code>☕ Coffee is ready!
 🍞 Bread is toasted!
 </code></pre><p>Both tasks run <em>at the same time</em> — this is concurrency in action.<br>
@@ -223,24 +223,24 @@ Each task gets its own <strong>thread</strong>, and the program doesn’t wait f
 <h3 id="thread-pools-managing-many-tasks">Thread Pools: Managing Many Tasks</h3>
 <p>Creating new threads every time can be expensive.<br>
 A better way is to <strong>reuse</strong> threads using an <strong>ExecutorService</strong> (a thread pool).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ExecutorService;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadPoolExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        ExecutorService pool <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newFixedThreadPool</span>(3);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;=</span> 5; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> taskId <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>            pool.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span>
-</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Running task &#34;</span> <span style="color:#f92672">+</span> taskId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; on &#34;</span> <span style="color:#f92672">+</span> Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>())
-</span></span><span style="display:flex;"><span>            );
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        pool.<span style="color:#a6e22e">shutdown</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This allows multiple tasks to share a limited number of threads efficiently — something frameworks like Quarkus also do under the hood.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ExecutorService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.Executors</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadPoolExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newFixedThreadPool</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">pool</span><span class="p">.</span><span class="na">submit</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Running task &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; on &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pool</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>This allows multiple tasks to share a limited number of threads efficiently — something frameworks like Quarkus also do under the hood.</p>
 <p>&ndash;</p>
 <h3 id="java-threads-vs-javascript-async-same-goal-different-path">Java Threads vs JavaScript Async (Same Goal, Different Path)</h3>
 <p>Java uses <strong>multiple threads</strong> to handle concurrency.</p>
@@ -331,18 +331,18 @@ Sometimes it’s fast (50 ms), sometimes slow (2 s).<br>
 Now — 1000 users open the app at once.</p>
 <p>&ndash;</p>
 <h4 id="traditional-java-blocking-io"><strong>Traditional Java (Blocking I/O)</strong></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/profile&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getProfile</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Blocking call to external API</span>
-</span></span><span style="display:flex;"><span>        String user <span style="color:#f92672">=</span> externalService.<span style="color:#a6e22e">getUserData</span>(); 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Profile: &#34;</span> <span style="color:#f92672">+</span> user;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/profile&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getProfile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Blocking call to external API</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">externalService</span><span class="p">.</span><span class="na">getUserData</span><span class="p">();</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Profile: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>Each request is assigned <strong>its own thread</strong> from a pool (say, 200 threads).</li>
 <li>The thread makes the external call and then <strong>waits</strong>.</li>
 <li>Once all 200 threads are busy, new requests are queued until one is free.</li>
@@ -356,18 +356,18 @@ Now — 1000 users open the app at once.</p>
 </ul>
 <p>&ndash;</p>
 <h4 id="quarkus-reactive--non-blocking-io"><strong>Quarkus (Reactive / Non-Blocking I/O)</strong></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReactiveUserResource</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GET</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Path</span>(<span style="color:#e6db74">&#34;/profile&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Uni<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getProfile</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> externalService.<span style="color:#a6e22e">getUserDataAsync</span>() <span style="color:#75715e">// returns Uni&lt;String&gt;</span>
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onItem</span>().<span style="color:#a6e22e">transform</span>(user <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Profile: &#34;</span> <span style="color:#f92672">+</span> user)
-</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">onFailure</span>().<span style="color:#a6e22e">recoverWithItem</span>(<span style="color:#e6db74">&#34;Fallback profile&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReactiveUserResource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&#34;/profile&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Uni</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getProfile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">externalService</span><span class="p">.</span><span class="na">getUserDataAsync</span><span class="p">()</span><span class="w"> </span><span class="c1">// returns Uni&lt;String&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onItem</span><span class="p">().</span><span class="na">transform</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&#34;Profile: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">onFailure</span><span class="p">().</span><span class="na">recoverWithItem</span><span class="p">(</span><span class="s">&#34;Fallback profile&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>The call is <strong>non-blocking</strong> — it sends the HTTP request and releases the thread.</li>
 <li>The same few event-loop threads handle other requests while waiting for responses.</li>
 <li>When the API responds, the result is processed asynchronously.</li>
@@ -465,7 +465,7 @@ But understanding how they work — and how Quarkus builds on top of them — ma
   </header>
   <div class="entry-content">
     <p><code>Express.js</code> is a minimalist and flexible <code>Node.js</code> web application framework that provides a robust set of features for building web and mobile applications and APIs. If you&rsquo;re looking to build fast, scalable, and efficient server-side applications with JavaScript, Express.js is your go-to choice. Its unopinionated nature gives you immense freedom,
-<!-- raw HTML omitted --></p>
+<br></p>
 <h3 id="setting-up">Setting Up</h3>
 <p>Getting started with Express.js is straightforward. If you already have a Node.js project, or if you&rsquo;re starting a new one, follow these simple steps:</p>
 <ul>
@@ -485,45 +485,45 @@ But understanding how they work — and how Quarkus builds on top of them — ma
 <li><code>PUT</code>: Update existing data (e.g., modifying a user&rsquo;s details).</li>
 <li><code>DELETE</code>: Remove data (e.g., deleting a user).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;express&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to the root URL
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Hello from Express!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GET request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>([
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Alice&#34;</span> },
-</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bob&#34;</span> },
-</span></span><span style="display:flex;"><span>  ]);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// POST request to /users
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Logic to create a new user
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">201</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;User created successfully!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Server listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Route Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /users/123
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Fetching user with ID: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Query Parameters:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Example URL: /search?q=nodejs&amp;category=backend
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/search&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">q</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">searchTerm</span>, <span style="color:#a6e22e">category</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">`Searching for &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">searchTerm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; in &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">category</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; category.`</span>);
-</span></span><span style="display:flex;"><span>});
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;express&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// GET request to the root URL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Hello from Express!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// GET request to /users
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/users&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Alice&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Bob&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// POST request to /users
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/users&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Logic to create a new user
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;User created successfully!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server listening at http://localhost:</span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Route Parameters:
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Example URL: /users/123
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/users/:id&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`Fetching user with ID: </span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Query Parameters:
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Example URL: /search?q=nodejs&amp;category=backend
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/search&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span> <span class="nx">q</span><span class="o">:</span> <span class="nx">searchTerm</span><span class="p">,</span> <span class="nx">category</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`Searching for &#34;</span><span class="si">${</span><span class="nx">searchTerm</span><span class="si">}</span><span class="sb">&#34; in &#34;</span><span class="si">${</span><span class="nx">category</span><span class="si">}</span><span class="sb">&#34; category.`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><h4 id="middleware">Middleware</h4>
 <p>Middleware functions are core to Express.js. They are functions that have access to the <code>request</code> object (<code>req</code>), the response object (<code>res</code>), and the <code>next()</code> function in the application&rsquo;s request-response cycle. The <code>next()</code> function is crucial as it passes control to the next middleware function.</p>
 <p>Think of middleware as a series of steps a request goes through before reaching its final route handler.</p>
@@ -543,17 +543,17 @@ But understanding how they work — and how Quarkus builds on top of them — ma
 </li>
 </ul>
 <p>Example of Custom Middleware:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// A simple logger middleware
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logger</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`[</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">] </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">next</span>(); <span style="color:#75715e">// Pass control to the next handler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">logger</span>); <span style="color:#75715e">// Use the middleware for all incoming requests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Home Page with Logger!&#34;</span>);
-</span></span><span style="display:flex;"><span>});
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// A simple logger middleware
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[</span><span class="si">${</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span><span class="si">}</span><span class="sb">] </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">next</span><span class="p">();</span> <span class="c1">// Pass control to the next handler
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">);</span> <span class="c1">// Use the middleware for all incoming requests
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Home Page with Logger!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></div><h4 id="handling-request-req-and-response-res">Handling Request (req) and Response (res)</h4>
 <ul>
 <li><code>req</code> (Request Object):
