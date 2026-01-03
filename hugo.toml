@@ -7,6 +7,9 @@ pygmentsUseClasses = true
 pygmentsCodeFences = true
 pygmentsClass = "highlight"
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   homeInfoParams = { Title = "👨‍💻 Hazriq’s Dev Blog", Content = "Learning in public. Building and exploring dev projects." }
 
