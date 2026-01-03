@@ -4,11 +4,14 @@ draft = false
 title = 'About'
 +++
 
-Hi, I'm @Hazriq. I'm a software developer exploring backend, AI, and open source.
+### Hello, I'm @Hazriq. 
 
-I write this blog to share what I'm learning, building, and obviously.... breaking.
+I'm a software developer exploring backend, AI, and open source.
 
-Feel free to reach out or connect!
+I write this blog to share what I'm learning, building, and importantly.... breaking.
 
-- [GitHub](https://github.com/hazriqpedia)
-- [LinkedIn](https://www.linkedin.com/in/hazriqishak/)
+Connect with me:
+
+- <a href="https://github.com/hazriqpedia" target="_blank">GitHub</a>
+- <a href="https://www.seek.com.au/profiles/hazriq-ishak-1zJ5J4YprW" target="_blank">SEEK Profile</a>
+- <a href="https://www.linkedin.com/in/hazriqishak/" target="_blank">LinkedIn</a>
