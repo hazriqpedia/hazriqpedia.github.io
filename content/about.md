@@ -10,6 +10,9 @@ I'm a software developer exploring backend, AI, and open source.
 
 I write this blog to share what I'm learning, building, and importantly.... breaking.
 
+> 🎓: Universiti Tenaga Nasional (UNITEN) - Computer Science</br>
+> 💼: Software Developer at Yinson GreenTech
+
 Connect with me:
 
 - <a href="https://github.com/hazriqpedia" target="_blank">GitHub</a>
