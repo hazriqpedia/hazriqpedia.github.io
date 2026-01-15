@@ -11,7 +11,7 @@ pygmentsClass = "highlight"
   unsafe = true
 
 [params]
-  homeInfoParams = { Title = "👨‍💻 Hazriq’s Dev Blog", Content = "Learning in public. Building and exploring dev projects." }
+  homeInfoParams = { Title = "👨‍💻 Hazriq’s Dev Blog", Content = "Learning in public. Building and exploring tech world." }
 
 
   ShowReadingTime = true
