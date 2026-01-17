@@ -18,3 +18,5 @@ Connect with me:
 - <a href="https://github.com/hazriqpedia" target="_blank">GitHub</a>
 - <a href="https://www.seek.com.au/profiles/hazriq-ishak-1zJ5J4YprW" target="_blank">SEEK Profile</a>
 - <a href="https://www.linkedin.com/in/hazriqishak/" target="_blank">LinkedIn</a>
+
+Techs: JavaScript, Python, Java, Quarkus.
