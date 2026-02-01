@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head>
-	<meta name="generator" content="Hugo 0.150.0"><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Hazriq&#39;s Dev Chaos</title>
-
+<title>Docker | Hazriq&#39;s Dev Chaos</title>
+<meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://hazriqpedia.github.io/">
+<link rel="canonical" href="https://hazriqpedia.github.io/tags/docker/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.19066d80f08d2e1509c585aa93646a200c55e178e289d812d0cfef5860f0adff.css" integrity="sha256-GQZtgPCNLhUJxYWqk2RqIAxV4XjiidgS0M/vWGDwrf8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hazriqpedia.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hazriqpedia.github.io/favicon-16x16.png">
@@ -19,8 +18,8 @@
 <link rel="mask-icon" href="https://hazriqpedia.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/index.xml">
-<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/">
+<link rel="alternate" type="application/rss+xml" href="https://hazriqpedia.github.io/tags/docker/index.xml">
+<link rel="alternate" hreflang="en" href="https://hazriqpedia.github.io/tags/docker/">
 <noscript>
     <style>
         #theme-toggle,
@@ -57,28 +56,15 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://hazriqpedia.github.io/">
+</noscript><meta property="og:url" content="https://hazriqpedia.github.io/tags/docker/">
   <meta property="og:site_name" content="Hazriq&#39;s Dev Chaos">
-  <meta property="og:title" content="Hazriq&#39;s Dev Chaos">
+  <meta property="og:title" content="Docker">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hazriq&#39;s Dev Chaos">
+<meta name="twitter:title" content="Docker">
 <meta name="twitter:description" content="">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Hazriq's Dev Chaos",
-  "url": "https://hazriqpedia.github.io/",
-  "description": "",
-  "logo": "https://hazriqpedia.github.io/favicon.ico",
-  "sameAs": [
-      "https://github.com/hazriqpedia", "https://www.seek.com.au/profiles/hazriq-ishak-1zJ5J4YprW", "https://www.linkedin.com/in/hazriqishak/"
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -140,26 +126,140 @@
     </nav>
 </header>
 <main class="main"> 
+<header class="page-header">
+  <h1>
+    Docker
+  </h1>
+</header>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">My First Post
+    <h2 class="entry-hint-parent">Containers: Why They Exist and Why I’m Learning Them
     </h2>
   </header>
   <div class="entry-content">
-    <p>Hellow World!</p>
+    <p>I’ve been seeing <strong>containers everywhere</strong>.</p>
+<p>Job descriptions. Architecture diagrams.<br>
+AWS services like ECS, ECR, and Fargate.<br>
+Even simple tutorials casually say <em>“just run it in a container”</em>.</p>
+<p>For a long time, containers felt like something I could delay learning.<br>
+But at some point, delaying fundamentals becomes technical debt — in your own understanding.</p>
+<p>This post is the first in a series where I slow down and learn containers <strong>from the basics</strong>, before jumping into tools or AWS services.</p>
+<hr>
+<h2 id="the-problem-before-containers">The problem before containers</h2>
+<p>Before containers became common, deploying an application often meant dealing with questions like:</p>
+<ul>
+<li>What OS is this running on?</li>
+<li>Which runtime version is installed?</li>
+<li>What dependencies already exist on this machine?</li>
+<li>Why does it work on my machine but not somewhere else?</li>
+</ul>
+<p>As systems grew more complex, these problems didn’t disappear — they multiplied.</p>
+<p>Most of the time, the issue wasn’t the application logic itself.<br>
+It was <strong>the environment around the code</strong>.</p>
+<hr>
+<h2 id="life-before-containers-from-my-own-experience">Life before containers (from my own experience)</h2>
+<p>I started my development career around 2014 — before Docker was widely adopted.</p>
+<p>Back then, running an application usually meant:</p>
+<ul>
+<li>Spinning up a virtual machine</li>
+<li>Making sure the VM was reachable and stable</li>
+<li>Installing runtimes and system dependencies</li>
+<li>Managing configuration using tools like Puppet or Ansible</li>
+</ul>
+<p>Configuration management helped, but it didn’t remove friction.</p>
+<p>If I wanted a clean environment for a new piece of work, I couldn’t simply reset things.</p>
+<p>I often had to:</p>
+<ul>
+<li>Tear down the VM</li>
+<li>Create a new one</li>
+<li>Reapply configuration</li>
+<li>Redeploy the application</li>
+</ul>
+<p>This took time — but more importantly, it created <strong>mental overhead</strong>.</p>
+<p>Every new task came with a quiet doubt:</p>
+<blockquote>
+<p>“Is this environment actually clean, or am I fighting leftovers from my previous work?”</p></blockquote>
+<p>The environment itself became part of the problem I had to manage.</p>
+<hr>
+<h2 id="it-works-on-my-machine">“It works on my machine”</h2>
+<p>Another common issue was environment mismatch across stages.</p>
+<p>Something would work perfectly on my local machine — but fail in QA.</p>
+<p>After some digging, the causes were often familiar:</p>
+<ul>
+<li>Different OS versions</li>
+<li>Slightly different VM specs</li>
+<li>Missing or extra system libraries</li>
+<li>Configuration values that didn’t fully match</li>
+</ul>
+<p>Each environment looked similar on paper, but behaved differently in practice.</p>
+<p>Debugging became less about the code and more about <strong>guessing what was different this time</strong>.</p>
+<p>This wasn’t anyone’s fault — it was simply hard to keep environments truly identical.</p>
+<hr>
+<h2 id="what-is-a-container-conceptually">What is a container (conceptually)?</h2>
+<p>At a high level, a container is a way to package:</p>
+<ul>
+<li>Application code</li>
+<li>Runtime and dependencies</li>
+<li>Basic environment assumptions</li>
+</ul>
+<p>…into a single, predictable unit.</p>
+<p>Instead of saying:</p>
+<blockquote>
+<p>“This app needs Python 3.11, these libraries, and these system configs”</p></blockquote>
+<p>You’re effectively saying:</p>
+<blockquote>
+<p>“Here is everything this app needs to run.”</p></blockquote>
+<p>That same package can then run consistently:</p>
+<ul>
+<li>On a developer’s laptop</li>
+<li>On a QA environment</li>
+<li>In production</li>
+<li>In the cloud</li>
+</ul>
+<p>The key value of containers isn’t performance.<br>
+It’s <strong>consistency and repeatability</strong>.</p>
+<hr>
+<h2 id="what-problem-do-containers-actually-solve">What problem do containers actually solve?</h2>
+<p>Containers don’t eliminate all complexity — but they reduce several painful ones:</p>
+<ul>
+<li>Environment drift over time</li>
+<li>Differences between local, QA, and production</li>
+<li>Lengthy setup instructions for new machines</li>
+<li>Fear of hidden configuration changes</li>
+</ul>
+<p>By making the runtime environment explicit and versioned, containers shrink the gap between:
+<strong>development → testing → production</strong>.</p>
+<p>That’s why they became a foundation of modern software delivery.</p>
+<hr>
+<h2 id="a-very-light-look-at-containers-in-aws">A very light look at containers in AWS</h2>
+<p>In the cloud — especially AWS — containers are treated as first-class citizens.</p>
+<p>AWS provides managed services that:</p>
+<ul>
+<li>Store container images</li>
+<li>Run containers</li>
+<li>Scale them</li>
+<li>Handle the infrastructure underneath</li>
+</ul>
+<p>At this stage, the service names aren’t important yet.<br>
+What matters is understanding that <strong>containers are the unit of execution</strong>, and cloud platforms are built around running them reliably.</p>
+<p>I’ll dive into AWS-specific services later in this series — once the fundamentals are solid.</p>
+<hr>
+<h2 id="whats-next">What’s next</h2>
+<p>This post intentionally avoids tools and commands.</p>
+<p>Before touching Docker or AWS services, I want to clearly understand:</p>
+<ul>
+<li>Why containers exist</li>
+<li>What problems they were designed to solve</li>
+<li>How they changed the way applications are delivered</li>
+</ul>
+<p>In the next post, I’ll walk through the <strong>full lifecycle of a containerised application</strong> — from code to production — still at a conceptual level.</p>
+<p>Slow progress, but solid foundations.</p>
 
   </div>
-  <footer class="entry-footer"><span title='2025-06-04 14:38:26 +0800 +08'>June 4, 2025</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to My First Post" href="https://hazriqpedia.github.io/posts/my-first-post/"></a>
+  <footer class="entry-footer"><span title='2026-01-31 19:05:21 +0800 +08'>January 31, 2026</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to Containers: Why They Exist and Why I’m Learning Them" href="https://hazriqpedia.github.io/posts/containers-intro-to-containers/"></a>
 </article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="https://hazriqpedia.github.io/page/2/">
-      «&nbsp;Prev&nbsp;
-    </a>
-  </nav>
-</footer>
     </main>
     
 <footer class="footer">

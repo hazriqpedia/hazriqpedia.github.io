@@ -2,22 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hazriqpedia.github.io/tags/aws/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/containers/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/containers-intro-to-containers/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/docker/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/ecs/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/posts/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
+    <loc>https://hazriqpedia.github.io/tags/</loc>
+    <lastmod>2026-01-31T19:05:21+08:00</lastmod>
+  </url><url>
     <loc>https://hazriqpedia.github.io/tags/2026/</loc>
     <lastmod>2026-01-01T11:34:42+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/posts/2026-ambition/</loc>
     <lastmod>2026-01-01T11:34:42+08:00</lastmod>
   </url><url>
-    <loc>https://hazriqpedia.github.io/</loc>
-    <lastmod>2026-01-01T11:34:42+08:00</lastmod>
-  </url><url>
     <loc>https://hazriqpedia.github.io/tags/personal/</loc>
-    <lastmod>2026-01-01T11:34:42+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/posts/</loc>
-    <lastmod>2026-01-01T11:34:42+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/</loc>
     <lastmod>2026-01-01T11:34:42+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/data-engineering/</loc>
@@ -55,9 +70,6 @@
   </url><url>
     <loc>https://hazriqpedia.github.io/tags/record/</loc>
     <lastmod>2025-12-14T17:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://hazriqpedia.github.io/tags/aws/</loc>
-    <lastmod>2025-10-21T18:54:27+08:00</lastmod>
   </url><url>
     <loc>https://hazriqpedia.github.io/posts/aws-lambda-vs-ec2/</loc>
     <lastmod>2025-10-21T18:54:27+08:00</lastmod>

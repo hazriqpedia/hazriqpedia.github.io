@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Docker on Hazriq&#39;s Dev Chaos</title>
+    <link>https://hazriqpedia.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Hazriq&#39;s Dev Chaos</description>
+    <generator>Hugo -- 0.150.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 31 Jan 2026 19:05:21 +0800</lastBuildDate>
+    <atom:link href="https://hazriqpedia.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Containers: Why They Exist and Why I’m Learning Them</title>
+      <link>https://hazriqpedia.github.io/posts/containers-intro-to-containers/</link>
+      <pubDate>Sat, 31 Jan 2026 19:05:21 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/posts/containers-intro-to-containers/</guid>
+      <description>&lt;p&gt;I’ve been seeing &lt;strong&gt;containers everywhere&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Job descriptions. Architecture diagrams.&lt;br&gt;
+AWS services like ECS, ECR, and Fargate.&lt;br&gt;
+Even simple tutorials casually say &lt;em&gt;“just run it in a container”&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;For a long time, containers felt like something I could delay learning.&lt;br&gt;
+But at some point, delaying fundamentals becomes technical debt — in your own understanding.&lt;/p&gt;
+&lt;p&gt;This post is the first in a series where I slow down and learn containers &lt;strong&gt;from the basics&lt;/strong&gt;, before jumping into tools or AWS services.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
