@@ -21,6 +21,7 @@ pygmentsClass = "highlight"
 
   socialIcons = [
     { name = "github", url = "https://github.com/hazriqpedia" },
+    { name = "seek", url = "https://www.seek.com.au/profiles/hazriq-ishak-1zJ5J4YprW" },
     { name = "linkedin", url = "https://www.linkedin.com/in/hazriqishak/" },
   ]
 

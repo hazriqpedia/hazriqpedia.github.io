@@ -6,8 +6,36 @@
     <description>Recent content in Tags on Hazriq&#39;s Dev Chaos</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Jan 2026 11:34:42 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 31 Jan 2026 19:05:21 +0800</lastBuildDate>
     <atom:link href="https://hazriqpedia.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS</title>
+      <link>https://hazriqpedia.github.io/tags/aws/</link>
+      <pubDate>Sat, 31 Jan 2026 19:05:21 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Containers</title>
+      <link>https://hazriqpedia.github.io/tags/containers/</link>
+      <pubDate>Sat, 31 Jan 2026 19:05:21 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/containers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://hazriqpedia.github.io/tags/docker/</link>
+      <pubDate>Sat, 31 Jan 2026 19:05:21 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ECS</title>
+      <link>https://hazriqpedia.github.io/tags/ecs/</link>
+      <pubDate>Sat, 31 Jan 2026 19:05:21 +0800</pubDate>
+      <guid>https://hazriqpedia.github.io/tags/ecs/</guid>
+      <description></description>
+    </item>
     <item>
       <title>2026</title>
       <link>https://hazriqpedia.github.io/tags/2026/</link>
@@ -90,13 +118,6 @@
       <link>https://hazriqpedia.github.io/tags/record/</link>
       <pubDate>Sun, 14 Dec 2025 17:30:00 +0800</pubDate>
       <guid>https://hazriqpedia.github.io/tags/record/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>AWS</title>
-      <link>https://hazriqpedia.github.io/tags/aws/</link>
-      <pubDate>Tue, 21 Oct 2025 18:54:27 +0800</pubDate>
-      <guid>https://hazriqpedia.github.io/tags/aws/</guid>
       <description></description>
     </item>
     <item>
