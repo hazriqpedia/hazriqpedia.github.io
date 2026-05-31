@@ -14,26 +14,13 @@ hugo new posts/your-post-title.md
 
 # Local dev server (includes drafts)
 hugo server --buildDrafts
-
-# Build to public/
-hugo
 ```
 
 ## Deployment
 
-`public/` is a **git worktree** tracking the `gh-pages` branch. After running `hugo`:
+Deployment is fully automated via GitHub Actions (`.github/workflows/hugo.yml`). Merging any branch into `main` triggers a build and deploy to GitHub Pages automatically — no manual steps needed.
 
-```bash
-cd public
-git add .
-git commit -m "New post: your-post-title"
-git push origin gh-pages --force
-```
-
-One-time setup (if the worktree is not set up):
-```bash
-git worktree add -B gh-pages public origin/gh-pages
-```
+To publish a post: set `draft = false`, merge to `main`.
 
 ## Architecture
 

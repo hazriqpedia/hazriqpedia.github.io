@@ -11,28 +11,14 @@ This site is powered by [Hugo](https://gohugo.io/) and deployed via GitHub Pages
 hugo new posts/your-post-title.md
 ```
 
-### Step 2: Start Local Server
+### Step 2: Write & Preview Locally
 ```bash
 hugo server --buildDrafts
 ```
 Open: [http://localhost:1313](http://localhost:1313)
 
-### Step 3: Build
-```bash
-hugo
-```
-
-### Step 4: Navigate to Public
-```bash
-cd public
-```
-
-### Step 5: Commit & Deploy
-```bash
-git add .
-git commit -m "New post: your-post-title"
-git push origin gh-pages --force
-```
+### Step 3: Publish
+Set `draft = false` in the post front matter, then merge to `main`. GitHub Actions handles the build and deploy automatically.
 
 ## 🛠️ Setup & Configuration
 
@@ -40,12 +26,6 @@ git push origin gh-pages --force
 - [Install Hugo](https://gohugo.io/getting-started/installing/)
 - Git
 - A GitHub repo (like this one)
-
-### One-time Setup (Optional - Git Worktree)
-```bash
-git worktree add -B gh-pages public origin/gh-pages
-```
-This makes `public/` track the `gh-pages` branch directly.
 
 ### Site Configuration
 Edit `hugo.toml` to customize:
@@ -57,9 +37,9 @@ Edit `hugo.toml` to customize:
 
 ### Writing Posts
 1. Create with: `hugo new posts/title.md`
-2. Edit the front matter (`title`, `date`, `draft: false`)
+2. Edit the front matter (`title`, `date`, `draft = false`)
 3. Write your content in Markdown
-4. Follow the workflow above to publish
+4. Merge to `main` — deploy happens automatically
 
 ### Adding Pages
 ```bash
